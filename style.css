@@ -1,0 +1,92 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+.hero {
+    font-size: xx-large;
+    background-image: url('hero.jpg');
+}
+
+body {
+    /* Default Light Mode styles */
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  body.dark {
+    /* Dark Mode styles */
+    background-color: #333;
+    color: #f0f0f0;
+  }
+  
+  #theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: #f0f0f0;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  body.dark #theme-toggle {
+    background-color: #fff;
+    color: #333;
+  }
+  
+  
+  #theme-toggle:hover {
+    background-color: #a6ca25;
+    color: #333;
+  }
+  
+  body.dark #theme-toggle:hover {
+    background-color: #a6ca25;
+    color: #ffffff;
+  }
+  
