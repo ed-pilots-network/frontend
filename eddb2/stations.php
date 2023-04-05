@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EDDB - Systems</title>
+    <title>EDDB - Stations</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,10 +12,10 @@
             <ul>
                 <li><a href="/eddb2/systems.php">Systems</a></li>
                 <li><a href="/eddb2/stations.php">Stations</a></li>
-                <li><a href="#">Attractions</a></li>
+                <li><a href="/eddb2/bodies.php">Bodies</a></li>
                 <li><a href="#">Commodities</a></li>
                 <li><a href="#">Factions</a></li>
-                <li><a href="#">Bodies</a></li>
+                <li><a href="#">Attractions</a></li>
                 <li><a href="#">Trading</a></li>
             </ul>
         </nav>
