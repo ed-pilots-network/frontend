@@ -1,2 +1,3 @@
 RewriteEngine On
 RewriteRule ^systems$ systems.php [L]
+RewriteRule ^stations$ stations.php [L]
