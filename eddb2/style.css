@@ -51,20 +51,34 @@ main {
 
 form {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     background-color: #1e1e1e;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  label {
+}
+
+.filter-group {
+    display: flex;
+    flex: 1 0 calc(33.33% - 10px);
+    flex-wrap: wrap;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 7px;
+}
+
+.filter-group:last-child {
+    margin-right: 0;
+}
+
+label {
     font-size: 16px;
     color: #fff;
     margin-right: 10px;
-  }
-  
-  input[type="text"] {
+}
+
+select {
     font-size: 16px;
     padding: 5px;
     border-radius: 3px;
@@ -72,9 +86,9 @@ form {
     background-color: #333;
     color: #fff;
     flex: 1;
-  }
-  
-  button[type="submit"] {
+}
+
+button[type="submit"] {
     font-size: 16px;
     padding: 5px 10px;
     border-radius: 3px;
@@ -82,50 +96,32 @@ form {
     background-color: #fbb400;
     color: #1e1e1e;
     cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
+}
+
+button[type="submit"]:hover {
     background-color: #ffc042;
-  }
-  
-  .filters {
+}
+
+.filters {
     margin-top: 20px;
     top: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
 }
 
-.filters h2 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #fff;
+@media only screen and (max-width: 7px) {
+    .filter-group {
+        flex: 1 0 100%;
+        margin-right: 0;
+    }
 }
 
-.filter-group {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-}
-
-.filter-group label {
-    font-size: 16px;
-    color: #fff;
-    margin-right: 10px;
-}
-
-.filter-group select {
-    font-size: 16px;
+#system {
+    width: 500px; /* or any other value that fits your layout */
     padding: 5px;
-    border-radius: 3px;
     border: none;
-    background-color: #333;
-    color: #fff;
+    border-bottom: 2px solid #ddd;
+    font-size: 13px;
 }
 
-.filter-group select option {
-    color: #000;
+button[type="submit"] {
+    margin-left: 10px; /* or any other value that looks good */
 }
-  
-
