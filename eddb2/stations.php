@@ -25,6 +25,8 @@
             <h2>System Search</h2>
 
             <form action="stations.php" method="GET">
+                <label for="refsys">Reference system:</label>
+                <input type="text" id="refsys" name="refsys">
                 <button type="submit">Search</button>
             </form>
         </section>
