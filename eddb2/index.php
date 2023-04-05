@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>EDDB</title>
-    <link rel="stylesheet" href="static/css/base.css">
-    <button id="theme-toggle">Theme</button>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -24,16 +23,5 @@
     <main>
         <section class="hero">
             <h2>Elite Dangerous Database</h2>
-        </section>
-    </main>
-    <script>
-        const toggleBtn = document.getElementById('theme-toggle');
-        const body = document.body;
-      
-        toggleBtn.addEventListener('click', function() {
-          body.classList.toggle('dark');
-        });
-      </script>
-      
 </body>
 </html>
