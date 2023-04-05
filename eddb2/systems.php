@@ -11,7 +11,7 @@
         <nav>
             <ul>
                 <li><a href="/eddb2/systems.php">Systems</a></li>
-                <li><a href="#">Stations</a></li>
+                <li><a href="/eddb2/stations.php">Stations</a></li>
                 <li><a href="#">Attractions</a></li>
                 <li><a href="#">Commodities</a></li>
                 <li><a href="#">Factions</a></li>
