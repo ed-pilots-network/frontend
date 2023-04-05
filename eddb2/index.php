@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <h1>EDDB</h1>
+        <h1><a href="/eddb2">EDDB</a></h1>
         <nav>
             <ul>
                 <li><a href="/eddb2/systems.php">Systems</a></li>

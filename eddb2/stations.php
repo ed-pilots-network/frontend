@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <h1>EDDB</h1>
+        <h1><a href="/eddb2">EDDB</a></h1>
         <nav>
             <ul>
                 <li><a href="/eddb2/systems.php">Systems</a></li>
@@ -22,11 +22,11 @@
     </header>
     <main>
         <section class="hero">
-            <h2>System Search</h2>
+            <h2>Stations</h2>
 
             <form action="stations.php" method="GET">
-                <label for="refsys">Reference system:</label>
-                <input type="text" id="refsys" name="refsys">
+                <label for="system">Reference system:</label>
+                <input type="text" id="system" name="system">
                 <button type="submit">Search</button>
             </form>
         </section>
@@ -73,9 +73,26 @@
 
     <div class="filter-row">
       <div class="filter-group">
+        <label for="facilities">Has facilities:</label>
+        <select id="facilities" name="facilities">
+          <option value="all">All</option>
+          <option value="refuel">Refuel</option>
+          <option value="repair">Repair</option>
+          <option value="restock">Restock</option>
+          <option value="outfitting">Outfitting</option>
+          <option value="shipyard">Shipyard</option>
+          <option value="material trader">Material Trader</option>
+          <option value="technology broker">Technology Broker</option>
+          <option value="interstellar factors">Interstellar Factors</option>
+          <option value="carrier vendor">Carrier Vendor</option>
+          <option value="carrier admin">Carrier Administration</option>
+          <option value="universal cartographics">Universal Cartographics</option>
+        </select>
+      </div>
+      <div class="filter-group">
         <label for="economy">Economy:</label>
         <select id="economy" name="economy">
-          <option value="all">All</option>
+          <option value="none">None</option>
           <option value="agriculture">Agriculture</option>
           <option value="colony">Colony</option>
           <option value="extraction">Extraction</option>
@@ -90,20 +107,10 @@
         </select>
       </div>
       <div class="filter-group">
-        <label for="security">Security:</label>
-        <select id="security" name="security">
-          <option value="all">All</option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="stations">Having stations:</label>
-        <select id="stations" name="stations">
-          <option value="station">Having stations</option>
-          <option value="planetary">Having planetary</option>
-          <option value="orbital">Having orbital</option>
+        <label for="carriers">Include Carriers:</label>
+        <select id="carriers" name="carriers">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
         </select>
       </div>
       <div class filter-row>

@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <h1>EDDB</h1>
+        <h1><a href="/eddb2">EDDB</a></h1>
         <nav>
             <ul>
                 <li><a href="/eddb2/systems.php">Systems</a></li>
@@ -38,7 +38,7 @@
       <div class="filter-group">
         <label for="government">Government:</label>
         <select id="government" name="government">
-          <option value="all">All</option>
+          <option value="none">None</option>
           <option value="anarchy">Anarchy</option>
           <option value="communist">Communist</option>
           <option value="confederacy">Confederacy</option>
@@ -56,7 +56,7 @@
       <div class="filter-group">
         <label for="allegiance">Allegiance:</label>
         <select id="allegiance" name="allegiance">
-          <option value="all">All</option>
+          <option value="none">None</option>
           <option value="alliance">Alliance</option>
           <option value="empire">Empire</option>
           <option value="federation">Federation</option>
@@ -76,7 +76,7 @@
       <div class="filter-group">
         <label for="economy">Economy:</label>
         <select id="economy" name="economy">
-          <option value="all">All</option>
+          <option value="none">None</option>
           <option value="agriculture">Agriculture</option>
           <option value="colony">Colony</option>
           <option value="extraction">Extraction</option>
@@ -93,7 +93,7 @@
       <div class="filter-group">
         <label for="security">Security:</label>
         <select id="security" name="security">
-          <option value="all">All</option>
+          <option value="none">None</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
@@ -102,6 +102,7 @@
       <div class="filter-group">
         <label for="stations">Having stations:</label>
         <select id="stations" name="stations">
+          <option value="none">None</option>
           <option value="station">Having stations</option>
           <option value="planetary">Having planetary</option>
           <option value="orbital">Having orbital</option>
