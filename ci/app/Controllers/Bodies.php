@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController
+class Bodies extends BaseController
 {
     public function index()
     {
-        $data['title']   = 'EDDB';
+        $data['title']   = 'EDDB - Bodies';
         return view('common/header', $data)
-            . view('home')
+            . view('bodies')
             . view('common/footer');
     }
 }
