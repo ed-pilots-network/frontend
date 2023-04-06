@@ -37,7 +37,8 @@ class Paths
      *
      * @see http://codeigniter.com/user_guide/general/managing_apps.html
      */
-    public string $appDirectory = __DIR__ . '/..';
+
+    public string $appDirectory = __DIR__ . '/../../app';
 
     /**
      * ---------------------------------------------------------------
@@ -71,5 +72,5 @@ class Paths
      * default this is in `app/Views`. This value
      * is used when no value is provided to `Services::renderer()`.
      */
-    public string $viewDirectory = __DIR__ . '/../Views';
+    public string $viewDirectory = __DIR__ . '/../../../Web/Views';
 }

@@ -12,11 +12,11 @@ $errorId = uniqid('error', true);
 
     <title><?= esc($title) ?></title>
     <style>
-        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?>
+        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR)) ?>
     </style>
 
     <script>
-        <?= file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.js') ?>
+        <?= file_get_contents(__DIR__ . DIRECTORY_SEPARATOR) ?>
     </script>
 </head>
 <body onload="init()">
