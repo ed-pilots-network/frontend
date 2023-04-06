@@ -2,3 +2,4 @@ RewriteEngine On
 RewriteRule ^systems$ systems.php [L]
 RewriteRule ^stations$ stations.php [L]
 RewriteRule ^bodies$ bodies.php [L]
+RewriteRule ^trading$ trading.php [L]

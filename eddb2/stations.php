@@ -13,10 +13,10 @@
                 <li><a href="/eddb2/systems.php">Systems</a></li>
                 <li><a href="/eddb2/stations.php">Stations</a></li>
                 <li><a href="/eddb2/bodies.php">Bodies</a></li>
-                <li><a href="#">Commodities</a></li>
+                <li><a href="/eddb2/trading.php">Trading</a></li>
                 <li><a href="#">Factions</a></li>
                 <li><a href="#">Attractions</a></li>
-                <li><a href="#">Trading</a></li>
+                <li><a href="#">Commodities</a></li>
             </ul>
         </nav>
     </header>
