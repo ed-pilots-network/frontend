@@ -16,7 +16,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/">
       <div>
         <nav>
           <ul>
@@ -25,9 +25,6 @@ function App() {
             </li>
             <li>
               <Link to="/route_finder">Route finder</Link>
-            </li>
-            <li>
-              <Link to="/page2">Page 2</Link>
             </li>
           </ul>
         </nav>

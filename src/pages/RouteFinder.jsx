@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Button, Checkbox, Form, Message,
-} from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Checkbox, Form } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import API from '../common';
+import RoutesTable from '../components/RoutesTable';
 
-function RouteFinder(props) {
-  const options1 = [
-    { key: 'param1', value: 'value1', text: 'Value 1' },
-    { key: 'param2', value: 'value2', text: 'Value 2' },
-    { key: 'param3', value: 'value3', text: 'Value 3' },
-  ];
-
-  const options2 = [
-    { key: 'param2_1', value: 'value2_1', text: 'Second Value 1' },
-    { key: 'param2_2', value: 'value2_2', text: 'Second Value 2' },
-    { key: 'param2_3', value: 'value2_3', text: 'Second Value 3' },
-  ];
-
+function RouteFinder() {
   const [includeFC, setIncludeFC] = useState(false);
   const [selectedStation, setSelectedStation] = useState(null);
 
-  const [rawData, setRawData] = useState(null);
+  const [routeData, setRouteData] = useState([]);
 
   const { stations } = useSelector((state) => state.stations);
   const stationsOptions = stations
@@ -29,13 +16,46 @@ function RouteFinder(props) {
     .map((station) => ({ key: station.id, value: station.id, text: `${station.station_name}[${station.system_name}]` }));
 
   const handleSubmit = async () => {
-    const profits = await API.post('find_route', {
+    const result = await API.post('find_route', {
       route_type: 'single', // Hardcode
       referenceStation: selectedStation,
       radius: 10, // Actually this is some 'coordinates' distance, need to convert to Ly first
     });
-    setRawData(profits);
+
+    const { data: profit } = result;
+    const tableData = Object.entries(profit).map(([commodityName, commodityData]) => (
+      {
+        commodity: commodityName,
+        from: commodityData.buy,
+        to: commodityData.sell,
+        profit: commodityData.profit,
+      }
+    ));
+    setRouteData(tableData);
   };
+
+  // FIXME Delete
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'Commodity name',
+        accessor: 'commodity', // accessor is the "key" in the data
+      },
+      {
+        Header: 'Station to buy',
+        accessor: 'from',
+      },
+      {
+        Header: 'Station to sell',
+        accessor: 'to',
+      },
+      {
+        Header: 'Profit',
+        accessor: 'profit',
+      },
+    ],
+    [],
+  );
 
   return (
     <div>
@@ -57,14 +77,13 @@ function RouteFinder(props) {
             value={selectedStation || ''}
             onChange={(e, { value }) => setSelectedStation(value)}
           />
-          <Form.Select fluid search label="Option2" options={options2} />
         </Form.Group>
         <Form.Field
           label="Test"
         />
         <Form.Button content="Go!" />
       </Form>
-      <div><pre>{JSON.stringify(rawData, null, 2)}</pre></div>
+      <RoutesTable columns={columns} data={routeData} />
     </div>
   );
 }
