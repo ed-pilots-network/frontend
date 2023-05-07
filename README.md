@@ -1,2 +1,1 @@
-# EDDB 2.0
-EDDB 2.0
+# EDPN
