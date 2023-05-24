@@ -1,6 +1,10 @@
 # EDPN
 Elite Dangerous Pilot Network front-end
 
+## Requirements
+
+- Node LTS
+
 ## Installation
 
 - Clone this repository using ```git clone https://github.com/ed-pilots-network/frontend.git```;
