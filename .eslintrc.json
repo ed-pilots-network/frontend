@@ -1,3 +1,28 @@
 {
-  "extends": "next/core-web-vitals"
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["jest", "@typescript-eslint", "prettier"],
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "next",
+    "prettier"
+  ],
+  "rules": {
+    "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }],
+    "prettier/prettier": "error",
+    "prefer-const": "off",
+    "no-use-before-define": "off",
+    "react/react-in-jsx-scope": "off",
+    "space-before-function-paren": [
+      "error",
+      {
+        "named": "never",
+        "anonymous": "never"
+      }
+    ]
+  }
 }
