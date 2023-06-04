@@ -1,11 +1,10 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import '@/styles/globals.css';
+import styles from './layout.module.css';
 
 export const metadata = {
   title: 'EDPN',
   description: 'Elite Dangerous Pilots Network',
+  icons: 'EDPN_logo.png',
 };
 
 export default function RootLayout({
@@ -15,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={styles.body}>{children}</body>
     </html>
   );
 }
