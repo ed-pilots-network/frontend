@@ -32,6 +32,8 @@
     ".eslintrc.json",
     "**/*.ts",
     "**/*.tsx",
+    "**/**/*.tsx",
+    "**/**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
