@@ -8,7 +8,10 @@ import styles from './navbar.module.css';
 
 export default function Navbar() {
   const [darkmode, setDarkmode] = useState(true);
-  const preferredTheme = window.localStorage.getItem('preferred-theme');
+  let preferredTheme: string | null = 'dark';
+  if (typeof window !== 'undefined') {
+    preferredTheme = window.localStorage.getItem('preferred-theme');
+  }
 
   const handleDarkmode = () => {
     setDarkmode(!darkmode);
