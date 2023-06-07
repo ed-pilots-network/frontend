@@ -32,12 +32,15 @@
     "next-env.d.ts",
     "next.config.js",
     ".eslintrc.json",
+    "**/*.js",
     "**/*.ts",
     "**/*.tsx",
     "**/**/*.tsx",
     "**/**/*.ts",
     "**/**/**/*.tsx",
     "**/**/**/*.ts",
+    "**/**/**/**/*.tsx",
+    "**/**/**/**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]

@@ -18,21 +18,31 @@
   margin: 0;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+/* set light theme global colors */
+html {
+  color: var(--color-dark);
+  background-color: var(--color-white);
+}
+
+/* set light theme colors for html elements */
+html.light h2 {
+  color: var(--color-white);
+}
+
+/* set dark theme global colors */
+html.dark {
+  color: var(--color-white);
+  background-color: var(--color-dark-gray);
+}
+
+/* set dark theme colors for html elements */
+html.dark h2 {
+  color: var(--color-white);
 }
 
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
 
 /* Set Font Face */

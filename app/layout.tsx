@@ -10,7 +10,7 @@ export const metadata = {
   icons: 'EDPN_logo.png',
 };
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], weight: ['400'] });
 
 export default function RootLayout({
   children,

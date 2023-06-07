@@ -1,6 +1,5 @@
 .nav {
   height: 4rem;
-  background: var(--color-dark);
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
