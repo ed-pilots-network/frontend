@@ -22,9 +22,9 @@
     "paths": {
       "@/*": ["./*"],
       "@/app/*": ["./app/*"],
-      "@/components/*": ["./components/*"],
-      "@/lib/*": ["./lib/*"],
-      "@/types/*": ["./types/*"],
+      "@/components/*": ["./app/components/*"],
+      "@/lib/*": ["./app/lib/*"],
+      "@/types/*": ["./app/types/*"],
       "@/styles/*": ["./styles/*"]
     }
   },
@@ -36,6 +36,8 @@
     "**/*.tsx",
     "**/**/*.tsx",
     "**/**/*.ts",
+    "**/**/**/*.tsx",
+    "**/**/**/*.ts",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]

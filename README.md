@@ -8,11 +8,6 @@ First, clone this repo:
 
 ```bash
 git clone https://github.com/ed-pilots-network/frontend.git
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Then, install dependencies with:

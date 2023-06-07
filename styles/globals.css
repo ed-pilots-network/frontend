@@ -6,7 +6,8 @@
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   /* Variables */
-  --color-dark: #2b2d31;
+  --color-dark: #1e1f22;
+  --color-dark-gray: #2b2d31;
   --color-gray: #303338;
   --color-white: #f2f2f2;
 }
@@ -21,7 +22,6 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: Rift-Bold;
 }
 
 a {

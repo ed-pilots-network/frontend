@@ -1,0 +1,67 @@
+.nav {
+  height: 4rem;
+  background: var(--color-dark);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.leftNav {
+  display: flex;
+  min-width: 30%;
+}
+
+.logo img {
+  margin: auto 0;
+}
+
+.branding {
+  display: flex;
+  margin-left: 0.5rem;
+}
+
+.button {
+  margin: auto;
+  border: none;
+  background: transparent;
+  font-family: Rift-Bold;
+  color: var(--color-white);
+  font-size: 38px;
+  letter-spacing: 1.5px;
+}
+
+.themeButton {
+  border: none;
+  background: transparent;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.themeIcon {
+  animation: fade1 0.3s ease-in-out;
+}
+
+.themeIcon :active {
+  animation: fade2 0.3s ease-in-out;
+}
+
+@keyframes fade1 {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade2 {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
