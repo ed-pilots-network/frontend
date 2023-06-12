@@ -3,7 +3,7 @@ Elite Dangerous Pilot Network front-end
 
 ## Requirements
 
-- Node LTS
+- Node LTS, version 14.18+, 16+
 
 ## Installation
 
