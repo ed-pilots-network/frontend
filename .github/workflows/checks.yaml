@@ -13,9 +13,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - run: npm ci
-      - run: npm run check
-      - run: npm run lint
+      - run: yarn install
+      - run: yarn check
+      - run: yarn lint
       - run: npx playwright install
-      - run: npm test
-      - run: npm run build
+      - run: yarn test
+      - run: yarn build
