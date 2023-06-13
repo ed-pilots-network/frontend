@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  padding: 0 1rem;
+  height: 3rem;
+  background: var(--color-dark);
+}
+
+.heading {
+  margin: auto;
+  font-family: Rift;
+}
