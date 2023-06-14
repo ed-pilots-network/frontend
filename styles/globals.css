@@ -1,0 +1,58 @@
+:root {
+  --max-width: 1100px;
+  --border-radius: 12px;
+  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+  /* Variables */
+  --color-dark: #1e1f22;
+  --color-dark-gray: #2b2d31;
+  --color-gray: #303338;
+  --color-white: #f2f2f2;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* set light theme global colors */
+html {
+  color: var(--color-dark);
+  background-color: var(--color-white);
+}
+
+/* set light theme colors for html elements */
+html.light h2 {
+  color: var(--color-white);
+}
+
+/* set dark theme global colors */
+html.dark {
+  color: var(--color-white);
+  background-color: var(--color-dark-gray);
+}
+
+/* set dark theme colors for html elements */
+html.dark h2 {
+  color: var(--color-white);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Set Font Face */
+@font-face {
+  font-family: Rift;
+  font-style: normal;
+  src: url('../public/fonts/Rift.ttf');
+}
+@font-face {
+  font-family: Rift-Bold;
+  font-style: normal;
+  src: url('../public/fonts/Rift_Bold.ttf');
+}
