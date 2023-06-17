@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 import PageClient from './page.client';
 
-export default function Page() {
-  return <PageClient />;
-}
-
 export const metadata: Metadata = {
-  title: 'EDPN Home',
+  title: 'EDPN FAQ',
   description: 'Elite Dangerous Pilots Network',
   icons: 'EDPN_logo.png',
 };
+
+export default function Page() {
+  return <PageClient />;
+}
