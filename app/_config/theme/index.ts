@@ -1,6 +1,12 @@
 'use client';
 
 import { extendTheme } from '@chakra-ui/react';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const theme = extendTheme({
   config: {
@@ -18,6 +24,10 @@ const theme = extendTheme({
       background: '#2B2D31',
       box: '#1E1F22',
     },
+  },
+  fonts: {
+    body: inter.style.fontFamily,
+    heading: inter.style.fontFamily,
   },
 });
 
