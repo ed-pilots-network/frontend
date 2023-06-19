@@ -1,12 +1,7 @@
 'use client';
 
 import { extendTheme } from '@chakra-ui/react';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { acumin, rift } from './fonts';
 
 const theme = extendTheme({
   config: {
@@ -26,8 +21,8 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    body: inter.style.fontFamily,
-    heading: inter.style.fontFamily,
+    body: acumin.style.fontFamily,
+    heading: rift.style.fontFamily,
   },
 });
 
