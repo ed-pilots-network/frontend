@@ -1,6 +1,17 @@
 'use client';
 
 import localFont from 'next/font/local';
+import { Orbitron, Rubik } from 'next/font/google';
+
+export const orbitron = Orbitron({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+export const rubik = Rubik({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const rift = localFont({
   src: [
@@ -13,32 +24,6 @@ export const rift = localFont({
       path: '/../../../public/fonts/Rift Bold.ttf',
       weight: '700',
       style: 'normal',
-    },
-  ],
-  display: 'swap',
-});
-
-export const acumin = localFont({
-  src: [
-    {
-      path: '/../../../public/fonts/Acumin Pro.ttf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '/../../../public/fonts/Acumin Pro Bold.ttf',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '/../../../public/fonts/Acumin Pro Italic.ttf',
-      weight: '400',
-      style: 'italic',
-    },
-    {
-      path: '/../../../public/fonts/Acumin Pro Bold Italic.ttf',
-      weight: '700',
-      style: 'italic',
     },
   ],
   display: 'swap',
