@@ -1,7 +1,7 @@
 'use client';
 
 import { extendTheme } from '@chakra-ui/react';
-import { acumin, rift } from './fonts';
+import { rubik, orbitron } from './fonts';
 
 const theme = extendTheme({
   config: {
@@ -21,8 +21,8 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    body: acumin.style.fontFamily,
-    heading: rift.style.fontFamily,
+    body: rubik.style.fontFamily,
+    heading: orbitron.style.fontFamily,
   },
 });
 
