@@ -2,12 +2,8 @@
 
 import { Flex, IconButton, useColorMode, Text, Image } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import localFont from 'next/font/local';
 
-const riftFont = localFont({
-  src: '/../../../public/fonts/Rift.ttf',
-  display: 'swap',
-});
+import { rift } from '@/app/_config/theme/fonts';
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -29,7 +25,7 @@ const Navbar = () => {
           alt="Logo"
           boxSize="50px"
         />
-        <Text ml={2} fontSize="4xl" className={riftFont.className}>
+        <Text ml={2} fontSize="4xl" fontWeight="700" className={rift.className}>
           EDPN
         </Text>
       </Flex>
