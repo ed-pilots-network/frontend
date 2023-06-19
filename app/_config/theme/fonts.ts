@@ -1,5 +1,6 @@
 'use client';
 
+import { NextFont } from 'next/dist/compiled/@next/font';
 import localFont from 'next/font/local';
 
 export const rift = localFont({
@@ -43,3 +44,8 @@ export const acumin = localFont({
   ],
   display: 'swap',
 });
+
+// I cannot believe this is the only way to override fonts with Chakra, but I have not found another one.
+export function overrideFont(font: NextFont): String {
+  return `${font.style.fontFamily} !important`;
+}
