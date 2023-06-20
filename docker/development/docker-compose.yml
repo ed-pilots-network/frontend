@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  edpn-frontend-docker-development:
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    image: edpn-frontend-docker-development
+    ports:
+      - '3002:3000'

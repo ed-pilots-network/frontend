@@ -2,6 +2,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Navbar from './Navbar';
 
 test('renders the navbar with logo and toggle switch', () => {
+  // Mock env variable
+  process.env = Object.assign(process.env, { NEXT_PUBLIC_STAGE: 'test-stage' });
   render(<Navbar />);
 
   // Logo
@@ -14,6 +16,10 @@ test('renders the navbar with logo and toggle switch', () => {
   expect(logoText).toBeInTheDocument();
   expect(logoText.tagName).toBe('P');
   expect(logoText).toHaveStyle({ fontSize: '2xl' });
+
+  // Server Stage
+  const serverStage = screen.getByText('Server: test-stage');
+  expect(serverStage).toBeInTheDocument();
 
   // Toggle switch
   const toggleButton = screen.getByLabelText('Toggle Dark Switch');
