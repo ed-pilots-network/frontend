@@ -29,12 +29,17 @@ const Navbar = () => {
           EDPN
         </Text>
       </Flex>
-      <IconButton
-        aria-label="Toggle Dark Switch"
-        icon={isDark ? <SunIcon /> : <MoonIcon />}
-        onClick={toggleColorMode}
-        size="sm"
-      />
+      <Flex justifyContent="space-between" alignItems="center">
+        <Text ml={2} px={2} fontSize="md">
+          Server: {process.env.NEXT_PUBLIC_STAGE}
+        </Text>
+        <IconButton
+          aria-label="Toggle Dark Switch"
+          icon={isDark ? <SunIcon /> : <MoonIcon />}
+          onClick={toggleColorMode}
+          size="sm"
+        />
+      </Flex>
     </Flex>
   );
 };
