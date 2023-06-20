@@ -44,6 +44,36 @@ yarn lint
 yarn test
 ```
 
+## Using Docker and Makefile
+
+Enter the values in the `.env` for localhost and `.env.development.sample`, `.env.production.sample` for respective environments. Only change `docker` folder files if you are involved in managing deployment to these stages.
+
+### Development environment - for doing testing
+
+```
+make build-development
+make start-development
+```
+
+Open http://localhost:3002
+
+### Production environment - for users
+
+```
+make build-production
+make start-production
+```
+
+Open http://localhost:3003
+
+## Running Locally
+
+First, run the development server:
+
+```bash
+yarn dev
+```
+
 #### This project uses:
 
 - NextJS as a framework.
@@ -52,3 +82,4 @@ yarn test
 - Eslint
 - Prettier
 - Husky
+- Docker

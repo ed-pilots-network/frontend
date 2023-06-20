@@ -8,5 +8,5 @@ export default function Page() {
 export const metadata: Metadata = {
   title: 'EDPN Home',
   description: 'Elite Dangerous Pilots Network',
-  icons: 'EDPN_logo.png',
+  icons: 'EDPN_logo_black.png',
 };

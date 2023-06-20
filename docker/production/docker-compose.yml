@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  edpn-frontend-docker-production:
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+    image: edpn-frontend-docker-production
+    ports:
+      - '3003:3000'
