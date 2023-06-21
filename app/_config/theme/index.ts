@@ -1,5 +1,3 @@
-'use client';
-
 import { extendTheme } from '@chakra-ui/react';
 import { rubik, orbitron } from './fonts';
 
