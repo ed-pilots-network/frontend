@@ -1,5 +1,3 @@
-'use client';
-
 import { Box, useColorMode } from '@chakra-ui/react';
 
 const Footer = () => {

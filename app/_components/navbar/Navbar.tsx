@@ -1,5 +1,3 @@
-'use client';
-
 import { Flex, IconButton, useColorMode, Text, Image } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 

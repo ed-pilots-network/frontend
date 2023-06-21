@@ -1,5 +1,3 @@
-'use client';
-
 import localFont from 'next/font/local';
 import { Orbitron, Rubik } from 'next/font/google';
 
