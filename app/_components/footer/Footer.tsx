@@ -1,8 +1,9 @@
-import { Box, useColorMode } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import useColorMode from '@/app/_hooks/useColorMode';
 
 const Footer = () => {
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === 'dark';
+  const { isDark } = useColorMode();
+
   return (
     <Box
       as="footer"
