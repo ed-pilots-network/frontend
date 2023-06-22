@@ -130,7 +130,7 @@ const ModuleLaunchPad = () => {
         {renderTabPanel(
           '/assets/Alliance_Crusader.svg',
           'Alliance Crusader',
-          'discover',
+          'outfit',
         )}
       </TabPanels>
     </Tabs>
