@@ -1,13 +1,17 @@
 'use client';
 
-import { Heading } from '@chakra-ui/react';
+import { Center, Flex, Heading } from '@chakra-ui/react';
+import ModuleLaunchPad from './_components/module-launch-pad/ModuleLaunchPad';
 
 const PageClient = () => (
-  <>
-    <Heading as="h2" size="lg">
-      Welcome to EDPN!
-    </Heading>
-  </>
+  <Center width="100%">
+    <Flex flexDirection="column" gap="24px" width="100%" maxWidth="1500px">
+      <Heading as="h1" size="lg">
+        Elite Dangerous Pilots Network
+      </Heading>
+      <ModuleLaunchPad />
+    </Flex>
+  </Center>
 );
 
 export default PageClient;
