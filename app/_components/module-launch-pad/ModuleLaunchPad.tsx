@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-  Heading,
-  LinkBox,
-  LinkOverlay,
-  SimpleGrid,
-  useColorMode,
-} from '@chakra-ui/react';
+import { Heading, LinkBox, LinkOverlay, SimpleGrid } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import {
   Attractions,
@@ -19,7 +13,8 @@ import {
   SingleTradeRoute,
   Stations,
   Systems,
-} from '../../_icons/modules';
+} from '@/app/_icons/modules';
+import useColorMode from '@/app/_hooks/useColorMode';
 
 interface Module {
   title: string;
@@ -102,8 +97,7 @@ const modules: Module[] = [
 ];
 
 const ModuleLaunchPad = () => {
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === 'dark';
+  const { isDark } = useColorMode();
 
   return (
     <SimpleGrid minChildWidth="220px" spacing="50px">

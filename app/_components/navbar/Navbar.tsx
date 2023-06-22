@@ -1,11 +1,11 @@
-import { Flex, IconButton, useColorMode, Text, Image } from '@chakra-ui/react';
+import { Flex, IconButton, Text, Image } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import { rift } from '@/app/_config/theme/fonts';
+import useColorMode from '@/app/_hooks/useColorMode';
 
 const Navbar = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const isDark = colorMode === 'dark';
+  const { isDark, toggleColorMode } = useColorMode();
 
   return (
     <Flex
