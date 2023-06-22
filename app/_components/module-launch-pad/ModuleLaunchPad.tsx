@@ -1,138 +1,139 @@
 import React from 'react';
-
 import {
   Heading,
   LinkBox,
   LinkOverlay,
   SimpleGrid,
   useColorMode,
+  Tab,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabPanel,
+  Box,
+  Img,
+  Center,
+  Hide,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import {
-  Attractions,
-  Bodies,
-  Factions,
-  LoopTradeRoute,
-  MultiHopTradeRoute,
-  POIs,
-  Shipyard,
-  SingleTradeRoute,
-  Stations,
-  Systems,
-} from '../../_icons/modules';
-
-interface Module {
-  title: string;
-  url: string;
-  icon: React.ReactNode;
-  description: string;
-}
-
-const modules: Module[] = [
-  {
-    url: '/systems',
-    icon: <Systems />,
-    title: 'Systems',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-  {
-    url: '/bodies',
-    icon: <Bodies />,
-    title: 'Bodies',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-  {
-    url: '/stations',
-    icon: <Stations />,
-    title: 'Stations',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-  {
-    url: '/attractions',
-    icon: <Attractions />,
-    title: 'Attractions',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-  {
-    url: '/pois',
-    icon: <POIs />,
-    title: 'POIs',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-  {
-    url: '/factions',
-    icon: <Factions />,
-    title: 'Factions',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-  {
-    url: '/shipyard',
-    icon: <Shipyard />,
-    title: 'Shipyard',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-  {
-    url: '/trade/single',
-    icon: <SingleTradeRoute />,
-    title: 'Single Trade Route',
-    description:
-      'Trade from A to B and find the best profit route using multiple filter options',
-  },
-  {
-    url: '/trade/multi',
-    icon: <MultiHopTradeRoute />,
-    title: 'Multi-Hop Trade Route',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-  {
-    url: '/trade/loop',
-    icon: <LoopTradeRoute />,
-    title: 'Loop Trade Route',
-    description:
-      'Browse the universe! Jump to any system or search by many properties',
-  },
-];
+import ModuleProps, { Module } from './moduleProps';
 
 const ModuleLaunchPad = () => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === 'dark';
 
-  return (
-    <SimpleGrid minChildWidth="220px" spacing="50px">
-      {modules.map((module) => (
-        <LinkBox
-          key={module.title}
-          borderWidth="1px"
-          borderRadius="9px"
-          borderColor={isDark ? 'dark.text' : 'light.text'}
-          p="12px"
-          position="relative"
-        >
-          <Heading
-            as="h2"
-            size="sm"
-            display="flex"
-            gap="8px"
-            alignItems="center"
-            mb="10px"
+  const selectColor = (element: String) => {
+    if (element === 'text') return isDark ? 'dark.text' : 'light.text';
+    if (element === 'box') return isDark ? 'dark.box' : 'light.box';
+    return isDark ? 'dark.background' : 'light.background';
+  };
+
+  const filteredGrid = (filter: String) => (
+    <SimpleGrid columns={[1, 2, 3]} spacing="50px">
+      {ModuleProps.filter((module: Module) => module.tag === filter).map(
+        (module) => (
+          <LinkBox
+            key={module.title}
+            borderWidth="1px"
+            borderRadius="9px"
+            borderColor={selectColor('text')}
+            bgColor="rgb(30 31 34 / 0.7)" // NOTE: this is a hack to get the dark.box to work, Chackra UI is not applying the dark.box variable: aslink87
+            p="12px"
+            position="relative"
           >
-            {module.icon}
-            <LinkOverlay as={NextLink} href={module.url}>
-              {module.title}
-            </LinkOverlay>
-          </Heading>
-          <p>{module.description}</p>
-        </LinkBox>
-      ))}
+            <Heading
+              as="h2"
+              size="sm"
+              display="flex"
+              gap="8px"
+              alignItems="center"
+              mb="10px"
+              letterSpacing="2px"
+            >
+              {module.icon}
+              <LinkOverlay as={NextLink} href={module.url}>
+                {module.title}
+              </LinkOverlay>
+            </Heading>
+            <p>{module.description}</p>
+          </LinkBox>
+        ),
+      )}
     </SimpleGrid>
+  );
+
+  const renderTabPanel = (img: string, alt: string, filter: string) => (
+    <TabPanel>
+      <Box as="div">
+        <Hide below="md">
+          <Center position="absolute" width="100%" left="0">
+            <Img
+              src={img}
+              alt={alt}
+              maxWidth="600px"
+              objectFit="cover"
+              opacity={0.2}
+              loading="lazy"
+            />
+          </Center>
+        </Hide>
+        {filteredGrid(filter)}
+      </Box>
+    </TabPanel>
+  );
+
+  return (
+    <Tabs
+      position="relative"
+      variant="enclosed"
+      align="center"
+      colorScheme={selectColor('text')}
+    >
+      <TabList>
+        <Tab
+          _selected={{
+            color: selectColor('text'),
+            borderBottom: `1px solid currentcolor`,
+            fontWeight: 'bold',
+            letterSpacing: '1px',
+          }}
+          aria-label="Toggle Discover Tab"
+        >
+          Discover
+        </Tab>
+        <Tab
+          _selected={{
+            color: selectColor('text'),
+            borderBottom: `1px solid currentcolor`,
+            fontWeight: 'bold',
+            letterSpacing: '1px',
+          }}
+          aria-label="Toggle Trade Tab"
+        >
+          Trade
+        </Tab>
+        <Tab
+          _selected={{
+            color: selectColor('text'),
+            borderBottom: `1px solid currentcolor`,
+            fontWeight: 'bold',
+            letterSpacing: '1px',
+          }}
+          aria-label="Toggle Outfit Tab"
+        >
+          Outfit
+        </Tab>
+      </TabList>
+      <TabPanels>
+        {renderTabPanel('/assets/Asp_Explorer.svg', 'Asp Explorer', 'discover')}
+        {renderTabPanel('/assets/Type_9.svg', 'Type 9 Heavy', 'trade')}
+        {renderTabPanel(
+          '/assets/Alliance_Crusader.svg',
+          'Alliance Crusader',
+          'discover',
+        )}
+      </TabPanels>
+    </Tabs>
   );
 };
 
