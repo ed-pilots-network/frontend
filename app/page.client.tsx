@@ -1,7 +1,7 @@
 'use client';
 
 import { Center, Flex, Heading } from '@chakra-ui/react';
-import ModuleLaunchPad from './ModuleLaunchPad';
+import ModuleLaunchPad from './_components/module-launch-pad/ModuleLaunchPad';
 
 const PageClient = () => (
   <Center width="100%">

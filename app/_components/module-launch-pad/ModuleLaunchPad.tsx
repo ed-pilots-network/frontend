@@ -19,7 +19,7 @@ import {
   SingleTradeRoute,
   Stations,
   Systems,
-} from './_icons/modules';
+} from '../../_icons/modules';
 
 interface Module {
   title: string;
