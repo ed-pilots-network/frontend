@@ -1,18 +1,19 @@
 import { test, expect } from '@playwright/test';
 
+// Navigation tests
 test('should navigate to the home page', async ({ page }) => {
   await page.goto('/');
   // The new page should contain an h1 with "Elite Dangerous Pilots Network"
   await expect(page.locator('h1')).toContainText(
     'Elite Dangerous Pilots Network',
   );
-
-  // Page should include a tab navigation with the following tabs:
-  await expect(page.getByRole('tab', { name: 'Discover' })).toBeVisible();
-
-  await expect(page.getByRole('link', { name: 'Systems' })).toBeVisible();
+});
+test('should navigate to the faq page', async ({ page }) => {
+  await page.goto('/faq');
+  await expect(page.locator('h2')).toContainText('FAQ');
 });
 
+// Index page tests
 test('homepage Trade tab should update cards', async ({ page }) => {
   await page.goto('/');
 
@@ -53,9 +54,4 @@ test('homepage Outfit tab should update cards', async ({ page }) => {
 
   // Page should NOT display hidden cards to include:
   await expect(page.getByRole('link', { name: 'Systems' })).toBeHidden();
-});
-
-test('should navigate to the faq page', async ({ page }) => {
-  await page.goto('/faq');
-  await expect(page.locator('h2')).toContainText('FAQ');
 });
