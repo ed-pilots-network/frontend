@@ -17,18 +17,27 @@ const Navbar = () => {
     >
       <Flex alignItems="center">
         <Image
-          src={
-            isDark ? '/EDPN_logo_dark_background.png' : '/EDPN_logo_black.png'
-          }
+          src={'/EDPN_logo_dark_background.png'}
           alt="Logo"
           boxSize="50px"
         />
-        <Text ml={2} fontSize="4xl" fontWeight="700" className={rift.className}>
+        <Text
+          ml={2}
+          fontSize="4xl"
+          fontWeight="700"
+          color={isDark ? 'dark.text' : 'light.background'}
+          className={rift.className}
+        >
           EDPN
         </Text>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
-        <Text ml={2} px={2} fontSize="md">
+        <Text
+          ml={2}
+          px={2}
+          fontSize="md"
+          color={isDark ? 'dark.text' : 'light.background'}
+        >
           Server: {process.env.NEXT_PUBLIC_STAGE}
         </Text>
         <IconButton

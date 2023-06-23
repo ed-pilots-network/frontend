@@ -9,7 +9,7 @@ const Footer = () => {
       py={5}
       textAlign="center"
       bg={isDark ? 'dark.box' : 'light.box'}
-      color={isDark ? 'dark.text' : 'light.text'}
+      color={isDark ? 'dark.text' : 'light.background'}
     >
       Engineered by the EDPN Team
     </Box>

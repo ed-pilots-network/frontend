@@ -16,12 +16,10 @@ export const rift = localFont({
     {
       path: '/../../../public/fonts/Rift.ttf',
       weight: '400',
-      style: 'normal',
     },
     {
       path: '/../../../public/fonts/Rift Bold.ttf',
       weight: '700',
-      style: 'normal',
     },
   ],
   display: 'swap',
