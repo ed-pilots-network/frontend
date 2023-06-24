@@ -1,6 +1,6 @@
-# [EDPN] Elite Dangerous Pilot Network - Frontend
+# Elite Dangerous Pilots Network - Frontend
 
-The EDPN `frontend` project handles the web application for the Elite Dangerous Pilot Network Website. It consumes the [EDPN Backend API](https://github.com/ed-pilots-network/backend) to support its features.
+The EDPN `frontend` project handles the web application for the Elite Dangerous Pilots Network Website. It consumes the [EDPN Backend API](https://github.com/ed-pilots-network/backend) to support its features.
 
 ![Dev Build Status](https://github.com/ed-pilots-network/frontend/actions/workflows/build-deploy.yaml/badge.svg?branch=development)
 
