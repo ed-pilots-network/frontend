@@ -1,8 +1,9 @@
-import { Flex, IconButton, Text, Image } from '@chakra-ui/react';
+import { Flex, IconButton, Text, Image, Hide } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import { rift } from '@/app/_config/theme/fonts';
 import useColorMode from '@/app/_hooks/useColorMode';
+import Link from 'next/link';
 
 const Navbar = () => {
   const { isDark, toggleColorMode } = useColorMode();
@@ -16,30 +17,36 @@ const Navbar = () => {
       color={isDark ? 'dark.text' : 'light.text'}
     >
       <Flex alignItems="center">
-        <Image
-          src={'/EDPN_logo_dark_background.png'}
-          alt="Logo"
-          boxSize="50px"
-        />
-        <Text
-          ml={2}
-          fontSize="4xl"
-          fontWeight="700"
-          color={isDark ? 'dark.text' : 'light.background'}
-          className={rift.className}
-        >
-          EDPN
-        </Text>
+        <Link href="/">
+          <Image
+            src={'/EDPN_logo_dark_background.png'}
+            alt="Logo"
+            boxSize="50px"
+          />
+        </Link>
+        <Link href="/">
+          <Text
+            ml="2"
+            fontSize="4xl"
+            fontWeight="700"
+            color={isDark ? 'dark.text' : 'light.background'}
+            className={rift.className}
+          >
+            EDPN
+          </Text>
+        </Link>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
-        <Text
-          ml={2}
-          px={2}
-          fontSize="md"
-          color={isDark ? 'dark.text' : 'light.background'}
-        >
-          Server: {process.env.NEXT_PUBLIC_STAGE}
-        </Text>
+        <Hide below="sm">
+          <Text
+            ml={2}
+            px={2}
+            fontSize="md"
+            color={isDark ? 'dark.text' : 'light.background'}
+          >
+            Server: {process.env.NEXT_PUBLIC_STAGE}
+          </Text>
+        </Hide>
         <IconButton
           aria-label="Toggle Dark Switch"
           icon={isDark ? <SunIcon /> : <MoonIcon />}
