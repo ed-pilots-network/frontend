@@ -10,6 +10,7 @@ import {
   TabPanels,
   TabPanel,
   Box,
+  Icon,
   Img,
   Center,
   Hide,
@@ -45,19 +46,20 @@ const ModuleLaunchPad = () => {
               backdropContrast: '90%',
             }}
           >
-            <Heading
-              as="h2"
-              size="sm"
-              gap="8px"
+            <Box
+              display="flex"
+              justifyContent="center"
               alignItems="center"
               mb="10px"
               letterSpacing="2px"
             >
-              {module.icon}
+              <Icon as={module.icon} boxSize={6} />
               <LinkOverlay as={NextLink} href={module.url} ml="10px">
-                {module.title}
+                <Heading as="h2" size="sm">
+                  {module.title}
+                </Heading>
               </LinkOverlay>
-            </Heading>
+            </Box>
             <p>{module.description}</p>
           </LinkBox>
         ),

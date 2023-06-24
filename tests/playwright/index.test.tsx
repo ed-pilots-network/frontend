@@ -14,44 +14,26 @@ test('should navigate to the faq page', async ({ page }) => {
 });
 
 // Index page tests
-test('homepage Trade tab should update cards', async ({ page }) => {
+test('homepage role tabs behave correctly', async ({ page }) => {
   await page.goto('/');
+  // Assert that the initial tab panel is visible
+  await expect(page.getByRole('tabpanel', { name: 'Discover' })).toBeVisible();
+  await expect(page.getByRole('tabpanel', { name: 'Trade' })).toBeHidden();
+  await expect(page.getByRole('tabpanel', { name: 'Outfit' })).toBeHidden();
 
-  // Page should display initial cards to include:
-  await expect(page.getByRole('link', { name: 'Systems' })).toBeVisible();
-
-  // Page should NOT display hidden cards to include:
-  await expect(
-    page.getByRole('link', { name: 'Single Trade Route' }),
-  ).toBeHidden();
-
-  // Click on the "Trade" tab
+  // Select the 'Trade' tab
   await page.getByRole('tab', { name: 'Trade' }).click();
 
-  // Page should display new cards to include:
-  await expect(
-    page.getByRole('link', { name: 'Single Trade Route' }),
-  ).toBeVisible();
+  // Assert that the 'Trade' tab panel is now visible, while others are hidden
+  await expect(page.getByRole('tabpanel', { name: 'Discover' })).toBeHidden();
+  await expect(page.getByRole('tabpanel', { name: 'Trade' })).toBeVisible();
+  await expect(page.getByRole('tabpanel', { name: 'Outfit' })).toBeHidden();
 
-  // Page should NOT display hidden cards to include:
-  await expect(page.getByRole('link', { name: 'Systems' })).toBeHidden();
-});
-
-test('homepage Outfit tab should update cards', async ({ page }) => {
-  await page.goto('/');
-
-  // Page should display initial cards to include:
-  await expect(page.getByRole('link', { name: 'Systems' })).toBeVisible();
-
-  // Page should NOT display hidden cards to include:
-  await expect(page.getByRole('link', { name: 'Shipyard' })).toBeHidden();
-
-  // Click on the "Outfit" tab
+  // Select the 'Outfit' tab
   await page.getByRole('tab', { name: 'Outfit' }).click();
 
-  // Page should display new cards to include:
-  await expect(page.getByRole('link', { name: 'Shipyard' })).toBeVisible();
-
-  // Page should NOT display hidden cards to include:
-  await expect(page.getByRole('link', { name: 'Systems' })).toBeHidden();
+  // Assert that the 'Outfit' tab panel is now visible, while others are hidden
+  await expect(page.getByRole('tabpanel', { name: 'Discover' })).toBeHidden();
+  await expect(page.getByRole('tabpanel', { name: 'Trade' })).toBeHidden();
+  await expect(page.getByRole('tabpanel', { name: 'Outfit' })).toBeVisible();
 });
