@@ -46,6 +46,13 @@ yarn lint
 yarn test
 ```
 
+### Take Screenshots
+If you are making changes that impact the UI, ensure to test the change on different view ports. Run the following to auto capture screenshots when tests run. Note that this only runs when you run this command locally.
+
+```bash
+yarn capture-screenshots
+```
+
 ## 🐳 Using Docker and Makefile
 
 Enter the values in the `.env` for localhost and `.env.development.sample`, `.env.production.sample` for respective environments. Only change `docker` folder files if you are involved in managing deployment to these stages.

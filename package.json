@@ -15,7 +15,8 @@
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
     "test": "yarn test:e2e && yarn test:unit",
     "test:e2e": "playwright test",
-    "test:unit": "jest"
+    "test:unit": "jest",
+    "capture-screenshots": "RUN_SCREENSHOT_TEST=true yarn test"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",

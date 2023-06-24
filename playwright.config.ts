@@ -43,20 +43,20 @@ const config: PlaywrightTestConfig = {
 
   projects: [
     {
-      name: 'Desktop Chrome',
+      name: 'Desktop-Chrome',
       use: {
         ...devices['Desktop Chrome'],
       },
     },
     {
-      name: 'Desktop Firefox',
+      name: 'Desktop-Firefox',
       use: {
         ...devices['Desktop Firefox'],
       },
     },
     // Test against mobile viewports.
     {
-      name: 'Mobile Chrome',
+      name: 'Mobile-Chrome',
       use: {
         ...devices['Pixel 5'],
       },
