@@ -4,7 +4,6 @@ import {
   LinkBox,
   LinkOverlay,
   SimpleGrid,
-  useColorMode,
   Tab,
   Tabs,
   TabList,
@@ -19,6 +18,7 @@ import NextLink from 'next/link';
 import ModuleProps, { Module } from './moduleProps';
 
 const ModuleLaunchPad = () => {
+  import useColorMode from '@/app/_hooks/useColorMode';
   const { isDark } = useColorMode();
 
   // local functions
