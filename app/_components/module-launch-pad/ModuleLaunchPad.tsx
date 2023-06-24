@@ -16,18 +16,13 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useColorMode from '@/app/_hooks/useColorMode';
+import selectColor from '@/app/_hooks/fontColorSelector';
 import ModuleProps, { Module } from './moduleProps';
 
 const ModuleLaunchPad = () => {
   const { isDark } = useColorMode();
 
   // local functions
-  const selectColor = (element: String) => {
-    if (element === 'text') return isDark ? 'dark.text' : 'light.text';
-    if (element === 'box') return isDark ? 'dark.box' : 'light.box';
-    return isDark ? 'dark.background' : 'light.background';
-  };
-
   // NOTE: these hex values are a hack to get the dark.box to work
   // Chackra UI is not applying the theme variables with alpha: aslink87
   const cardBgColor = isDark ? 'rgb(30 31 34 / 0.7)' : 'rgb(255 255 255 / 0.7)';
@@ -40,7 +35,7 @@ const ModuleLaunchPad = () => {
             key={module.title}
             borderWidth="1px"
             borderRadius="9px"
-            borderColor={selectColor('text')}
+            borderColor={selectColor(isDark, 'text')}
             bgColor={cardBgColor}
             p="25px"
             position="relative"
@@ -73,7 +68,7 @@ const ModuleLaunchPad = () => {
   const renderTab = (text: string) => (
     <Tab
       _selected={{
-        color: selectColor('text'),
+        color: selectColor(isDark, 'text'),
         borderBottom: '1px solid currentcolor',
         fontWeight: 'bold',
         letterSpacing: '1px',
@@ -111,7 +106,7 @@ const ModuleLaunchPad = () => {
       variant="enclosed"
       align="center"
       minHeight="100%"
-      colorScheme={selectColor('text')}
+      colorScheme={selectColor(isDark, 'text')}
     >
       <TabList display="flex" gap="2rem" flexWrap="wrap">
         {renderTab('Discover')}

@@ -3,6 +3,7 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import { rift } from '@/app/_config/theme/fonts';
 import useColorMode from '@/app/_hooks/useColorMode';
+import selectColor from '@/app/_hooks/fontColorSelector';
 
 const Navbar = () => {
   const { isDark, toggleColorMode } = useColorMode();
@@ -12,8 +13,8 @@ const Navbar = () => {
       justifyContent="space-between"
       alignItems="center"
       p={2}
-      bg={isDark ? 'dark.box' : 'light.box'}
-      color={isDark ? 'dark.text' : 'light.text'}
+      bg={selectColor(isDark, 'box')}
+      color={selectColor(isDark, 'text')}
     >
       <Flex alignItems="center">
         <Image
@@ -25,7 +26,7 @@ const Navbar = () => {
           ml={2}
           fontSize="4xl"
           fontWeight="700"
-          color={isDark ? 'dark.text' : 'light.background'}
+          color={selectColor(isDark, 'textLight')}
           className={rift.className}
         >
           EDPN
@@ -36,7 +37,7 @@ const Navbar = () => {
           ml={2}
           px={2}
           fontSize="md"
-          color={isDark ? 'dark.text' : 'light.background'}
+          color={selectColor(isDark, 'textLight')}
         >
           Server: {process.env.NEXT_PUBLIC_STAGE}
         </Text>
