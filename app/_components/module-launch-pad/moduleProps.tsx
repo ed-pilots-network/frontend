@@ -1,21 +1,20 @@
+import { IconType } from 'react-icons';
+import { GiSolarSystem, GiEarthAmerica } from 'react-icons/gi';
+import { MdApartment, MdPhotoCamera } from 'react-icons/md';
 import {
-  Attractions,
-  Bodies,
-  Factions,
-  LoopTradeRoute,
-  MultiHopTradeRoute,
-  POIs,
-  Shipyard,
-  SingleTradeRoute,
-  Stations,
-  Systems,
-} from '../../_icons/moduleIcons';
+  FaArrowRight,
+  FaArrowRightArrowLeft,
+  FaShuttleSpace,
+  FaArrowTrendUp,
+  FaMapLocationDot,
+  FaLandmark,
+} from 'react-icons/fa6';
 
 export interface Module {
   title: string;
   tag: string;
   url: string;
-  icon: React.ReactNode;
+  icon: IconType;
   description: string;
 }
 
@@ -23,7 +22,7 @@ const ModuleProps: Module[] = [
   {
     url: '/systems',
     tag: 'discover',
-    icon: <Systems />,
+    icon: GiSolarSystem,
     title: 'Systems',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -31,7 +30,7 @@ const ModuleProps: Module[] = [
   {
     url: '/bodies',
     tag: 'discover',
-    icon: <Bodies />,
+    icon: GiEarthAmerica,
     title: 'Bodies',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -39,7 +38,7 @@ const ModuleProps: Module[] = [
   {
     url: '/stations',
     tag: 'discover',
-    icon: <Stations />,
+    icon: MdApartment,
     title: 'Stations',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -47,7 +46,7 @@ const ModuleProps: Module[] = [
   {
     url: '/attractions',
     tag: 'discover',
-    icon: <Attractions />,
+    icon: MdPhotoCamera,
     title: 'Attractions',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -55,7 +54,7 @@ const ModuleProps: Module[] = [
   {
     url: '/pois',
     tag: 'discover',
-    icon: <POIs />,
+    icon: FaMapLocationDot,
     title: 'POIs',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -63,7 +62,7 @@ const ModuleProps: Module[] = [
   {
     url: '/factions',
     tag: 'discover',
-    icon: <Factions />,
+    icon: FaLandmark,
     title: 'Factions',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -71,7 +70,7 @@ const ModuleProps: Module[] = [
   {
     url: '/shipyard',
     tag: 'outfit',
-    icon: <Shipyard />,
+    icon: FaShuttleSpace,
     title: 'Shipyard',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -79,7 +78,7 @@ const ModuleProps: Module[] = [
   {
     url: '/trade/single',
     tag: 'trade',
-    icon: <SingleTradeRoute />,
+    icon: FaArrowRight,
     title: 'Single Trade Route',
     description:
       'Trade from A to B and find the best profit route using multiple filter options',
@@ -87,7 +86,7 @@ const ModuleProps: Module[] = [
   {
     url: '/trade/multi',
     tag: 'trade',
-    icon: <MultiHopTradeRoute />,
+    icon: FaArrowTrendUp,
     title: 'Multi-Hop Trade Route',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -95,7 +94,7 @@ const ModuleProps: Module[] = [
   {
     url: '/trade/loop',
     tag: 'trade',
-    icon: <LoopTradeRoute />,
+    icon: FaArrowRightArrowLeft,
     title: 'Loop Trade Route',
     description:
       'Browse the universe! Jump to any system or search by many properties',

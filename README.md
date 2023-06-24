@@ -1,8 +1,10 @@
-# EDPN
+# [EDPN] Elite Dangerous Pilot Network - Frontend
 
-Elite Dangerous Pilots Network Frontend
+The EDPN `frontend` project handles the web application for the Elite Dangerous Pilot Network Website. It consumes the [EDPN Backend API](https://github.com/ed-pilots-network/backend) to support its features.
 
-## Get Started
+![Dev Build Status](https://github.com/ed-pilots-network/frontend/actions/workflows/build-deploy.yaml/badge.svg?branch=development)
+
+## 📦 Get Started
 
 First, clone this repo:
 
@@ -16,7 +18,7 @@ Then, install dependencies with:
 yarn install
 ```
 
-## Scripts
+## 📝 Scripts
 
 ### Development mode
 
@@ -44,7 +46,7 @@ yarn lint
 yarn test
 ```
 
-## Using Docker and Makefile
+## 🐳 Using Docker and Makefile
 
 Enter the values in the `.env` for localhost and `.env.development.sample`, `.env.production.sample` for respective environments. Only change `docker` folder files if you are involved in managing deployment to these stages.
 
@@ -74,7 +76,7 @@ First, run the development server:
 yarn dev
 ```
 
-#### This project uses:
+### 🧰 This project uses:
 
 - NextJS as a framework.
 - Jest and Playwright for unit and end-to-end testing respectively.
@@ -83,3 +85,6 @@ yarn dev
 - Prettier
 - Husky
 - Docker
+
+### 🌐 Useful Tools
+- [ColorKit](https://colorkit.co/color-palette-generator/272f33-4e5d66-9BB9CB-cddce5-e6eef2/) - Color Palette Generator
