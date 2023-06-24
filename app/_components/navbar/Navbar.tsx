@@ -30,7 +30,7 @@ const Navbar = () => {
             ml="2"
             fontSize="4xl"
             fontWeight="700"
-            color={isDark ? 'dark.text' : 'light.background'}
+            color={selectColor(isDark, 'textLight')}
             className={rift.className}
           >
             EDPN
@@ -43,7 +43,7 @@ const Navbar = () => {
             ml={2}
             px={2}
             fontSize="md"
-            color={isDark ? 'dark.text' : 'light.background'}
+            color={selectColor(isDark, 'textLight')}
           >
             Server: {process.env.NEXT_PUBLIC_STAGE}
           </Text>
