@@ -14,11 +14,11 @@ export const rubik = Rubik({
 export const rift = localFont({
   src: [
     {
-      path: '/../../../public/fonts/Rift.ttf',
+      path: '../../../public/fonts/Rift.ttf',
       weight: '400',
     },
     {
-      path: '/../../../public/fonts/Rift Bold.ttf',
+      path: '../../../public/fonts/Rift_Bold.ttf',
       weight: '700',
     },
   ],

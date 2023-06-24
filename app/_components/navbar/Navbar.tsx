@@ -1,8 +1,9 @@
-import { Flex, IconButton, Text, Image } from '@chakra-ui/react';
+import { Flex, IconButton, Text, Image, Hide } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 import { rift } from '@/app/_config/theme/fonts';
 import useColorMode from '@/app/_hooks/useColorMode';
+import Link from 'next/link';
 import selectColor from '@/app/_hooks/fontColorSelector';
 
 const Navbar = () => {
@@ -17,30 +18,36 @@ const Navbar = () => {
       color={selectColor(isDark, 'text')}
     >
       <Flex alignItems="center">
-        <Image
-          src={'/EDPN_logo_dark_background.png'}
-          alt="Logo"
-          boxSize="50px"
-        />
-        <Text
-          ml={2}
-          fontSize="4xl"
-          fontWeight="700"
-          color={selectColor(isDark, 'textLight')}
-          className={rift.className}
-        >
-          EDPN
-        </Text>
+        <Link href="/">
+          <Image
+            src={'/EDPN_logo_dark_background.png'}
+            alt="Logo"
+            boxSize="50px"
+          />
+        </Link>
+        <Link href="/">
+          <Text
+            ml="2"
+            fontSize="4xl"
+            fontWeight="700"
+            color={selectColor(isDark, 'textLight')}
+            className={rift.className}
+          >
+            EDPN
+          </Text>
+        </Link>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
-        <Text
-          ml={2}
-          px={2}
-          fontSize="md"
-          color={selectColor(isDark, 'textLight')}
-        >
-          Server: {process.env.NEXT_PUBLIC_STAGE}
-        </Text>
+        <Hide below="md">
+          <Text
+            ml={2}
+            px={2}
+            fontSize="md"
+            color={selectColor(isDark, 'textLight')}
+          >
+            Server: {process.env.NEXT_PUBLIC_STAGE}
+          </Text>
+        </Hide>
         <IconButton
           aria-label="Toggle Dark Switch"
           icon={isDark ? <SunIcon /> : <MoonIcon />}

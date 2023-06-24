@@ -10,7 +10,7 @@ test('should navigate to the home page', async ({ page }) => {
 });
 test('should navigate to the faq page', async ({ page }) => {
   await page.goto('/faq');
-  await expect(page.locator('h2')).toContainText('FAQ');
+  await expect(page.locator('h1')).toContainText('FAQ');
 });
 
 // Index page tests
