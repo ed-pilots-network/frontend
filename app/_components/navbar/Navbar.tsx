@@ -4,6 +4,7 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { rift } from '@/app/_config/theme/fonts';
 import useColorMode from '@/app/_hooks/useColorMode';
 import Link from 'next/link';
+import selectColor from '@/app/_hooks/fontColorSelector';
 
 const Navbar = () => {
   const { isDark, toggleColorMode } = useColorMode();
@@ -13,8 +14,8 @@ const Navbar = () => {
       justifyContent="space-between"
       alignItems="center"
       p={2}
-      bg={isDark ? 'dark.box' : 'light.box'}
-      color={isDark ? 'dark.text' : 'light.text'}
+      bg={selectColor(isDark, 'box')}
+      color={selectColor(isDark, 'text')}
     >
       <Flex alignItems="center">
         <Link href="/">
@@ -37,7 +38,7 @@ const Navbar = () => {
         </Link>
       </Flex>
       <Flex justifyContent="space-between" alignItems="center">
-        <Hide below="sm">
+        <Hide below="md">
           <Text
             ml={2}
             px={2}

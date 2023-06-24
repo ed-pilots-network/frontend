@@ -1,6 +1,7 @@
 'use client';
 
 import { ColorModeScript, Flex, Box, useColorMode } from '@chakra-ui/react';
+import selectColor from '@/app/_hooks/fontColorSelector';
 import Navbar from './_components/navbar/Navbar';
 import Footer from './_components/footer/Footer';
 import theme from './_config/theme';
@@ -14,8 +15,8 @@ const LayoutClient = ({ children }: { children: React.ReactNode }) => {
       {/* ColorModeScript mitigates the FOUC for dark theme being default */}
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <Flex
-        bg={isDark ? 'dark.background' : 'light.background'}
-        color={isDark ? 'dark.text' : 'light.text'}
+        bg={selectColor(isDark, 'background')}
+        color={selectColor(isDark, 'text')}
         direction="column"
         minH="100vh"
       >

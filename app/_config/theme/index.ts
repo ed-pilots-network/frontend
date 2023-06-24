@@ -9,6 +9,7 @@ const theme = extendTheme({
   colors: {
     light: {
       text: '#272f33',
+      textLight: '#e6eef2',
       background: '#e6eef2',
       box: '#4e5d66',
     },
