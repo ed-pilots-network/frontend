@@ -84,18 +84,17 @@ const ModuleLaunchPad = () => {
   const renderTabPanel = (img: string, alt: string, filter: string) => (
     <TabPanel>
       <Box as="div">
-        <Hide below="md">
-          <Center position="absolute" width="100%" left="0">
-            <Img
-              src={img}
-              alt={alt}
-              maxWidth="500px"
-              objectFit="cover"
-              opacity={0.2}
-              loading="lazy"
-            />
-          </Center>
-        </Hide>
+        <Center 
+        height="500px" 
+        position="fixed" 
+        width="100%" 
+        left="0" 
+        backgroundImage={`url(${img})`} 
+        backgroundSize="contain" 
+        opacity="0.2" 
+        backgroundRepeat="no-repeat" 
+        backgroundPosition="center center">
+        </Center>
         {filteredGrid(filter)}
       </Box>
     </TabPanel>
