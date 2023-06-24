@@ -8,9 +8,10 @@ const theme = extendTheme({
   },
   colors: {
     light: {
-      text: '#2D3748',
-      background: '#F7FAFC',
-      box: '#F2F2F2',
+      text: '#272f33',
+      textLight: '#e6eef2',
+      background: '#e6eef2',
+      box: '#4e5d66',
     },
     dark: {
       text: '#F2F2F2',

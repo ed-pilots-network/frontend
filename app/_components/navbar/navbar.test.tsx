@@ -9,7 +9,7 @@ test('renders the navbar with logo and toggle switch', () => {
   // Logo
   const logoImage = screen.getByAltText('Logo') as HTMLImageElement;
   expect(logoImage).toBeInTheDocument();
-  expect(logoImage.src).toContain('/EDPN_logo_black.png');
+  expect(logoImage.src).toContain('/EDPN_logo_dark_background.png');
 
   // Text
   const logoText = screen.getByText('EDPN');
