@@ -19,8 +19,7 @@ import NextLink from 'next/link';
 import ModuleProps, { Module } from './moduleProps';
 
 const ModuleLaunchPad = () => {
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === 'dark';
+  const { isDark } = useColorMode();
 
   // local functions
   const selectColor = (element: String) => {
