@@ -15,8 +15,8 @@ import {
   Hide,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import ModuleProps, { Module } from './moduleProps';
 import useColorMode from '@/app/_hooks/useColorMode';
+import ModuleProps, { Module } from './moduleProps';
 
 const ModuleLaunchPad = () => {
   const { isDark } = useColorMode();
