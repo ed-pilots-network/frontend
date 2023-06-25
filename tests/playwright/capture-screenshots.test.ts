@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 interface ScreenSize {
   width: number;
@@ -6,9 +6,10 @@ interface ScreenSize {
 }
 
 const screenSizes: ScreenSize[] = [
-  { width: 480, height: 640 },
+  { width: 480, height: 720 },
   { width: 768, height: 1024 },
   { width: 1280, height: 1024 },
+  { width: 1920, height: 1080 },
   // Add more screen sizes as needed
 ];
 
@@ -22,20 +23,25 @@ if (RUN_SCREENSHOT_TEST === 'true') {
       const { name } = testInfo.project;
       if (name === projectName) {
         await page.goto('/');
-
-        await expect(page.getByRole('tabpanel', { name: 'Discover' })).toBeVisible();
-
         // Capture screenshots for each screen size
-        for (const size of screenSizes) {
+        await screenSizes.reduce(async (promise, size) => {
+          await promise;
           await page.setViewportSize(size);
           await page.screenshot({
-            path: `./tests/playwright/screenshots/screenshot-${projectName}-${size.width}x${size.height}.png`,
+            path: `./tests/playwright/screenshots/screenshot-${projectName}-${size.width}x${size.height}-dark.png`,
           });
-
-          console.log(`Screenshot captured for ${projectName} in ${size.width}x${size.height}`);
-        }
-    }
+          // Toggle color mode
+          await page.click('button[aria-label="Toggle Dark Switch"]');
+          await page.screenshot({
+            path: `./tests/playwright/screenshots/screenshot-${projectName}-${size.width}x${size.height}-light.png`,
+          });
+          // Toggle color mode back to original
+          await page.click('button[aria-label="Toggle Dark Switch"]');
+          console.log(
+            `Screenshots captured for ${projectName} in ${size.width}x${size.height}`,
+          );
+        }, Promise.resolve());
+      }
+    });
   });
-});
 }
-

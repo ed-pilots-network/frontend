@@ -23,6 +23,9 @@
         "named": "never",
         "anonymous": "never"
       }
-    ]
+    ],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["next.config.js", "jest.setup.js", "**/*.test.tsx", "**/*.test.ts"]
+    }]
   }
 }
