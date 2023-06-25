@@ -11,9 +11,7 @@ import {
   TabPanel,
   Box,
   Icon,
-  Img,
   Center,
-  Hide,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useColorMode from '@/app/_hooks/useColorMode';
@@ -81,20 +79,20 @@ const ModuleLaunchPad = () => {
     </Tab>
   );
 
-  const renderTabPanel = (img: string, alt: string, filter: string) => (
+  const renderTabPanel = (img: string, filter: string) => (
     <TabPanel>
       <Box as="div">
-        <Center 
-        height="500px" 
-        position="fixed" 
-        width="100%" 
-        left="0" 
-        backgroundImage={`url(${img})`} 
-        backgroundSize="contain" 
-        opacity="0.2" 
-        backgroundRepeat="no-repeat" 
-        backgroundPosition="center center">
-        </Center>
+        <Center
+          height="500px"
+          position="fixed"
+          width="100%"
+          left="0"
+          backgroundImage={`url(${img})`}
+          backgroundSize="contain"
+          opacity="0.2"
+          backgroundRepeat="no-repeat"
+          backgroundPosition="center center"
+        ></Center>
         {filteredGrid(filter)}
       </Box>
     </TabPanel>
@@ -115,13 +113,9 @@ const ModuleLaunchPad = () => {
         {renderTab('Outfit')}
       </TabList>
       <TabPanels mt="20px" minHeight="400px">
-        {renderTabPanel('/assets/Asp_Explorer.svg', 'Asp Explorer', 'discover')}
-        {renderTabPanel('/assets/Type_9.svg', 'Type 9 Heavy', 'trade')}
-        {renderTabPanel(
-          '/assets/Alliance_Crusader.svg',
-          'Alliance Crusader',
-          'outfit',
-        )}
+        {renderTabPanel('/assets/Asp_Explorer.svg', 'discover')}
+        {renderTabPanel('/assets/Type_9.svg', 'trade')}
+        {renderTabPanel('/assets/Alliance_Crusader.svg', 'outfit')}
       </TabPanels>
     </Tabs>
   );
