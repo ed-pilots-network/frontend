@@ -37,6 +37,7 @@ if (RUN_SCREENSHOT_TEST === 'true') {
           });
           // Toggle color mode back to original
           await page.click('button[aria-label="Toggle Dark Switch"]');
+          // eslint-disable-next-line no-console
           console.log(
             `Screenshots captured for ${projectName} in ${size.width}x${size.height}`,
           );
