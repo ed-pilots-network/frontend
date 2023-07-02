@@ -1,11 +1,31 @@
 'use client';
 
-import { Center, Flex, Heading, Select, FormLabel } from '@chakra-ui/react';
+import { Box, Center, Flex, FormLabel, Heading, Input } from '@chakra-ui/react';
+import { useEffect, useRef, useState } from 'react';
+import Form from '@/components/form/Form';
+import useColorMode from '@/app/_hooks/useColorMode';
+import selectColor from '@/app/_hooks/fontColorSelector';
 
 const PageClient = ({ commodities }: { commodities: string[] }) => {
-  const formattedCommodities = commodities.map((commodity) =>
-    commodity.slice(3).split('_').join(' ').toLocaleUpperCase(),
-  );
+  const [commoditySearchString, setCommoditySearchString] = useState('');
+  const matchArray = useRef<string[]>([]);
+  const { isDark } = useColorMode();
+
+  useEffect(() => {
+    // If the search string is longer than 3 characters, filter the commodities according to the search string
+    // the results will be presented as radio buttons in the form
+    if (commoditySearchString.length > 3) {
+      let filteredSearch = commoditySearchString.toLocaleLowerCase().trim();
+      matchArray.current = [];
+
+      commodities.filter((commodity) => {
+        if (commodity.startsWith(filteredSearch)) {
+          matchArray.current.push(commodity);
+        }
+        return null;
+      });
+    }
+  }, [commoditySearchString, commodities]);
 
   return (
     <Center width="100%">
@@ -17,14 +37,28 @@ const PageClient = ({ commodities }: { commodities: string[] }) => {
         >
           Find Commodity
         </Heading>
-        <FormLabel>Commodity</FormLabel>
-        <Select placeholder="Select option">
-          {formattedCommodities.map((commodity, index) => (
-            <option key={index} value={commodity}>
-              {commodity}
-            </option>
-          ))}
-        </Select>
+        <Box
+          borderWidth="1px"
+          borderRadius="9px"
+          borderColor={selectColor(isDark, 'text')}
+          p="1rem"
+        >
+          <FormLabel>Commodity</FormLabel>
+          <Input
+            variant="filled"
+            placeholder="Search through the commodity list..."
+            value={commoditySearchString}
+            onChange={(e) => setCommoditySearchString(e.target.value)}
+            aria-label="commodity-search-input"
+          />
+          <Form
+            radio1={{ label: 'Commodity', values: matchArray.current }}
+            input1={{
+              label: 'Current System',
+              placeholder: 'Search for a system...',
+            }}
+          />
+        </Box>
       </Flex>
     </Center>
   );
