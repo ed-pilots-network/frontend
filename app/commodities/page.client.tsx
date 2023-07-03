@@ -2,7 +2,7 @@
 
 import { Box, Center, Flex, FormLabel, Heading, Input } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
-import Form from '@/components/form/Form';
+import Form from '@/components/commodities/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 
@@ -35,7 +35,7 @@ const PageClient = ({ commodities }: { commodities: string[] }) => {
           size={{ base: 'md', md: 'lg', lg: 'lg' }}
           marginX={{ base: 'auto', md: '0', lg: '0' }}
         >
-          Find Commodity
+          Find Closest Station to Buy/Sell Commodities
         </Heading>
         <Box
           borderWidth="1px"
@@ -51,13 +51,7 @@ const PageClient = ({ commodities }: { commodities: string[] }) => {
             onChange={(e) => setCommoditySearchString(e.target.value)}
             aria-label="commodity-search-input"
           />
-          <Form
-            radio1={{ label: 'Commodity', values: matchArray.current }}
-            input1={{
-              label: 'Current System',
-              placeholder: 'Search for a system...',
-            }}
-          />
+          <Form commodityValues={matchArray.current} />
         </Box>
       </Flex>
     </Center>
