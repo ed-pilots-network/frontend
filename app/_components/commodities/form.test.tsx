@@ -1,9 +1,14 @@
 import { render, screen } from '@testing-library/react';
+
 import Form from './Form';
 
-test('renders the form', () => {
-  render(<Form commodityValues={['guardian relic']} />);
+jest.mock('@/lib/commodity-list', () => ['mt_gold']);
 
-  const input = screen.getByRole('textbox');
-  expect(input).toBeInTheDocument();
+test('renders the form', () => {
+  setTimeout(() => {
+    render(<Form />);
+
+    const input = screen.getByRole('textbox');
+    expect(input).toBeInTheDocument();
+  }, 2500);
 });

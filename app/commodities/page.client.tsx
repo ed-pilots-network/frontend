@@ -1,31 +1,12 @@
 'use client';
 
-import { Box, Center, Flex, FormLabel, Heading, Input } from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
+import { Box, Center, Flex, Heading } from '@chakra-ui/react';
 import Form from '@/components/commodities/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 
-const PageClient = ({ commodities }: { commodities: string[] }) => {
-  const [commoditySearchString, setCommoditySearchString] = useState('');
-  const matchArray = useRef<string[]>([]);
+const PageClient = () => {
   const { isDark } = useColorMode();
-
-  useEffect(() => {
-    // If the search string is longer than 3 characters, filter the commodities according to the search string
-    // the results will be presented as radio buttons in the form
-    if (commoditySearchString.length > 3) {
-      let filteredSearch = commoditySearchString.toLocaleLowerCase().trim();
-      matchArray.current = [];
-
-      commodities.filter((commodity) => {
-        if (commodity.startsWith(filteredSearch)) {
-          matchArray.current.push(commodity);
-        }
-        return null;
-      });
-    }
-  }, [commoditySearchString, commodities]);
 
   return (
     <Center width="100%">
@@ -43,15 +24,7 @@ const PageClient = ({ commodities }: { commodities: string[] }) => {
           borderColor={selectColor(isDark, 'text')}
           p="1rem"
         >
-          <FormLabel>Commodity</FormLabel>
-          <Input
-            variant="filled"
-            placeholder="Search through the commodity list..."
-            value={commoditySearchString}
-            onChange={(e) => setCommoditySearchString(e.target.value)}
-            aria-label="commodity-search-input"
-          />
-          <Form commodityValues={matchArray.current} />
+          <Form />
         </Box>
       </Flex>
     </Center>

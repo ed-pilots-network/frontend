@@ -15,13 +15,10 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-
-interface FormProps {
-  commodityValues: string[];
-}
+import CommoditiesField from '../inputs/commodities/commodities';
 
 interface IFormInputs {
-  commodity: string;
+  commodity: { value: string; label: string };
   system: string;
   landingPadSize: string;
   planetary: boolean;
@@ -29,11 +26,12 @@ interface IFormInputs {
   carriers: boolean;
 }
 
-const Form: React.FC<FormProps> = ({ commodityValues }) => {
+const Form: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<IFormInputs>();
 
   const { isDark } = useColorMode();
@@ -49,9 +47,10 @@ const Form: React.FC<FormProps> = ({ commodityValues }) => {
 
     let submitData = {
       ...data,
-      commodity: formatString(data.commodity),
+      commodity: formatString(data.commodity.value),
       system: formatString(data.system),
     };
+
     console.log(submitData);
   };
 
@@ -59,46 +58,8 @@ const Form: React.FC<FormProps> = ({ commodityValues }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Flex justifyContent="space-between" alignItems="center" paddingY="8">
         <FormControl>
-          <RadioGroup aria-label="current-system-selection">
-            <Stack direction="row">
-              {commodityValues.length > 0 && (
-                <>
-                  <FormLabel ml={8} mb={0}>
-                    Select:
-                  </FormLabel>
-                  <Flex alignItems="center" mb={8} flexWrap="wrap">
-                    {commodityValues.map((commodity, index) => (
-                      <Radio
-                        mx={2}
-                        value={commodity}
-                        key={index}
-                        {...register('commodity', {
-                          required: true,
-                          pattern: {
-                            value: /^[\w\-\s]+$/,
-                            message: 'Alphanumeric or spaces only.',
-                          },
-                          maxLength: {
-                            value: 40,
-                            message: 'Exceeds max length.',
-                          },
-                        })}
-                        aria-invalid={errors.commodity ? 'true' : 'false'}
-                      >
-                        {commodity}
-                      </Radio>
-                    ))}
-                  </Flex>
-                </>
-              )}
-            </Stack>
-            {errors.commodity && (
-              <Text color="red" mb={3}>
-                Commodity name is required
-              </Text>
-            )}
-          </RadioGroup>
-          <FormLabel>Current System</FormLabel>
+          <CommoditiesField control={control} />
+          <FormLabel marginTop={8}>Current System</FormLabel>
           <Input
             variant="filled"
             placeholder="Enter a system..."
