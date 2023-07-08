@@ -16,6 +16,9 @@ const PageClient = () => {
           size={{ base: 'md', md: 'lg', lg: 'lg' }}
           marginX={{ base: 'auto', md: '0', lg: '0' }}
         >
+          Commodities
+        </Heading>
+        <Heading as="h2" size={{ base: 'xs', md: 'sm', lg: 'sm' }}>
           Find Closest Station to Buy/Sell Commodities
         </Heading>
         <Box

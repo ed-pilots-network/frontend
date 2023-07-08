@@ -82,7 +82,7 @@ const Form: React.FC = () => {
               System name is required
             </Text>
           )}
-          <FormLabel marginTop={8}>Optional Factors</FormLabel>
+          <FormLabel marginTop={8}>Options</FormLabel>
           <CheckboxGroup colorScheme="gray">
             <Stack spacing={8} direction={['column', 'row']} margin={8}>
               {checkboxValues.map((checkbox, index) => (
