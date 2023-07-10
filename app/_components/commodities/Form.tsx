@@ -76,14 +76,14 @@ const Form: React.FC = () => {
 
     const validatedData = CommodityFormSchema.safeParse(data);
 
-    interface ReqBody extends Omit<SubmitProps, 'commodityId'> {
+    interface ReqBody extends Omit<SubmitProps, 'commodityId' | 'system'> {
       commodityId: string;
+      system?: string;
     }
 
     let submitData: ReqBody = {
       ...data,
       commodityId: formatString(data.commodityId.value),
-      system: formatString(data.system),
       minDemand: Number(data.minDemand),
       minSupply: Number(data.minSupply),
       referenceLocation: {
@@ -92,10 +92,13 @@ const Form: React.FC = () => {
         zcoordinate: 0,
       },
     };
+    delete submitData.system;
 
     if (!validatedData.success) {
+      // TODO: handle error
       console.log(validatedData.error);
     }
+    // TODO: handle POST request
     console.log(submitData);
   };
 
