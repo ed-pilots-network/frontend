@@ -28,7 +28,7 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
 
   return (
     <Controller
-      name="commodity"
+      name="commodityId"
       control={control}
       rules={{ required: 'Enter at least one commodity' }}
       render={({
