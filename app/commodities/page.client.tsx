@@ -53,10 +53,13 @@ const PageClient = () => {
           size={{ base: 'md', md: 'lg', lg: 'lg' }}
           marginX={{ base: 'auto', md: '0', lg: '0' }}
         >
+          Commodities
+        </Heading>
+        <Heading as="h2" size={{ base: 'xs', md: 'sm', lg: 'sm' }}>
           Find Closest Station to Buy/Sell Commodities
         </Heading>
         <Box
-          borderWidth="1px"
+          borderWidth="2px"
           borderRadius="9px"
           borderColor={selectColor(isDark, 'text')}
           p="1rem"

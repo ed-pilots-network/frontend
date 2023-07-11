@@ -4,5 +4,5 @@ import { test, expect } from '@playwright/test';
 test('should navigate to the commodities page', async ({ page }) => {
   await page.goto('/commodities');
   // The new page should contain an h1 with "Elite Dangerous Pilots Network"
-  await expect(page.locator('h1')).toContainText('Find Closest Station');
+  await expect(page.locator('h1')).toContainText('Commodities');
 });
