@@ -59,7 +59,7 @@ const PageClient = () => {
           Find Closest Station to Buy/Sell Commodities
         </Heading>
         <Box
-          borderWidth="1px"
+          borderWidth="2px"
           borderRadius="9px"
           borderColor={selectColor(isDark, 'text')}
           p="1rem"

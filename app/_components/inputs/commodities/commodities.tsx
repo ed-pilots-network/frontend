@@ -2,13 +2,11 @@ import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import { Controller } from 'react-hook-form';
 
-import * as capitalize from 'capitalize';
+import { titleCase } from 'title-case';
 
 import React from 'react';
 
 import commodities from '@/app/_lib/commodity-list';
-
-const dontCap = { skipWord: /^(a|the|an|and|or|but|in|on|of|it)$/ };
 
 interface CommodityProps {
   control: any;
@@ -28,7 +26,7 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
   const formattedCommodities: CommodityGroup[] = commodities.map(
     (commodity) => ({
       value: commodity.slice(3).split('_').join(' '),
-      label: capitalize.words(commodity.slice(3).split('_').join(' '), dontCap),
+      label: titleCase(commodity.slice(3).split('_').join(' ')),
     }),
   );
 

@@ -102,14 +102,14 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
       <Flex
         justifyContent="space-between"
         alignItems="center"
-        paddingY="8"
+        paddingBottom="8"
         flexWrap="wrap"
       >
         <FormControl>
           <CommoditiesField control={control} />
           <FormLabel marginTop={8}>Near Star System</FormLabel>
           <Input
-            variant="filled"
+            variant="outline"
             placeholder="Enter a system..."
             {...register('system', {
               required: true,
@@ -124,9 +124,18 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           )}
           <FormLabel marginTop={8}>Options</FormLabel>
           <CheckboxGroup colorScheme="gray">
-            <Stack spacing={8} direction={['column', 'row']} margin={8}>
+            <Stack
+              borderWidth="2px"
+              borderRadius="9px"
+              borderColor={selectColor(isDark, 'text')}
+              p="1rem"
+              spacing={8}
+              direction={['column', 'row']}
+              margin={8}
+            >
               {checkboxValues.map((checkbox, index) => (
                 <Checkbox
+                  colorScheme="orange"
                   key={index}
                   {...register(`${checkbox.value}` as keyof SubmitProps)}
                   borderColor={selectColor(isDark, 'text')}
@@ -136,12 +145,22 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               ))}
             </Stack>
           </CheckboxGroup>
-          <FormLabel>Max Landing Pad Size</FormLabel>
+          <FormLabel>Landing Pad Size</FormLabel>
           <RadioGroup>
-            <Stack spacing={8} direction="row" mt={8} ml={8} flexWrap="wrap">
+            <Stack
+              borderWidth="2px"
+              borderRadius="9px"
+              borderColor={selectColor(isDark, 'text')}
+              p="1rem"
+              spacing={8}
+              direction="row"
+              mt={8}
+              ml={8}
+              flexWrap="wrap"
+            >
               {['Small', 'Medium', 'Large'].map((value, index) => (
                 <Radio
-                  colorScheme="gray"
+                  colorScheme="orange"
                   key={index}
                   value={value.toLowerCase()}
                   borderColor={selectColor(isDark, 'text')}
@@ -168,6 +187,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               my="auto"
               isChecked={isBuying}
               onChange={() => setIsBuying(!isBuying)}
+              colorScheme="orange"
             />
             {isBuying && numberInputs('Minimum Supply', 'minSupply')}
             {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
@@ -186,7 +206,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
       </Flex>
       <Button
         type="submit"
-        colorScheme="gray"
+        colorScheme="orange"
         variant="solid"
         id="submit"
         isLoading={isLoading}
