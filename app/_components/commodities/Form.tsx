@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Button,
   Checkbox,
@@ -20,12 +21,11 @@ import {
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from 'react';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import CommoditiesField from '../inputs/commodities/commodities';
 
-const CommodityFormSchema = z.object({
+export const CommodityFormSchema = z.object({
   commodityId: z.object({
     value: z.string().regex(/[a-z_]/),
   }),
@@ -36,18 +36,16 @@ const CommodityFormSchema = z.object({
   includeOdyssey: z.boolean(),
   includePlanetary: z.boolean(),
   system: z.string().regex(/^[\w'-]+(?:\s[\w'-]+)*$/), // word chars, apostrophes, and dashes across multiple words
-  referenceLocation: z
-    .object({
-      xcoordinate: z.number(),
-      ycoordinate: z.number(),
-      zcoordinate: z.number(),
-    })
-    .optional(), // until the flow is established for these values i've marked them as optional - aslink87
 });
 
-type SubmitProps = z.infer<typeof CommodityFormSchema>;
+export type SubmitProps = z.infer<typeof CommodityFormSchema>;
 
-const Form: React.FC = () => {
+interface FormProps {
+  onSubmitHandler: SubmitHandler<SubmitProps>;
+  isLoading: boolean;
+}
+
+const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   const [isBuying, setIsBuying] = useState(true);
 
   const {
@@ -57,49 +55,46 @@ const Form: React.FC = () => {
     control,
   } = useForm<SubmitProps>({
     defaultValues: {
-      minDemand: 0,
-      minSupply: 0,
+      minDemand: 1,
+      minSupply: 1,
     },
     resolver: zodResolver(CommodityFormSchema),
   });
 
   const { isDark } = useColorMode();
+
   const checkboxValues = [
     { name: 'Include Planetary', value: 'includePlanetary' },
     { name: 'Include Odyssey', value: 'includeOdyssey' },
     { name: 'Fleet Carriers', value: 'includeFleetCarriers' },
   ];
 
+  const numberInputs = (
+    label: string,
+    registerName: 'minSupply' | 'minDemand',
+  ) => (
+    <>
+      <FormLabel my="auto">{label}</FormLabel>
+      <NumberInput defaultValue={1} min={1} max={1000000} precision={0}>
+        <NumberInputField
+          {...register(registerName, {
+            max: 1000000,
+            valueAsNumber: true,
+          })}
+        />
+        <NumberInputStepper>
+          <NumberIncrementStepper />
+          <NumberDecrementStepper />
+        </NumberInputStepper>
+      </NumberInput>
+    </>
+  );
+
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
-    const formatString = (string: string) =>
-      string.split(' ').join('_').toLowerCase();
-
-    const validatedData = CommodityFormSchema.safeParse(data);
-
-    interface ReqBody extends Omit<SubmitProps, 'commodityId' | 'system'> {
-      commodityId: string;
-      system?: string;
-    }
-
-    let submitData: ReqBody = {
-      ...data,
-      commodityId: formatString(data.commodityId.value),
-      minDemand: Number(data.minDemand),
-      minSupply: Number(data.minSupply),
-      referenceLocation: {
-        xcoordinate: 0,
-        ycoordinate: 0,
-        zcoordinate: 0,
-      },
-    };
-    delete submitData.system;
-
-    if (!validatedData.success) {
-      // TODO: handle error
-      console.log(validatedData.error);
-    }
-    // TODO: handle POST request
-    console.log(submitData);
+    const submitData = data;
+    if (isBuying) submitData.minDemand = 0;
+    if (!isBuying) submitData.minSupply = 0;
+    onSubmitHandler(submitData);
   };
 
   return (
@@ -118,11 +113,9 @@ const Form: React.FC = () => {
             placeholder="Enter a system..."
             {...register('system', {
               required: true,
-              pattern: /^[\w\-\s]+$/,
+              pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,
               maxLength: 40,
             })}
-            aria-invalid={errors.system ? 'true' : 'false'}
-            aria-label="system-search-input"
           />
           {errors.system && (
             <Text color="red" mt={3}>
@@ -146,30 +139,17 @@ const Form: React.FC = () => {
           <FormLabel>Max Landing Pad Size</FormLabel>
           <RadioGroup>
             <Stack spacing={8} direction="row" mt={8} ml={8} flexWrap="wrap">
-              <Radio
-                colorScheme="gray"
-                value="small"
-                borderColor={selectColor(isDark, 'text')}
-                {...register('maxLandingPadSize', { required: true })}
-              >
-                Small
-              </Radio>
-              <Radio
-                colorScheme="gray"
-                value="medium"
-                borderColor={selectColor(isDark, 'text')}
-                {...register('maxLandingPadSize', { required: true })}
-              >
-                Medium
-              </Radio>
-              <Radio
-                colorScheme="gray"
-                value="large"
-                borderColor={selectColor(isDark, 'text')}
-                {...register('maxLandingPadSize', { required: true })}
-              >
-                Large
-              </Radio>
+              {['Small', 'Medium', 'Large'].map((value, index) => (
+                <Radio
+                  colorScheme="gray"
+                  key={index}
+                  value={value.toLowerCase()}
+                  borderColor={selectColor(isDark, 'text')}
+                  {...register('maxLandingPadSize', { required: true })}
+                >
+                  {value}
+                </Radio>
+              ))}
             </Stack>
           </RadioGroup>
           {errors.maxLandingPadSize && (
@@ -189,52 +169,8 @@ const Form: React.FC = () => {
               isChecked={isBuying}
               onChange={() => setIsBuying(!isBuying)}
             />
-            {isBuying && (
-              <>
-                <FormLabel my="auto">Minimum Supply</FormLabel>
-                <NumberInput
-                  defaultValue={0}
-                  min={1}
-                  max={1000000}
-                  precision={0}
-                >
-                  <NumberInputField
-                    {...register('minSupply', {
-                      min: 1,
-                      max: 1000000,
-                      valueAsNumber: true,
-                    })}
-                  />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-              </>
-            )}
-            {!isBuying && (
-              <>
-                <FormLabel my="auto">Minimum Demand</FormLabel>
-                <NumberInput
-                  defaultValue={0}
-                  min={0}
-                  max={1000000}
-                  precision={0}
-                >
-                  <NumberInputField
-                    {...register('minDemand', {
-                      min: 1,
-                      max: 1000000,
-                      valueAsNumber: true,
-                    })}
-                  />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-              </>
-            )}
+            {isBuying && numberInputs('Minimum Supply', 'minSupply')}
+            {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
             {errors.minSupply && (
               <Text color="red" mt={3}>
                 {errors.minSupply.message as string}
@@ -248,7 +184,13 @@ const Form: React.FC = () => {
           </Stack>
         </FormControl>
       </Flex>
-      <Button type="submit" colorScheme="gray" variant="solid" id="submit">
+      <Button
+        type="submit"
+        colorScheme="gray"
+        variant="solid"
+        id="submit"
+        isLoading={isLoading}
+      >
         Submit
       </Button>
     </form>
