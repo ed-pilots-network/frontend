@@ -118,6 +118,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             variant="outline"
             placeholder="Enter a system..."
             borderColor={selectColor(isDark, 'border')}
+            _hover={{
+              borderColor: selectColor(isDark, 'border'),
+            }}
             {...register('system', {
               required: true,
               pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,

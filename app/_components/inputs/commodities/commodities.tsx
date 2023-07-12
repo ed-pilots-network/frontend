@@ -1,4 +1,9 @@
-import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  SystemStyleObject,
+} from '@chakra-ui/react';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import { Controller } from 'react-hook-form';
 
@@ -7,6 +12,8 @@ import { titleCase } from 'title-case';
 import React from 'react';
 
 import commodities from '@/app/_lib/commodity-list';
+import useColorMode from '@/app/_hooks/useColorMode';
+import selectColor from '@/app/_hooks/fontColorSelector';
 
 interface CommodityProps {
   control: any;
@@ -30,6 +37,44 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
     }),
   );
 
+  const { isDark } = useColorMode();
+
+  const customStyles = {
+    control: (baseStyles: SystemStyleObject, state: any) => ({
+      ...baseStyles,
+      borderColor: selectColor(isDark, 'border'),
+      borderBottomLeftRadius: state.menuIsOpen ? 0 : 'md',
+      borderBottomRightRadius: state.menuIsOpen ? 0 : 'md',
+      focusBorderColor: selectColor(isDark, 'border'),
+      _hover: {
+        borderColor: selectColor(isDark, 'border'),
+      },
+      _focus: {
+        border: 'none',
+      },
+    }),
+    dropdownIndicator: (baseStyles: SystemStyleObject) => ({
+      ...baseStyles,
+      px: 3,
+    }),
+    menu: (baseStyles: SystemStyleObject) => ({
+      ...baseStyles,
+      m: 0,
+      p: 0,
+    }),
+    menuList: (baseStyles: SystemStyleObject) => ({
+      ...baseStyles,
+      m: 0,
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+      borderColor: 'blue.300',
+    }),
+    group: (baseStyles: SystemStyleObject) => ({
+      ...baseStyles,
+      py: '20px',
+    }),
+  };
+
   return (
     <Controller
       name="commodityId"
@@ -51,6 +96,7 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
             value={value}
             options={formattedCommodities}
             placeholder="Select a commodity"
+            chakraStyles={customStyles}
           />
           <FormErrorMessage>{error && error.message}</FormErrorMessage>
         </FormControl>
