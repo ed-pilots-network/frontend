@@ -75,7 +75,13 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   ) => (
     <>
       <FormLabel my="auto">{label}</FormLabel>
-      <NumberInput defaultValue={1} min={1} max={1000000} precision={0}>
+      <NumberInput
+        defaultValue={1}
+        min={1}
+        max={1000000}
+        precision={0}
+        borderColor={selectColor(isDark, 'border')}
+      >
         <NumberInputField
           {...register(registerName, {
             max: 1000000,
@@ -111,6 +117,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           <Input
             variant="outline"
             placeholder="Enter a system..."
+            borderColor={selectColor(isDark, 'border')}
             {...register('system', {
               required: true,
               pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,
@@ -125,9 +132,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           <FormLabel marginTop={8}>Options</FormLabel>
           <CheckboxGroup colorScheme="gray">
             <Stack
-              borderWidth="2px"
+              borderWidth="1px"
               borderRadius="9px"
-              borderColor={selectColor(isDark, 'text')}
+              borderColor={selectColor(isDark, 'border')}
               p="1rem"
               spacing={8}
               direction={['column', 'row']}
@@ -138,7 +145,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                   colorScheme="orange"
                   key={index}
                   {...register(`${checkbox.value}` as keyof SubmitProps)}
-                  borderColor={selectColor(isDark, 'text')}
+                  borderColor={selectColor(isDark, 'border')}
                 >
                   {checkbox.name}
                 </Checkbox>
@@ -148,9 +155,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           <FormLabel>Landing Pad Size</FormLabel>
           <RadioGroup>
             <Stack
-              borderWidth="2px"
+              borderWidth="1px"
               borderRadius="9px"
-              borderColor={selectColor(isDark, 'text')}
+              borderColor={selectColor(isDark, 'border')}
               p="1rem"
               spacing={8}
               direction="row"
@@ -163,7 +170,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                   colorScheme="orange"
                   key={index}
                   value={value.toLowerCase()}
-                  borderColor={selectColor(isDark, 'text')}
+                  borderColor={selectColor(isDark, 'border')}
                   {...register('maxLandingPadSize', { required: true })}
                 >
                   {value}
@@ -187,7 +194,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               my="auto"
               isChecked={isBuying}
               onChange={() => setIsBuying(!isBuying)}
-              colorScheme="orange"
+              colorScheme={selectColor(isDark, 'switch')}
             />
             {isBuying && numberInputs('Minimum Supply', 'minSupply')}
             {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
@@ -206,8 +213,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
       </Flex>
       <Button
         type="submit"
-        colorScheme="orange"
-        variant="solid"
+        variant="customButton"
         id="submit"
         isLoading={isLoading}
       >

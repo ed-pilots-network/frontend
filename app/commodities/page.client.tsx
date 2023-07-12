@@ -52,6 +52,7 @@ const PageClient = () => {
           as="h1"
           size={{ base: 'md', md: 'lg', lg: 'lg' }}
           marginX={{ base: 'auto', md: '0', lg: '0' }}
+          color={selectColor(isDark, 'accent-text')}
         >
           Commodities
         </Heading>
@@ -61,7 +62,8 @@ const PageClient = () => {
         <Box
           borderWidth="2px"
           borderRadius="9px"
-          borderColor={selectColor(isDark, 'text')}
+          borderColor={selectColor(isDark, 'border')}
+          bg={selectColor(isDark, 'accent-bg')}
           p="1rem"
         >
           <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
