@@ -74,7 +74,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     registerName: 'minSupply' | 'minDemand',
   ) => (
     <>
-      <FormLabel my="auto">{label}</FormLabel>
+      <FormLabel marginY="auto">{label}</FormLabel>
       <NumberInput
         defaultValue={1}
         min={1}
@@ -138,7 +138,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               borderWidth="1px"
               borderRadius="9px"
               borderColor={selectColor(isDark, 'border')}
-              p="1rem"
+              padding="1rem"
               spacing={8}
               direction={['column', 'row']}
               margin={8}
@@ -161,7 +161,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               borderWidth="1px"
               borderRadius="9px"
               borderColor={selectColor(isDark, 'border')}
-              p="1rem"
+              padding="1rem"
               spacing={8}
               direction={['column', 'row']}
               margin={8}
@@ -186,13 +186,13 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           )}
           <Stack spacing={8} direction="row" mt={8} flexWrap="wrap">
             {isBuying ? (
-              <FormLabel my="auto">Buying</FormLabel>
+              <FormLabel marginY="auto">Buying</FormLabel>
             ) : (
-              <FormLabel my="auto">Selling</FormLabel>
+              <FormLabel marginY="auto">Selling</FormLabel>
             )}
             <Switch
               id="buying"
-              my="auto"
+              marginY="auto"
               isChecked={isBuying}
               onChange={() => setIsBuying(!isBuying)}
               colorScheme={selectColor(isDark, 'switch')}
