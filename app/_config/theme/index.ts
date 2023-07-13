@@ -3,12 +3,14 @@ import { rubik, orbitron } from './fonts';
 import buttonTheme from './button';
 import checkboxTheme from './checkbox';
 import radioTheme from './radio';
+import selectTheme from './select';
 
 const theme = extendTheme({
   components: {
     Button: buttonTheme,
     Checkbox: checkboxTheme,
     Radio: radioTheme,
+    Select: selectTheme,
   },
   config: {
     initialColorMode: 'dark',
