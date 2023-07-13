@@ -7,8 +7,6 @@ import {
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import { Controller } from 'react-hook-form';
 
-import { titleCase } from 'title-case';
-
 import React from 'react';
 
 import commodities from '@/app/_lib/commodity-list';
@@ -29,11 +27,10 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
   // for example: 'water' is stored as 'ch_water' designated as a chemical
   // if we don't end up using this designation then we should remove it
 
-  // TODO: while commodity names are now capitalised, names which contain acronyms such as CMM Composites are not capitalised correctly
   const formattedCommodities: CommodityGroup[] = commodities.map(
     (commodity) => ({
       value: commodity.slice(3).split('_').join(' '),
-      label: titleCase(commodity.slice(3).split('_').join(' ')),
+      label: commodity.slice(3).split('_').join(' '),
     }),
   );
 

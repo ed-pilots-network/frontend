@@ -163,10 +163,8 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               borderColor={selectColor(isDark, 'border')}
               p="1rem"
               spacing={8}
-              direction="row"
-              mt={8}
-              ml={8}
-              flexWrap="wrap"
+              direction={['column', 'row']}
+              margin={8}
             >
               {['Small', 'Medium', 'Large'].map((value, index) => (
                 <Radio
