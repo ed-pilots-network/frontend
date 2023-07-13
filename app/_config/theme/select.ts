@@ -1,11 +1,9 @@
-import { selectAnatomy } from "@chakra-ui/anatomy";
-import { createMultiStyleConfigHelpers, defineStyle } from "@chakra-ui/react";
+import { selectAnatomy } from '@chakra-ui/anatomy';
+import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
 import selectColor from '@/app/_hooks/fontColorSelector';
 
-const {
-  definePartsStyle,
-  defineMultiStyleConfig
-} = createMultiStyleConfigHelpers(selectAnatomy.keys);
+const { definePartsStyle, defineMultiStyleConfig } =
+  createMultiStyleConfigHelpers(selectAnatomy.keys);
 
 const customSelect = definePartsStyle({
   field: {

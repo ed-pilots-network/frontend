@@ -15,7 +15,7 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  Switch,
+  Select,
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { z } from 'zod';
@@ -186,19 +186,23 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               </FormErrorMessage>
             </Stack>
           </RadioGroup>
-          <Stack spacing={8} direction="row" mt={8} flexWrap="wrap">
-            {isBuying ? (
-              <FormLabel marginY="auto">Buying</FormLabel>
-            ) : (
-              <FormLabel marginY="auto">Selling</FormLabel>
-            )}
-            <Switch
+          {isBuying ? (
+            <FormLabel marginY="auto">Buying</FormLabel>
+          ) : (
+            <FormLabel marginY="auto">Selling</FormLabel>
+          )}
+          <Stack paddingX={8} spacing={8} direction="row" mt={8}>
+            <Select
+              variant="customSelect"
               id="buying"
-              marginY="auto"
-              isChecked={isBuying}
-              onChange={() => setIsBuying(!isBuying)}
-              colorScheme={selectColor(isDark, 'switch')}
-            />
+              marginY={'auto'}
+              onChange={(e) => {
+                setIsBuying(e.target.value === 'buying');
+              }}
+            >
+              <option value="buying">Buy</option>
+              <option value="selling">Sell</option>
+            </Select>
 
             {isBuying && numberInputs('Minimum Supply', 'minSupply')}
             {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
