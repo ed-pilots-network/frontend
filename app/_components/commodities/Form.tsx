@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { CheckIcon } from '@chakra-ui/icons';
 import {
   Button,
+  ButtonGroup,
   Checkbox,
   CheckboxGroup,
   Flex,
@@ -15,7 +17,6 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  Switch,
   Text,
 } from '@chakra-ui/react';
 import { z } from 'zod';
@@ -74,7 +75,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     registerName: 'minSupply' | 'minDemand',
   ) => (
     <>
-      <FormLabel my="auto">{label}</FormLabel>
+      <FormLabel my="auto" width="140px">
+        {label}
+      </FormLabel>
       <NumberInput
         defaultValue={1}
         min={1}
@@ -184,19 +187,27 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               Pad size is required
             </Text>
           )}
+          <Text>I am looking to:</Text>
           <Stack spacing={8} direction="row" mt={8} flexWrap="wrap">
-            {isBuying ? (
-              <FormLabel my="auto">Buying</FormLabel>
-            ) : (
-              <FormLabel my="auto">Selling</FormLabel>
-            )}
-            <Switch
-              id="buying"
-              my="auto"
-              isChecked={isBuying}
-              onChange={() => setIsBuying(!isBuying)}
-              colorScheme={selectColor(isDark, 'switch')}
-            />
+            <ButtonGroup size="md" isAttached>
+              <Button
+                onClick={() => setIsBuying(true)}
+                variant={isBuying ? 'customButton' : 'outline'}
+                leftIcon={<CheckIcon opacity={isBuying ? 1 : 0} />}
+                width={36}
+                style={{ marginInlineEnd: 0 }}
+              >
+                Buy
+              </Button>
+              <Button
+                onClick={() => setIsBuying(false)}
+                variant={!isBuying ? 'customButton' : 'outline'}
+                leftIcon={<CheckIcon opacity={!isBuying ? 1 : 0} />}
+                width={36}
+              >
+                Sell
+              </Button>
+            </ButtonGroup>
             {isBuying && numberInputs('Minimum Supply', 'minSupply')}
             {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
             {errors.minSupply && (
