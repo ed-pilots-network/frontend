@@ -43,7 +43,6 @@ const NavDrawer = () => {
         aria-label="Open Navigation Drawer"
         icon={<HamburgerIcon />}
         marginX={4}
-        display={['inline-block', 'inline-block', 'none']}
       />
 
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
