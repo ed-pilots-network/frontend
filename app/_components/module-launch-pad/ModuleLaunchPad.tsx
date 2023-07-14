@@ -16,7 +16,7 @@ import {
 import NextLink from 'next/link';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import ModuleProps, { Module } from './moduleProps';
+import ModuleProps, { Module } from '../../_lib/moduleProps';
 
 const ModuleLaunchPad = () => {
   const { isDark } = useColorMode();
