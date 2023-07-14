@@ -6,6 +6,8 @@ import useColorMode from '@/app/_hooks/useColorMode';
 import Link from 'next/link';
 import selectColor from '@/app/_hooks/fontColorSelector';
 
+import NavDrawer from '../nav-drawer/NavDrawer';
+
 const Navbar = () => {
   const { isDark, toggleColorMode } = useColorMode();
 
@@ -52,8 +54,8 @@ const Navbar = () => {
           aria-label="Toggle Dark Switch"
           icon={isDark ? <SunIcon /> : <MoonIcon />}
           onClick={toggleColorMode}
-          size="sm"
         />
+        <NavDrawer />
       </Flex>
     </Flex>
   );
