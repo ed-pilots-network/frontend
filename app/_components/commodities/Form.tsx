@@ -18,6 +18,7 @@ import {
   RadioGroup,
   Stack,
   Text,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -75,7 +76,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     registerName: 'minSupply' | 'minDemand',
   ) => (
     <>
-      <FormLabel my="auto" width="140px">
+      <FormLabel marginY="auto" width="140px">
         {label}
       </FormLabel>
       <NumberInput
@@ -114,7 +115,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         paddingBottom="8"
         flexWrap="wrap"
       >
-        <FormControl>
+        <FormControl isInvalid={!!(errors.system && errors.system.message)}>
           <CommoditiesField control={control} />
           <FormLabel marginTop={8}>Near Star System</FormLabel>
           <Input
@@ -126,22 +127,24 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             }}
             {...register('system', {
               required: true,
-              pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,
+              pattern: {
+                value: /^[\w'-]+(?:\s[\w'-]+)*$/,
+                message: 'Please enter a valid system name',
+              },
               maxLength: 40,
             })}
           />
-          {errors.system && (
-            <Text color="red" mt={3}>
-              {errors.system.message}
-            </Text>
-          )}
+          <FormErrorMessage>
+            {errors.system && errors.system.message}
+          </FormErrorMessage>
+
           <FormLabel marginTop={8}>Options</FormLabel>
           <CheckboxGroup colorScheme="gray">
             <Stack
               borderWidth="1px"
               borderRadius="9px"
               borderColor={selectColor(isDark, 'border')}
-              p="1rem"
+              padding="1rem"
               spacing={8}
               direction={['column', 'row']}
               margin={8}
@@ -164,7 +167,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               borderWidth="1px"
               borderRadius="9px"
               borderColor={selectColor(isDark, 'border')}
-              p="1rem"
+              padding="1rem"
               spacing={8}
               direction={['column', 'row']}
               margin={8}
@@ -175,17 +178,22 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                   key={index}
                   value={value.toLowerCase()}
                   borderColor={selectColor(isDark, 'border')}
-                  {...register('maxLandingPadSize', { required: true })}
+                  {...register('maxLandingPadSize', {
+                    required: true,
+                  })}
                 >
                   {value}
                 </Radio>
               ))}
+              <FormErrorMessage>
+                {errors.maxLandingPadSize && 'Select a landing pad size'}
+              </FormErrorMessage>
             </Stack>
           </RadioGroup>
-          {errors.maxLandingPadSize && (
-            <Text color="red" mt={3}>
-              Pad size is required
-            </Text>
+          {isBuying ? (
+            <FormLabel marginY="auto">Buying</FormLabel>
+          ) : (
+            <FormLabel marginY="auto">Selling</FormLabel>
           )}
           <Text>I am looking to:</Text>
           <Stack spacing={8} direction="row" mt={8} flexWrap="wrap">
@@ -210,16 +218,14 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             </ButtonGroup>
             {isBuying && numberInputs('Minimum Supply', 'minSupply')}
             {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
-            {errors.minSupply && (
-              <Text color="red" mt={3}>
-                {errors.minSupply.message as string}
-              </Text>
-            )}
-            {errors.minDemand && (
-              <Text color="red" mt={3}>
-                {errors.minDemand.message as string}
-              </Text>
-            )}
+            <FormErrorMessage>
+              {errors.minSupply &&
+                isBuying &&
+                (errors.minSupply.message as string)}
+              {errors.minDemand &&
+                !isBuying &&
+                (errors.minDemand.message as string)}
+            </FormErrorMessage>
           </Stack>
         </FormControl>
       </Flex>

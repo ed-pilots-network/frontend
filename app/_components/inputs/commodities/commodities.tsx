@@ -52,23 +52,23 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
     }),
     dropdownIndicator: (baseStyles: SystemStyleObject) => ({
       ...baseStyles,
-      px: 3,
+      paddingX: 3,
     }),
     menu: (baseStyles: SystemStyleObject) => ({
       ...baseStyles,
-      m: 0,
-      p: 0,
+      margin: 0,
+      padding: 0,
     }),
     menuList: (baseStyles: SystemStyleObject) => ({
       ...baseStyles,
-      m: 0,
+      margin: 0,
       borderTopLeftRadius: 0,
       borderTopRightRadius: 0,
       borderColor: 'blue.300',
     }),
     group: (baseStyles: SystemStyleObject) => ({
       ...baseStyles,
-      py: '20px',
+      paddingY: '20px',
     }),
   };
 

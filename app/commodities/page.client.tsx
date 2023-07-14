@@ -69,7 +69,7 @@ const PageClient = () => {
           borderRadius="9px"
           borderColor={selectColor(isDark, 'border')}
           bg={selectColor(isDark, 'accent-bg')}
-          p="1rem"
+          padding="1rem"
         >
           <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
         </Box>
