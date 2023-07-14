@@ -18,7 +18,7 @@ export interface Module {
   description: string;
 }
 
-export const Tags = ['discover', 'outfit', 'trade'];
+export const Tags = ['discover', 'trade', 'outfit'];
 
 const ModuleProps: Module[] = [
   {
