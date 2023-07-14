@@ -19,6 +19,8 @@ export interface Module {
   description: string;
 }
 
+export const Tags = ['discover', 'outfit', 'trade'];
+
 const ModuleProps: Module[] = [
   {
     url: '/systems',
