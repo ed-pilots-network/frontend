@@ -35,6 +35,9 @@ const Navbar = () => {
       color={selectColor(isDark, 'text')}
     >
       <Flex alignItems="center">
+        <Show below="md">
+          <NavDrawer />
+        </Show>
         <Link href="/">
           <Image
             src={'/EDPN_logo_dark_background.png'}
@@ -118,9 +121,6 @@ const Navbar = () => {
           icon={isDark ? <SunIcon /> : <MoonIcon />}
           onClick={toggleColorMode}
         />
-        <Show below="md">
-          <NavDrawer />
-        </Show>
       </Flex>
     </Flex>
   );
