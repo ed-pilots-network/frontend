@@ -54,7 +54,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     handleSubmit,
     formState: { errors },
     control,
-    watch,
   } = useForm<SubmitProps>({
     defaultValues: {
       minDemand: 1,
@@ -99,8 +98,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
       </NumberInput>
     </>
   );
-
-  const validatePadSize = watch('maxLandingPadSize');
 
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
     const submitData = data;
@@ -192,9 +189,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 </Radio>
               ))}
               <FormErrorMessage marginY="auto">
-                {!validatePadSize &&
-                  errors.maxLandingPadSize &&
-                  'Select a landing pad size'}
+                {errors.maxLandingPadSize && 'Select a landing pad size'}
               </FormErrorMessage>
             </Stack>
           </RadioGroup>
