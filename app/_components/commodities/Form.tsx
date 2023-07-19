@@ -54,6 +54,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     handleSubmit,
     formState: { errors },
     control,
+    watch,
   } = useForm<SubmitProps>({
     defaultValues: {
       minDemand: 1,
@@ -99,6 +100,8 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     </>
   );
 
+  const validatePadSize = watch('maxLandingPadSize');
+
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
     const submitData = data;
     if (isBuying) submitData.minDemand = 0;
@@ -126,28 +129,26 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             }}
             {...register('system', {
               required: true,
-              pattern: {
-                value: /^[\w'-]+(?:\s[\w'-]+)*$/,
-                message: 'Please enter a valid system name',
-              },
+              pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,
               maxLength: 40,
             })}
           />
           <FormErrorMessage>
             {errors.system && errors.system.message}
           </FormErrorMessage>
-
+        </FormControl>
+        <FormControl>
           <FormLabel marginTop={8}>Options</FormLabel>
-          <CheckboxGroup colorScheme="gray">
-            <Stack
-              borderWidth="1px"
-              borderRadius="9px"
-              borderColor={selectColor(isDark, 'border')}
-              padding="1rem"
-              spacing={8}
-              direction={['column', 'row']}
-              margin={8}
-            >
+          <Stack
+            borderWidth="1px"
+            borderRadius="9px"
+            borderColor={selectColor(isDark, 'border')}
+            padding="1rem"
+            spacing={8}
+            direction={['column', 'row']}
+            margin={8}
+          >
+            <CheckboxGroup colorScheme="gray">
               {checkboxValues.map((checkbox, index) => (
                 <Checkbox
                   colorScheme="orange"
@@ -158,8 +159,14 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                   {checkbox.name}
                 </Checkbox>
               ))}
-            </Stack>
-          </CheckboxGroup>
+            </CheckboxGroup>
+          </Stack>
+        </FormControl>
+        <FormControl
+          isInvalid={
+            !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
+          }
+        >
           <FormLabel>Landing Pad Size</FormLabel>
           <RadioGroup>
             <Stack
@@ -184,11 +191,15 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                   {value}
                 </Radio>
               ))}
-              <FormErrorMessage>
-                {errors.maxLandingPadSize && 'Select a landing pad size'}
+              <FormErrorMessage marginY="auto">
+                {!validatePadSize &&
+                  errors.maxLandingPadSize &&
+                  'Select a landing pad size'}
               </FormErrorMessage>
             </Stack>
           </RadioGroup>
+        </FormControl>
+        <FormControl isInvalid={!!errors.minSupply || !!errors.minDemand}>
           <FormLabel>I am looking to:</FormLabel>
           <Stack spacing={8} direction="row" margin={8} flexWrap="wrap">
             <ButtonGroup size="md" isAttached>
@@ -196,7 +207,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 onClick={() => setIsBuying(true)}
                 variant={isBuying ? 'customButton' : 'outline'}
                 leftIcon={<CheckIcon opacity={isBuying ? 1 : 0} />}
-                width={36}
+                width={[24, 36]}
                 style={{ marginInlineEnd: 0 }}
               >
                 Buy
@@ -205,7 +216,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 onClick={() => setIsBuying(false)}
                 variant={!isBuying ? 'customButton' : 'outline'}
                 leftIcon={<CheckIcon opacity={!isBuying ? 1 : 0} />}
-                width={36}
+                width={[24, 36]}
               >
                 Sell
               </Button>
