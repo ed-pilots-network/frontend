@@ -17,7 +17,6 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  Text,
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { z } from 'zod';
@@ -190,13 +189,8 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               </FormErrorMessage>
             </Stack>
           </RadioGroup>
-          {isBuying ? (
-            <FormLabel marginY="auto">Buying</FormLabel>
-          ) : (
-            <FormLabel marginY="auto">Selling</FormLabel>
-          )}
-          <Text>I am looking to:</Text>
-          <Stack spacing={8} direction="row" mt={8} flexWrap="wrap">
+          <FormLabel>I am looking to:</FormLabel>
+          <Stack spacing={8} direction="row" margin={8} flexWrap="wrap">
             <ButtonGroup size="md" isAttached>
               <Button
                 onClick={() => setIsBuying(true)}
