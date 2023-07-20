@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "dev-api": "concurrently \"next dev\" \"yarn api\"",
-    "api": "json-server --watch mock-api/db.json --port 3001",
+    "api": "node mock-api/server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
