@@ -28,14 +28,12 @@ const PageClient = ({ posts }: PageClientProps) => (
       >
         Server Side Data Fetch
       </Heading>
-      {posts ? (
-        posts.map((item) => (
-          <div key={item.id}>
-            <p>Post Title: {item.title}</p>
-            <p>Author: {item.author}</p>
-          </div>
-        ))
-      ) : (
+      {posts?.map((item) => (
+        <div key={item.id}>
+          <p>Post Title: {item.title}</p>
+          <p>Author: {item.author}</p>
+        </div>
+      )) ?? (
         <Alert status="error">
           <AlertIcon />
           Failed to fetch post data
