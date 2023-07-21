@@ -172,7 +172,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               borderColor={selectColor(isDark, 'border')}
               padding="1rem"
               spacing={8}
-              direction={['column', 'row']}
+              direction={['column', 'column', 'row']}
               margin={8}
             >
               {['Small', 'Medium', 'Large'].map((value, index) => (
