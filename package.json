@@ -19,6 +19,7 @@
     "capture-screenshots": "RUN_SCREENSHOT_TEST=true yarn test"
   },
   "dependencies": {
+    "@chakra-ui/anatomy": "^2.1.1",
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/next-js": "^2.1.4",
     "@chakra-ui/react": "^2.7.0",

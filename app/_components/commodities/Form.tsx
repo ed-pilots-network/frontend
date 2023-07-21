@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { CheckIcon } from '@chakra-ui/icons';
 import {
   Button,
+  ButtonGroup,
   Checkbox,
   CheckboxGroup,
   Flex,
@@ -15,8 +17,7 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  Switch,
-  Text,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -74,8 +75,16 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     registerName: 'minSupply' | 'minDemand',
   ) => (
     <>
-      <FormLabel my="auto">{label}</FormLabel>
-      <NumberInput defaultValue={1} min={1} max={1000000} precision={0}>
+      <FormLabel marginY="auto" width="140px">
+        {label}
+      </FormLabel>
+      <NumberInput
+        defaultValue={1}
+        min={1}
+        max={1000000}
+        precision={0}
+        borderColor={selectColor(isDark, 'border')}
+      >
         <NumberInputField
           {...register(registerName, {
             max: 1000000,
@@ -102,92 +111,127 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
       <Flex
         justifyContent="space-between"
         alignItems="center"
-        paddingY="8"
+        paddingBottom="8"
         flexWrap="wrap"
       >
-        <FormControl>
+        <FormControl isInvalid={!!(errors.system && errors.system.message)}>
           <CommoditiesField control={control} />
           <FormLabel marginTop={8}>Near Star System</FormLabel>
           <Input
-            variant="filled"
+            variant="outline"
             placeholder="Enter a system..."
+            borderColor={selectColor(isDark, 'border')}
+            _hover={{
+              borderColor: selectColor(isDark, 'border'),
+            }}
             {...register('system', {
               required: true,
               pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,
               maxLength: 40,
             })}
           />
-          {errors.system && (
-            <Text color="red" mt={3}>
-              {errors.system.message}
-            </Text>
-          )}
-          <FormLabel marginTop={8}>Optional Factors</FormLabel>
-          <CheckboxGroup colorScheme="gray">
-            <Stack spacing={8} direction={['column', 'row']} margin={8}>
+          <FormErrorMessage>
+            {errors.system && errors.system.message}
+          </FormErrorMessage>
+        </FormControl>
+        <FormControl>
+          <FormLabel marginTop={8}>Options</FormLabel>
+          <Stack
+            borderWidth="1px"
+            borderRadius="9px"
+            borderColor={selectColor(isDark, 'border')}
+            padding="1rem"
+            spacing={8}
+            direction={['column', 'row']}
+            margin={8}
+          >
+            <CheckboxGroup colorScheme="gray">
               {checkboxValues.map((checkbox, index) => (
                 <Checkbox
+                  colorScheme="orange"
                   key={index}
                   {...register(`${checkbox.value}` as keyof SubmitProps)}
-                  borderColor={selectColor(isDark, 'text')}
+                  borderColor={selectColor(isDark, 'border')}
                 >
                   {checkbox.name}
                 </Checkbox>
               ))}
-            </Stack>
-          </CheckboxGroup>
-          <FormLabel>Max Landing Pad Size</FormLabel>
+            </CheckboxGroup>
+          </Stack>
+        </FormControl>
+        <FormControl
+          isInvalid={
+            !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
+          }
+        >
+          <FormLabel>Landing Pad Size</FormLabel>
           <RadioGroup>
-            <Stack spacing={8} direction="row" mt={8} ml={8} flexWrap="wrap">
+            <Stack
+              borderWidth="1px"
+              borderRadius="9px"
+              borderColor={selectColor(isDark, 'border')}
+              padding="1rem"
+              spacing={8}
+              direction={['column', 'column', 'row']}
+              margin={8}
+            >
               {['Small', 'Medium', 'Large'].map((value, index) => (
                 <Radio
-                  colorScheme="gray"
+                  colorScheme="orange"
                   key={index}
                   value={value.toLowerCase()}
-                  borderColor={selectColor(isDark, 'text')}
-                  {...register('maxLandingPadSize', { required: true })}
+                  borderColor={selectColor(isDark, 'border')}
+                  {...register('maxLandingPadSize', {
+                    required: true,
+                  })}
                 >
                   {value}
                 </Radio>
               ))}
+              <FormErrorMessage marginY="auto">
+                {errors.maxLandingPadSize && 'Select a landing pad size'}
+              </FormErrorMessage>
             </Stack>
           </RadioGroup>
-          {errors.maxLandingPadSize && (
-            <Text color="red" mt={3}>
-              Pad size is required
-            </Text>
-          )}
-          <Stack spacing={8} direction="row" mt={8} flexWrap="wrap">
-            {isBuying ? (
-              <FormLabel my="auto">Buying</FormLabel>
-            ) : (
-              <FormLabel my="auto">Selling</FormLabel>
-            )}
-            <Switch
-              id="buying"
-              my="auto"
-              isChecked={isBuying}
-              onChange={() => setIsBuying(!isBuying)}
-            />
+        </FormControl>
+        <FormControl isInvalid={!!errors.minSupply || !!errors.minDemand}>
+          <FormLabel>I am looking to:</FormLabel>
+          <Stack spacing={8} direction="row" margin={8} flexWrap="wrap">
+            <ButtonGroup size="md" isAttached>
+              <Button
+                onClick={() => setIsBuying(true)}
+                variant={isBuying ? 'customButton' : 'outline'}
+                leftIcon={<CheckIcon opacity={isBuying ? 1 : 0} />}
+                width={[24, 36]}
+                style={{ marginInlineEnd: 0 }}
+              >
+                Buy
+              </Button>
+              <Button
+                onClick={() => setIsBuying(false)}
+                variant={!isBuying ? 'customButton' : 'outline'}
+                leftIcon={<CheckIcon opacity={!isBuying ? 1 : 0} />}
+                width={[24, 36]}
+              >
+                Sell
+              </Button>
+            </ButtonGroup>
             {isBuying && numberInputs('Minimum Supply', 'minSupply')}
             {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
-            {errors.minSupply && (
-              <Text color="red" mt={3}>
-                {errors.minSupply.message as string}
-              </Text>
-            )}
-            {errors.minDemand && (
-              <Text color="red" mt={3}>
-                {errors.minDemand.message as string}
-              </Text>
-            )}
+            <FormErrorMessage>
+              {errors.minSupply &&
+                isBuying &&
+                (errors.minSupply.message as string)}
+              {errors.minDemand &&
+                !isBuying &&
+                (errors.minDemand.message as string)}
+            </FormErrorMessage>
           </Stack>
         </FormControl>
       </Flex>
       <Button
         type="submit"
-        colorScheme="gray"
-        variant="solid"
+        variant="customButton"
         id="submit"
         isLoading={isLoading}
       >

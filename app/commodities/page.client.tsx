@@ -52,14 +52,24 @@ const PageClient = () => {
           as="h1"
           size={{ base: 'md', md: 'lg', lg: 'lg' }}
           marginX={{ base: 'auto', md: '0', lg: '0' }}
+          color={selectColor(isDark, 'accent-text')}
+        >
+          Commodities
+        </Heading>
+        <Heading
+          as="h2"
+          size={{ base: 'xs', md: 'sm', lg: 'sm' }}
+          marginX={{ base: 'auto', md: '0', lg: '0' }}
+          textAlign={{ base: 'center', sm: 'left', md: 'left' }}
         >
           Find Closest Station to Buy/Sell Commodities
         </Heading>
         <Box
-          borderWidth="1px"
+          borderWidth="2px"
           borderRadius="9px"
-          borderColor={selectColor(isDark, 'text')}
-          p="1rem"
+          borderColor={selectColor(isDark, 'border')}
+          bg={selectColor(isDark, 'accent-bg')}
+          padding="1rem"
         >
           <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
         </Box>

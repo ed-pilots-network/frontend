@@ -1,7 +1,17 @@
 import { extendTheme } from '@chakra-ui/react';
 import { rubik, orbitron } from './fonts';
+import buttonTheme from './button';
+import checkboxTheme from './checkbox';
+import radioTheme from './radio';
+import selectTheme from './select';
 
 const theme = extendTheme({
+  components: {
+    Button: buttonTheme,
+    Checkbox: checkboxTheme,
+    Radio: radioTheme,
+    Select: selectTheme,
+  },
   config: {
     initialColorMode: 'dark',
     useSystemColorMode: false,
@@ -17,6 +27,28 @@ const theme = extendTheme({
       text: '#F2F2F2',
       background: '#2B2D31',
       box: '#1E1F22',
+    },
+    orange: {
+      1: '#FEEBC8',
+      2: '#FBD38D',
+      3: '#f6ad55',
+      4: '#ED8936',
+      5: '#DD6B20',
+      6: '#C05621',
+    },
+    blue: {
+      1: '#f3f7f9',
+      2: '#e6eef2',
+      3: '#cddce5',
+      4: '#9BB9CB',
+      5: '#4e5d66',
+      6: '#272f33',
+    },
+    switchLight: {
+      500: '#ed8936',
+    },
+    switchDark: {
+      200: '#9bb9cb',
     },
   },
   fonts: {

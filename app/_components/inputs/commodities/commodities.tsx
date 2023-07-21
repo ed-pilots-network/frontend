@@ -1,10 +1,17 @@
-import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  SystemStyleObject,
+} from '@chakra-ui/react';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import { Controller } from 'react-hook-form';
 
 import React from 'react';
 
 import commodities from '@/app/_lib/commodity-list';
+import useColorMode from '@/app/_hooks/useColorMode';
+import selectColor from '@/app/_hooks/fontColorSelector';
 
 interface CommodityProps {
   control: any;
@@ -19,12 +26,51 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
   // TODO: for now these values have leading designators that we need to remove
   // for example: 'water' is stored as 'ch_water' designated as a chemical
   // if we don't end up using this designation then we should remove it
+
   const formattedCommodities: CommodityGroup[] = commodities.map(
     (commodity) => ({
       value: commodity.slice(3).split('_').join(' '),
       label: commodity.slice(3).split('_').join(' '),
     }),
   );
+
+  const { isDark } = useColorMode();
+
+  const customStyles = {
+    control: (baseStyles: SystemStyleObject, state: any) => ({
+      ...baseStyles,
+      borderColor: selectColor(isDark, 'border'),
+      borderBottomLeftRadius: state.menuIsOpen ? 0 : 'md',
+      borderBottomRightRadius: state.menuIsOpen ? 0 : 'md',
+      focusBorderColor: selectColor(isDark, 'border'),
+      _hover: {
+        borderColor: selectColor(isDark, 'border'),
+      },
+      _focus: {
+        border: 'none',
+      },
+    }),
+    dropdownIndicator: (baseStyles: SystemStyleObject) => ({
+      ...baseStyles,
+      paddingX: 3,
+    }),
+    menu: (baseStyles: SystemStyleObject) => ({
+      ...baseStyles,
+      margin: 0,
+      padding: 0,
+    }),
+    menuList: (baseStyles: SystemStyleObject) => ({
+      ...baseStyles,
+      margin: 0,
+      borderTopLeftRadius: 0,
+      borderTopRightRadius: 0,
+      borderColor: 'blue.300',
+    }),
+    group: (baseStyles: SystemStyleObject) => ({
+      ...baseStyles,
+      paddingY: '20px',
+    }),
+  };
 
   return (
     <Controller
@@ -46,7 +92,8 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
             onBlur={onBlur}
             value={value}
             options={formattedCommodities}
-            placeholder="Search through the commodities"
+            placeholder="Select a commodity"
+            chakraStyles={customStyles}
           />
           <FormErrorMessage>{error && error.message}</FormErrorMessage>
         </FormControl>
