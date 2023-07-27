@@ -9,6 +9,7 @@ const nextConfig = {
   images: {
     domains: ['edpn.com'],
   },
+  eslint: { dirs: ['.'] },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

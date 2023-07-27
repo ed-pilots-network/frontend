@@ -1,6 +1,7 @@
 import { IconType } from 'react-icons';
 import { GiSolarSystem, GiEarthAmerica } from 'react-icons/gi';
 import { MdApartment, MdPhotoCamera } from 'react-icons/md';
+import { BsBox } from 'react-icons/bs';
 import {
   FaArrowRight,
   FaArrowRightArrowLeft,
@@ -74,6 +75,13 @@ const ModuleProps: Module[] = [
     title: 'Shipyard',
     description:
       'Browse the universe! Jump to any system or search by many properties',
+  },
+  {
+    url: '/commodities',
+    tag: 'trade',
+    icon: BsBox,
+    title: 'Trade Commodities',
+    description: 'Find a place to buy or sell a specific commodity',
   },
   {
     url: '/trade/single',
