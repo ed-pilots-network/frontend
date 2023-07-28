@@ -3,7 +3,6 @@ import governments from '@/app/_lib/government-list';
 import securities from '@/app/_lib/security-list';
 import economies from '@/app/_lib/economy-list';
 import allegiances from '@/app/_lib/allegiance-list';
-import factionStates from '@/app/_lib/faction-state-list';
 
 import {
   Button,
@@ -22,8 +21,12 @@ import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import selectStyles from '@/app/_hooks/selectStyles';
-
-const powerEffectOptions = ['Control', 'Expansion', 'Exploited'];
+import PowersField from '../inputs/Powers';
+import AllegiancesField from '../inputs/Allegiances';
+import GovernmentsField from '../inputs/Governments';
+import RequiresPermitField from '../inputs/RequiresPermit';
+import PowerEffectsField from '../inputs/PowerEffects';
+import FactionStatesField from '../inputs/FactionStates';
 
 export const SystemFormSchema = z.object({
   system: z.string().regex(/[A-Za-z\ ]/),
@@ -35,7 +38,7 @@ export const SystemFormSchema = z.object({
   ),
   minorFaction: z.string().regex(/[A-Za-z\ ]/),
   presenceType: z.string().regex(/[A-Za-z\ ]/),
-  needsPermit: z.enum(['yes', 'no']),
+  requiresPermit: z.enum(['yes', 'no']),
   stationFilter: z.enum([
     'hasStations',
     'hasPlanetary',
@@ -43,9 +46,7 @@ export const SystemFormSchema = z.object({
     'hasNoStations',
   ]),
   powers: z.enum(powers.map((item) => item) as [string, ...string[]]),
-  powerEffects: z.enum(
-    powerEffectOptions.map((item) => item) as [string, ...string[]],
-  ),
+  powerEffects: z.enum(['Control', 'Expansion', 'Exploited']),
   referenceSystem: z.string().regex(/[A-Za-z\ ]/),
   securities: z.enum(securities.map((item) => item) as [string, ...string[]]),
   factionStates: z.string().regex(/[A-Za-z\ ]/),
@@ -143,91 +144,14 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         </GridItem>
 
         <GridItem w="100%">
-          <Controller
-            name="allegiance"
-            control={control}
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { error },
-            }) => (
-              <FormControl isInvalid={!!error} id="allegiance">
-                <FormLabel>Allegiance</FormLabel>
-                <Select<SelectGroup, true, GroupBase<SelectGroup>>
-                  id="allegiance-field"
-                  instanceId="allegiance-field"
-                  name={name}
-                  ref={ref}
-                  onBlur={onBlur}
-                  value={value}
-                  options={allegiances.map((item) => ({
-                    value: item,
-                    label: item,
-                  }))}
-                  chakraStyles={chakraSelectStyles}
-                />
-                <FormErrorMessage>{error && error.message}</FormErrorMessage>
-              </FormControl>
-            )}
-          />
+          <AllegiancesField control={control} />
         </GridItem>
 
         <GridItem w="100%">
-          <Controller
-            name="government"
-            control={control}
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { error },
-            }) => (
-              <FormControl isInvalid={!!error} id="government">
-                <FormLabel>Government Type</FormLabel>
-                <Select<SelectGroup, true, GroupBase<SelectGroup>>
-                  id="government-field"
-                  instanceId="government-field"
-                  name={name}
-                  ref={ref}
-                  onBlur={onBlur}
-                  value={value}
-                  options={governments.map((item) => ({
-                    value: item,
-                    label: item,
-                  }))}
-                  chakraStyles={chakraSelectStyles}
-                />
-                <FormErrorMessage>{error && error.message}</FormErrorMessage>
-              </FormControl>
-            )}
-          />
+          <GovernmentsField control={control} />
         </GridItem>
 
-        <GridItem w="100%">
-          <Controller
-            name="primaryEconomy"
-            control={control}
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { error },
-            }) => (
-              <FormControl isInvalid={!!error} id="economy">
-                <FormLabel>Economy Type</FormLabel>
-                <Select<SelectGroup, true, GroupBase<SelectGroup>>
-                  id="economy-field"
-                  instanceId="economy-field"
-                  name={name}
-                  ref={ref}
-                  onBlur={onBlur}
-                  value={value}
-                  options={economies.map((item) => ({
-                    value: item,
-                    label: item,
-                  }))}
-                  chakraStyles={chakraSelectStyles}
-                />
-                <FormErrorMessage>{error && error.message}</FormErrorMessage>
-              </FormControl>
-            )}
-          />
-        </GridItem>
+        <GridItem w="100%"></GridItem>
 
         <GridItem w="100%" colSpan={3}>
           <FormControl
@@ -283,32 +207,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         </GridItem>
 
         <GridItem w="100%">
-          <Controller
-            name="needsPermit"
-            control={control}
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { error },
-            }) => (
-              <FormControl isInvalid={!!error} id="needsPermit">
-                <FormLabel>Needs Permit?</FormLabel>
-                <Select<SelectGroup, true, GroupBase<SelectGroup>>
-                  id="needsPermit-field"
-                  instanceId="needsPermit-field"
-                  name={name}
-                  ref={ref}
-                  onBlur={onBlur}
-                  value={value}
-                  options={[
-                    { label: 'Yes', value: '1' },
-                    { label: 'No', value: '0' },
-                  ]}
-                  chakraStyles={chakraSelectStyles}
-                />
-                <FormErrorMessage>{error && error.message}</FormErrorMessage>
-              </FormControl>
-            )}
-          />
+          <RequiresPermitField control={control} />
         </GridItem>
 
         <GridItem w="100%">
@@ -343,61 +242,11 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         </GridItem>
 
         <GridItem w="100%">
-          <Controller
-            name="powers"
-            control={control}
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { error },
-            }) => (
-              <FormControl isInvalid={!!error} id="powers">
-                <FormLabel>Powers</FormLabel>
-                <Select<SelectGroup, true, GroupBase<SelectGroup>>
-                  id="powers-field"
-                  instanceId="powers-field"
-                  name={name}
-                  ref={ref}
-                  onBlur={onBlur}
-                  value={value}
-                  options={powers.map((item) => ({
-                    value: item,
-                    label: item,
-                  }))}
-                  chakraStyles={chakraSelectStyles}
-                />
-                <FormErrorMessage>{error && error.message}</FormErrorMessage>
-              </FormControl>
-            )}
-          />
+          <PowersField control={control} />
         </GridItem>
 
         <GridItem w="100%">
-          <Controller
-            name="powerEffects"
-            control={control}
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { error },
-            }) => (
-              <FormControl isInvalid={!!error} id="powerEffects">
-                <FormLabel>Power Effects</FormLabel>
-                <Select<SelectGroup, true, GroupBase<SelectGroup>>
-                  id="powerEffects-field"
-                  instanceId="powerEffects-field"
-                  name={name}
-                  ref={ref}
-                  onBlur={onBlur}
-                  value={value}
-                  options={powerEffectOptions.map((item) => ({
-                    value: item,
-                    label: item,
-                  }))}
-                  chakraStyles={chakraSelectStyles}
-                />
-                <FormErrorMessage>{error && error.message}</FormErrorMessage>
-              </FormControl>
-            )}
-          />
+          <PowerEffectsField control={control} />
         </GridItem>
 
         <GridItem w="100%" colSpan={2}>
@@ -456,32 +305,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         </GridItem>
 
         <GridItem w="100%">
-          <Controller
-            name="factionStates"
-            control={control}
-            render={({
-              field: { onChange, onBlur, value, name, ref },
-              fieldState: { error },
-            }) => (
-              <FormControl isInvalid={!!error} id="factionStatesfactionStates">
-                <FormLabel>Faction States</FormLabel>
-                <Select<SelectGroup, true, GroupBase<SelectGroup>>
-                  id="factionStates-field"
-                  instanceId="factionStates-field"
-                  name={name}
-                  ref={ref}
-                  onBlur={onBlur}
-                  value={value}
-                  options={factionStates.map((item) => ({
-                    value: item,
-                    label: item,
-                  }))}
-                  chakraStyles={chakraSelectStyles}
-                />
-                <FormErrorMessage>{error && error.message}</FormErrorMessage>
-              </FormControl>
-            )}
-          />
+          <FactionStatesField control={control} />
         </GridItem>
       </Grid>
       <Button
