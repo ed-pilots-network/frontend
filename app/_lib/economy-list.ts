@@ -1,4 +1,4 @@
-const governments: string[] = [
+const economies: string[] = [
   'Agriculture',
   'Colony',
   'Damaged',
@@ -18,4 +18,4 @@ const governments: string[] = [
   'None',
 ];
 
-export default governments;
+export default economies;
