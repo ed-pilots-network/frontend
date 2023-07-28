@@ -1,4 +1,4 @@
-const factonStates: string[] = [
+const factionStates: string[] = [
   'Blight',
   'Boom',
   'Bust',
@@ -31,4 +31,4 @@ const factonStates: string[] = [
   'War',
 ];
 
-export default factonStates;
+export default factionStates;
