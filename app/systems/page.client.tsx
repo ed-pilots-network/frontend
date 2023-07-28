@@ -27,9 +27,6 @@ const PageClient = () => {
 
     let submitData: ReqBody = {
       ...data,
-      commodityId: formatString(data.commodityId.value),
-      minDemand: Number(data.minDemand),
-      minSupply: Number(data.minSupply),
       referenceLocation: {
         xcoordinate: 0,
         ycoordinate: 0,
