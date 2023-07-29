@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Center, Flex, Heading } from '@chakra-ui/react';
+import { Box, Center, HStack, Heading, VStack } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/systems/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
@@ -44,15 +44,19 @@ const PageClient = () => {
 
   return (
     <Center width="100%">
-      <Flex flexDirection="column" gap="24px" width="100%" maxWidth="1500px">
-        <Heading
-          as="h1"
-          size={{ base: 'md', md: 'lg', lg: 'lg' }}
-          marginX={{ base: 'auto', md: '0', lg: '0' }}
-          color={selectColor(isDark, 'accent-text')}
-        >
-          Systems
-        </Heading>
+      <VStack align="stretch">
+        <HStack spacing={4}>
+          <Box alignSelf="baseline">
+            <Heading
+              as="h1"
+              size={{ base: 'md', md: 'lg', lg: 'lg' }}
+              marginX={{ base: 'auto', md: '0', lg: '0' }}
+              color={selectColor(isDark, 'accent-text')}
+            >
+              Systems
+            </Heading>
+          </Box>
+        </HStack>
         <Box
           borderWidth="2px"
           borderRadius="9px"
@@ -62,7 +66,7 @@ const PageClient = () => {
         >
           <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
         </Box>
-      </Flex>
+      </VStack>
     </Center>
   );
 };
