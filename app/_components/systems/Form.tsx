@@ -5,6 +5,7 @@ import economies from '@/app/_lib/economy-list';
 import allegiances from '@/app/_lib/allegiance-list';
 
 import {
+  breakpoints,
   Button,
   FormControl,
   FormLabel,
@@ -27,6 +28,7 @@ import GovernmentsField from '../inputs/Governments';
 import RequiresPermitField from '../inputs/RequiresPermit';
 import PowerEffectsField from '../inputs/PowerEffects';
 import FactionStatesField from '../inputs/FactionStates';
+import EconomiesField from '../inputs/Economies';
 
 export const SystemFormSchema = z.object({
   system: z.string().regex(/[A-Za-z\ ]/),
@@ -83,8 +85,16 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid templateColumns="repeat(4, 1fr)" gap={6} marginBottom="10">
-        <GridItem w="100%" colSpan={4}>
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(2, 1fr)',
+          lg: 'repeat(4, 1fr)',
+        }}
+        gap={6}
+        marginBottom="10"
+      >
+        <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 4 }}>
           <FormControl
             isInvalid={!!(errors.onlyPopulated && errors.onlyPopulated.message)}
           >
@@ -108,7 +118,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%" colSpan={4}>
+        <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 4 }}>
           <h5>
             <b>SEARCH</b>
           </h5>
@@ -151,9 +161,11 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           <GovernmentsField control={control} />
         </GridItem>
 
-        <GridItem w="100%"></GridItem>
+        <GridItem w="100%">
+          <EconomiesField control={control} />
+        </GridItem>
 
-        <GridItem w="100%" colSpan={3}>
+        <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 3 }}>
           <FormControl
             isInvalid={!!(errors.minorFaction && errors.minorFaction.message)}
           >
@@ -249,7 +261,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           <PowerEffectsField control={control} />
         </GridItem>
 
-        <GridItem w="100%" colSpan={2}>
+        <GridItem w="100%" colSpan={{ base: 1, md: 1, lg: 2 }}>
           <FormControl
             isInvalid={
               !!(errors.referenceSystem && errors.referenceSystem.message)
