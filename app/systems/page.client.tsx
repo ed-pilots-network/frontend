@@ -5,16 +5,7 @@ import { Box, Center, HStack, Heading, VStack } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/systems/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-
-interface ReqBody extends Omit<SubmitProps, 'commodityId' | 'system'> {
-  commodityId: string;
-  referenceLocation: {
-    xcoordinate: number;
-    ycoordinate: number;
-    zcoordinate: number;
-  };
-  system?: string;
-}
+import { SystemForm } from '../_components/systems/types';
 
 const PageClient = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,18 +13,10 @@ const PageClient = () => {
 
   const handleSubmit = (data: SubmitProps) => {
     setIsLoading(true);
-    const formatString = (string: string) =>
-      string.split(' ').join('_').toLowerCase();
 
-    let submitData: ReqBody = {
+    let submitData: SystemForm = {
       ...data,
-      referenceLocation: {
-        xcoordinate: 0,
-        ycoordinate: 0,
-        zcoordinate: 0,
-      },
     };
-    delete submitData.system;
 
     // TODO: submit data to backend
     setTimeout(() => {

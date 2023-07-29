@@ -5,7 +5,6 @@ import economies from '@/app/_lib/economy-list';
 import allegiances from '@/app/_lib/allegiance-list';
 
 import {
-  breakpoints,
   Button,
   FormControl,
   FormLabel,
@@ -40,7 +39,7 @@ export const SystemFormSchema = z.object({
   ),
   minorFaction: z.string().regex(/[A-Za-z\ ]/),
   presenceType: z.string().regex(/[A-Za-z\ ]/),
-  requiresPermit: z.enum(['yes', 'no']),
+  requiresPermit: z.enum(['1', '0']),
   stationFilter: z.enum([
     'hasStations',
     'hasPlanetary',
