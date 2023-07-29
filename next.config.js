@@ -10,6 +10,14 @@ const nextConfig = {
     domains: ['edpn.com'],
   },
   eslint: { dirs: ['.'] },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://morris.edpn.io:8080/api/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
