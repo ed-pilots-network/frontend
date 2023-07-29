@@ -1,4 +1,7 @@
 import {
+  Badge,
+  Menu,
+  MenuButton,
   Flex,
   IconButton,
   Text,
@@ -14,6 +17,7 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { MdCode } from 'react-icons/md';
 
 import { rift } from '@/app/_config/theme/fonts';
 import useColorMode from '@/app/_hooks/useColorMode';
@@ -107,15 +111,22 @@ const Navbar = () => {
 
       <Flex justifyContent="space-between" alignItems="center">
         <Hide below="md">
-          <Text
-            ml={2}
+          <Badge
+            margin={2}
             px={2}
             fontSize="md"
-            color={selectColor(isDark, 'textLight')}
+            colorScheme={isDark ? 'orange' : 'gray'}
           >
-            Server: {process.env.NEXT_PUBLIC_STAGE}
-          </Text>
+            {process.env.NEXT_PUBLIC_STAGE}
+          </Badge>
         </Hide>
+        {process.env.NEXT_PUBLIC_STAGE === 'localhost' && (
+          <Menu>
+            <Link href="/playground">
+              <MenuButton as={IconButton} icon={<MdCode />} size="sm" m={2} />
+            </Link>
+          </Menu>
+        )}
         <IconButton
           aria-label="Toggle Dark Switch"
           icon={isDark ? <SunIcon /> : <MoonIcon />}
