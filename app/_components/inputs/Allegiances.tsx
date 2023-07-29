@@ -2,7 +2,6 @@ import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import { Control, Controller } from 'react-hook-form';
 import selectStyles from '@/app/_hooks/selectStyles';
-import useColorMode from '@/app/_hooks/useColorMode';
 import allegiances from '@/app/_lib/allegiance-list';
 
 interface Props {
@@ -19,8 +18,6 @@ const AllegiancesField: React.FC<Props> = ({
   control,
   label = 'Allegiance',
 }) => {
-  const { isDark } = useColorMode();
-
   return (
     <Controller
       name="allegiance"
@@ -43,7 +40,7 @@ const AllegiancesField: React.FC<Props> = ({
               value: item,
               label: item,
             }))}
-            chakraStyles={selectStyles(isDark)}
+            chakraStyles={selectStyles()}
           />
           <FormErrorMessage>{error && error.message}</FormErrorMessage>
         </FormControl>

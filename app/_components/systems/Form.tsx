@@ -72,7 +72,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   });
 
   const { isDark } = useColorMode();
-  const chakraSelectStyles = selectStyles(isDark);
+  const chakraSelectStyles = selectStyles();
 
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
     onSubmitHandler(data);
