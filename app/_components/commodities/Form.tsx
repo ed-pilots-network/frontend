@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { CheckIcon } from '@chakra-ui/icons';
 import {
   Button,
   ButtonGroup,
@@ -230,14 +229,12 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               <Button
                 variant={isBuying ? 'customButton' : 'outline'}
                 onClick={() => setIsBuying(true)}
-                leftIcon={<CheckIcon display={isBuying ? 'inline' : 'none'} />}
               >
                 Buy
               </Button>
               <Button
                 variant={isBuying ? 'outline' : 'customButton'}
                 onClick={() => setIsBuying(false)}
-                leftIcon={<CheckIcon display={isBuying ? 'none' : 'inline'} />}
               >
                 Sell
               </Button>
