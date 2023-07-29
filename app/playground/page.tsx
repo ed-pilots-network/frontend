@@ -7,35 +7,14 @@ export const metadata: Metadata = {
   icons: 'EDPN_logo_black.png',
 };
 
-/** Example GET calls
-async function getPosts() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
-
-  if (!res.ok) {
-    return null;
-  }
-
-  return res.json();
-}
-
-async function getPostsForCategory() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/json`);
-  if (!res.ok) {
-    return null;
-  }
-
-  return res.json();
-}
-*/
-
-// Example fetch with POST instead of GET. Relies on middlware to change mock API to GET
 async function getPostsForCategoryWithPost() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_MOCK_API_URL}/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ category: 'json' }),
+    next: { revalidate: 1 },
   });
 
   if (!res.ok) {
@@ -45,16 +24,34 @@ async function getPostsForCategoryWithPost() {
   return res.json();
 }
 
+async function getCommodityByName(name: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STAGING_API_URL}/api/v1/trade/commodity/${name}`,
+    { next: { revalidate: 1 } },
+  );
+
+  if (!res.ok) {
+    return null;
+  }
+
+  return res.json();
+}
+
 export default async function Page() {
-  let posts = null;
+  let posts;
+  let commodity = null;
 
   try {
     posts = await getPostsForCategoryWithPost();
   } catch (error) {
-    /* eslint-disable */
-    console.error('Failed to fetch data:', error);
-    /* eslint-enable */
+    console.error('Failed to fetch posts data:', error);
   }
 
-  return <PageClient posts={posts} />;
+  try {
+    commodity = await getCommodityByName('Wine');
+  } catch (error) {
+    console.error('Failed to fetch commodity data:', error);
+  }
+
+  return <PageClient posts={posts} commodity={commodity} />;
 }

@@ -18,7 +18,7 @@ test('renders the navbar with logo and toggle switch', () => {
   expect(logoText).toHaveStyle({ fontSize: '2xl' });
 
   // Server Stage
-  const serverStage = screen.getByText('Server: test-stage');
+  const serverStage = screen.getByText('test-stage');
   expect(serverStage).toBeInTheDocument();
 
   // Toggle switch
