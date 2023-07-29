@@ -6,7 +6,6 @@ import selectStyles from '@/app/_hooks/selectStyles';
 import React from 'react';
 
 import commodities from '@/app/_lib/commodity-list';
-import useColorMode from '@/app/_hooks/useColorMode';
 
 interface CommodityProps {
   control: any;
@@ -29,8 +28,6 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
     }),
   );
 
-  const { isDark } = useColorMode();
-
   return (
     <Controller
       name="commodityId"
@@ -52,7 +49,7 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
             value={value}
             options={formattedCommodities}
             placeholder="Select a commodity"
-            chakraStyles={selectStyles(isDark)}
+            chakraStyles={selectStyles()}
           />
           <FormErrorMessage>{error && error.message}</FormErrorMessage>
         </FormControl>

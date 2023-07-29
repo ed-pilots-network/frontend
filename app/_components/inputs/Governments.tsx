@@ -2,7 +2,6 @@ import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import { Control, Controller } from 'react-hook-form';
 import selectStyles from '@/app/_hooks/selectStyles';
-import useColorMode from '@/app/_hooks/useColorMode';
 import governments from '@/app/_lib/government-list';
 
 interface Props {
@@ -19,8 +18,6 @@ const GovernmentsField: React.FC<Props> = ({
   control,
   label = 'Government Type',
 }) => {
-  const { isDark } = useColorMode();
-
   return (
     <Controller
       name="government"
@@ -43,7 +40,7 @@ const GovernmentsField: React.FC<Props> = ({
               value: item,
               label: item,
             }))}
-            chakraStyles={selectStyles(isDark)}
+            chakraStyles={selectStyles()}
           />
           <FormErrorMessage>{error && error.message}</FormErrorMessage>
         </FormControl>

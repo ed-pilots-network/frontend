@@ -1,7 +1,10 @@
 import { SystemStyleObject } from "@chakra-ui/react"
 import selectColor from "./fontColorSelector"
+import useColorMode from '@/app/_hooks/useColorMode';
 
-const selectStyles = (isDark: boolean) => {
+const selectStyles = () => {
+  const { isDark } = useColorMode()
+
   return {
     control: (baseStyles: SystemStyleObject, state: any) => ({
       ...baseStyles,
