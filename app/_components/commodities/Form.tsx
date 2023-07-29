@@ -8,7 +8,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  HStack,
   Input,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -66,8 +65,8 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   const { isDark } = useColorMode();
 
   const checkboxValues = [
-    { name: 'Include Planetary', value: 'includePlanetary' },
-    { name: 'Include Odyssey', value: 'includeOdyssey' },
+    { name: 'Planetary', value: 'includePlanetary' },
+    { name: 'Odyssey', value: 'includeOdyssey' },
     { name: 'Fleet Carriers', value: 'includeFleetCarriers' },
   ];
 
@@ -115,11 +114,16 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         alignItems="center"
         paddingBottom="8"
         flexWrap="wrap"
+        direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
       >
-        <HStack spacing={4} width="100%">
+        <Stack
+          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          width="100%"
+          spacing={4}
+        >
           <CommoditiesField control={control} />
           <FormControl
-            width="50%"
+            width="100%"
             isInvalid={!!(errors.system && errors.system.message)}
           >
             <FormLabel>Near Star System</FormLabel>
@@ -140,10 +144,15 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               {errors.system && errors.system.message}
             </FormErrorMessage>
           </FormControl>
-        </HStack>
-        <HStack spacing={4} marginTop={4} width="100%">
-          <FormControl width="50%">
-            <FormLabel>Options</FormLabel>
+        </Stack>
+        <Stack
+          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          spacing={4}
+          width="100%"
+          marginTop={4}
+        >
+          <FormControl width="100%">
+            <FormLabel>Include</FormLabel>
             <Stack
               borderWidth="1px"
               borderRadius="md"
@@ -167,7 +176,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             </Stack>
           </FormControl>
           <FormControl
-            width="50%"
+            width="100%"
             isInvalid={
               !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
             }
@@ -201,10 +210,15 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               </Stack>
             </RadioGroup>
           </FormControl>
-        </HStack>
-        <HStack spacing={4} marginTop={4} width="100%">
+        </Stack>
+        <Stack
+          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          spacing={4}
+          width="100%"
+          marginTop={4}
+        >
           <FormControl
-            width="20%"
+            width="100%"
             isInvalid={!!errors.minSupply || !!errors.minDemand}
           >
             <FormLabel>I am looking to:</FormLabel>
@@ -218,18 +232,18 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 onClick={() => setIsBuying(true)}
                 leftIcon={<CheckIcon />}
               >
-                Buying
+                Buy
               </Button>
               <Button
                 variant={isBuying ? 'outline' : 'customButton'}
                 onClick={() => setIsBuying(false)}
                 leftIcon={<CheckIcon />}
               >
-                Selling
+                Sell
               </Button>
             </ButtonGroup>
           </FormControl>
-          <FormControl width="20%">
+          <FormControl width="100%">
             {isBuying && numberInputs('Minimum Supply', 'minSupply')}
             {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
             <FormErrorMessage>
@@ -241,7 +255,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 (errors.minDemand.message as string)}
             </FormErrorMessage>
           </FormControl>
-        </HStack>
+        </Stack>
       </Flex>
       <Button
         type="submit"
