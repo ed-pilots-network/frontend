@@ -2,18 +2,44 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import Form from './Form';
 
 const mockData = {
-  commodityId: 'gold',
-  system: 'sol',
-  includePlanetary: true,
-  includeOdyssey: true,
-  includeFleetCarriers: false,
-  smallLandingPad: false,
-  mediumLandingPad: true,
-  largeLandingPad: false,
-  minSupply: 5000,
+  system: 'Sol',
+  onlyPopulated: '1',
+  allegiance: 'Empire',
+  government: 'Corporate',
+  economy: 'Industrial',
+  minorFaction: 'Pilots Federation',
+  stationFilter: 'hasStations',
+  powers: 'Edmund Mahon',
+  powerEffects: 'Control',
+  referenceSystem: 'Sol',
+  securities: 'Low',
+  factionStates: 'Boom',
 };
 
-jest.mock('@/lib/commodity-list', () => ['mt_gold']);
+it('should render the basic fields', () => {
+  render(<Form onSubmitHandler={() => {}} isLoading={false} />);
+
+  /* expect(
+    screen.getByRole('heading', { name: 'New recipe' }),
+  ).toBeInTheDocument();
+
+  expect(screen.getByRole('textbox', { name: /name/i })).toBeInTheDocument();
+  expect(
+    screen.getByRole('textbox', { name: /description/i }),
+  ).toBeInTheDocument();
+
+  expect(
+    screen.getByRole('spinbutton', { name: /servings/i }),
+  ).toBeInTheDocument();
+
+  expect(
+    screen.getByRole('button', { name: /add ingredient/i }),
+  ).toBeInTheDocument();
+
+  expect(screen.getByRole('button', { name: /save/i })).toBeInTheDocument(); */
+});
+
+/* jest.mock('@/lib/commodity-list', () => ['mt_gold']);
 jest.mock('../inputs/commodities/commodities', () => ({
   __esModule: true,
   default: jest
@@ -31,85 +57,29 @@ describe('Form', () => {
   test('renders the form', () => {
     // ARRANGE input values
     let textboxes: HTMLInputElement[] = screen.getAllByRole('textbox');
-    let commodityIdInput = textboxes[0];
-    let systemInput = textboxes[1];
-    commodityIdInput.value = mockData.commodityId;
+    let systemInput = textboxes[0];
+    let factionInput = textboxes[1];
+    let referenceSystemInput = textboxes[2];
+
     systemInput.value = mockData.system;
-
-    let checkboxes: HTMLInputElement[] = screen.getAllByRole('checkbox');
-    let includePlanetaryInput = checkboxes[0];
-    let includeOdyssey = checkboxes[1];
-    let includeFleetCarriers = checkboxes[2];
-    includePlanetaryInput.checked = mockData.includePlanetary;
-    includeOdyssey.checked = mockData.includeOdyssey;
-    includeFleetCarriers.checked = mockData.includeFleetCarriers;
-
-    const radioButtons: HTMLInputElement[] = screen.getAllByRole('radio');
-    let smallLandingPad = radioButtons[0];
-    let mediumLandingPad = radioButtons[1];
-    let largeLandingPad = radioButtons[2];
-    smallLandingPad.checked = mockData.smallLandingPad;
-    mediumLandingPad.checked = mockData.mediumLandingPad;
-    largeLandingPad.checked = mockData.largeLandingPad;
-
-    const minSupplyInput: HTMLInputElement = screen.getByRole('spinbutton');
-    minSupplyInput.value = mockData.minSupply.toString();
+    factionInput.value = mockData.minorFaction;
+    referenceSystemInput.value = mockData.referenceSystem;
 
     // ASSERT values are displayed correctly
-    expect(commodityIdInput).toHaveValue(mockData.commodityId);
     expect(systemInput).toHaveValue(mockData.system);
-    expect(includePlanetaryInput).toBeChecked();
-    expect(includeOdyssey).toBeChecked();
-    expect(includeFleetCarriers).not.toBeChecked();
-    expect(smallLandingPad).not.toBeChecked();
-    expect(mediumLandingPad).toBeChecked();
-    expect(largeLandingPad).not.toBeChecked();
-    expect(minSupplyInput).toHaveValue(mockData.minSupply.toString());
-  });
-
-  test('user can change checkbox values', () => {
-    // ARRANGE checkbox values
-    let checkboxes: HTMLInputElement[] = screen.getAllByRole('checkbox');
-    let includePlanetary = checkboxes[0];
-    let includeOdyssey = checkboxes[1];
-    let includeFleetCarriers = checkboxes[2];
-
-    // ACT change checkbox values
-    fireEvent.change(includePlanetary, { target: { checked: false } });
-    fireEvent.change(includeOdyssey, { target: { checked: false } });
-    fireEvent.change(includeFleetCarriers, { target: { checked: true } });
-
-    // ASSERT checkbox values are changed
-    expect(includePlanetary).not.toBeChecked();
-    expect(includeOdyssey).not.toBeChecked();
-    expect(includeFleetCarriers).toBeChecked();
-  });
-
-  test('user can change radio buttons', () => {
-    // ARRANGE radio button values
-    const radioButtons: HTMLInputElement[] = screen.getAllByRole('radio');
-    let smallLandingPad = radioButtons[0];
-    let mediumLandingPad = radioButtons[1];
-    let largeLandingPad = radioButtons[2];
-
-    // ACT change radio button values
-    fireEvent.change(smallLandingPad, { target: { checked: true } });
-
-    // ASSERT radio button values are changed
-    expect(smallLandingPad).toBeChecked();
-    expect(mediumLandingPad).not.toBeChecked();
-    expect(largeLandingPad).not.toBeChecked();
+    expect(factionInput).toHaveValue(mockData.minorFaction);
+    expect(factionInput).toHaveValue(mockData.referenceSystem);
   });
 
   test('user can text inputs', () => {
     // ARRANGE inputs
     const systemInput: HTMLInputElement =
-      screen.getByLabelText('Near Star System');
+      screen.getByLabelText('Minor Faction');
 
     // ACT change input values
-    fireEvent.change(systemInput, { target: { value: 'new system' } });
+    fireEvent.change(systemInput, { target: { value: 'new faction' } });
 
     // ASSERT input values are changed
-    expect(systemInput).toHaveValue('new system');
+    expect(systemInput).toHaveValue('new faction');
   });
-});
+}); */

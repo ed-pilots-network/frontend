@@ -3,7 +3,7 @@ export type SystemForm = {
   onlyPopulated?: '1' | '0'
   allegiance?: string
   government?: string
-  primaryEconomy?: string
+  economy?: string
   minorFaction?: string
   stationFilter?: string
   powers?: string

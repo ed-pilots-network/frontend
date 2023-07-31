@@ -34,9 +34,7 @@ export const SystemFormSchema = z.object({
   onlyPopulated: z.enum(['1', '0']),
   allegiance: z.enum(allegiances.map((item) => item) as [string, ...string[]]),
   government: z.enum(governments.map((item) => item) as [string, ...string[]]),
-  primaryEconomy: z.enum(
-    economies.map((item) => item) as [string, ...string[]],
-  ),
+  economy: z.enum(economies.map((item) => item) as [string, ...string[]]),
   minorFaction: z.string().regex(/[A-Za-z\ ]/),
   presenceType: z.string().regex(/[A-Za-z\ ]/),
   requiresPermit: z.enum(['1', '0']),
@@ -274,7 +272,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               _hover={{
                 borderColor: selectColor(isDark, 'border'),
               }}
-              {...register('presenceType', {
+              {...register('referenceSystem', {
                 required: true,
                 pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,
                 maxLength: 40,

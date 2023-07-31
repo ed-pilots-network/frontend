@@ -20,7 +20,7 @@ const EconomiesField: React.FC<Props> = ({
 }) => {
   return (
     <Controller
-      name="primaryEconomy"
+      name="economy"
       control={control}
       render={({
         field: { onChange, onBlur, value, name, ref },
