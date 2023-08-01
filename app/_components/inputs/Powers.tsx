@@ -1,48 +1,21 @@
-import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
-import { Select, OptionBase, GroupBase } from 'chakra-react-select';
-import { Control, Controller } from 'react-hook-form';
-import selectStyles from '@/app/_hooks/selectStyles';
 import powers from '@/app/_lib/power-list';
+import Select from './form/Select';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props {
-  control: Control<any>;
-  label?: string;
+  placeholder?: string;
+  register: UseFormRegisterReturn;
 }
 
-interface SelectGroup extends OptionBase {
-  label: string;
-  value: string;
-}
-
-const PowersField: React.FC<Props> = ({ control, label = 'Powers' }) => {
+const PowersField = ({ register, placeholder = 'Select...' }: Props) => {
   return (
-    <Controller
-      name="powers"
-      control={control}
-      render={({
-        field: { onChange, onBlur, value, name, ref },
-        fieldState: { error },
-      }) => (
-        <FormControl isInvalid={!!error} id="powers">
-          <FormLabel>{label}</FormLabel>
-          <Select<SelectGroup, true, GroupBase<SelectGroup>>
-            id="powers-field"
-            instanceId="powers-field"
-            name={name}
-            ref={ref}
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            options={powers.map((item) => ({
-              value: item,
-              label: item,
-            }))}
-            chakraStyles={selectStyles()}
-          />
-          <FormErrorMessage>{error && error.message}</FormErrorMessage>
-        </FormControl>
-      )}
-    />
+    <Select placeholder={placeholder} register={register}>
+      {powers.map((item) => (
+        <option key={item} value={item}>
+          {item}
+        </option>
+      ))}
+    </Select>
   );
 };
 

@@ -1,51 +1,21 @@
-import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
-import { Select, OptionBase, GroupBase } from 'chakra-react-select';
-import { Control, Controller } from 'react-hook-form';
-import selectStyles from '@/app/_hooks/selectStyles';
 import governments from '@/app/_lib/government-list';
+import Select from './form/Select';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props {
-  control: Control<any>;
-  label?: string;
+  placeholder?: string;
+  register: UseFormRegisterReturn;
 }
 
-interface SelectGroup extends OptionBase {
-  label: string;
-  value: string;
-}
-
-const GovernmentsField: React.FC<Props> = ({
-  control,
-  label = 'Government Type',
-}) => {
+const GovernmentsField = ({ register, placeholder = 'Select...' }: Props) => {
   return (
-    <Controller
-      name="government"
-      control={control}
-      render={({
-        field: { onChange, onBlur, value, name, ref },
-        fieldState: { error },
-      }) => (
-        <FormControl isInvalid={!!error} id="government">
-          <FormLabel>{label}</FormLabel>
-          <Select<SelectGroup, true, GroupBase<SelectGroup>>
-            id="government-field"
-            instanceId="government-field"
-            name={name}
-            ref={ref}
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            options={governments.map((item) => ({
-              value: item,
-              label: item,
-            }))}
-            chakraStyles={selectStyles()}
-          />
-          <FormErrorMessage>{error && error.message}</FormErrorMessage>
-        </FormControl>
-      )}
-    />
+    <Select placeholder={placeholder} register={register}>
+      {governments.map((item) => (
+        <option key={item} value={item}>
+          {item}
+        </option>
+      ))}
+    </Select>
   );
 };
 
