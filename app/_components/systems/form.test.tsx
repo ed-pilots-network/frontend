@@ -1,7 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Form from './Form';
 
-const mockData = {
+/* const mockData = {
   system: 'Sol',
   onlyPopulated: '1',
   allegiance: 'Empire',
@@ -14,7 +14,7 @@ const mockData = {
   referenceSystem: 'Sol',
   securities: 'Low',
   factionStates: 'Boom',
-};
+}; */
 
 it('should render the basic fields', () => {
   render(<Form onSubmitHandler={() => {}} isLoading={false} />);

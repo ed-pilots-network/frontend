@@ -1,9 +1,3 @@
-const securities: string[] = [
-  'Low',
-  'Medium',
-  'High',
-  'Anarchy',
-  'Lawless',
-];
+const securities: string[] = ['Low', 'Medium', 'High', 'Anarchy', 'Lawless'];
 
 export default securities;

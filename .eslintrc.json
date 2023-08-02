@@ -17,6 +17,7 @@
     "prefer-const": "off",
     "no-use-before-define": "off",
     "react/react-in-jsx-scope": "off",
+    "import/order": "off",
     "space-before-function-paren": [
       "error",
       {
@@ -24,8 +25,16 @@
         "anonymous": "never"
       }
     ],
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": ["next.config.js", "jest.setup.js", "**/*.test.tsx", "**/*.test.ts"]
-    }]
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "next.config.js",
+          "jest.setup.js",
+          "**/*.test.tsx",
+          "**/*.test.ts"
+        ]
+      }
+    ]
   }
 }

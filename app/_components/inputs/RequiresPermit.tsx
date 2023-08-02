@@ -9,13 +9,11 @@ interface Props {
 const RequiresPermitField = ({
   register,
   placeholder = 'Select...',
-}: Props) => {
-  return (
-    <Select placeholder={placeholder} register={register}>
-      <option value="1">Yes</option>
-      <option value="0">No</option>
-    </Select>
-  );
-};
+}: Props) => (
+  <Select placeholder={placeholder} register={register}>
+    <option value="1">Yes</option>
+    <option value="0">No</option>
+  </Select>
+);
 
 export default RequiresPermitField;

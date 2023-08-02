@@ -18,8 +18,6 @@ const PageClient = () => {
       ...data,
     };
 
-    console.log(submitData);
-
     // TODO: submit data to backend
     setTimeout(() => {
       console.log('submitted ', submitData);

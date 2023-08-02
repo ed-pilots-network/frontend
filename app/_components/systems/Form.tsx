@@ -16,10 +16,9 @@ import {
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import selectStyles from '@/app/_hooks/selectStyles';
 import PowersField from '../inputs/Powers';
 import AllegiancesField from '../inputs/Allegiances';
 import GovernmentsField from '../inputs/Governments';
@@ -42,10 +41,7 @@ export const SystemFormSchema = z.object({
     .enum(economies.map((item) => item) as [string, ...string[]])
     .optional(),
   minorFaction: z.string().optional(),
-  presenceType: z
-    .string()
-    .regex(/[A-Za-z\ ]/)
-    .optional(),
+  presenceType: z.string().optional(),
   requiresPermit: z.enum(['', '1', '0']).optional(),
   stationFilter: z
     .enum(['hasStations', 'hasPlanetary', 'hasOrbital', 'hasNoStations'])
@@ -56,10 +52,7 @@ export const SystemFormSchema = z.object({
   security: z
     .enum(securities.map((item) => item) as [string, ...string[]])
     .optional(),
-  factionState: z
-    .string()
-    .regex(/[A-Za-z\ ]/)
-    .optional(),
+  factionState: z.string().optional(),
 });
 
 export type SubmitProps = z.infer<typeof SystemFormSchema>;
@@ -74,13 +67,11 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm<SubmitProps>({
     resolver: zodResolver(SystemFormSchema),
   });
 
   const { isDark } = useColorMode();
-  const chakraSelectStyles = selectStyles();
 
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
     onSubmitHandler(data);
