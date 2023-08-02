@@ -20,7 +20,9 @@ const PageClient = () => {
 
     // TODO: submit data to backend
     setTimeout(() => {
+      /* eslint-disable */
       console.log('submitted ', submitData);
+      /* eslint-enable */
       setIsLoading(false);
     }, 2000);
   };
