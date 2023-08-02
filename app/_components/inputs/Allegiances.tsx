@@ -3,8 +3,8 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 import Select from './form/Select';
 
 interface Props {
-  placeholder?: string;
   register: UseFormRegisterReturn;
+  placeholder?: string;
 }
 
 const AllegiancesField = ({ register, placeholder }: Props) => (

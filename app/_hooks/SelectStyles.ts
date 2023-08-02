@@ -2,7 +2,7 @@ import { SystemStyleObject } from '@chakra-ui/react';
 import selectColor from './fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 
-const InputStyles = () => {
+const SelectStyles = () => {
   const { isDark } = useColorMode();
 
   return {
@@ -42,4 +42,4 @@ const InputStyles = () => {
   };
 };
 
-export default InputStyles;
+export default SelectStyles;
