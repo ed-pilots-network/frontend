@@ -5,7 +5,7 @@ import { Controller } from 'react-hook-form';
 import React from 'react';
 
 import commodities from '@/app/_lib/commodity-list';
-import SelectStyles from '@/app/_hooks/SelectStyles';
+import InputStyles from '@/app/_hooks/InputStyles';
 
 interface CommodityProps {
   control: any;
@@ -49,7 +49,7 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
             value={value}
             options={formattedCommodities}
             placeholder="Select a commodity"
-            chakraStyles={SelectStyles()}
+            chakraStyles={InputStyles()}
           />
           <FormErrorMessage>{error && error.message}</FormErrorMessage>
         </FormControl>

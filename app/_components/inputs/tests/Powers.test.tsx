@@ -9,7 +9,7 @@ describe('PowersField', () => {
     const Component = () => {
       const { register } = useForm<SystemForm>();
 
-      return <PowersField register={register('powers')} />;
+      return <PowersField register={register('power')} />;
     };
 
     render(<Component />);

@@ -7,7 +7,7 @@ interface Props {
   register: UseFormRegisterReturn;
 }
 
-const AllegiancesField = ({ register, placeholder = 'Select...' }: Props) => (
+const AllegiancesField = ({ register, placeholder }: Props) => (
   <Select placeholder={placeholder} register={register}>
     {allegiances.map((item) => (
       <option key={item} value={item}>

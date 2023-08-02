@@ -7,7 +7,7 @@ interface Props {
   register: UseFormRegisterReturn;
 }
 
-const FactionStatesField = ({ register, placeholder = 'Select...' }: Props) => (
+const FactionStatesField = ({ register, placeholder }: Props) => (
   <Select placeholder={placeholder} register={register}>
     {factionStates.map((item) => (
       <option key={item} value={item}>
