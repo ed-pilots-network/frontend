@@ -49,7 +49,7 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
             value={value}
             options={formattedCommodities}
             placeholder="Select a commodity"
-            chakraStyles={SelectStyles}
+            chakraStyles={SelectStyles()}
           />
           <FormErrorMessage>{error && error.message}</FormErrorMessage>
         </FormControl>
