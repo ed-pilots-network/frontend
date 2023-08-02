@@ -2,8 +2,8 @@ import { UseFormRegisterReturn } from 'react-hook-form';
 import Select from './form/Select';
 
 interface Props {
-  placeholder?: string;
   register: UseFormRegisterReturn;
+  placeholder?: string;
 }
 
 const PowerEffectsField = ({ register, placeholder }: Props) => (

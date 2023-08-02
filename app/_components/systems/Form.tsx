@@ -93,11 +93,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         gap={6}
         marginBottom="10"
       >
-        <GridItem
-          w="100%"
-          marginBottom={30}
-          colSpan={{ base: 1, md: 2, lg: 4 }}
-        >
+        <GridItem marginBottom={30} colSpan={{ base: 1, md: 2, lg: 4 }}>
           <FormControl isInvalid={!!(errors.system && errors.system.message)}>
             <FormLabel>System</FormLabel>
             <Input
@@ -115,7 +111,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={!!(errors.allegiance && errors.allegiance.message)}
           >
@@ -127,7 +123,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={!!(errors.government && errors.government.message)}
           >
@@ -139,7 +135,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl isInvalid={!!(errors.economy && errors.economy.message)}>
             <FormLabel>Economy</FormLabel>
             <EconomiesField register={register('economy')} />
@@ -149,7 +145,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={!!(errors.security && errors.security.message)}
           >
@@ -167,7 +163,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 3 }}>
+        <GridItem colSpan={{ base: 1, md: 2, lg: 3 }}>
           <FormControl
             isInvalid={!!(errors.minorFaction && errors.minorFaction.message)}
           >
@@ -184,7 +180,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={!!(errors.presenceType && errors.presenceType.message)}
           >
@@ -199,7 +195,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={!!(errors.stationFilter && errors.stationFilter.message)}
           >
@@ -216,7 +212,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl isInvalid={!!(errors.power && errors.power.message)}>
             <FormLabel>Powers</FormLabel>
             <PowersField register={register('power')} />
@@ -226,7 +222,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={!!(errors.powerEffect && errors.powerEffect.message)}
           >
@@ -238,7 +234,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={!!(errors.factionState && errors.factionState.message)}
           >
@@ -250,7 +246,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 4 }}>
+        <GridItem colSpan={{ base: 1, md: 2, lg: 4 }}>
           <FormControl
             isInvalid={
               !!(errors.referenceSystem && errors.referenceSystem.message)
@@ -278,7 +274,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         gap={6}
         marginBottom="10"
       >
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={!!(errors.onlyPopulated && errors.onlyPopulated.message)}
           >
@@ -294,7 +290,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             </FormErrorMessage>
           </FormControl>
         </GridItem>
-        <GridItem w="100%">
+        <GridItem>
           <FormControl
             isInvalid={
               !!(errors.requiresPermit && errors.requiresPermit.message)
