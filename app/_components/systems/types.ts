@@ -1,6 +1,6 @@
 export type SystemForm = {
   system?: string;
-  onlyPopulated?: '1' | '0';
+  onlyPopulated?: boolean;
   allegiance?: string;
   government?: string;
   economy?: string;
@@ -11,5 +11,5 @@ export type SystemForm = {
   referenceSystem?: string;
   security?: string;
   factionState?: string;
-  requiresPermit?: '1' | '0';
+  requiresPermit?: boolean;
 };
