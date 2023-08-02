@@ -6,10 +6,7 @@ interface Props {
   register: UseFormRegisterReturn;
 }
 
-const RequiresPermitField = ({
-  register,
-  placeholder = 'Select...',
-}: Props) => (
+const RequiresPermitField = ({ register, placeholder }: Props) => (
   <Select placeholder={placeholder} register={register}>
     <option value="1">Yes</option>
     <option value="0">No</option>

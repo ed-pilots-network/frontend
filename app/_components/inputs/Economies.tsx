@@ -7,7 +7,7 @@ interface Props {
   register: UseFormRegisterReturn;
 }
 
-const EconomiesField = ({ register, placeholder = 'Select...' }: Props) => (
+const EconomiesField = ({ register, placeholder }: Props) => (
   <Select placeholder={placeholder} register={register}>
     {economies.map((item) => (
       <option key={item} value={item}>

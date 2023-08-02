@@ -1,3 +1,5 @@
+import selectColor from '@/app/_hooks/fontColorSelector';
+import useColorMode from '@/app/_hooks/useColorMode';
 import { Select as ChakraSelect } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
@@ -8,11 +10,14 @@ interface Props {
   placeholder?: string;
 }
 
-const Select = ({ children, register, placeholder = 'Select...' }: Props) => (
-  <ChakraSelect {...register}>
-    <option>{placeholder}</option>
-    {children}
-  </ChakraSelect>
-);
+const Select = ({ children, register, placeholder = 'Select...' }: Props) => {
+  const { isDark } = useColorMode();
+  return (
+    <ChakraSelect {...register} borderColor={selectColor(isDark, 'border')}>
+      <option className="placeholder">{placeholder}</option>
+      {children}
+    </ChakraSelect>
+  );
+};
 
 export default Select;

@@ -6,7 +6,7 @@ interface Props {
   register: UseFormRegisterReturn;
 }
 
-const PowerEffectsField = ({ register, placeholder = 'Select...' }: Props) => (
+const PowerEffectsField = ({ register, placeholder }: Props) => (
   <Select placeholder={placeholder} register={register}>
     <option value="control">Control</option>
     <option value="expansion">Expansion</option>

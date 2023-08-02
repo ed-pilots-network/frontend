@@ -8,7 +8,7 @@ describe('PowerEffectsField', () => {
     const Component = () => {
       const { register } = useForm<SystemForm>();
 
-      return <PowerEffectsField register={register('economy')} />;
+      return <PowerEffectsField register={register('powerEffect')} />;
     };
 
     render(<Component />);

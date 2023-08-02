@@ -167,8 +167,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           >
             <FormLabel>Minor Faction</FormLabel>
             <Input
+              borderColor={selectColor(isDark, 'border')}
               variant="outline"
-              placeholder="Search for a minor faction..."
+              placeholder="Enter a minor faction..."
               {...register('minorFaction')}
             />
             <FormErrorMessage>
@@ -253,6 +254,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           >
             <FormLabel>Reference System</FormLabel>
             <Input
+              borderColor={selectColor(isDark, 'border')}
               variant="outline"
               placeholder="Enter a system..."
               {...register('referenceSystem')}

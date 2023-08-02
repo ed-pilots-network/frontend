@@ -9,7 +9,7 @@ describe('GovernmentsField', () => {
     const Component = () => {
       const { register } = useForm<SystemForm>();
 
-      return <GovernmentsField register={register('economy')} />;
+      return <GovernmentsField register={register('government')} />;
     };
 
     render(<Component />);

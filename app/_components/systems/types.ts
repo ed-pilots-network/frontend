@@ -6,10 +6,10 @@ export type SystemForm = {
   economy?: string;
   minorFaction?: string;
   stationFilter?: string;
-  powers?: string;
-  powerEffects?: string;
+  power?: string;
+  powerEffect?: string;
   referenceSystem?: string;
-  securities?: string;
-  factionStates?: string;
+  security?: string;
+  factionState?: string;
   requiresPermit?: '1' | '0';
 };
