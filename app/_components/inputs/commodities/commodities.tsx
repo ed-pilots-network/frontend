@@ -1,7 +1,7 @@
 import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/react';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import { Controller } from 'react-hook-form';
-import selectStyles from '@/app/_hooks/selectStyles';
+import SelectStyles from '@/app/_hooks/SelectStyles';
 
 import React from 'react';
 
@@ -49,7 +49,7 @@ const CommoditiesField: React.FC<CommodityProps> = ({ control }) => {
             value={value}
             options={formattedCommodities}
             placeholder="Select a commodity"
-            chakraStyles={selectStyles()}
+            chakraStyles={SelectStyles()}
           />
           <FormErrorMessage>{error && error.message}</FormErrorMessage>
         </FormControl>
