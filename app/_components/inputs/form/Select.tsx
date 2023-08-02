@@ -13,8 +13,11 @@ interface Props {
 const Select = ({ children, register, placeholder = 'Select...' }: Props) => {
   const { isDark } = useColorMode();
   return (
-    <ChakraSelect {...register} borderColor={selectColor(isDark, 'border')}>
-      <option className="placeholder">{placeholder}</option>
+    <ChakraSelect
+      {...register}
+      borderColor={selectColor(isDark, 'border')}
+      placeholder={placeholder}
+    >
       {children}
     </ChakraSelect>
   );

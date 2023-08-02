@@ -12,6 +12,7 @@ import {
   GridItem,
   Input,
   FormErrorMessage,
+  Checkbox,
 } from '@chakra-ui/react';
 
 import { z } from 'zod';
@@ -27,32 +28,37 @@ import PowerEffectsField from '../inputs/PowerEffects';
 import FactionStatesField from '../inputs/FactionStates';
 import EconomiesField from '../inputs/Economies';
 import Select from '../inputs/form/Select';
+import factionStates from '@/app/_lib/faction-state-list';
 
 export const SystemFormSchema = z.object({
   system: z.string(),
-  onlyPopulated: z.enum(['1', '0']).optional(),
+  onlyPopulated: z.boolean(),
   allegiance: z
-    .enum(allegiances.map((item) => item) as [string, ...string[]])
+    .enum(['', ...(allegiances.map((item) => item) as [string, ...string[]])])
     .optional(),
   government: z
-    .enum(governments.map((item) => item) as [string, ...string[]])
+    .enum(['', ...(governments.map((item) => item) as [string, ...string[]])])
     .optional(),
   economy: z
-    .enum(economies.map((item) => item) as [string, ...string[]])
+    .enum(['', ...(economies.map((item) => item) as [string, ...string[]])])
     .optional(),
   minorFaction: z.string().optional(),
   presenceType: z.string().optional(),
-  requiresPermit: z.enum(['1', '0']).optional(),
+  requiresPermit: z.boolean(),
   stationFilter: z
-    .enum(['hasStations', 'hasPlanetary', 'hasOrbital', 'hasNoStations'])
+    .enum(['', 'hasStations', 'hasPlanetary', 'hasOrbital', 'hasNoStations'])
     .optional(),
-  power: z.enum(powers.map((item) => item) as [string, ...string[]]).optional(),
-  powerEffect: z.enum(['Control', 'Expansion', 'Exploited']).optional(),
+  power: z
+    .enum(['', ...(powers.map((item) => item) as [string, ...string[]])])
+    .optional(),
+  powerEffect: z.enum(['', 'Control', 'Expansion', 'Exploited']).optional(),
   referenceSystem: z.string().optional(),
   security: z
-    .enum(securities.map((item) => item) as [string, ...string[]])
+    .enum(['', ...(securities.map((item) => item) as [string, ...string[]])])
     .optional(),
-  factionState: z.string().optional(),
+  factionState: z
+    .enum(['', ...(factionStates.map((item) => item) as [string, ...string[]])])
+    .optional(),
 });
 
 export type SubmitProps = z.infer<typeof SystemFormSchema>;
@@ -88,7 +94,11 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         gap={6}
         marginBottom="10"
       >
-        <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 4 }}>
+        <GridItem
+          w="100%"
+          marginBottom={30}
+          colSpan={{ base: 1, md: 2, lg: 4 }}
+        >
           <FormControl isInvalid={!!(errors.system && errors.system.message)}>
             <FormLabel>System</FormLabel>
             <Input
@@ -102,27 +112,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             />
             <FormErrorMessage>
               {errors.system && errors.system.message}
-            </FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 4 }}>
-          <h5>
-            <b>SEARCH</b>
-          </h5>
-        </GridItem>
-
-        <GridItem w="100%">
-          <FormControl
-            isInvalid={!!(errors.onlyPopulated && errors.onlyPopulated.message)}
-          >
-            <FormLabel>Only Populated Systems</FormLabel>
-            <Select>
-              <option value="1">Yes</option>
-              <option value="0">No</option>
-            </Select>
-            <FormErrorMessage>
-              {errors.onlyPopulated && errors.onlyPopulated.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
@@ -161,6 +150,24 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
+        <GridItem w="100%">
+          <FormControl
+            isInvalid={!!(errors.security && errors.security.message)}
+          >
+            <FormLabel>Security Level</FormLabel>
+            <Select register={register('security')}>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="anarchy">Anarchy</option>
+              <option value="lawless">Lawless</option>
+            </Select>
+            <FormErrorMessage>
+              {errors.security && errors.security.message}
+            </FormErrorMessage>
+          </FormControl>
+        </GridItem>
+
         <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 3 }}>
           <FormControl
             isInvalid={!!(errors.minorFaction && errors.minorFaction.message)}
@@ -189,20 +196,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             </Select>
             <FormErrorMessage>
               {errors.presenceType && errors.presenceType.message}
-            </FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem w="100%">
-          <FormControl
-            isInvalid={
-              !!(errors.requiresPermit && errors.requiresPermit.message)
-            }
-          >
-            <FormLabel>Requires Permit</FormLabel>
-            <RequiresPermitField register={register('requiresPermit')} />
-            <FormErrorMessage>
-              {errors.requiresPermit && errors.requiresPermit.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
@@ -246,7 +239,19 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem w="100%" colSpan={{ base: 1, md: 1, lg: 2 }}>
+        <GridItem w="100%">
+          <FormControl
+            isInvalid={!!(errors.factionState && errors.factionState.message)}
+          >
+            <FormLabel>Faction State</FormLabel>
+            <FactionStatesField register={register('factionState')} />
+            <FormErrorMessage>
+              {errors.factionState && errors.factionState.message}
+            </FormErrorMessage>
+          </FormControl>
+        </GridItem>
+
+        <GridItem w="100%" colSpan={{ base: 1, md: 2, lg: 4 }}>
           <FormControl
             isInvalid={
               !!(errors.referenceSystem && errors.referenceSystem.message)
@@ -264,33 +269,47 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             </FormErrorMessage>
           </FormControl>
         </GridItem>
-
+      </Grid>
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(2, 1fr)',
+          lg: 'repeat(4, 1fr)',
+        }}
+        gap={6}
+        marginBottom="10"
+      >
         <GridItem w="100%">
           <FormControl
-            isInvalid={!!(errors.security && errors.security.message)}
+            isInvalid={!!(errors.onlyPopulated && errors.onlyPopulated.message)}
           >
-            <FormLabel>Security Level</FormLabel>
-            <Select register={register('security')}>
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-              <option value="anarchy">Anarchy</option>
-              <option value="lawless">Lawless</option>
-            </Select>
+            <Checkbox
+              colorScheme="orange"
+              {...register('onlyPopulated')}
+              borderColor={selectColor(isDark, 'border')}
+            >
+              Only Populated Systems
+            </Checkbox>
             <FormErrorMessage>
-              {errors.security && errors.security.message}
+              {errors.onlyPopulated && errors.onlyPopulated.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
-
         <GridItem w="100%">
           <FormControl
-            isInvalid={!!(errors.factionState && errors.factionState.message)}
+            isInvalid={
+              !!(errors.requiresPermit && errors.requiresPermit.message)
+            }
           >
-            <FormLabel>Faction State</FormLabel>
-            <FactionStatesField register={register('factionState')} />
+            <Checkbox
+              colorScheme="orange"
+              {...register('requiresPermit')}
+              borderColor={selectColor(isDark, 'border')}
+            >
+              Requires Permit
+            </Checkbox>
             <FormErrorMessage>
-              {errors.factionState && errors.factionState.message}
+              {errors.requiresPermit && errors.requiresPermit.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
