@@ -11,32 +11,23 @@ import {
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 
-interface Commodity {
-  commodityName: string;
-  displayName: string;
-  type: string;
-  isRare: boolean;
-}
+import { ICommodity, IPost } from '../_types';
 
 interface PageClientProps {
-  posts: {
-    id: number;
-    title: string;
-    author: string;
-  }[];
-  commodity: Commodity;
+  posts: IPost[];
+  commodity: ICommodity | null;
 }
 
 const PageClient = ({ posts, commodity }: PageClientProps) => {
-  const [clientCommodity, setClientCommodity] = useState<Commodity | undefined>(
-    undefined,
-  );
+  const [clientCommodity, setClientCommodity] = useState<
+    ICommodity | undefined
+  >(undefined);
   const [fetchError, setFetchError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('/api/v1/trade/commodity/Beer', { next: { revalidate: 1 } })
+    fetch('/api/v1/trade/commodity/Beer', { cache: 'no-store' })
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);

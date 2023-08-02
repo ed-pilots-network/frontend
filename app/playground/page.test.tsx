@@ -43,7 +43,7 @@ test('fetches and displays the post & commodity data from server & client side c
 
   // Check for client returned commodity data is being rendered
   expect(fetchMock).toHaveBeenCalledWith('/api/v1/trade/commodity/Beer', {
-    next: { revalidate: 1 },
+    cache: 'no-store',
   });
 
   await waitFor(() =>
