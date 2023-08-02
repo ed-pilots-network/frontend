@@ -18,7 +18,6 @@
     "no-use-before-define": "off",
     "react/react-in-jsx-scope": "off",
     "import/order": "off",
-    "import/extensions": "off",
     "space-before-function-paren": [
       "error",
       {
