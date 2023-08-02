@@ -11,4 +11,5 @@ export type SystemForm = {
   referenceSystem?: string
   securities?: string
   factionStates?: string
+  requiresPermit?: '1' | '0'
 }
