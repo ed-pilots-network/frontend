@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import { SystemForm } from '../../systems/types';
 import EconomiesField from '../Economies';
+import economies from '@/app/_lib/economy-list';
 
 describe('EconomiesField', () => {
   beforeEach(() => {
@@ -22,5 +23,11 @@ describe('EconomiesField', () => {
 
   it('includes the correct number of options', () => {
     expect(screen.getAllByRole('option').length).toBe(18);
+  });
+
+  it('includes all the options', () => {
+    economies.forEach((item) => {
+      expect(screen.getByRole('option', { name: item })).toHaveValue(item);
+    });
   });
 });
