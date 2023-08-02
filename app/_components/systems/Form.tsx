@@ -42,7 +42,7 @@ export const SystemFormSchema = z.object({
     .optional(),
   minorFaction: z.string().optional(),
   presenceType: z.string().optional(),
-  requiresPermit: z.enum(['', '1', '0']).optional(),
+  requiresPermit: z.enum(['1', '0']).optional(),
   stationFilter: z
     .enum(['hasStations', 'hasPlanetary', 'hasOrbital', 'hasNoStations'])
     .optional(),
