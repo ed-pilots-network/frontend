@@ -23,7 +23,6 @@ import selectColor from '@/app/_hooks/fontColorSelector';
 import PowersField from '../inputs/Powers';
 import AllegiancesField from '../inputs/Allegiances';
 import GovernmentsField from '../inputs/Governments';
-import RequiresPermitField from '../inputs/RequiresPermit';
 import PowerEffectsField from '../inputs/PowerEffects';
 import FactionStatesField from '../inputs/FactionStates';
 import EconomiesField from '../inputs/Economies';
