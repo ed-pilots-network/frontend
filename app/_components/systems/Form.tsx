@@ -3,6 +3,7 @@ import governments from '@/app/_lib/government-list';
 import securities from '@/app/_lib/security-list';
 import economies from '@/app/_lib/economy-list';
 import allegiances from '@/app/_lib/allegiance-list';
+import factionStates from '@/app/_lib/faction-state-list';
 
 import {
   Button,
@@ -27,7 +28,6 @@ import PowerEffectsField from '../inputs/PowerEffects';
 import FactionStatesField from '../inputs/FactionStates';
 import EconomiesField from '../inputs/Economies';
 import Select from '../inputs/form/Select';
-import factionStates from '@/app/_lib/faction-state-list';
 
 export const SystemFormSchema = z.object({
   system: z.string(),
