@@ -11,7 +11,6 @@ import Form from './Form';
   stationFilter: 'hasStations',
   powers: 'Edmund Mahon',
   powerEffects: 'Control',
-  referenceSystem: 'Sol',
   securities: 'Low',
   factionStates: 'Boom',
 }; */
@@ -23,10 +22,6 @@ it('should render the basic fields', () => {
 
   expect(
     screen.getByRole('textbox', { name: 'Minor Faction' }),
-  ).toBeInTheDocument();
-
-  expect(
-    screen.getByRole('textbox', { name: 'Reference System' }),
   ).toBeInTheDocument();
 
   expect(

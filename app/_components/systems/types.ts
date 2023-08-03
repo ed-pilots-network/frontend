@@ -8,7 +8,6 @@ export type SystemForm = {
   stationFilter?: string;
   power?: string;
   powerEffect?: string;
-  referenceSystem?: string;
   security?: string;
   factionState?: string;
   requiresPermit?: boolean;

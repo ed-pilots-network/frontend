@@ -51,7 +51,6 @@ export const SystemFormSchema = z.object({
     .enum(['', ...(powers.map((item) => item) as [string, ...string[]])])
     .optional(),
   powerEffect: z.enum(['', 'Control', 'Expansion', 'Exploited']).optional(),
-  referenceSystem: z.string().optional(),
   security: z
     .enum(['', ...(securities.map((item) => item) as [string, ...string[]])])
     .optional(),
@@ -242,25 +241,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <FactionStatesField register={register('factionState')} />
             <FormErrorMessage>
               {errors.factionState && errors.factionState.message}
-            </FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem colSpan={{ base: 1, md: 2, lg: 4 }}>
-          <FormControl
-            isInvalid={
-              !!(errors.referenceSystem && errors.referenceSystem.message)
-            }
-          >
-            <FormLabel>Reference System</FormLabel>
-            <Input
-              borderColor={selectColor(isDark, 'border')}
-              variant="outline"
-              placeholder="Enter a system..."
-              {...register('referenceSystem')}
-            />
-            <FormErrorMessage>
-              {errors.referenceSystem && errors.referenceSystem.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
