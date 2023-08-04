@@ -20,13 +20,29 @@ yarn install
 
 ## 📝 Scripts
 
-### Development mode
+### Run Frontend Web App & JSON Mock API Server
+
+```bash
+yarn dev-api
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the web app while API runs on [http://localhost:3001](http://localhost:3001).
+
+### Run Frontend Web App
 
 ```bash
 yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Run JSON Mock API Server
+
+```bash
+yarn api
+```
+
+Open [http://localhost:3001](http://localhost:3001) with your browser to see the API endpoint. Read more on [JSON Server](https://github.com/typicode/json-server)
 
 ### Build
 

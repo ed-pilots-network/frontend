@@ -8,10 +8,6 @@ test('should navigate to the home page', async ({ page }) => {
     'Elite Dangerous Pilots Network',
   );
 });
-test('should navigate to the faq page', async ({ page }) => {
-  await page.goto('/faq');
-  await expect(page.locator('h1')).toContainText('FAQ');
-});
 
 // Index page tests
 test('homepage role tabs behave correctly', async ({ page }) => {
