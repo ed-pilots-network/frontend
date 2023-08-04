@@ -65,7 +65,7 @@ const ModuleLaunchPad = () => {
     </SimpleGrid>
   );
 
-  const renderTab = (text: string) => (
+  const renderTab = (text: string, key: number) => (
     <Tab
       _selected={{
         color: selectColor(isDark, 'text'),
@@ -75,6 +75,7 @@ const ModuleLaunchPad = () => {
       }}
       aria-label={`Toggle ${text} Tab`}
       textTransform="capitalize"
+      key={key}
     >
       {text}
     </Tab>
@@ -109,7 +110,7 @@ const ModuleLaunchPad = () => {
       colorScheme={selectColor(isDark, 'text')}
     >
       <TabList display="flex" gap="2rem" flexWrap="wrap">
-        {Tags.map((tag) => renderTab(tag))}
+        {Tags.map((tag, key) => renderTab(tag, key))}
       </TabList>
       <TabPanels mt="20px" minHeight="400px">
         {renderTabPanel('/assets/Asp_Explorer.svg', 'discover')}
