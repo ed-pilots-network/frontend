@@ -2,8 +2,6 @@ import { useState } from 'react';
 import {
   Button,
   ButtonGroup,
-  Checkbox,
-  CheckboxGroup,
   Flex,
   FormControl,
   FormLabel,
@@ -13,8 +11,6 @@ import {
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  Radio,
-  RadioGroup,
   Stack,
   FormErrorMessage,
 } from '@chakra-ui/react';
@@ -24,18 +20,22 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import CommoditiesField from '../inputs/commodities/commodities';
+import StationTypes from '../inputs/StationTypes';
+import LandingPad from '../inputs/LandingPads';
+import { CommodityForm } from './types';
 
 export const CommodityFormSchema = z.object({
   commodityId: z.object({
     value: z.string().regex(/[a-z_]/),
   }),
-  maxLandingPadSize: z.enum(['small', 'medium', 'large']),
-  minDemand: z.number().nonnegative().max(1000000),
-  minSupply: z.number().nonnegative().max(1000000),
-  includeFleetCarriers: z.boolean(),
-  includeOdyssey: z.boolean(),
-  includePlanetary: z.boolean(),
-  system: z.string().regex(/^[\w'-]+(?:\s[\w'-]+)*$/), // word chars, apostrophes, and dashes across multiple words
+  maxLandingPadSize: z.string(),
+  minDemand: z.number().nonnegative().max(1000000).optional(),
+  minSupply: z.number().nonnegative().max(1000000).optional(),
+  includeFleetCarriers: z.boolean().optional(),
+  includeOdyssey: z.boolean().optional(),
+  includePlanetary: z.boolean().optional(),
+  includeOrbital: z.boolean().optional(),
+  system: z.string().optional(),
 });
 
 export type SubmitProps = z.infer<typeof CommodityFormSchema>;
@@ -53,7 +53,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<SubmitProps>({
+  } = useForm<CommodityForm>({
     defaultValues: {
       minDemand: 1,
       minSupply: 1,
@@ -62,12 +62,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   });
 
   const { isDark } = useColorMode();
-
-  const checkboxValues = [
-    { name: 'Planetary', value: 'includePlanetary' },
-    { name: 'Odyssey', value: 'includeOdyssey' },
-    { name: 'Fleet Carriers', value: 'includeFleetCarriers' },
-  ];
 
   const numberInputs = (
     label: string,
@@ -134,8 +128,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 borderColor: selectColor(isDark, 'border'),
               }}
               {...register('system', {
-                required: true,
-                pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,
                 maxLength: 40,
               })}
             />
@@ -152,27 +144,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         >
           <FormControl width="100%">
             <FormLabel>Include</FormLabel>
-            <Stack
-              borderWidth="1px"
-              borderRadius="md"
-              borderColor={selectColor(isDark, 'border')}
-              padding={3}
-              spacing={5}
-              direction="row"
-            >
-              <CheckboxGroup colorScheme="gray">
-                {checkboxValues.map((checkbox, index) => (
-                  <Checkbox
-                    colorScheme="orange"
-                    key={index}
-                    {...register(`${checkbox.value}` as keyof SubmitProps)}
-                    borderColor={selectColor(isDark, 'border')}
-                  >
-                    {checkbox.name}
-                  </Checkbox>
-                ))}
-              </CheckboxGroup>
-            </Stack>
+            <StationTypes register={register} />
           </FormControl>
           <FormControl
             width="100%"
@@ -180,34 +152,8 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
             }
           >
-            <FormLabel>Landing Pad Size</FormLabel>
-            <RadioGroup>
-              <Stack
-                borderWidth="1px"
-                borderRadius="md"
-                borderColor={selectColor(isDark, 'border')}
-                padding={3}
-                spacing={5}
-                direction="row"
-              >
-                {['Small', 'Medium', 'Large'].map((value, index) => (
-                  <Radio
-                    colorScheme="orange"
-                    key={index}
-                    value={value.toLowerCase()}
-                    borderColor={selectColor(isDark, 'border')}
-                    {...register('maxLandingPadSize', {
-                      required: true,
-                    })}
-                  >
-                    {value}
-                  </Radio>
-                ))}
-                <FormErrorMessage marginY="auto">
-                  {errors.maxLandingPadSize && 'Select a landing pad size'}
-                </FormErrorMessage>
-              </Stack>
-            </RadioGroup>
+            <FormLabel>Max Landing Pad Size</FormLabel>
+            <LandingPad register={register('maxLandingPadSize')} />
           </FormControl>
         </Stack>
         <Stack
