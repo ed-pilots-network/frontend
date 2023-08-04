@@ -43,6 +43,7 @@ const NavDrawer = () => {
         aria-label="Open Navigation Drawer"
         icon={<HamburgerIcon />}
         marginX={4}
+        role="button"
       />
 
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
