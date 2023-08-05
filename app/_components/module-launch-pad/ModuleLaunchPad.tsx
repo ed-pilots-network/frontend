@@ -75,6 +75,7 @@ const ModuleLaunchPad = () => {
       }}
       aria-label={`Toggle ${text} Tab`}
       textTransform="capitalize"
+      key={text}
     >
       {text}
     </Tab>
