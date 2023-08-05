@@ -51,7 +51,9 @@ export default async function Page() {
   try {
     posts = await getPostsForCategoryWithPost();
   } catch (error) {
+    /* eslint-disable */
     console.error('Failed to fetch data:', error);
+    /* eslint-enable */
   }
 
   return <PageClient posts={posts} />;

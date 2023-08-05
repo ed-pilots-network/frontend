@@ -16,7 +16,7 @@ import {
 import NextLink from 'next/link';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import ModuleProps, { Module } from './moduleProps';
+import ModuleProps, { Module, Tags } from '../../_lib/moduleProps';
 
 const ModuleLaunchPad = () => {
   const { isDark } = useColorMode();
@@ -74,6 +74,7 @@ const ModuleLaunchPad = () => {
         letterSpacing: '1px',
       }}
       aria-label={`Toggle ${text} Tab`}
+      textTransform="capitalize"
     >
       {text}
     </Tab>
@@ -108,9 +109,7 @@ const ModuleLaunchPad = () => {
       colorScheme={selectColor(isDark, 'text')}
     >
       <TabList display="flex" gap="2rem" flexWrap="wrap">
-        {renderTab('Discover')}
-        {renderTab('Trade')}
-        {renderTab('Outfit')}
+        {Tags.map((tag) => renderTab(tag))}
       </TabList>
       <TabPanels mt="20px" minHeight="400px">
         {renderTabPanel('/assets/Asp_Explorer.svg', 'discover')}
