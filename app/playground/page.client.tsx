@@ -26,23 +26,25 @@ const PageClient = ({ posts, commodity }: PageClientProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch('/api/v1/trade/commodity/Beer', { cache: 'no-store' })
-      .then((res) => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch('/api/v1/trade/commodity/Beer', {
+          cache: 'no-store',
+        });
+
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
-        return res.json();
-      })
-      .then((data) => {
+        const data: ICommodity = await res.json();
         setClientCommodity(data);
-      })
-      .catch((error) => {
-        setFetchError(error);
-      })
-      .finally(() => {
+      } catch (error) {
+        setFetchError(error as Error);
+      } finally {
         setIsLoading(false);
-      });
+      }
+    };
+    fetchData();
   }, []);
 
   const renderCommodityData = () => {
