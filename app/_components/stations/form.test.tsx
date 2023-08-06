@@ -11,6 +11,6 @@ it('should render the basic fields', () => {
   ).toBeInTheDocument();
 
   expect(
-    screen.getByRole('button', { name: /Find Systems/i }),
+    screen.getByRole('button', { name: /Find Stations/i }),
   ).toBeInTheDocument();
 });

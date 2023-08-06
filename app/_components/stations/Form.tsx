@@ -26,7 +26,6 @@ import GovernmentsField from '../inputs/Governments';
 import PowerEffectsField from '../inputs/PowerEffects';
 import FactionStatesField from '../inputs/FactionStates';
 import EconomiesField from '../inputs/Economies';
-import Select from '../inputs/form/Select';
 
 export const StationFormSchema = z.object({
   station: z.string(),
