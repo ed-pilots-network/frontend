@@ -11,12 +11,6 @@ describe('Nav Bar', () => {
   });
 
   test('renders the navbar with logo and toggle switch', () => {
-    // Mock env variable
-    process.env = Object.assign(process.env, {
-      NEXT_PUBLIC_STAGE: 'test-stage',
-    });
-    render(<Navbar />);
-
     // Logo
     const logoImage = screen.getByAltText('Logo') as HTMLImageElement;
     expect(logoImage).toBeInTheDocument();
