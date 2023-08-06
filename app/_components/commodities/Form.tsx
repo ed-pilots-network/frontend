@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import { CheckIcon } from '@chakra-ui/icons';
 import {
   Button,
   ButtonGroup,
-  Checkbox,
-  CheckboxGroup,
   Flex,
   FormControl,
   FormLabel,
@@ -14,8 +11,6 @@ import {
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  Radio,
-  RadioGroup,
   Stack,
   FormErrorMessage,
 } from '@chakra-ui/react';
@@ -25,18 +20,22 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import CommoditiesField from '../inputs/commodities/commodities';
+import StationTypes from '../inputs/StationTypes';
+import LandingPad from '../inputs/LandingPads';
+import { CommodityForm } from './types';
 
 export const CommodityFormSchema = z.object({
   commodityId: z.object({
     value: z.string().regex(/[a-z_]/),
   }),
-  maxLandingPadSize: z.enum(['small', 'medium', 'large']),
-  minDemand: z.number().nonnegative().max(1000000),
-  minSupply: z.number().nonnegative().max(1000000),
-  includeFleetCarriers: z.boolean(),
-  includeOdyssey: z.boolean(),
-  includePlanetary: z.boolean(),
-  system: z.string().regex(/^[\w'-]+(?:\s[\w'-]+)*$/), // word chars, apostrophes, and dashes across multiple words
+  maxLandingPadSize: z.string(),
+  minDemand: z.number().nonnegative().max(1000000).optional(),
+  minSupply: z.number().nonnegative().max(1000000).optional(),
+  includeFleetCarriers: z.boolean().optional(),
+  includeOdyssey: z.boolean().optional(),
+  includePlanetary: z.boolean().optional(),
+  includeOrbital: z.boolean().optional(),
+  system: z.string().optional(),
 });
 
 export type SubmitProps = z.infer<typeof CommodityFormSchema>;
@@ -54,7 +53,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<SubmitProps>({
+  } = useForm<CommodityForm>({
     defaultValues: {
       minDemand: 1,
       minSupply: 1,
@@ -63,12 +62,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   });
 
   const { isDark } = useColorMode();
-
-  const checkboxValues = [
-    { name: 'Include Planetary', value: 'includePlanetary' },
-    { name: 'Include Odyssey', value: 'includeOdyssey' },
-    { name: 'Fleet Carriers', value: 'includeFleetCarriers' },
-  ];
 
   const numberInputs = (
     label: string,
@@ -79,6 +72,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         {label}
       </FormLabel>
       <NumberInput
+        marginTop={2}
         defaultValue={1}
         min={1}
         max={1000000}
@@ -113,109 +107,86 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         alignItems="center"
         paddingBottom="8"
         flexWrap="wrap"
+        direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
       >
-        <FormControl isInvalid={!!(errors.system && errors.system.message)}>
-          <CommoditiesField control={control} />
-          <FormLabel marginTop={8}>Near Star System</FormLabel>
-          <Input
-            variant="outline"
-            placeholder="Enter a system..."
-            borderColor={selectColor(isDark, 'border')}
-            _hover={{
-              borderColor: selectColor(isDark, 'border'),
-            }}
-            {...register('system', {
-              required: true,
-              pattern: /^[\w'-]+(?:\s[\w'-]+)*$/,
-              maxLength: 40,
-            })}
-          />
-          <FormErrorMessage>
-            {errors.system && errors.system.message}
-          </FormErrorMessage>
-        </FormControl>
-        <FormControl>
-          <FormLabel marginTop={8}>Options</FormLabel>
-          <Stack
-            borderWidth="1px"
-            borderRadius="9px"
-            borderColor={selectColor(isDark, 'border')}
-            padding="1rem"
-            spacing={8}
-            direction={['column', 'row']}
-            margin={8}
-          >
-            <CheckboxGroup colorScheme="gray">
-              {checkboxValues.map((checkbox, index) => (
-                <Checkbox
-                  colorScheme="orange"
-                  key={index}
-                  {...register(`${checkbox.value}` as keyof SubmitProps)}
-                  borderColor={selectColor(isDark, 'border')}
-                >
-                  {checkbox.name}
-                </Checkbox>
-              ))}
-            </CheckboxGroup>
-          </Stack>
-        </FormControl>
-        <FormControl
-          isInvalid={
-            !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
-          }
+        <Stack
+          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          width="100%"
+          spacing={4}
         >
-          <FormLabel>Landing Pad Size</FormLabel>
-          <RadioGroup>
-            <Stack
-              borderWidth="1px"
-              borderRadius="9px"
+          <CommoditiesField control={control} />
+          <FormControl
+            width="100%"
+            isInvalid={!!(errors.system && errors.system.message)}
+          >
+            <FormLabel>Near Star System</FormLabel>
+            <Input
+              variant="outline"
+              placeholder="Enter a system..."
               borderColor={selectColor(isDark, 'border')}
-              padding="1rem"
-              spacing={8}
-              direction={['column', 'column', 'row']}
-              margin={8}
+              _hover={{
+                borderColor: selectColor(isDark, 'border'),
+              }}
+              {...register('system', {
+                maxLength: 40,
+              })}
+            />
+            <FormErrorMessage>
+              {errors.system && errors.system.message}
+            </FormErrorMessage>
+          </FormControl>
+        </Stack>
+        <Stack
+          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          spacing={4}
+          width="100%"
+          marginTop={4}
+        >
+          <FormControl width="100%">
+            <FormLabel>Include</FormLabel>
+            <StationTypes register={register} />
+          </FormControl>
+          <FormControl
+            width="100%"
+            isInvalid={
+              !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
+            }
+          >
+            <FormLabel>Max Landing Pad Size</FormLabel>
+            <LandingPad register={register('maxLandingPadSize')} />
+          </FormControl>
+        </Stack>
+        <Stack
+          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          spacing={4}
+          width="100%"
+          marginTop={4}
+        >
+          <FormControl
+            width="100%"
+            isInvalid={!!errors.minSupply || !!errors.minDemand}
+          >
+            <FormLabel>I am looking to:</FormLabel>
+            <ButtonGroup
+              isAttached
+              borderColor={selectColor(isDark, 'border')}
+              variant="outline"
             >
-              {['Small', 'Medium', 'Large'].map((value, index) => (
-                <Radio
-                  colorScheme="orange"
-                  key={index}
-                  value={value.toLowerCase()}
-                  borderColor={selectColor(isDark, 'border')}
-                  {...register('maxLandingPadSize', {
-                    required: true,
-                  })}
-                >
-                  {value}
-                </Radio>
-              ))}
-              <FormErrorMessage marginY="auto">
-                {errors.maxLandingPadSize && 'Select a landing pad size'}
-              </FormErrorMessage>
-            </Stack>
-          </RadioGroup>
-        </FormControl>
-        <FormControl isInvalid={!!errors.minSupply || !!errors.minDemand}>
-          <FormLabel>I am looking to:</FormLabel>
-          <Stack spacing={8} direction="row" margin={8} flexWrap="wrap">
-            <ButtonGroup size="md" isAttached>
               <Button
-                onClick={() => setIsBuying(true)}
                 variant={isBuying ? 'customButton' : 'outline'}
-                leftIcon={<CheckIcon opacity={isBuying ? 1 : 0} />}
-                width={[24, 36]}
-                style={{ marginInlineEnd: 0 }}
+                onClick={() => setIsBuying(true)}
               >
                 Buy
               </Button>
               <Button
+                variant={isBuying ? 'outline' : 'customButton'}
                 onClick={() => setIsBuying(false)}
-                variant={!isBuying ? 'customButton' : 'outline'}
-                leftIcon={<CheckIcon opacity={!isBuying ? 1 : 0} />}
-                width={[24, 36]}
               >
                 Sell
               </Button>
             </ButtonGroup>
+          </FormControl>
+          <FormControl width="100%">
             {isBuying && numberInputs('Minimum Supply', 'minSupply')}
             {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
             <FormErrorMessage>
@@ -226,8 +197,8 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 !isBuying &&
                 (errors.minDemand.message as string)}
             </FormErrorMessage>
-          </Stack>
-        </FormControl>
+          </FormControl>
+        </Stack>
       </Flex>
       <Button
         type="submit"
