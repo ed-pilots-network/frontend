@@ -107,10 +107,10 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         alignItems="center"
         paddingBottom="8"
         flexWrap="wrap"
-        direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+        direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
       >
         <Stack
-          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
           width="100%"
           spacing={4}
         >
@@ -137,7 +137,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </Stack>
         <Stack
-          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
           spacing={4}
           width="100%"
           marginTop={4}
@@ -157,7 +157,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </Stack>
         <Stack
-          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
           spacing={4}
           width="100%"
           marginTop={4}
