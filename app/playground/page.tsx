@@ -6,6 +6,9 @@ import {
 } from './_api';
 import { ICommodity, IPost } from '../_types';
 
+// Force dynamic fetching during runtime for playground
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'EDPN Playground',
   description: 'Elite Dangerous Pilots Network',
