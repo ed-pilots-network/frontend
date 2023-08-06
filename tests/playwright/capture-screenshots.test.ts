@@ -13,7 +13,7 @@ const screenSizes: ScreenSize[] = [
   // Add more screen sizes as needed
 ];
 
-const { RUN_SCREENSHOT_TEST } = process.env;
+const { RUN_SCREENSHOT_TEST, PAGE_PATH } = process.env;
 // Change to the project you want to take screenshots using - check playwright.config.ts
 const projectName = 'Desktop-Chrome';
 
@@ -22,7 +22,7 @@ if (RUN_SCREENSHOT_TEST === 'true') {
     test(projectName, async ({ page }, testInfo) => {
       const { name } = testInfo.project;
       if (name === projectName) {
-        await page.goto('/');
+        await page.goto(PAGE_PATH || '/');
         // Capture screenshots for each screen size
         await screenSizes.reduce(async (promise, size) => {
           await promise;

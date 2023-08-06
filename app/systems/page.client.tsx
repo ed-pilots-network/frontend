@@ -1,20 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Center, Heading, VStack, HStack } from '@chakra-ui/react';
-import Form, { SubmitProps } from '@/components/commodities/Form';
+import { Box, Center, HStack, Heading, VStack } from '@chakra-ui/react';
+import Form, { SubmitProps } from '@/components/systems/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-
-interface ReqBody extends Omit<SubmitProps, 'commodityId' | 'system'> {
-  commodityId: string;
-  referenceLocation: {
-    xcoordinate: number;
-    ycoordinate: number;
-    zcoordinate: number;
-  };
-  system?: string;
-}
+import { SystemForm } from '../_components/systems/types';
 
 const PageClient = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,21 +13,10 @@ const PageClient = () => {
 
   const handleSubmit = (data: SubmitProps) => {
     setIsLoading(true);
-    const formatString = (string: string) =>
-      string.split(' ').join('_').toLowerCase();
 
-    let submitData: ReqBody = {
+    let submitData: SystemForm = {
       ...data,
-      commodityId: formatString(data.commodityId.value),
-      minDemand: Number(data.minDemand),
-      minSupply: Number(data.minSupply),
-      referenceLocation: {
-        xcoordinate: 0,
-        ycoordinate: 0,
-        zcoordinate: 0,
-      },
     };
-    delete submitData.system;
 
     // TODO: submit data to backend
     setTimeout(() => {
@@ -56,17 +36,7 @@ const PageClient = () => {
               marginX={{ base: 'auto', md: '0', lg: '0' }}
               color={selectColor(isDark, 'accent-text')}
             >
-              Commodities
-            </Heading>
-          </Box>
-          <Box alignSelf="baseline">
-            <Heading
-              as="h2"
-              size={{ base: 'xs', md: 'sm', lg: 'sm' }}
-              marginX={{ base: 'auto', md: '0', lg: '0' }}
-              textAlign={{ base: 'center', sm: 'left', md: 'left' }}
-            >
-              Find Closest Station to Buy/Sell Commodities
+              Systems
             </Heading>
           </Box>
         </HStack>

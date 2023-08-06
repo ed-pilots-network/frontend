@@ -65,8 +65,14 @@ yarn test
 ### Take Screenshots
 If you are making changes that impact the UI, ensure to test the change on different view ports. Run the following to auto capture screenshots when tests run. Note that this only runs when you run this command locally.
 
+#### Take screenshots of home page
 ```bash
 yarn capture-screenshots
+```
+
+#### Take screenshots of a specific page
+```bash
+PAGE_PATH=/commodities yarn capture-screenshots
 ```
 
 ## 🐳 Using Docker and Makefile

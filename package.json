@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "prepare": "husky install",
     "prettier": "prettier --write .",
     "analyze": "ANALYZE=true yarn build",
@@ -62,6 +63,7 @@
     "husky": "^8.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
+    "jest-fetch-mock": "^3.0.3",
     "prettier": "^2.8.8"
   },
   "engines": {
@@ -69,5 +71,6 @@
     "yarn": ">= 1.22.19",
     "npm": "Please use Yarn instead of NPM.",
     "pnpm": "Please use Yarn instead of NPM."
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
