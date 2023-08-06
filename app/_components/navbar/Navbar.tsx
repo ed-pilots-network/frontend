@@ -64,7 +64,7 @@ const Navbar = () => {
 
         <Hide below="md">
           {Tags.map((tag) => (
-            <Popover key={tag} trigger="hover" placement="bottom-start">
+            <Popover key={tag} trigger="click" placement="bottom-start">
               <PopoverTrigger>
                 <Text
                   margin={4}
