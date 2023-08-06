@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Center, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/commodities/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
@@ -46,35 +46,33 @@ const PageClient = () => {
   };
 
   return (
-    <Center width="100%">
-      <Flex flexDirection="column" gap="24px" width="100%" maxWidth="1500px">
-        <Heading
-          as="h1"
-          size={{ base: 'md', md: 'lg', lg: 'lg' }}
-          marginX={{ base: 'auto', md: '0', lg: '0' }}
-          color={selectColor(isDark, 'accent-text')}
-        >
-          Commodities
-        </Heading>
-        <Heading
-          as="h2"
-          size={{ base: 'xs', md: 'sm', lg: 'sm' }}
-          marginX={{ base: 'auto', md: '0', lg: '0' }}
-          textAlign={{ base: 'center', sm: 'left', md: 'left' }}
-        >
-          Find Closest Station to Buy/Sell Commodities
-        </Heading>
-        <Box
-          borderWidth="2px"
-          borderRadius="9px"
-          borderColor={selectColor(isDark, 'border')}
-          bg={selectColor(isDark, 'accent-bg')}
-          padding="1rem"
-        >
-          <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
-        </Box>
-      </Flex>
-    </Center>
+    <Flex flexDirection="column" gap="24px" width="100%">
+      <Heading
+        as="h1"
+        size={{ base: 'md', md: 'lg', lg: 'lg' }}
+        marginX={{ base: 'auto', md: '0', lg: '0' }}
+        color={selectColor(isDark, 'accent-text')}
+      >
+        Commodities
+      </Heading>
+      <Heading
+        as="h2"
+        size={{ base: 'xs', md: 'sm', lg: 'sm' }}
+        marginX={{ base: 'auto', md: '0', lg: '0' }}
+        textAlign={{ base: 'center', sm: 'left', md: 'left' }}
+      >
+        Find Closest Station to Buy/Sell Commodities
+      </Heading>
+      <Box
+        borderWidth="2px"
+        borderRadius="9px"
+        borderColor={selectColor(isDark, 'border')}
+        bg={selectColor(isDark, 'accent-bg')}
+        padding="1rem"
+      >
+        <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
+      </Box>
+    </Flex>
   );
 };
 
