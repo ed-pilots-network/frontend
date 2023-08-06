@@ -47,22 +47,23 @@ const PageClient = () => {
 
   return (
     <Flex flexDirection="column" gap="24px" width="100%">
-      <Heading
-        as="h1"
-        size={{ base: 'md', md: 'lg', lg: 'lg' }}
-        marginX={{ base: 'auto', md: '0', lg: '0' }}
-        color={selectColor(isDark, 'accent-text')}
-      >
-        Commodities
-      </Heading>
-      <Heading
-        as="h2"
-        size={{ base: 'xs', md: 'sm', lg: 'sm' }}
-        marginX={{ base: 'auto', md: '0', lg: '0' }}
-        textAlign={{ base: 'center', sm: 'left', md: 'left' }}
-      >
-        Find Closest Station to Buy/Sell Commodities
-      </Heading>
+      <Box alignSelf="baseline">
+        <Heading
+          as="h1"
+          size={{ base: 'md', md: 'lg', lg: 'lg' }}
+          marginX={{ base: 'auto', md: '0', lg: '0' }}
+          color={selectColor(isDark, 'accent-text')}
+        >
+          Commodities
+        </Heading>
+        <Heading
+          as="h2"
+          size={{ base: 'xs', md: 'sm', lg: 'sm' }}
+          marginX={{ base: 'auto', md: '0', lg: '0' }}
+        >
+          Find Closest Station to Buy/Sell Commodities
+        </Heading>
+      </Box>
       <Box
         borderWidth="2px"
         borderRadius="9px"

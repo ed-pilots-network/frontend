@@ -1,5 +1,5 @@
 const layoutConfig = {
-  maxWidth: '1200px',
+  maxWidth: '1400px',
 };
 
 export default layoutConfig;
