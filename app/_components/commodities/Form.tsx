@@ -19,18 +19,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
+import { ICommodity, ICommodityFormRequest } from '@/app/_types/commodity';
 import CommoditiesField from '../inputs/commodities/commodities';
 import StationTypes from '../inputs/StationTypes';
 import LandingPad from '../inputs/LandingPads';
-import { CommodityForm } from './types';
 
 export const CommodityFormSchema = z.object({
-  commodityId: z.object({
-    value: z.string().regex(/[a-z_]/),
+  commodityDisplayName: z.object({
+    value: z.string().regex(/[a-zA-Z_-]/),
   }),
   maxLandingPadSize: z.string(),
-  minDemand: z.number().nonnegative().max(1000000).optional(),
-  minSupply: z.number().nonnegative().max(1000000).optional(),
+  minDemand: z.number().nonnegative().max(50000000).optional(),
+  minSupply: z.number().nonnegative().max(50000000).optional(),
   includeFleetCarriers: z.boolean().optional(),
   includeOdyssey: z.boolean().optional(),
   includePlanetary: z.boolean().optional(),
@@ -43,9 +43,14 @@ export type SubmitProps = z.infer<typeof CommodityFormSchema>;
 interface FormProps {
   onSubmitHandler: SubmitHandler<SubmitProps>;
   isLoading: boolean;
+  commodities: ICommodity[] | null;
 }
 
-const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
+const Form: React.FC<FormProps> = ({
+  onSubmitHandler,
+  isLoading,
+  commodities,
+}) => {
   const [isBuying, setIsBuying] = useState(true);
 
   const {
@@ -53,7 +58,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<CommodityForm>({
+  } = useForm<ICommodityFormRequest>({
     defaultValues: {
       minDemand: 1,
       minSupply: 1,
@@ -75,13 +80,13 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         marginTop={2}
         defaultValue={1}
         min={1}
-        max={1000000}
+        max={50000000}
         precision={0}
         borderColor={selectColor(isDark, 'border')}
       >
         <NumberInputField
           {...register(registerName, {
-            max: 1000000,
+            max: 50000000,
             valueAsNumber: true,
           })}
         />
@@ -114,7 +119,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           width="100%"
           spacing={4}
         >
-          <CommoditiesField control={control} />
+          <CommoditiesField control={control} commodities={commodities} />
           <FormControl
             width="100%"
             isInvalid={!!(errors.system && errors.system.message)}
