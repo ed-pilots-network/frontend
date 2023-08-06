@@ -20,7 +20,8 @@ const config: PlaywrightTestConfig = {
   // Run your local dev server before starting the tests:
   // https://playwright.dev/docs/test-advanced#launching-a-development-web-server-during-the-tests
   webServer: {
-    command: 'yarn build && yarn start',
+    command:
+      'yarn build && yarn copy-standalone-assets && node .next/standalone/server.js',
     url: baseURL,
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
