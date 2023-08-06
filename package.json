@@ -8,6 +8,7 @@
     "dev-api": "concurrently \"next dev\" \"yarn api\"",
     "api": "node mock-api/server.js",
     "build": "next build",
+    "copy-standalone-assets": "cp -R .next/static .next/standalone/.next && cp -R public .next/standalone",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
