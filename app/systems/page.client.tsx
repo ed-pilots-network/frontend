@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Center, HStack, Heading, VStack } from '@chakra-ui/react';
+import { Box, Center, HStack, Heading, Flex } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/systems/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
@@ -27,7 +27,7 @@ const PageClient = () => {
 
   return (
     <Center width="100%">
-      <VStack align="stretch">
+      <Flex flexDirection="column" gap="24px" width="100%" maxWidth="1500px">
         <HStack spacing={4}>
           <Box alignSelf="baseline">
             <Heading
@@ -49,7 +49,7 @@ const PageClient = () => {
         >
           <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
         </Box>
-      </VStack>
+      </Flex>
     </Center>
   );
 };

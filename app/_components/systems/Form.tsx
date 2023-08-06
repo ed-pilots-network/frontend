@@ -92,7 +92,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         gap={6}
         marginBottom="10"
       >
-        <GridItem marginBottom={30} colSpan={{ base: 1, md: 2, lg: 4 }}>
+        <GridItem colSpan={{ base: 1, md: 2, lg: 4 }}>
           <FormControl isInvalid={!!(errors.system && errors.system.message)}>
             <FormLabel>System</FormLabel>
             <Input
