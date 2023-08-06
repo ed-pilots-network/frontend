@@ -1,10 +1,11 @@
 'use client';
 
-import { ColorModeScript, Flex, Box, useColorMode } from '@chakra-ui/react';
+import { ColorModeScript, Box, Flex, useColorMode } from '@chakra-ui/react';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import Navbar from './_components/navbar/Navbar';
 import Footer from './_components/footer/Footer';
 import theme from './_config/theme';
+import layoutConfig from '@/app/_config/layout';
 
 const LayoutClient = ({ children }: { children: React.ReactNode }) => {
   const { colorMode } = useColorMode();
@@ -21,8 +22,12 @@ const LayoutClient = ({ children }: { children: React.ReactNode }) => {
         minH="100vh"
       >
         <Navbar />
-        <Box p={5} flex="1" as="main">
-          {children}
+        <Box as="main" flex="1">
+          <Flex p={5} justify="center">
+            <Flex width="100%" maxWidth={layoutConfig.maxWidth}>
+              {children}
+            </Flex>
+          </Flex>
         </Box>
         <Footer />
       </Flex>
