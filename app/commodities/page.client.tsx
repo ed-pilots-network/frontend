@@ -70,11 +70,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
       return <div>No results!</div>;
     }
     if (commodityResponse.length > 0) {
-      commodityResponse.map((commodity: ICommodityFormResponse) => (
-        <div key={commodity.commodityDisplayName}>
-          Commodity Name: {commodity.commodityDisplayName}
-        </div>
-      ));
+      return <div>Results: {commodityResponse.length}</div>;
     }
     return (
       <Alert status="warning">
