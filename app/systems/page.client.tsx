@@ -29,7 +29,7 @@ const PageClient = () => {
   return (
     <Box p={5} flex="1" as="main">
       <Center maxWidth={layoutConfig.maxWidth} marginX="auto">
-        <VStack align="stretch" width="100%">
+        <VStack align="stretch" width="100%" gap={6}>
           <HStack spacing={4}>
             <Box alignSelf="baseline">
               <Heading

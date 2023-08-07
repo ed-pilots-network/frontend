@@ -92,8 +92,8 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
       backgroundSize="contain"
     >
       <Center maxWidth={layoutConfig.maxWidth} marginX="auto">
-        <Flex flexDirection="column" gap="24px" width="100%">
-          <VStack align="stretch">
+        <Flex flexDirection="column" gap={6} width="100%">
+          <VStack align="stretch" gap={6}>
             <HStack spacing={4}>
               <Box alignSelf="baseline">
                 <Heading
