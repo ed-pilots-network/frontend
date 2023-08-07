@@ -26,6 +26,8 @@ import GovernmentsField from '../inputs/Governments';
 import PowerEffectsField from '../inputs/PowerEffects';
 import FactionStatesField from '../inputs/FactionStates';
 import EconomiesField from '../inputs/Economies';
+import LandingPad from '../inputs/LandingPads';
+import StationTypes from '../inputs/StationTypes';
 
 export const StationFormSchema = z.object({
   station: z.string(),
@@ -108,7 +110,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem>
+        <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl isInvalid={!!(errors.ships && errors.ships.message)}>
             <FormLabel>Ships (placeholder)</FormLabel>
             <Input
@@ -126,7 +128,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem>
+        <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl isInvalid={!!(errors.modules && errors.modules.message)}>
             <FormLabel>Modules (placeholder)</FormLabel>
             <Input
@@ -144,7 +146,27 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
 
-        <GridItem colSpan={{ base: 1, md: 2, lg: 3 }}>
+        <GridItem colSpan={{ base: 1, md: 2 }}>
+          <FormControl
+            isInvalid={!!(errors.commodities && errors.commodities.message)}
+          >
+            <FormLabel>Commodities (placeholder)</FormLabel>
+            <Input
+              variant="outline"
+              placeholder="Search by system name..."
+              borderColor={selectColor(isDark, 'border')}
+              _hover={{
+                borderColor: selectColor(isDark, 'border'),
+              }}
+              {...register('commodities')}
+            />
+            <FormErrorMessage>
+              {errors.commodities && errors.commodities.message}
+            </FormErrorMessage>
+          </FormControl>
+        </GridItem>
+
+        <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl
             isInvalid={!!(errors.minorFaction && errors.minorFaction.message)}
           >
@@ -188,38 +210,17 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         <GridItem>
           <FormControl
             isInvalid={
-              !!(errors.landingPadSize && errors.landingPadSize.message)
-            }
-          >
-            <FormLabel>Landing Pad Size (placeholder)</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by system name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('landingPadSize')}
-            />
-            <FormErrorMessage>
-              {errors.landingPadSize && errors.landingPadSize.message}
-            </FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem>
-          <FormControl
-            isInvalid={
               !!(
                 errors.maxDistanceToArrival &&
                 errors.maxDistanceToArrival.message
               )
             }
           >
-            <FormLabel>Max Distance to Arrival (placeholder)</FormLabel>
+            <FormLabel>Max Distance From Star</FormLabel>
             <Input
+              type="number"
               variant="outline"
-              placeholder="Search by system name..."
+              placeholder="In LS"
               borderColor={selectColor(isDark, 'border')}
               _hover={{
                 borderColor: selectColor(isDark, 'border'),
@@ -237,7 +238,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           <FormControl
             isInvalid={!!(errors.facilities && errors.facilities.message)}
           >
-            <FormLabel>Max Distance to Arrival (placeholder)</FormLabel>
+            <FormLabel>Facilities (placeholder)</FormLabel>
             <Input
               variant="outline"
               placeholder="Search by system name..."
@@ -249,46 +250,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             />
             <FormErrorMessage>
               {errors.facilities && errors.facilities.message}
-            </FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem>
-          <FormControl
-            isInvalid={!!(errors.commodities && errors.commodities.message)}
-          >
-            <FormLabel>Commodities (placeholder)</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by system name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('commodities')}
-            />
-            <FormErrorMessage>
-              {errors.commodities && errors.commodities.message}
-            </FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem>
-          <FormControl
-            isInvalid={!!(errors.stationType && errors.stationType.message)}
-          >
-            <FormLabel>Station Type (placeholder)</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by system name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('stationType')}
-            />
-            <FormErrorMessage>
-              {errors.stationType && errors.stationType.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
@@ -333,6 +294,42 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <EconomiesField register={register('economy')} />
             <FormErrorMessage>
               {errors.economy && errors.economy.message}
+            </FormErrorMessage>
+          </FormControl>
+        </GridItem>
+      </Grid>
+
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(2, 1fr)',
+          lg: 'repeat(4, 1fr)',
+        }}
+        gap={6}
+        marginBottom="10"
+      >
+        <GridItem colSpan={{ base: 1, md: 2 }}>
+          <FormControl
+            isInvalid={!!(errors.stationType && errors.stationType.message)}
+          >
+            <FormLabel>Station Type</FormLabel>
+            <StationTypes register={register} />
+            <FormErrorMessage>
+              {errors.stationType && errors.stationType.message}
+            </FormErrorMessage>
+          </FormControl>
+        </GridItem>
+
+        <GridItem>
+          <FormControl
+            isInvalid={
+              !!(errors.landingPadSize && errors.landingPadSize.message)
+            }
+          >
+            <FormLabel>Max Landing Pad Size</FormLabel>
+            <LandingPad register={register('landingPadSize')} />
+            <FormErrorMessage>
+              {errors.landingPadSize && errors.landingPadSize.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
