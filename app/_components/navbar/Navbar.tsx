@@ -1,13 +1,12 @@
 import {
   Badge,
+  Box,
   Menu,
   MenuButton,
   Flex,
   IconButton,
   Text,
   Image,
-  Hide,
-  Show,
   LinkBox,
   LinkOverlay,
   Popover,
@@ -45,9 +44,9 @@ const Navbar = () => {
         maxWidth={layoutConfig.maxWidth}
       >
         <Flex alignItems="center">
-          <Show below="md">
+          <Box display={{ base: 'flex', md: 'none' }}>
             <NavDrawer />
-          </Show>
+          </Box>
           <Link href="/">
             <Image
               src={'/EDPN_logo_dark_background.png'}
@@ -68,7 +67,7 @@ const Navbar = () => {
             </Text>
           </Link>
 
-          <Hide below="md">
+          <Box display={{ base: 'none', md: 'flex' }}>
             {Tags.map((tag) => (
               <Popover key={tag} trigger="click" placement="bottom-start">
                 <PopoverTrigger>
@@ -112,11 +111,11 @@ const Navbar = () => {
                 </PopoverContent>
               </Popover>
             ))}
-          </Hide>
+          </Box>
         </Flex>
 
         <Flex justifyContent="space-between" alignItems="center">
-          <Hide below="md">
+          <Box display={{ base: 'none', md: 'flex' }}>
             <Badge
               margin={2}
               px={2}
@@ -125,7 +124,7 @@ const Navbar = () => {
             >
               {process.env.NEXT_PUBLIC_STAGE}
             </Badge>
-          </Hide>
+          </Box>
           {process.env.NEXT_PUBLIC_STAGE === 'localhost' && (
             <Menu>
               <Link href="/playground" prefetch={false}>
