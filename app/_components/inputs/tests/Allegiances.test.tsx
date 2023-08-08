@@ -4,7 +4,7 @@ import allegiances from '@/app/_lib/allegiance-list';
 import AllegiancesField from '../Allegiances';
 import { SystemForm } from '../../systems/types';
 
-describe('AllegiancesField', () => {
+describe('Allegiances Field', () => {
   beforeEach(() => {
     const Component = () => {
       const { register } = useForm<SystemForm>();

@@ -6,8 +6,8 @@ import Form, { SubmitProps } from '@/components/commodities/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 
-interface ReqBody extends Omit<SubmitProps, 'commodityId' | 'system'> {
-  commodityId: string;
+interface ReqBody extends Omit<SubmitProps, 'commodity' | 'system'> {
+  commodity: string;
   referenceLocation: {
     xcoordinate: number;
     ycoordinate: number;
@@ -27,7 +27,7 @@ const PageClient = () => {
 
     let submitData: ReqBody = {
       ...data,
-      commodityId: formatString(data.commodityId.value),
+      commodity: formatString(data.commodity.value),
       minDemand: Number(data.minDemand),
       minSupply: Number(data.minSupply),
       referenceLocation: {

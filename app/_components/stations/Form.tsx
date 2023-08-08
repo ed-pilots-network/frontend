@@ -20,43 +20,50 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import PowersField from '../inputs/Powers';
-import AllegiancesField from '../inputs/Allegiances';
-import GovernmentsField from '../inputs/Governments';
-import PowerEffectsField from '../inputs/PowerEffects';
-import FactionStatesField from '../inputs/FactionStates';
-import EconomiesField from '../inputs/Economies';
-import LandingPad from '../inputs/LandingPads';
-import StationTypes from '../inputs/StationTypes';
+import PowersField from '@/app/_components/inputs/Powers';
+import AllegiancesField from '@/app/_components/inputs/Allegiances';
+import GovernmentsField from '@/app/_components/inputs/Governments';
+import PowerEffectsField from '@/app/_components/inputs/PowerEffects';
+import FactionStatesField from '@/app/_components/inputs/FactionStates';
+import EconomiesField from '@/app/_components/inputs/Economies';
+import LandingPad from '@/app/_components/inputs/LandingPads';
+import StationTypes from '@/app/_components/inputs/StationTypes';
+import ShipsField from '@/app/_components/inputs/Ships';
+import ModulesField from '@/app/_components/inputs/Modules';
+import CommoditiesField from '@/app/_components/inputs/Commodities';
+import FacilitiesField from '@/app/_components/inputs/Facilities';
+import CheckboxGroup from '../form/CheckboxGroup';
 
 export const StationFormSchema = z.object({
   station: z.string(),
-  ships: z.string(),
-  modules: z.string(),
-  minorFaction: z.string().optional(),
+  ships: z.array(z.object({ value: z.string() })).optional(),
+  modules: z.array(z.object({ value: z.string() })).optional(),
+  commodity: z.array(z.object({ value: z.string() })).optional(),
+  facilities: z.array(z.object({ value: z.string() })).optional(),
   allegiance: z
     .enum(['', ...(allegiances.map((item) => item) as [string, ...string[]])])
     .optional(),
   government: z
     .enum(['', ...(governments.map((item) => item) as [string, ...string[]])])
     .optional(),
+  system: z.string().optional(),
   landingPadSize: z.string().optional(),
-  maxDistanceToArrival: z.number().optional(),
-  facilities: z.string().optional(),
-  commodities: z.string().optional(),
-  stationType: z.string().optional(),
+  includeFleetCarriers: z.boolean().optional(),
+  includeOdyssey: z.boolean().optional(),
+  includePlanetary: z.boolean().optional(),
+  includeOrbital: z.boolean().optional(),
+  maxDistanceToArrival: z.string().optional(),
   requiresPermit: z.boolean(),
   power: z
     .enum(['', ...(powers.map((item) => item) as [string, ...string[]])])
     .optional(),
-  powerEffect: z.enum(['', 'Control', 'Expansion', 'Exploited']).optional(),
+  powerEffect: z.enum(['', 'control', 'expansion', 'exploited']).optional(),
   factionState: z
     .enum(['', ...(factionStates.map((item) => item) as [string, ...string[]])])
     .optional(),
   economy: z
     .enum(['', ...(economies.map((item) => item) as [string, ...string[]])])
     .optional(),
-  nearestSystem: z.string(),
 });
 
 export type SubmitProps = z.infer<typeof StationFormSchema>;
@@ -68,6 +75,7 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -97,7 +105,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <FormLabel>Station</FormLabel>
             <Input
               variant="outline"
-              placeholder="Search by system name..."
+              placeholder="Search by station name..."
               borderColor={selectColor(isDark, 'border')}
               _hover={{
                 borderColor: selectColor(isDark, 'border'),
@@ -112,74 +120,63 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
 
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl isInvalid={!!(errors.ships && errors.ships.message)}>
-            <FormLabel>Ships (placeholder)</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by system name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('ships')}
+            <FormLabel>Ships</FormLabel>
+            <ShipsField
+              control={control}
+              placeholder="Find stations selling these ships..."
             />
-            <FormErrorMessage>
-              {errors.ships && errors.ships.message}
-            </FormErrorMessage>
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl isInvalid={!!(errors.modules && errors.modules.message)}>
-            <FormLabel>Modules (placeholder)</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by system name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('modules')}
+            <FormLabel>Modules</FormLabel>
+            <ModulesField
+              control={control}
+              placeholder="Find stations selling these modules..."
             />
-            <FormErrorMessage>
-              {errors.modules && errors.modules.message}
-            </FormErrorMessage>
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl
-            isInvalid={!!(errors.commodities && errors.commodities.message)}
+            isInvalid={!!(errors.commodity && errors.commodity.message)}
           >
-            <FormLabel>Commodities (placeholder)</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by system name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('commodities')}
+            <FormLabel>Commodities</FormLabel>
+            <CommoditiesField
+              control={control}
+              placeholder="Find stations selling these commodities..."
             />
-            <FormErrorMessage>
-              {errors.commodities && errors.commodities.message}
-            </FormErrorMessage>
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={{ base: 1, md: 2 }}>
-          <FormControl
-            isInvalid={!!(errors.minorFaction && errors.minorFaction.message)}
-          >
-            <FormLabel>Minor Faction</FormLabel>
+          <FormControl isInvalid={!!(errors.system && errors.system.message)}>
+            <FormLabel>Nearest System</FormLabel>
             <Input
-              borderColor={selectColor(isDark, 'border')}
               variant="outline"
-              placeholder="Enter a minor faction..."
-              {...register('minorFaction')}
+              placeholder="Enter system name..."
+              borderColor={selectColor(isDark, 'border')}
+              _hover={{
+                borderColor: selectColor(isDark, 'border'),
+              }}
+              {...register('system')}
             />
             <FormErrorMessage>
-              {errors.minorFaction && errors.minorFaction.message}
+              {errors.system && errors.system.message}
             </FormErrorMessage>
+          </FormControl>
+        </GridItem>
+
+        <GridItem>
+          <FormControl
+            isInvalid={!!(errors.facilities && errors.facilities.message)}
+          >
+            <FormLabel>Facilities</FormLabel>
+            <FacilitiesField
+              control={control}
+              placeholder="Select facilities..."
+            />
           </FormControl>
         </GridItem>
 
@@ -230,26 +227,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <FormErrorMessage>
               {errors.maxDistanceToArrival &&
                 errors.maxDistanceToArrival.message}
-            </FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem>
-          <FormControl
-            isInvalid={!!(errors.facilities && errors.facilities.message)}
-          >
-            <FormLabel>Facilities (placeholder)</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by system name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('facilities')}
-            />
-            <FormErrorMessage>
-              {errors.facilities && errors.facilities.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
@@ -309,14 +286,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         marginBottom="10"
       >
         <GridItem colSpan={{ base: 1, md: 2 }}>
-          <FormControl
-            isInvalid={!!(errors.stationType && errors.stationType.message)}
-          >
+          <FormControl>
             <FormLabel>Station Type</FormLabel>
             <StationTypes register={register} />
-            <FormErrorMessage>
-              {errors.stationType && errors.stationType.message}
-            </FormErrorMessage>
           </FormControl>
         </GridItem>
 
@@ -326,40 +298,35 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               !!(errors.landingPadSize && errors.landingPadSize.message)
             }
           >
-            <FormLabel>Max Landing Pad Size</FormLabel>
+            <FormLabel>Ship Size</FormLabel>
             <LandingPad register={register('landingPadSize')} />
             <FormErrorMessage>
               {errors.landingPadSize && errors.landingPadSize.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
-      </Grid>
 
-      <Grid
-        templateColumns={{
-          base: 'repeat(1, 1fr)',
-          md: 'repeat(2, 1fr)',
-          lg: 'repeat(4, 1fr)',
-        }}
-        gap={6}
-        marginBottom="10"
-      >
         <GridItem>
-          <FormControl
-            isInvalid={
-              !!(errors.requiresPermit && errors.requiresPermit.message)
-            }
-          >
-            <Checkbox
-              colorScheme="orange"
-              {...register('requiresPermit')}
-              borderColor={selectColor(isDark, 'border')}
-            >
-              Requires Permit
-            </Checkbox>
-            <FormErrorMessage>
-              {errors.requiresPermit && errors.requiresPermit.message}
-            </FormErrorMessage>
+          <FormControl>
+            <FormLabel>Other Options</FormLabel>
+            <CheckboxGroup>
+              <FormControl
+                isInvalid={
+                  !!(errors.requiresPermit && errors.requiresPermit.message)
+                }
+              >
+                <Checkbox
+                  colorScheme="orange"
+                  {...register('requiresPermit')}
+                  borderColor={selectColor(isDark, 'border')}
+                >
+                  Requires Permit
+                </Checkbox>
+                <FormErrorMessage>
+                  {errors.requiresPermit && errors.requiresPermit.message}
+                </FormErrorMessage>
+              </FormControl>
+            </CheckboxGroup>
           </FormControl>
         </GridItem>
       </Grid>

@@ -1,5 +1,5 @@
 export type CommodityForm = {
-  commodityId: {
+  commodity: {
     value: string;
   };
   system?: string;

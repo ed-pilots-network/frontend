@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import Form from './Form';
 
 const mockData = {
-  commodityId: 'gold',
+  commodity: 'gold',
   system: 'sol',
   includePlanetary: true,
   includeOdyssey: true,
@@ -14,7 +14,7 @@ const mockData = {
 };
 
 jest.mock('@/lib/commodity-list', () => ['mt_gold']);
-jest.mock('../inputs/commodities/commodities', () => ({
+jest.mock('../inputs/Commodities', () => ({
   __esModule: true,
   default: jest
     .fn()
@@ -31,9 +31,9 @@ describe('Form', () => {
   test('renders the form', () => {
     // ARRANGE input values
     let textboxes: HTMLInputElement[] = screen.getAllByRole('textbox');
-    let commodityIdInput = textboxes[0];
+    let commodityInput = textboxes[0];
     let systemInput = textboxes[1];
-    commodityIdInput.value = mockData.commodityId;
+    commodityInput.value = mockData.commodity;
     systemInput.value = mockData.system;
 
     let checkboxes: HTMLInputElement[] = screen.getAllByRole('checkbox');
@@ -56,7 +56,7 @@ describe('Form', () => {
     minSupplyInput.value = mockData.minSupply.toString();
 
     // ASSERT values are displayed correctly
-    expect(commodityIdInput).toHaveValue(mockData.commodityId);
+    expect(commodityInput).toHaveValue(mockData.commodity);
     expect(systemInput).toHaveValue(mockData.system);
     expect(includePlanetaryInput).toBeChecked();
     expect(includeOdyssey).toBeChecked();

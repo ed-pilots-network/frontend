@@ -19,13 +19,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import CommoditiesField from '../inputs/commodities/commodities';
+import CommoditiesField from '../inputs/Commodities';
 import StationTypes from '../inputs/StationTypes';
 import LandingPad from '../inputs/LandingPads';
 import { CommodityForm } from './types';
 
 export const CommodityFormSchema = z.object({
-  commodityId: z.object({
+  commodity: z.object({
     value: z.string().regex(/[a-z_]/),
   }),
   maxLandingPadSize: z.string(),
@@ -114,7 +114,19 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           width="100%"
           spacing={4}
         >
-          <CommoditiesField control={control} />
+          <FormControl
+            isInvalid={!!(errors.commodity && errors.commodity.message)}
+          >
+            <FormLabel>Commodities</FormLabel>
+            <CommoditiesField
+              control={control}
+              placeholder="Enter at least one commodity..."
+              isMulti={false}
+            />
+            <FormErrorMessage>
+              {errors.commodity && errors.commodity.message}
+            </FormErrorMessage>
+          </FormControl>
           <FormControl
             width="100%"
             isInvalid={!!(errors.system && errors.system.message)}
@@ -152,7 +164,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
             }
           >
-            <FormLabel>Max Landing Pad Size</FormLabel>
+            <FormLabel>Min Landing Pad Size</FormLabel>
             <LandingPad register={register('maxLandingPadSize')} />
           </FormControl>
         </Stack>

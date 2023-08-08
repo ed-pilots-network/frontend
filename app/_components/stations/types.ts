@@ -1,14 +1,23 @@
 export type StationForm = {
   station?: string;
-  ships?: string;
-  modules?: string;
+  ships?: {
+    value: string;
+  }[];
+  modules?: {
+    value: string;
+  }[];
+  commodities?: {
+    value: string;
+  }[];
+  system?: string;
   minorFaction?: string;
   allegiance?: string;
   government?: string;
   landingPadSize?: string;
-  maxDistanceToArrival?: number;
-  facilities?: string;
-  commodities?: string;
+  maxDistanceToArrival?: string;
+  facilities?: {
+    value: string;
+  }[];
   stationType?: string;
   requiresPermit?: boolean;
   power?: string;
