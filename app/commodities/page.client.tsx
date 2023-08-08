@@ -6,7 +6,6 @@ import {
   Center,
   Heading,
   VStack,
-  HStack,
   Spinner,
   Alert,
   AlertIcon,
@@ -87,14 +86,15 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
       p={5}
       flex="1"
       as="main"
-      background={`url('/assets/Alliance_Crusader.svg')`}
+      backgroundImage={`url('/assets/Anaconda_Opacity.svg')`}
       backgroundRepeat="no-repeat"
-      backgroundSize="contain"
+      backgroundSize={{ base: 'contain', sm: '0', lg: '50%' }}
+      backgroundPosition="center center"
     >
       <Center maxWidth={layoutConfig.maxWidth} marginX="auto">
         <Flex flexDirection="column" gap={6} width="100%">
           <VStack align="stretch" gap={6}>
-            <HStack spacing={4}>
+            <Flex direction="column" gap={2}>
               <Box alignSelf="baseline">
                 <Heading
                   as="h1"
@@ -115,7 +115,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
                   Find Closest Station to Buy/Sell Commodities
                 </Heading>
               </Box>
-            </HStack>
+            </Flex>
             <Box
               borderWidth="2px"
               borderRadius="9px"
