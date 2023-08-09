@@ -128,7 +128,7 @@ const Navbar = () => {
           {process.env.NEXT_PUBLIC_STAGE === 'localhost' && (
             <Menu>
               <Link href="/playground" prefetch={false}>
-                <MenuButton as={IconButton} icon={<MdCode />} size="sm" m={2} />
+                <MenuButton as={IconButton} icon={<MdCode />} m={2} />
               </Link>
             </Menu>
           )}
