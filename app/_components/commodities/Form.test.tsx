@@ -31,9 +31,9 @@ describe('Form', () => {
   test('renders the form', () => {
     // ARRANGE input values
     let textboxes: HTMLInputElement[] = screen.getAllByRole('textbox');
-    let commodityInput = textboxes[0];
+    let commodityIdInput = textboxes[0];
     let systemInput = textboxes[1];
-    commodityInput.value = mockData.commodityId;
+    commodityIdInput.value = mockData.commodityId;
     systemInput.value = mockData.system;
 
     let checkboxes: HTMLInputElement[] = screen.getAllByRole('checkbox');
@@ -56,7 +56,7 @@ describe('Form', () => {
     minSupplyInput.value = mockData.minSupply.toString();
 
     // ASSERT values are displayed correctly
-    expect(commodityInput).toHaveValue(mockData.commodityId);
+    expect(commodityIdInput).toHaveValue(mockData.commodityId);
     expect(systemInput).toHaveValue(mockData.system);
     expect(includePlanetaryInput).toBeChecked();
     expect(includeOdyssey).toBeChecked();

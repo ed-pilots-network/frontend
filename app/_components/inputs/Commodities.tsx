@@ -20,6 +20,9 @@ type FieldOptions = {
 
 /* Swap out for live lookup when data is available? */
 const getOptions = () => {
+  // TODO: for now these values have leading designators that we need to remove
+  // for example: 'water' is stored as 'ch_water' designated as a chemical
+  // if we don't end up using this designation then we should remove it
   const options: SelectGroup[] = commodities.map((commodity) => ({
     value: commodity.slice(3).split('_').join(' '),
     label: commodity.slice(3).split('_').join(' '),
