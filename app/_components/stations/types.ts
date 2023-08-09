@@ -1,5 +1,5 @@
 export type StationForm = {
-  station?: string;
+  stationId?: string;
   ships?: {
     value: string;
   }[];

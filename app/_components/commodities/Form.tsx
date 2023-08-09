@@ -25,7 +25,7 @@ import LandingPad from '../inputs/LandingPads';
 import { CommodityForm } from './types';
 
 export const CommodityFormSchema = z.object({
-  commodity: z.object({
+  commodityId: z.object({
     value: z.string().regex(/[a-z_]/),
   }),
   maxLandingPadSize: z.string(),
@@ -115,7 +115,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           spacing={4}
         >
           <FormControl
-            isInvalid={!!(errors.commodity && errors.commodity.message)}
+            isInvalid={!!(errors.commodityId && errors.commodityId.message)}
           >
             <FormLabel>Commodities</FormLabel>
             <CommoditiesField
@@ -124,7 +124,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               isMulti={false}
             />
             <FormErrorMessage>
-              {errors.commodity && errors.commodity.message}
+              {errors.commodityId && errors.commodityId.message}
             </FormErrorMessage>
           </FormControl>
           <FormControl

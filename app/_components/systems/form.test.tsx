@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Form from './Form';
 
 /* const mockData = {
-  system: 'Sol',
+  systemId: 'Sol',
   onlyPopulated: '1',
   allegiance: 'Empire',
   government: 'Corporate',

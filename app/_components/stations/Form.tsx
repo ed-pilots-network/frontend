@@ -35,7 +35,7 @@ import FacilitiesField from '@/app/_components/inputs/Facilities';
 import CheckboxGroup from '../form/CheckboxGroup';
 
 export const StationFormSchema = z.object({
-  station: z.string(),
+  stationId: z.string(),
   ships: z.array(z.object({ value: z.string() })).optional(),
   modules: z.array(z.object({ value: z.string() })).optional(),
   commodity: z.array(z.object({ value: z.string() })).optional(),
@@ -101,7 +101,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         marginBottom="10"
       >
         <GridItem marginBottom={30} colSpan={{ base: 1, md: 2, lg: 4 }}>
-          <FormControl isInvalid={!!(errors.station && errors.station.message)}>
+          <FormControl
+            isInvalid={!!(errors.stationId && errors.stationId.message)}
+          >
             <FormLabel>Station</FormLabel>
             <Input
               variant="outline"
@@ -110,10 +112,10 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               _hover={{
                 borderColor: selectColor(isDark, 'border'),
               }}
-              {...register('station')}
+              {...register('stationId')}
             />
             <FormErrorMessage>
-              {errors.station && errors.station.message}
+              {errors.stationId && errors.stationId.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>

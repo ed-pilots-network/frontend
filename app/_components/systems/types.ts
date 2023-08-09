@@ -1,5 +1,5 @@
 export type SystemForm = {
-  system?: string;
+  systemId?: string;
   onlyPopulated?: boolean;
   allegiance?: string;
   government?: string;

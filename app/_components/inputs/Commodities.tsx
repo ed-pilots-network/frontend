@@ -39,12 +39,12 @@ const CommoditiesField = ({
   }
   return (
     <Controller
-      name="commodity"
+      name="commodityId"
       control={control}
       render={({ field: { onChange, onBlur, value, name, ref } }) => (
         <Select<SelectGroup, true, GroupBase<SelectGroup>>
-          id="commodity-field"
-          instanceId="commodity-field"
+          id="commodityId-field"
+          instanceId="commodityId-field"
           name={name}
           ref={ref}
           onChange={onChange}
