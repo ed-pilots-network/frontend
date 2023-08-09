@@ -10,11 +10,13 @@ import {
   Alert,
   AlertIcon,
   Flex,
+  Button,
 } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/commodities/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import { ICommodity, ICommodityFormResponse } from '@/app/_types/commodity';
+import ExampleResponse from './ExampleResponse';
 import layoutConfig from '../_config/layout';
 
 interface IPageClientProps {
@@ -22,6 +24,7 @@ interface IPageClientProps {
 }
 
 const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
+  const [example, setExample] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [fetchError, setFetchError] = useState<Error | null>(null);
   const [commodityResponse, setCommodityResponse] = useState<
@@ -91,7 +94,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
       backgroundSize={{ base: 'contain', sm: '0', lg: '50%' }}
       backgroundPosition="center center"
     >
-      <Center maxWidth={layoutConfig.maxWidth} marginX="auto">
+      <Center maxWidth={layoutConfig.maxWidth} marginX="auto" opacity={0.8}>
         <Flex flexDirection="column" gap={6} width="100%">
           <VStack align="stretch" gap={6}>
             <Flex direction="column" gap={2}>
@@ -129,8 +132,17 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
                 commodities={commodities}
               />
             </Box>
+            <Button
+              type="button"
+              variant="customButton"
+              id="example"
+              onClick={() => setExample(!example)}
+            >
+              Submit Example
+            </Button>
           </VStack>
           {renderCommodityData()}
+          {example && <ExampleResponse />}
         </Flex>
       </Center>
     </Box>

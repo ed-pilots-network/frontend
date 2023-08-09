@@ -1,9 +1,37 @@
 {
-    "posts": [
-      { "id": 1, "title": "json-server", "author": "typicode", "category": "json" },
-      { "id": 2, "title": "text-server", "author": "typicode", "category": "text" }
-    ],
-    "comments": [
-      { "id": 1, "body": "some comment", "postId": 1 }
-    ]
-  }
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode",
+      "category": "json"
+    },
+    {
+      "id": 2,
+      "title": "text-server",
+      "author": "typicode",
+      "category": "text"
+    }
+  ],
+  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+  "commodity": [
+    {
+      "commodityDisplayName": "Tritium",
+      "station": {
+        "name": "Thoreau Station",
+        "arrivalDistance": null,
+        "maxLandingPadSize": "UNKNOWN",
+        "fleetCarrier": false,
+        "requireOdyssey": null,
+        "planetary": null
+      },
+      "systemName": "HIP 113495",
+      "pricesUpdatedAt": "2023-08-02T00:47:01",
+      "supply": 9199,
+      "demand": 1,
+      "buyPrice": 49906,
+      "sellPrice": 49184,
+      "distance": 0
+    }
+  ]
+}
