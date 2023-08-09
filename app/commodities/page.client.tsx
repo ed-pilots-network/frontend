@@ -6,17 +6,16 @@ import {
   Center,
   Heading,
   VStack,
-  Spinner,
   Alert,
   AlertIcon,
   Flex,
   Button,
 } from '@chakra-ui/react';
-import Form, { SubmitProps } from '@/components/commodities/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import { ICommodity, ICommodityFormResponse } from '@/app/_types/commodity';
-import ExampleResponse from './ExampleResponse';
+import Form, { SubmitProps } from '@/components/commodities/Form';
+import CommodityFormResponse from '@/components/commodities/CommodityFormResponse';
 import layoutConfig from '../_config/layout';
 
 interface IPageClientProps {
@@ -24,8 +23,8 @@ interface IPageClientProps {
 }
 
 const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
-  const [example, setExample] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [fetchError, setFetchError] = useState<Error | null>(null);
   const [commodityResponse, setCommodityResponse] = useState<
     ICommodityFormResponse[]
@@ -34,6 +33,8 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
 
   const handleSubmit = async (data: SubmitProps) => {
     setIsLoading(true);
+    setSubmitted(false);
+
     let submitData = `commodityDisplayName=${data.commodityDisplayName.value
       .split(' ')
       .join('%20')}&maxLandingPadSize=${data.maxLandingPadSize}&minSupply=${
@@ -49,39 +50,63 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
         `/api/v1/trade/locate-commodity/filter?${submitData}`,
       );
       const commodityRes = await commodityReq.json();
-
       setCommodityResponse(commodityRes);
     } catch (error) {
       setFetchError(error as Error);
     } finally {
       setIsLoading(false);
+      setSubmitted(true);
+    }
+  };
+
+  // TODO: remove this function after development - aslink87
+  const handleExampleSubmit = async () => {
+    setIsLoading(true);
+    setSubmitted(false);
+
+    try {
+      const commodityReq = await fetch(
+        `${process.env.NEXT_PUBLIC_MOCK_API_URL}/api/v1/trade/commodity`,
+        {
+          cache: 'no-store',
+        },
+      );
+      const commodityRes = await commodityReq.json();
+      setCommodityResponse(commodityRes);
+    } catch (error) {
+      setFetchError(error as Error);
+    } finally {
+      setIsLoading(false);
+      setSubmitted(true);
     }
   };
 
   const renderCommodityData = () => {
-    if (isLoading) {
-      return <Spinner />;
-    }
     if (fetchError) {
       return (
         <Alert status="error">
           <AlertIcon />
-          Failed to fetch commodity data from staging server on client side
+          Failed to fetch commodity data!
         </Alert>
       );
     }
-    if (commodityResponse.length === 0) {
-      return <div>No results!</div>;
+    if (submitted && commodityResponse.length === 0) {
+      return (
+        <Alert status="warning">
+          <AlertIcon />
+          Commodity Not Found!
+        </Alert>
+      );
     }
-    if (commodityResponse.length > 0) {
-      return <div>Results: {commodityResponse.length}</div>;
+    if (submitted && commodityResponse.length > 0) {
+      return (
+        <CommodityFormResponse
+          // TODO: remove this slice after pagination is implemented - aslink87
+          commodityResponse={commodityResponse.slice(0, 20)}
+        />
+      );
     }
-    return (
-      <Alert status="warning">
-        <AlertIcon />
-        Commodity Not Found!
-      </Alert>
-    );
+    return null;
   };
 
   return (
@@ -132,17 +157,17 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
                 commodities={commodities}
               />
             </Box>
+            {/* TODO: remove this button after development - aslink87 */}
             <Button
               type="button"
               variant="customButton"
               id="example"
-              onClick={() => setExample(!example)}
+              onClick={handleExampleSubmit}
             >
               Submit Example
             </Button>
           </VStack>
           {renderCommodityData()}
-          {example && <ExampleResponse />}
         </Flex>
       </Center>
     </Box>
