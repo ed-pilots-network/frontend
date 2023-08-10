@@ -22,7 +22,7 @@ import selectColor from '@/app/_hooks/fontColorSelector';
 import CommoditiesField from '../inputs/Commodities';
 import StationTypes from '../inputs/StationTypes';
 import LandingPad from '../inputs/LandingPads';
-import { CommodityForm } from './types';
+import { CommodityForm } from '@/app/_types/forms';
 
 export const CommodityFormSchema = z.object({
   commodityId: z.object({

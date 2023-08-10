@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
-import { CommodityForm } from '../../commodities/types';
+import { CommodityForm } from '@/app/_types/forms';
 import StationTypes, { checkboxValues } from '../StationTypes';
 
 describe('Station Type Field', () => {

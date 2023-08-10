@@ -5,7 +5,7 @@ import { Box, HStack, Heading, Flex } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/systems/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import { SystemForm } from '../_components/systems/types';
+import { SystemForm } from '@/app/_types/forms';
 
 const PageClient = () => {
   const [isLoading, setIsLoading] = useState(false);

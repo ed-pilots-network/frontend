@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
-import { SystemForm } from '../../systems/types';
+import { SystemForm } from '@/app/_types/forms';
 import FactionStatesField from '../FactionStates';
 import factionStates from '@/app/_lib/faction-state-list';
 
