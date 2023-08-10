@@ -21,7 +21,7 @@
         "name": "Thoreau Station",
         "arrivalDistance": null,
         "maxLandingPadSize": "UNKNOWN",
-        "fleetCarrier": false,
+        "fleetCarrier": true,
         "requireOdyssey": null,
         "planetary": null
       },

@@ -1,20 +1,37 @@
 import React from 'react';
 
-import { GridItem, Heading, SimpleGrid, VStack } from '@chakra-ui/react';
+import {
+  Flex,
+  GridItem,
+  HStack,
+  Heading,
+  Image,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import layoutConfig from '@/app/_config/layout';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
 import { formatLocalTime, formatThousands } from '@/app/_hooks/textFormatting';
+import { renderLandingIcon, legendItems } from './helpers';
 
 interface ICommodityFormResponseProps {
   commodityResponse: ICommodityFormResponse[];
+}
+
+interface ILegendIcons {
+  text: string;
+  src: string;
+  alt: string;
 }
 
 const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
   commodityResponse,
 }) => {
   const { isDark } = useColorMode();
+
   return (
     <VStack
       maxWidth={layoutConfig.maxWidth}
@@ -30,6 +47,25 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
       <Heading as="h2" size="md">
         Commodity: {commodityResponse[0]?.commodityDisplayName}
       </Heading>
+      <HStack>
+        <Heading as="h3" size="sm">
+          Legend:
+        </Heading>
+        <Flex gap={4}>
+          {legendItems.map((item: ILegendIcons, index: number) => (
+            <HStack key={index}>
+              <Text>{item.text}: </Text>
+              <Image
+                src={item.src}
+                alt={item.alt}
+                boxSize="20px"
+                backgroundSize="initial"
+                backgroundPosition="200px 0px"
+              />
+            </HStack>
+          ))}
+        </Flex>
+      </HStack>
       <SimpleGrid
         columns={[1, 3, 7]}
         width="100%"
@@ -55,7 +91,15 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
             {formatThousands(commodity.supply)}
           </GridItem>
           <GridItem minWidth="120px">{commodity.systemName}</GridItem>
-          <GridItem minWidth="120px">{commodity.station.name}</GridItem>
+          <GridItem
+            minWidth="fit-content"
+            display="flex"
+            flexWrap="nowrap"
+            gap={1}
+          >
+            {renderLandingIcon(commodity.station)}
+            {commodity.station.name}
+          </GridItem>
           <GridItem minWidth="120px">
             {commodity.station.arrivalDistance}
           </GridItem>
