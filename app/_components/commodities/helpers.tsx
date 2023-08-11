@@ -58,6 +58,7 @@ const legendItems = [
   },
 ];
 
+// calculate when the response was last updated
 const calculateTimeDifference = (then: string): string => {
   const now = new Date().toISOString();
   const timeDifferenceMilliseconds = Math.abs(
@@ -80,6 +81,7 @@ const calculateTimeDifference = (then: string): string => {
   return `${timeDifferenceHours} hours ago`;
 };
 
+// headings that sort should diplay and arrow indicating the direction of the sort
 const renderFilterButtonStatus = (
   filter: string,
   newFilter: string,
@@ -103,16 +105,28 @@ const renderFilterButtonStatus = (
   return <FaArrowsUpDown />;
 };
 
-const gridHeadings: { text: string; filter: string | null }[] = [
-  { text: 'Sell Price', filter: 'sellPrice' },
-  { text: 'Supply', filter: 'supply' },
-  { text: 'System', filter: null },
-  { text: 'Station', filter: null },
-  { text: 'Station Distance', filter: null },
-  { text: 'Distance', filter: 'distance' },
-  { text: 'Latest Update', filter: 'updateTime' },
+// determine what the results headings should say and if they should allow sorting
+const gridHeadings: { text: string; sort: string | null }[] = [
+  { text: 'Sell Price', sort: 'sellPrice' },
+  { text: 'Buy Price', sort: 'buyPrice' },
+  { text: 'Supply', sort: 'supply' },
+  { text: 'Demand', sort: 'demand' },
+  { text: 'System', sort: null },
+  { text: 'Station', sort: null },
+  { text: 'Station Distance', sort: null },
+  { text: 'Distance', sort: 'distance' },
+  { text: 'Latest Update', sort: null },
 ];
 
+const unnecessaryHeadings = (isBuying: boolean, newFilter: string | null) => {
+  if (isBuying && newFilter === 'buyPrice') return true;
+  if (isBuying && newFilter === 'demand') return true;
+  if (!isBuying && newFilter === 'sellPrice') return true;
+  if (!isBuying && newFilter === 'supply') return true;
+  return false;
+};
+
+// attach the sort buttons to the headings that sort, remove unnecessary headings
 const renderGridHeading = (
   text: string,
   filter: string,
@@ -120,34 +134,36 @@ const renderGridHeading = (
   ascending: boolean,
   setAscending: React.Dispatch<SetStateAction<boolean>>,
   newFilter: string | null,
+  isBuying: boolean,
 ) => {
-  if (newFilter) {
+  if (unnecessaryHeadings(isBuying, newFilter)) return null;
+  if (!newFilter) {
     return (
       <GridItem display="flex" alignItems="center">
-        <Button
-          variant="unstyled"
-          display="flex"
-          gap={1}
-          onClick={() => {
-            setFilter(newFilter as keyof ICommodityFormResponse);
-            setAscending(!ascending);
-          }}
-        >
-          {text}
-          {renderFilterButtonStatus(
-            filter,
-            newFilter as keyof ICommodityFormResponse,
-            ascending,
-            setAscending,
-            setFilter,
-          )}
-        </Button>
+        {text}
       </GridItem>
     );
   }
   return (
     <GridItem display="flex" alignItems="center">
-      {text}
+      <Button
+        variant="unstyled"
+        display="flex"
+        gap={1}
+        onClick={() => {
+          setFilter(newFilter as keyof ICommodityFormResponse);
+          setAscending(!ascending);
+        }}
+      >
+        {text}
+        {renderFilterButtonStatus(
+          filter,
+          newFilter as keyof ICommodityFormResponse,
+          ascending,
+          setAscending,
+          setFilter,
+        )}
+      </Button>
     </GridItem>
   );
 };

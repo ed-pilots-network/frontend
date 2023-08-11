@@ -24,6 +24,7 @@ interface IPageClientProps {
 
 const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isBuying, setIsBuying] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [fetchError, setFetchError] = useState<Error | null>(null);
   const [commodityResponse, setCommodityResponse] = useState<
@@ -34,6 +35,9 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
   const handleSubmit = async (data: SubmitProps) => {
     setIsLoading(true);
     setSubmitted(false);
+
+    if (data.minDemand === 0) setIsBuying(true);
+    if (data.minSupply === 0) setIsBuying(false);
 
     let submitData = `commodityDisplayName=${data.commodityDisplayName.value
       .split(' ')
@@ -103,6 +107,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
         <CommodityFormResponse
           // TODO: remove this slice after pagination is implemented - aslink87
           commodityResponse={commodityResponse.slice(0, 20)}
+          isBuying={isBuying}
         />
       );
     }

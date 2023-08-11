@@ -25,6 +25,7 @@ import {
 
 interface ICommodityFormResponseProps {
   commodityResponse: ICommodityFormResponse[];
+  isBuying: boolean;
 }
 
 interface ILegendIcons {
@@ -35,6 +36,7 @@ interface ILegendIcons {
 
 const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
   commodityResponse,
+  isBuying,
 }) => {
   const [filter, setFilter] = useState(
     'distance' as keyof ICommodityFormResponse,
@@ -44,6 +46,10 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
 
   const compareNumbers = (a: number, b: number) => {
     if (filter === 'sellPrice' || filter === 'supply') {
+      if (ascending) return b - a;
+      return a - b;
+    }
+    if (filter === 'buyPrice' || filter === 'demand') {
       if (ascending) return b - a;
       return a - b;
     }
@@ -99,7 +105,8 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
             setFilter,
             ascending,
             setAscending,
-            heading.filter,
+            heading.sort,
+            isBuying,
           ),
         )}
       </SimpleGrid>
@@ -111,10 +118,15 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
           .map((commodity, index) => (
             <SimpleGrid key={index} columns={[1, 3, 7]} width="100%" rowGap={1}>
               <GridItem minWidth="120px">
-                CR {formatThousands(commodity.sellPrice)}
+                CR{' '}
+                {isBuying
+                  ? formatThousands(commodity.sellPrice)
+                  : formatThousands(commodity.buyPrice)}
               </GridItem>
               <GridItem minWidth="120px">
-                {formatThousands(commodity.supply)}
+                {isBuying
+                  ? formatThousands(commodity.supply)
+                  : formatThousands(commodity.demand)}
               </GridItem>
               <GridItem minWidth="120px">{commodity.systemName}</GridItem>
               <GridItem
