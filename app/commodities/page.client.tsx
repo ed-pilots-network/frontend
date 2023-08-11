@@ -111,7 +111,6 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
 
   return (
     <Box
-      p={5}
       flex="1"
       as="main"
       backgroundImage={`url('/assets/Anaconda_Opacity.svg')`}
@@ -119,7 +118,12 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
       backgroundSize={{ base: 'contain', sm: '0', lg: '50%' }}
       backgroundPosition="center center"
     >
-      <Center maxWidth={layoutConfig.maxWidth} marginX="auto" opacity={0.8}>
+      <Center
+        maxWidth={layoutConfig.maxWidth}
+        marginX="auto"
+        opacity={0.9}
+        paddingY={5}
+      >
         <Flex flexDirection="column" gap={6} width="100%">
           <VStack align="stretch" gap={6}>
             <Flex direction="column" gap={2}>

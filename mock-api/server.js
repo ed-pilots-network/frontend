@@ -24,6 +24,7 @@ server.post('/comments', function (req, res, next) {
   next();
 });
 
+// serve commodity route with path resembling /api/v1/trade/commodity
 server.use(
   jsonServer.rewriter({
     '/api/v1/trade/commodity': '/commodity',

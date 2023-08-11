@@ -129,7 +129,6 @@ const Form: React.FC<FormProps> = ({
               )
             }
           >
-            <FormLabel>Commodities</FormLabel>
             <CommoditiesField control={control} commodities={commodities} />
             <FormErrorMessage>
               {errors.commodityDisplayName &&

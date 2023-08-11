@@ -1,11 +1,14 @@
-import { Image } from '@chakra-ui/react';
+import { ICommodityFormResponse } from '@/app/_types/commodity';
+import { Button, GridItem, Image } from '@chakra-ui/react';
+import { SetStateAction } from 'react';
+import { FaArrowDown, FaArrowsUpDown, FaArrowUp } from 'react-icons/fa6';
 
 interface IStationType {
   fleetCarrier: boolean | null;
   planetary: boolean | null;
 }
 
-const renderLandingIcon = (station: IStationType) => {
+const renderStationTypeIcon = (station: IStationType) => {
   if (station.fleetCarrier) {
     return (
       <Image
@@ -77,4 +80,83 @@ const calculateTimeDifference = (then: string): string => {
   return `${timeDifferenceHours} hours ago`;
 };
 
-export { renderLandingIcon, legendItems, calculateTimeDifference };
+const renderFilterButtonStatus = (
+  filter: string,
+  newFilter: string,
+  ascending: boolean,
+  setAscending: React.Dispatch<SetStateAction<boolean>>,
+  setFilter: React.Dispatch<SetStateAction<any>>,
+) => {
+  if (filter === newFilter) {
+    return (
+      <Button
+        variant="unstyled"
+        onClick={() => {
+          setFilter(newFilter);
+          setAscending(!ascending);
+        }}
+      >
+        {ascending ? <FaArrowDown /> : <FaArrowUp />}
+      </Button>
+    );
+  }
+  return <FaArrowsUpDown />;
+};
+
+const gridHeadings: { text: string; filter: string | null }[] = [
+  { text: 'Sell Price', filter: 'sellPrice' },
+  { text: 'Supply', filter: 'supply' },
+  { text: 'System', filter: null },
+  { text: 'Station', filter: null },
+  { text: 'Station Distance', filter: null },
+  { text: 'Distance', filter: 'distance' },
+  { text: 'Latest Update', filter: 'updateTime' },
+];
+
+const renderGridHeading = (
+  text: string,
+  filter: string,
+  setFilter: React.Dispatch<SetStateAction<any>>,
+  ascending: boolean,
+  setAscending: React.Dispatch<SetStateAction<boolean>>,
+  newFilter: string | null,
+) => {
+  if (newFilter) {
+    return (
+      <GridItem display="flex" alignItems="center">
+        <Button
+          variant="unstyled"
+          display="flex"
+          gap={1}
+          onClick={() => {
+            setFilter(newFilter as keyof ICommodityFormResponse);
+            setAscending(!ascending);
+          }}
+        >
+          {text}
+          {renderFilterButtonStatus(
+            filter,
+            newFilter as keyof ICommodityFormResponse,
+            ascending,
+            setAscending,
+            setFilter,
+          )}
+        </Button>
+      </GridItem>
+    );
+  }
+  return (
+    <GridItem display="flex" alignItems="center">
+      {text}
+    </GridItem>
+  );
+};
+
+export {
+  renderStationTypeIcon,
+  legendItems,
+  calculateTimeDifference,
+  renderFilterButtonStatus,
+  gridHeadings,
+  renderGridHeading,
+};

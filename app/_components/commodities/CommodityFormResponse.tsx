@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Flex,
@@ -16,9 +16,11 @@ import useColorMode from '@/app/_hooks/useColorMode';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
 import { formatThousands } from '@/app/_hooks/textFormatting';
 import {
-  renderLandingIcon,
+  renderStationTypeIcon,
   legendItems,
   calculateTimeDifference,
+  renderGridHeading,
+  gridHeadings,
 } from './helpers';
 
 interface ICommodityFormResponseProps {
@@ -34,14 +36,26 @@ interface ILegendIcons {
 const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
   commodityResponse,
 }) => {
+  const [filter, setFilter] = useState(
+    'distance' as keyof ICommodityFormResponse,
+  );
+  const [ascending, setAscending] = useState(true);
   const { isDark } = useColorMode();
+
+  const compareNumbers = (a: number, b: number) => {
+    if (filter === 'sellPrice' || filter === 'supply') {
+      if (ascending) return b - a;
+      return a - b;
+    }
+    return a - b;
+  };
 
   return (
     <VStack
       maxWidth={layoutConfig.maxWidth}
       width="100%"
       marginX="auto"
-      opacity={0.8}
+      opacity={0.9}
       borderWidth="2px"
       borderRadius="9px"
       borderColor={selectColor(isDark, 'border')}
@@ -78,43 +92,51 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
         borderColor={selectColor(isDark, 'border')}
         rowGap={1}
       >
-        <GridItem>Sell Price</GridItem>
-        <GridItem>Supply</GridItem>
-        <GridItem>System</GridItem>
-        <GridItem>Station</GridItem>
-        <GridItem>Station Distance</GridItem>
-        <GridItem>Distance</GridItem>
-        <GridItem>Latest Update</GridItem>
+        {gridHeadings.map((heading) =>
+          renderGridHeading(
+            heading.text,
+            filter,
+            setFilter,
+            ascending,
+            setAscending,
+            heading.filter,
+          ),
+        )}
       </SimpleGrid>
-      {commodityResponse?.map((commodity, index) => (
-        <SimpleGrid key={index} columns={[1, 3, 7]} width="100%" rowGap={1}>
-          <GridItem minWidth="120px">
-            CR {formatThousands(commodity.sellPrice)}
-          </GridItem>
-          <GridItem minWidth="120px">
-            {formatThousands(commodity.supply)}
-          </GridItem>
-          <GridItem minWidth="120px">{commodity.systemName}</GridItem>
-          <GridItem
-            minWidth="fit-content"
-            display="flex"
-            flexWrap="nowrap"
-            gap={1}
-          >
-            {renderLandingIcon(commodity.station)}
-            {commodity.station.name}
-          </GridItem>
-          <GridItem minWidth="120px">
-            {formatThousands(commodity.station.arrivalDistance)} ls
-          </GridItem>
-          <GridItem minWidth="120px">
-            {formatThousands(commodity.distance)} ly
-          </GridItem>
-          <GridItem minWidth="120px">
-            {calculateTimeDifference(commodity.pricesUpdatedAt)}
-          </GridItem>
-        </SimpleGrid>
-      ))}
+      {commodityResponse.length > 0 &&
+        commodityResponse
+          .sort((a: ICommodityFormResponse, b: ICommodityFormResponse) =>
+            compareNumbers(a[filter] as number, b[filter] as number),
+          )
+          .map((commodity, index) => (
+            <SimpleGrid key={index} columns={[1, 3, 7]} width="100%" rowGap={1}>
+              <GridItem minWidth="120px">
+                CR {formatThousands(commodity.sellPrice)}
+              </GridItem>
+              <GridItem minWidth="120px">
+                {formatThousands(commodity.supply)}
+              </GridItem>
+              <GridItem minWidth="120px">{commodity.systemName}</GridItem>
+              <GridItem
+                minWidth="fit-content"
+                display="flex"
+                flexWrap="nowrap"
+                gap={1}
+              >
+                {renderStationTypeIcon(commodity.station)}
+                {commodity.station.name}
+              </GridItem>
+              <GridItem minWidth="120px">
+                {formatThousands(commodity.station.arrivalDistance)} ls
+              </GridItem>
+              <GridItem minWidth="120px">
+                {formatThousands(commodity.distance)} ly
+              </GridItem>
+              <GridItem minWidth="120px">
+                {calculateTimeDifference(commodity.pricesUpdatedAt)}
+              </GridItem>
+            </SimpleGrid>
+          ))}
     </VStack>
   );
 };

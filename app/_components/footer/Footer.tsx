@@ -12,6 +12,7 @@ const Footer = () => {
       textAlign="center"
       bg={selectColor(isDark, 'box')}
       color={selectColor(isDark, 'textLight')}
+      zIndex={1}
     >
       Engineered by the EDPN Team
     </Box>
