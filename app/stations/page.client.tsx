@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, HStack, Heading, Flex } from '@chakra-ui/react';
-import Form, { SubmitProps } from '@/components/systems/Form';
+import { Box, Flex, HStack, Heading } from '@chakra-ui/react';
+import Form, { SubmitProps } from '@/components/stations/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import { SystemForm } from '@/app/_types/forms';
+import { StationForm } from '@/app/_types/forms';
 
 const PageClient = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,7 @@ const PageClient = () => {
   const handleSubmit = (data: SubmitProps) => {
     setIsLoading(true);
 
-    let submitData: SystemForm = {
+    let submitData: StationForm = {
       ...data,
     };
 
@@ -35,7 +35,7 @@ const PageClient = () => {
             marginX={{ base: 'auto', md: '0', lg: '0' }}
             color={selectColor(isDark, 'accent-text')}
           >
-            Systems
+            Stations
           </Heading>
         </Box>
       </HStack>

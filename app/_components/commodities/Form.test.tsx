@@ -14,7 +14,7 @@ const mockData = {
 };
 
 jest.mock('@/lib/commodity-list', () => ['mt_gold']);
-jest.mock('../inputs/commodities/commodities', () => ({
+jest.mock('../inputs/Commodities', () => ({
   __esModule: true,
   default: jest
     .fn()

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import LandingPad, { radioValues } from '../LandingPads';
-import { CommodityForm } from '../../commodities/types';
+import { CommodityForm } from '@/app/_types/forms';
 
 describe('Landing Pad Field', () => {
   beforeEach(() => {

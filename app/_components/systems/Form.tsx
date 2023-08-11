@@ -30,7 +30,7 @@ import EconomiesField from '../inputs/Economies';
 import Select from '../inputs/form/Select';
 
 export const SystemFormSchema = z.object({
-  system: z.string(),
+  systemId: z.string(),
   onlyPopulated: z.boolean(),
   allegiance: z
     .enum(['', ...(allegiances.map((item) => item) as [string, ...string[]])])
@@ -93,7 +93,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         marginBottom="10"
       >
         <GridItem colSpan={{ base: 1, md: 2, lg: 4 }}>
-          <FormControl isInvalid={!!(errors.system && errors.system.message)}>
+          <FormControl
+            isInvalid={!!(errors.systemId && errors.systemId.message)}
+          >
             <FormLabel>System</FormLabel>
             <Input
               variant="outline"
@@ -102,10 +104,10 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               _hover={{
                 borderColor: selectColor(isDark, 'border'),
               }}
-              {...register('system')}
+              {...register('systemId')}
             />
             <FormErrorMessage>
-              {errors.system && errors.system.message}
+              {errors.systemId && errors.systemId.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>

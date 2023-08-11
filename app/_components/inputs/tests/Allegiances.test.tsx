@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import allegiances from '@/app/_lib/allegiance-list';
 import AllegiancesField from '../Allegiances';
-import { SystemForm } from '../../systems/types';
+import { SystemForm } from '@/app/_types/forms';
 
-describe('AllegiancesField', () => {
+describe('Allegiances Field', () => {
   beforeEach(() => {
     const Component = () => {
       const { register } = useForm<SystemForm>();
