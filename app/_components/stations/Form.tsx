@@ -27,8 +27,8 @@ import {
   PowerEffectsField,
   FactionStatesField,
   EconomiesField,
-  LandingPad,
-  StationTypes,
+  LandingPadsField,
+  StationTypesField,
   ShipsField,
   ModulesField,
   CommoditiesField,
@@ -292,7 +292,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl>
             <FormLabel>Station Type</FormLabel>
-            <StationTypes register={register} />
+            <StationTypesField register={register} />
           </FormControl>
         </GridItem>
 
@@ -303,7 +303,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             }
           >
             <FormLabel>Ship Size</FormLabel>
-            <LandingPad register={register('landingPadSize')} />
+            <LandingPadsField register={register('landingPadSize')} />
             <FormErrorMessage>
               {errors.landingPadSize && errors.landingPadSize.message}
             </FormErrorMessage>

@@ -12,7 +12,7 @@ export const radioValues = [
   { name: 'Large', value: 'landingPadLarge', checked: true },
 ];
 
-const LandingPad = ({ register }: Props) => (
+const LandingPadsField = ({ register }: Props) => (
   <RadioGroup>
     {radioValues.map((checkbox, index) => (
       <Radio
@@ -26,4 +26,4 @@ const LandingPad = ({ register }: Props) => (
   </RadioGroup>
 );
 
-export default LandingPad;
+export default LandingPadsField;

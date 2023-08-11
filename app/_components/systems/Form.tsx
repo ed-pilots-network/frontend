@@ -21,13 +21,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import PowersField from '../inputs/Powers';
-import AllegiancesField from '../inputs/Allegiances';
-import GovernmentsField from '../inputs/Governments';
-import PowerEffectsField from '../inputs/PowerEffects';
-import FactionStatesField from '../inputs/FactionStates';
-import EconomiesField from '../inputs/Economies';
 import Select from '../inputs/form/Select';
+import {
+  AllegiancesField,
+  EconomiesField,
+  FactionStatesField,
+  GovernmentsField,
+  PowerEffectsField,
+  PowersField,
+} from '../inputs';
 
 export const SystemFormSchema = z.object({
   systemId: z.string(),

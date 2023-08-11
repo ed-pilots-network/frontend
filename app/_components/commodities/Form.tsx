@@ -19,10 +19,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import CommoditiesField from '../inputs/Commodities';
-import StationTypes from '../inputs/StationTypes';
-import LandingPad from '../inputs/LandingPads';
 import { CommodityForm } from '@/app/_types/forms';
+import {
+  CommoditiesField,
+  LandingPadsField,
+  StationTypesField,
+} from '../inputs';
 
 export const CommodityFormSchema = z.object({
   commodityId: z.object({
@@ -156,7 +158,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         >
           <FormControl width="100%">
             <FormLabel>Include</FormLabel>
-            <StationTypes register={register} />
+            <StationTypesField register={register} />
           </FormControl>
           <FormControl
             width="100%"
@@ -165,7 +167,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             }
           >
             <FormLabel>Min Landing Pad Size</FormLabel>
-            <LandingPad register={register('maxLandingPadSize')} />
+            <LandingPadsField register={register('maxLandingPadSize')} />
           </FormControl>
         </Stack>
         <Stack
