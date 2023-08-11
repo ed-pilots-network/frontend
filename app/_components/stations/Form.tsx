@@ -20,18 +20,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import PowersField from '@/app/_components/inputs/Powers';
-import AllegiancesField from '@/app/_components/inputs/Allegiances';
-import GovernmentsField from '@/app/_components/inputs/Governments';
-import PowerEffectsField from '@/app/_components/inputs/PowerEffects';
-import FactionStatesField from '@/app/_components/inputs/FactionStates';
-import EconomiesField from '@/app/_components/inputs/Economies';
-import LandingPad from '@/app/_components/inputs/LandingPads';
-import StationTypes from '@/app/_components/inputs/StationTypes';
-import ShipsField from '@/app/_components/inputs/Ships';
-import ModulesField from '@/app/_components/inputs/Modules';
-import CommoditiesField from '@/app/_components/inputs/Commodities';
-import FacilitiesField from '@/app/_components/inputs/Facilities';
+import {
+  PowersField,
+  AllegiancesField,
+  GovernmentsField,
+  PowerEffectsField,
+  FactionStatesField,
+  EconomiesField,
+  LandingPad,
+  StationTypes,
+  ShipsField,
+  ModulesField,
+  CommoditiesField,
+  FacilitiesField,
+} from '@/app/_components/inputs';
 import CheckboxGroup from '../form/CheckboxGroup';
 
 export const StationFormSchema = z.object({
