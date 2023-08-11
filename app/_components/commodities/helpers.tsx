@@ -55,4 +55,26 @@ const legendItems = [
   },
 ];
 
-export { renderLandingIcon, legendItems };
+const calculateTimeDifference = (then: string): string => {
+  const now = new Date().toISOString();
+  const timeDifferenceMilliseconds = Math.abs(
+    new Date(now).getTime() - new Date(then).getTime(),
+  );
+  const timeDifferenceHours = Math.ceil(
+    timeDifferenceMilliseconds / (1000 * 3600),
+  );
+
+  if (timeDifferenceHours >= 24) {
+    const timeDifferenceDays = Math.floor(timeDifferenceHours / 24);
+    if (timeDifferenceDays > 1) {
+      return `${timeDifferenceDays} days ago`;
+    }
+    return `${timeDifferenceHours} day ago`;
+  }
+  if (timeDifferenceHours === 1) {
+    return `${timeDifferenceHours} hour ago`;
+  }
+  return `${timeDifferenceHours} hours ago`;
+};
+
+export { renderLandingIcon, legendItems, calculateTimeDifference };

@@ -14,8 +14,12 @@ import layoutConfig from '@/app/_config/layout';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
-import { formatLocalTime, formatThousands } from '@/app/_hooks/textFormatting';
-import { renderLandingIcon, legendItems } from './helpers';
+import { formatThousands } from '@/app/_hooks/textFormatting';
+import {
+  renderLandingIcon,
+  legendItems,
+  calculateTimeDifference,
+} from './helpers';
 
 interface ICommodityFormResponseProps {
   commodityResponse: ICommodityFormResponse[];
@@ -101,13 +105,13 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
             {commodity.station.name}
           </GridItem>
           <GridItem minWidth="120px">
-            {commodity.station.arrivalDistance}
+            {formatThousands(commodity.station.arrivalDistance)} ls
           </GridItem>
           <GridItem minWidth="120px">
-            {formatThousands(commodity.distance)}
+            {formatThousands(commodity.distance)} ly
           </GridItem>
           <GridItem minWidth="120px">
-            {formatLocalTime(commodity.pricesUpdatedAt)}
+            {calculateTimeDifference(commodity.pricesUpdatedAt)}
           </GridItem>
         </SimpleGrid>
       ))}

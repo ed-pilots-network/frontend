@@ -1,6 +1,4 @@
-const credits = new Intl.NumberFormat('en-US', {
-  maximumSignificantDigits: 3,
-});
+const credits = new Intl.NumberFormat('en-US');
 
 const formatThousands = (price: number) => credits.format(price);
 
