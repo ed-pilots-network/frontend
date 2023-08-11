@@ -13,7 +13,7 @@ export const checkboxValues = [
   { name: 'Fleet Carriers', value: 'includeFleetCarriers' },
 ];
 
-const StationTypes = ({ register }: Props) => (
+const StationTypesField = ({ register }: Props) => (
   <CheckboxGroup>
     {checkboxValues.map((checkbox, index) => (
       <Checkbox
@@ -26,4 +26,4 @@ const StationTypes = ({ register }: Props) => (
   </CheckboxGroup>
 );
 
-export default StationTypes;
+export default StationTypesField;

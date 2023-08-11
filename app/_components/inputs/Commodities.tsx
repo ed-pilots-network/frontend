@@ -45,8 +45,8 @@ const CommoditiesField: React.FC<CommodityProps> = ({
         <FormControl width="100%" isInvalid={!!error} id="commodity">
           <FormLabel>Commodity</FormLabel>
           <Select<CommoditySelectItems, true, GroupBase<CommoditySelectItems>>
-            id="commodity-field"
-            instanceId="commodity-field"
+            id="commodityDisplayName"
+            instanceId="commodityDisplayName"
             name={name}
             ref={ref}
             onChange={onChange}

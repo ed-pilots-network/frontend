@@ -5,7 +5,7 @@ import { Box, HStack, Heading, Center, VStack } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/systems/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
-import { SystemForm } from '../_components/systems/types';
+import { SystemForm } from '@/app/_types/forms';
 import layoutConfig from '../_config/layout';
 
 const PageClient = () => {

@@ -20,9 +20,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import { ICommodity, ICommodityFormRequest } from '@/app/_types/commodity';
-import CommoditiesField from '../inputs/commodities/commodities';
-import StationTypes from '../inputs/StationTypes';
-import LandingPad from '../inputs/LandingPads';
+import {
+  CommoditiesField,
+  LandingPadsField,
+  StationTypesField,
+} from '../inputs';
 
 export const CommodityFormSchema = z.object({
   commodityDisplayName: z.object({
@@ -119,7 +121,21 @@ const Form: React.FC<FormProps> = ({
           width="100%"
           spacing={4}
         >
-          <CommoditiesField control={control} commodities={commodities} />
+          <FormControl
+            isInvalid={
+              !!(
+                errors.commodityDisplayName &&
+                errors.commodityDisplayName.message
+              )
+            }
+          >
+            <FormLabel>Commodities</FormLabel>
+            <CommoditiesField control={control} commodities={commodities} />
+            <FormErrorMessage>
+              {errors.commodityDisplayName &&
+                errors.commodityDisplayName.message}
+            </FormErrorMessage>
+          </FormControl>
           <FormControl
             width="100%"
             isInvalid={!!(errors.system && errors.system.message)}
@@ -149,7 +165,7 @@ const Form: React.FC<FormProps> = ({
         >
           <FormControl width="100%">
             <FormLabel>Include</FormLabel>
-            <StationTypes register={register} />
+            <StationTypesField register={register} />
           </FormControl>
           <FormControl
             width="100%"
@@ -157,8 +173,8 @@ const Form: React.FC<FormProps> = ({
               !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
             }
           >
-            <FormLabel>Max Landing Pad Size</FormLabel>
-            <LandingPad register={register('maxLandingPadSize')} />
+            <FormLabel>Min Landing Pad Size</FormLabel>
+            <LandingPadsField register={register('maxLandingPadSize')} />
           </FormControl>
         </Stack>
         <Stack
