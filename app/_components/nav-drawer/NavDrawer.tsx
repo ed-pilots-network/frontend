@@ -80,9 +80,6 @@ const NavDrawer = () => {
             backgroundColor={selectColor(isDark, 'box')}
             color={selectColor(isDark, 'textLight')}
           >
-            <Heading as="h1" size="xl">
-              Menu
-            </Heading>
             <Divider opacity="1.0" marginBottom={8}></Divider>
             {Tags.map((tag) => (
               <Box key={tag}>
