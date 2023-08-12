@@ -13,7 +13,6 @@
         "endOfLine": "auto"
       }
     ],
-    "no-console": "off",
     "prefer-const": "off",
     "no-use-before-define": "off",
     "react/react-in-jsx-scope": "off",
