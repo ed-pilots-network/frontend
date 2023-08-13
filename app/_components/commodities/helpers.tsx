@@ -105,23 +105,6 @@ const renderFilterButtonStatus = (
   return <FaArrowsUpDown />;
 };
 
-// determine what the results headings should say and if they should allow sorting
-const gridHeadings: {
-  text: string;
-  sort: string | null;
-  hide: string;
-}[] = [
-  { text: 'Sell Price', sort: 'sellPrice', hide: '' },
-  { text: 'Buy Price', sort: 'buyPrice', hide: '' },
-  { text: 'Supply', sort: 'supply', hide: '' },
-  { text: 'Demand', sort: 'demand', hide: '' },
-  { text: 'System', sort: null, hide: '' },
-  { text: 'Station', sort: null, hide: 'md' },
-  { text: 'Station Distance', sort: null, hide: 'lg' },
-  { text: 'Distance', sort: 'distance', hide: '' },
-  { text: 'Latest Update', sort: null, hide: '' },
-];
-
 const unnecessaryHeadings = (isBuying: boolean, newFilter: string | null) => {
   if (isBuying && newFilter === 'buyPrice') return true;
   if (isBuying && newFilter === 'demand') return true;
@@ -132,6 +115,7 @@ const unnecessaryHeadings = (isBuying: boolean, newFilter: string | null) => {
 
 // attach the sort buttons to the headings that sort, remove unnecessary headings
 const renderGridHeading = (
+  id: number,
   text: string,
   filter: string,
   setFilter: React.Dispatch<SetStateAction<any>>,
@@ -139,18 +123,17 @@ const renderGridHeading = (
   setAscending: React.Dispatch<SetStateAction<boolean>>,
   newFilter: string | null,
   isBuying: boolean,
-  hide: string,
 ) => {
   if (unnecessaryHeadings(isBuying, newFilter)) return null;
   if (!newFilter) {
     return (
-      <GridItem display="flex" alignItems="center" hideBelow={hide}>
+      <GridItem display="flex" alignItems="center" key={id}>
         {text}
       </GridItem>
     );
   }
   return (
-    <GridItem display="flex" alignItems="center">
+    <GridItem display="flex" alignItems="center" key={id}>
       <Button
         variant="unstyled"
         display="flex"
@@ -178,6 +161,5 @@ export {
   legendItems,
   calculateTimeDifference,
   renderFilterButtonStatus,
-  gridHeadings,
   renderGridHeading,
 };
