@@ -106,16 +106,20 @@ const renderFilterButtonStatus = (
 };
 
 // determine what the results headings should say and if they should allow sorting
-const gridHeadings: { text: string; sort: string | null }[] = [
-  { text: 'Sell Price', sort: 'sellPrice' },
-  { text: 'Buy Price', sort: 'buyPrice' },
-  { text: 'Supply', sort: 'supply' },
-  { text: 'Demand', sort: 'demand' },
-  { text: 'System', sort: null },
-  { text: 'Station', sort: null },
-  { text: 'Station Distance', sort: null },
-  { text: 'Distance', sort: 'distance' },
-  { text: 'Latest Update', sort: null },
+const gridHeadings: {
+  text: string;
+  sort: string | null;
+  hide: string;
+}[] = [
+  { text: 'Sell Price', sort: 'sellPrice', hide: '' },
+  { text: 'Buy Price', sort: 'buyPrice', hide: '' },
+  { text: 'Supply', sort: 'supply', hide: '' },
+  { text: 'Demand', sort: 'demand', hide: '' },
+  { text: 'System', sort: null, hide: '' },
+  { text: 'Station', sort: null, hide: 'md' },
+  { text: 'Station Distance', sort: null, hide: 'lg' },
+  { text: 'Distance', sort: 'distance', hide: '' },
+  { text: 'Latest Update', sort: null, hide: '' },
 ];
 
 const unnecessaryHeadings = (isBuying: boolean, newFilter: string | null) => {
@@ -135,11 +139,12 @@ const renderGridHeading = (
   setAscending: React.Dispatch<SetStateAction<boolean>>,
   newFilter: string | null,
   isBuying: boolean,
+  hide: string,
 ) => {
   if (unnecessaryHeadings(isBuying, newFilter)) return null;
   if (!newFilter) {
     return (
-      <GridItem display="flex" alignItems="center">
+      <GridItem display="flex" alignItems="center" hideBelow={hide}>
         {text}
       </GridItem>
     );

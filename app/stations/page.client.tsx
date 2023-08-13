@@ -32,8 +32,13 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
   };
 
   return (
-    <Box p={5} flex="1" as="main">
-      <Center maxWidth={layoutConfig.maxWidth} marginX="auto" opacity={0.8}>
+    <Box paddingX={2} flex="1" as="main">
+      <Center
+        maxWidth={layoutConfig.maxWidth}
+        marginX="auto"
+        opacity={0.8}
+        paddingY={5}
+      >
         <Flex flexDirection="column" gap={6} width="100%">
           <HStack spacing={4}>
             <Box alignSelf="baseline">

@@ -10,12 +10,14 @@ import {
   AlertIcon,
   Flex,
   Button,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import { ICommodity, ICommodityFormResponse } from '@/app/_types/commodity';
 import Form, { SubmitProps } from '@/components/commodities/Form';
 import CommodityFormResponse from '@/components/commodities/CommodityFormResponse';
+import CommodityFormResponseMobile from '@/components/commodities/CommodityFormResponseMobile';
 import layoutConfig from '../_config/layout';
 
 interface IPageClientProps {
@@ -30,7 +32,9 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
   const [commodityResponse, setCommodityResponse] = useState<
     ICommodityFormResponse[]
   >([]);
+
   const { isDark } = useColorMode();
+  const [isLarge] = useMediaQuery('(min-width: 1024px)');
 
   const handleSubmit = async (data: SubmitProps) => {
     setIsLoading(true);
@@ -39,7 +43,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
     if (data.minDemand === 0) setIsBuying(true);
     if (data.minSupply === 0) setIsBuying(false);
 
-    let submitData = `commodityDisplayName=${data.commodityDisplayName.value
+    let queryString = `commodityDisplayName=${data.commodityDisplayName.value
       .split(' ')
       .join('%20')}&maxLandingPadSize=${data.maxLandingPadSize}&minSupply=${
       data.minSupply
@@ -51,7 +55,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
 
     try {
       const commodityReq = await fetch(
-        `/api/v1/trade/locate-commodity/filter?${submitData}`,
+        `/api/v1/trade/locate-commodity/filter?${queryString}`,
       );
       const commodityRes = await commodityReq.json();
       setCommodityResponse(commodityRes);
@@ -85,33 +89,23 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
     }
   };
 
-  const renderCommodityData = () => {
-    if (fetchError) {
-      return (
-        <Alert status="error">
-          <AlertIcon />
-          Failed to fetch commodity data!
-        </Alert>
-      );
-    }
-    if (submitted && commodityResponse.length === 0) {
-      return (
-        <Alert status="warning">
-          <AlertIcon />
-          Commodity Not Found!
-        </Alert>
-      );
-    }
-    if (submitted && commodityResponse.length > 0) {
+  const checkBreakpointBeforeShowingResponse = () => {
+    if (isLarge) {
       return (
         <CommodityFormResponse
-          // TODO: remove this slice after pagination is implemented - aslink87
+          // TODO: remove this slice after pagination/truncate is implemented - aslink87
           commodityResponse={commodityResponse.slice(0, 20)}
           isBuying={isBuying}
         />
       );
     }
-    return null;
+    return (
+      <CommodityFormResponseMobile
+        // TODO: remove this slice after pagination/truncate is implemented - aslink87
+        commodityResponse={commodityResponse.slice(0, 20)}
+        isBuying={isBuying}
+      />
+    );
   };
 
   return (
@@ -122,6 +116,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
       backgroundRepeat="no-repeat"
       backgroundSize={{ base: 'contain', sm: '0', lg: '50%' }}
       backgroundPosition="center center"
+      paddingX={2}
     >
       <Center
         maxWidth={layoutConfig.maxWidth}
@@ -176,7 +171,21 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
               Submit Example
             </Button>
           </VStack>
-          {renderCommodityData()}
+          {fetchError && (
+            <Alert status="error">
+              <AlertIcon />
+              Failed to fetch commodity data!
+            </Alert>
+          )}
+          {submitted && commodityResponse.length === 0 && (
+            <Alert status="warning">
+              <AlertIcon />
+              Commodity Not Found!
+            </Alert>
+          )}
+          {submitted &&
+            commodityResponse.length > 0 &&
+            checkBreakpointBeforeShowingResponse()}
         </Flex>
       </Center>
     </Box>

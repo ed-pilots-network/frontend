@@ -69,7 +69,7 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
       padding="1rem"
     >
       <Heading as="h2" size="md">
-        Commodity: {commodityResponse[0]?.commodityDisplayName}
+        Commodity Mobile: {commodityResponse[0]?.commodityDisplayName}
       </Heading>
       <HStack>
         <Heading as="h3" size="sm">
@@ -91,7 +91,7 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
         </Flex>
       </HStack>
       <SimpleGrid
-        columns={[5, 7]}
+        columns={[5, 5, 7]}
         width="100%"
         fontWeight="bold"
         borderBottom="1px"
@@ -120,7 +120,7 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
           .map((commodity, index) => (
             <SimpleGrid
               key={index}
-              columns={[5, 7]}
+              columns={[5, 5, 7]}
               width="100%"
               rowGap={1}
               fontSize="sm"
@@ -136,7 +136,7 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
                   ? formatThousands(commodity.supply)
                   : formatThousands(commodity.demand)}
               </GridItem>
-              <GridItem width="max-content" minWidth="180px">
+              <GridItem width="max-content" minWidth="150px">
                 {commodity.systemName}
               </GridItem>
               <GridItem

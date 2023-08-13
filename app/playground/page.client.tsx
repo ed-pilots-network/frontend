@@ -73,9 +73,9 @@ const PageClient = ({ posts, commodity }: PageClientProps) => {
   };
 
   return (
-    <Box p={5} flex="1" as="main">
-      <Center maxWidth={layoutConfig.maxWidth} marginX="auto">
-        <Flex flexDirection="column" gap="24px" width="100%">
+    <Box paddingX={2} flex="1" as="main">
+      <Center maxWidth={layoutConfig.maxWidth} marginX="auto" paddingY={5}>
+        <Flex flexDirection="column" gap="24px" width="100%{}">
           <Heading as="h1" size="lg">
             Playground
           </Heading>
