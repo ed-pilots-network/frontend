@@ -16,8 +16,9 @@ import {
   Icon,
   LinkOverlay,
   Divider,
+  useBreakpointValue,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 import { HamburgerIcon } from '@chakra-ui/icons';
@@ -35,6 +36,14 @@ const NavDrawer = () => {
   const onOpen = () => {
     setIsOpen(true);
   };
+
+  // Close the drawer if the screen resizes above the md breakpoint
+  const hideDrawer = !useBreakpointValue({ base: true, md: false });
+  useEffect(() => {
+    if (isOpen && hideDrawer) {
+      onClose();
+    }
+  }, [hideDrawer, isOpen]);
 
   return (
     <>
