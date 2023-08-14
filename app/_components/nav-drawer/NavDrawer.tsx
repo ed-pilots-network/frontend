@@ -59,13 +59,13 @@ const NavDrawer = () => {
                 <Image
                   src={'/EDPN_logo_dark_background.png'}
                   alt="Logo"
-                  boxSize="75px"
+                  boxSize="50px"
                 />
               </Link>
               <Link href="/">
                 <Text
                   marginLeft="2"
-                  fontSize="6xl"
+                  fontSize="4xl"
                   fontWeight="700"
                   color={selectColor(isDark, 'textLight')}
                   className={rift.className}
@@ -80,22 +80,19 @@ const NavDrawer = () => {
             backgroundColor={selectColor(isDark, 'box')}
             color={selectColor(isDark, 'textLight')}
           >
-            <Heading as="h1" size="2xl">
-              Menu
-            </Heading>
             <Divider opacity="1.0" marginBottom={8}></Divider>
             {Tags.map((tag) => (
               <Box key={tag}>
                 <Heading textTransform="capitalize" size="md" as="h2">
                   {tag}
                 </Heading>
-                <Box>
+                <Box marginBottom={6}>
                   {ModuleProps.filter(
                     (module: Module) => module.tag === tag,
                   ).map((module) => (
                     <LinkBox
                       borderRadius="lg"
-                      padding={4}
+                      padding={2}
                       key={module.title}
                       _hover={{
                         backgroundColor: selectColor(isDark, 'background'),
