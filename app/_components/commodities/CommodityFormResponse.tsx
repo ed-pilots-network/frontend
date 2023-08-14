@@ -5,10 +5,8 @@ import layoutConfig from '@/app/_config/layout';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
-import { legendItems } from './helpers';
-import FormResponseHeading from './components/FormResponseHeading';
-import GridHeadings from './components/GridHeadings';
-import GridBodyItem from './components/GridBodyItem';
+import { compareNumbers, legendItems } from './helpers';
+import { FormResponseHeading, GridHeadings, GridBodyItem } from './components';
 
 interface ICommodityFormResponseProps {
   commodityResponse: ICommodityFormResponse[];
@@ -24,18 +22,6 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
   );
   const [ascending, setAscending] = useState(true);
   const { isDark } = useColorMode();
-
-  const compareNumbers = (a: number, b: number) => {
-    if (filter === 'sellPrice' || filter === 'supply') {
-      if (ascending) return b - a;
-      return a - b;
-    }
-    if (filter === 'buyPrice' || filter === 'demand') {
-      if (ascending) return b - a;
-      return a - b;
-    }
-    return a - b;
-  };
 
   return (
     <VStack
@@ -63,7 +49,12 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
       {commodityResponse.length > 0 &&
         commodityResponse
           .sort((a: ICommodityFormResponse, b: ICommodityFormResponse) =>
-            compareNumbers(a[filter] as number, b[filter] as number),
+            compareNumbers(
+              a[filter] as number,
+              b[filter] as number,
+              filter,
+              ascending,
+            ),
           )
           .map((commodity, index) => (
             <GridBodyItem

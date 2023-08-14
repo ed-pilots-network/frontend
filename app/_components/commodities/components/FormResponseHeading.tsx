@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Flex, HStack, Heading, Image, Text } from '@chakra-ui/react';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
 
@@ -20,13 +21,13 @@ const FormResponseHeading: React.FC<IFormResponseHeadProps> = ({
       Commodity: {commodityResponse[0]?.commodityDisplayName}
     </Heading>
     <HStack>
-      <Heading as="h3" size="sm">
+      <Heading as="h3" size="sm" hideBelow="md">
         Legend:
       </Heading>
-      <Flex gap={4}>
+      <Flex gap={[1, 1, 4]}>
         {legendItems.map((item, index) => (
           <HStack key={index}>
-            <Text>{item.text}: </Text>
+            <Text size="sm">{item.text}: </Text>
             <Image
               src={item.src}
               alt={item.alt}

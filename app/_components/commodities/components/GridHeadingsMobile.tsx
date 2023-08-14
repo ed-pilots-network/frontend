@@ -13,7 +13,7 @@ interface IGridHeadingsProps {
   setAscending: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const GridHeadings: React.FC<IGridHeadingsProps> = ({
+const GridHeadingsMobile: React.FC<IGridHeadingsProps> = ({
   filter,
   isBuying,
   setFilter,
@@ -32,10 +32,7 @@ const GridHeadings: React.FC<IGridHeadingsProps> = ({
     { id: 2, text: 'Supply', sortByString: 'supply' },
     { id: 3, text: 'Demand', sortByString: 'demand' },
     { id: 4, text: 'System', sortByString: null },
-    { id: 5, text: 'Station', sortByString: null },
-    { id: 6, text: 'Station Distance', sortByString: null },
-    { id: 7, text: 'Distance', sortByString: 'distance' },
-    { id: 8, text: 'Latest Update', sortByString: null },
+    { id: 5, text: 'Distance', sortByString: 'distance' },
   ];
 
   const unnecessaryHeadings = (newFilter: string | null) => {
@@ -55,7 +52,7 @@ const GridHeadings: React.FC<IGridHeadingsProps> = ({
 
   return (
     <SimpleGrid
-      columns={[5, 7]}
+      columns={[4, 4]}
       width="100%"
       fontWeight="bold"
       borderBottom="1px"
@@ -92,4 +89,4 @@ const GridHeadings: React.FC<IGridHeadingsProps> = ({
   );
 };
 
-export default GridHeadings;
+export default GridHeadingsMobile;

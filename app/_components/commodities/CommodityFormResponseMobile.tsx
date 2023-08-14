@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 
-import { Text, VStack } from '@chakra-ui/react';
+import { Table, TableContainer, VStack } from '@chakra-ui/react';
 import layoutConfig from '@/app/_config/layout';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
-import { legendItems } from './helpers';
-import FormResponseHeading from './components/FormResponseHeading';
-import GridHeadings from './components/GridHeadings';
+import { compareNumbers, legendItems } from './helpers';
+import {
+  FormResponseHeading,
+  GridHeadingsMobile,
+  GridBodyItemMobile,
+} from './components';
 
 interface ICommodityFormResponseProps {
   commodityResponse: ICommodityFormResponse[];
@@ -40,14 +43,37 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
         commodityResponse={commodityResponse}
         legendItems={legendItems}
       />
-      <GridHeadings
+      <GridHeadingsMobile
         filter={filter}
         isBuying={isBuying}
         setFilter={setFilter}
         ascending={ascending}
         setAscending={setAscending}
       />
-      <Text>Better get to work</Text>
+      <TableContainer width="100%">
+        <Table variant="unstyled" fontSize="sm">
+          {commodityResponse.length > 0 && (
+            <>
+              {commodityResponse
+                .sort((a: ICommodityFormResponse, b: ICommodityFormResponse) =>
+                  compareNumbers(
+                    a[filter] as number,
+                    b[filter] as number,
+                    filter,
+                    ascending,
+                  ),
+                )
+                .map((commodity, index) => (
+                  <GridBodyItemMobile
+                    key={index}
+                    commodity={commodity}
+                    isBuying={isBuying}
+                  />
+                ))}
+            </>
+          )}
+        </Table>
+      </TableContainer>
     </VStack>
   );
 };
