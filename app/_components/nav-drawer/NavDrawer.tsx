@@ -9,7 +9,6 @@ import {
   Image,
   Flex,
   Link,
-  Text,
   Heading,
   LinkBox,
   Box,
@@ -22,7 +21,6 @@ import { useState, useEffect } from 'react';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { rift } from '@/app/_config/theme/fonts';
 import ModuleProps, { Module, Tags } from '../../_lib/moduleProps';
 
 const NavDrawer = () => {
@@ -66,21 +64,10 @@ const NavDrawer = () => {
             <Flex alignItems="center" justifyContent="center">
               <Link href="/">
                 <Image
-                  src={'/EDPN_logo_dark_background.png'}
+                  src={'/EDPN_logo_spelled_nav_drawer.png'}
+                  objectFit="cover"
                   alt="Logo"
-                  boxSize="50px"
                 />
-              </Link>
-              <Link href="/">
-                <Text
-                  marginLeft="2"
-                  fontSize="4xl"
-                  fontWeight="700"
-                  color={selectColor(isDark, 'textLight')}
-                  className={rift.className}
-                >
-                  EDPN
-                </Text>
               </Link>
             </Flex>
           </DrawerHeader>
