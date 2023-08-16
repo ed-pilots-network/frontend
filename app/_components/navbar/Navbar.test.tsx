@@ -1,13 +1,18 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import ModuleProps, { Tags } from '@/app/_lib/moduleProps';
 import Navbar from './Navbar';
+import { ChakraProvider } from '@chakra-ui/react';
 
 describe('Nav Bar', () => {
   beforeEach(() => {
     process.env = Object.assign(process.env, {
       NEXT_PUBLIC_STAGE: 'test-stage',
     });
-    render(<Navbar />);
+    render(
+      <ChakraProvider>
+        <Navbar />
+      </ChakraProvider>,
+    );
   });
 
   test('renders the navbar with logo and toggle switch', () => {
