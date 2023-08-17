@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa6';
 import { formatThousands } from '@/app/_hooks/textFormatting';
-import { Center, Tbody, Td, Text, Tr } from '@chakra-ui/react';
+import { Center, Flex, Tbody, Td, Text, Tr } from '@chakra-ui/react';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
-import { calculateTimeDifference } from '../helpers';
+import { calculateTimeDifference, renderStationTypeIcon } from '../helpers';
 
 interface IGridBodyItemProps {
   commodity: ICommodityFormResponse;
@@ -24,6 +24,10 @@ const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
     <Tr fontSize="sm" borderBottomRadius="10px">
       <Td colSpan={4} lineHeight={2}>
         <Text>Station Name: {commodity.station.name}</Text>
+        <Flex gap={2}>
+          Station Type:
+          {renderStationTypeIcon(commodity.station)}
+        </Flex>
         <Text>
           Arrival Distance: {commodity.station.arrivalDistance ?? '?'} ls
         </Text>

@@ -12,6 +12,7 @@ const renderStationTypeIcon = (station: IStationType) => {
         src="/assets/Carrier_sprite.png"
         alt="Fleet Carrier"
         boxSize="20px"
+        marginY="auto"
       />
     );
   }
@@ -21,6 +22,7 @@ const renderStationTypeIcon = (station: IStationType) => {
         src="/assets/Surface_settlement_sprite.png"
         alt="Planetary Station"
         boxSize="20px"
+        marginY="auto"
       />
     );
   }
@@ -30,6 +32,7 @@ const renderStationTypeIcon = (station: IStationType) => {
         src="/assets/Coriolis_sprite.png"
         alt="Orbital Station"
         boxSize="20px"
+        marginY="auto"
       />
     );
   }
