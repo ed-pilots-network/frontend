@@ -12,6 +12,7 @@ import {
   Box,
   Icon,
   Center,
+  Text,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useColorMode from '@/app/_hooks/useColorMode';
@@ -34,7 +35,7 @@ const ModuleLaunchPad = () => {
             key={module.title}
             borderWidth="1px"
             borderRadius="9px"
-            borderColor={selectColor(isDark, 'text')}
+            borderColor={selectColor(isDark, 'border')}
             bgColor={cardBgColor}
             p="25px"
             position="relative"
@@ -58,7 +59,7 @@ const ModuleLaunchPad = () => {
                 </Heading>
               </LinkOverlay>
             </Box>
-            <p>{module.description}</p>
+            <Text>{module.description}</Text>
           </LinkBox>
         ),
       )}
@@ -68,10 +69,7 @@ const ModuleLaunchPad = () => {
   const renderTab = (text: string) => (
     <Tab
       _selected={{
-        color: selectColor(isDark, 'text'),
-        borderBottom: '1px solid currentcolor',
-        fontWeight: 'bold',
-        letterSpacing: '1px',
+        color: selectColor(isDark, 'textSelected'),
       }}
       aria-label={`Toggle ${text} Tab`}
       textTransform="capitalize"
@@ -104,7 +102,6 @@ const ModuleLaunchPad = () => {
   return (
     <Tabs
       position="relative"
-      variant="enclosed"
       align="center"
       minHeight="100%"
       colorScheme={selectColor(isDark, 'text')}

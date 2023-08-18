@@ -4,6 +4,7 @@ import buttonTheme from './button';
 import checkboxTheme from './checkbox';
 import radioTheme from './radio';
 import selectTheme from './select';
+import tabsTheme from './tabs';
 
 const theme = extendTheme({
   components: {
@@ -11,6 +12,7 @@ const theme = extendTheme({
     Checkbox: checkboxTheme,
     Radio: radioTheme,
     Select: selectTheme,
+    Tabs: tabsTheme,
   },
   config: {
     initialColorMode: 'dark',
@@ -19,14 +21,20 @@ const theme = extendTheme({
   colors: {
     light: {
       text: '#272f33',
+      textSelected: '#272f33',
       textLight: '#e6eef2',
       background: '#e6eef2',
       box: '#4e5d66',
+      border: '##272f33',
+      accentBackground: '#cddce5',
     },
     dark: {
       text: '#F2F2F2',
+      textSelected: '#f6ad55',
       background: '#2B2D31',
       box: '#1E1F22',
+      border: '#f6ad55',
+      accentBackground: '#272f33',
     },
     orange: {
       1: '#FEEBC8',
