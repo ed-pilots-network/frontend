@@ -25,7 +25,7 @@ const theme = extendTheme({
       textLight: '#e6eef2',
       background: '#e6eef2',
       box: '#4e5d66',
-      border: '##272f33',
+      border: '#C05621',
       accentBackground: '#cddce5',
     },
     dark: {
@@ -51,6 +51,14 @@ const theme = extendTheme({
       4: '#9BB9CB',
       5: '#4e5d66',
       6: '#272f33',
+    },
+    brown: {
+      1: '#f6f2ed',
+      2: '#ede5db',
+      3: '#dacab6',
+      4: '#b4956d',
+      5: '#5a4b37',
+      6: '#2d261c',
     },
     switchLight: {
       500: '#ed8936',

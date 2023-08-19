@@ -6,15 +6,10 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const baseStyle = definePartsStyle({
   control: {
-    _dark: {
-      _checked: {
-        borderColor: '#9bb9cb',
-        bg: '#9bb9cb',
-      },
-    },
+    borderColor: '#ed8936',
     _checked: {
-      boxSize: 4,
       borderColor: '#ed8936',
+      boxSize: 4,
       bg: '#ed8936',
     },
   },

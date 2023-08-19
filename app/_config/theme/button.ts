@@ -9,16 +9,6 @@ const customButton = defineStyle({
     borderColor: '#fbaf5d',
     background: '#f6ad55',
   },
-  _dark: {
-    borderColor: '#cddce5',
-    background: '#9BB9CB',
-    color: '#272f33',
-
-    _hover: {
-      bordercolor: '#e6eef2',
-      background: '#cddce5',
-    },
-  },
 });
 
 const buttonTheme = defineStyleConfig({
