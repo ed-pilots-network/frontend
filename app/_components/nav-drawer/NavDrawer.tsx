@@ -12,7 +12,6 @@ import {
   Heading,
   LinkBox,
   Box,
-  Icon,
   LinkOverlay,
   Divider,
   useBreakpointValue,
@@ -21,7 +20,8 @@ import { useState, useEffect } from 'react';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import ModuleProps, { Module, Tags } from '../../_lib/moduleProps';
+import ModuleProps, { Module, Tags } from '@/lib/moduleProps';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavDrawer = () => {
   const { isDark } = useColorMode();
@@ -95,7 +95,7 @@ const NavDrawer = () => {
                         color: selectColor(isDark, 'text'),
                       }}
                     >
-                      <Icon as={module.icon} />
+                      <FontAwesomeIcon icon={module.icon} />
                       <LinkOverlay href={module.url} marginLeft={2}>
                         {module.title}
                       </LinkOverlay>
