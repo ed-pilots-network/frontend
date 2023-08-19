@@ -20,7 +20,7 @@ import { useState, useEffect } from 'react';
 import selectColor from '@/app/_hooks/fontColorSelector';
 import useColorMode from '@/app/_hooks/useColorMode';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import ModuleProps, { Module, Tags } from '@/lib/moduleProps';
+import ModuleProps, { Module, Tags } from '@/app/_lib/moduleProps';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavDrawer = () => {
