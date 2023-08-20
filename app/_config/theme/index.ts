@@ -25,8 +25,8 @@ const theme = extendTheme({
       textLight: '#e6eef2',
       background: '#e6eef2',
       box: '#4e5d66',
-      border: '#f6ad55',
-      borderAccent: '#f6ad55',
+      border: '#9bb9cb',
+      borderAccent: '#9bb9cb',
       accentBackground: '#cddce5',
     },
     dark: {
@@ -35,7 +35,7 @@ const theme = extendTheme({
       background: '#2B2D31',
       box: '#1E1F22',
       border: '#cddce5',
-      borderAccent: '#dacaB6',
+      borderAccent: '#9bb9cb',
       accentBackground: '#272f33',
     },
     orange: {

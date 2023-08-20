@@ -100,7 +100,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           >
             <FormLabel>System</FormLabel>
             <Input
-              variant="outline"
               placeholder="Search by system name..."
               borderColor={selectColor(isDark, 'border')}
               _hover={{
@@ -293,12 +292,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </GridItem>
       </Grid>
-      <Button
-        type="submit"
-        variant="customButton"
-        id="submit"
-        isLoading={isLoading}
-      >
+      <Button type="submit" variant="outline" id="submit" isLoading={isLoading}>
         Find Systems
       </Button>
     </form>

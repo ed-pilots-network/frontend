@@ -1,6 +1,5 @@
 import { selectAnatomy } from '@chakra-ui/anatomy';
 import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
-import selectColor from '@/app/_hooks/fontColorSelector';
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(selectAnatomy.keys);
@@ -8,18 +7,18 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const outline = definePartsStyle({
   field: {
     border: '1px solid',
-    borderColor: selectColor(false, 'border'),
+    borderColor: 'blue.4',
 
-    _selected: {
-      borderColor: 'blue.600',
-    },
     _dark: {
-      borderColor: selectColor(true, 'border'),
+      borderColor: 'blue.4',
+      icon: {
+        color: 'blue.3',
+      },
     },
   },
 
   icon: {
-    color: 'orange.6',
+    color: 'blue.5',
   },
 });
 

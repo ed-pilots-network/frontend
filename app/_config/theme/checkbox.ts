@@ -6,11 +6,27 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const baseStyle = definePartsStyle({
   control: {
-    borderColor: 'blue.3',
+    borderColor: 'blue.4',
+    _hover: {
+      bg: 'blue.4',
+      borderColor: 'blue.4',
+    },
     _checked: {
-      borderColor: 'blue.3',
+      borderColor: 'blue.4',
       boxSize: 4,
-      bg: 'blue.3',
+      bg: 'blue.4',
+      _hover: {
+        bg: 'blue.4',
+        borderColor: 'blue.4',
+      },
+    },
+    _dark: {
+      borderColor: 'blue.3',
+      _checked: {
+        borderColor: 'blue.3',
+        boxSize: 4,
+        bg: 'blue.3',
+      },
     },
   },
 });

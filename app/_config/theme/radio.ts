@@ -15,8 +15,17 @@ const baseStyle = definePartsStyle({
     },
     _checked: {
       boxSize: 4,
-      borderColor: 'orange.4',
-      bg: 'orange.4',
+      borderColor: 'blue.4',
+      bg: 'blue.4',
+      _hover: {
+        borderColor: 'blue.4',
+        bg: 'blue.4',
+      },
+    },
+
+    _hover: {
+      borderColor: 'blue.4',
+      bg: 'blue.4',
     },
   },
 });
