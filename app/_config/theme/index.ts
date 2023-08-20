@@ -21,11 +21,12 @@ const theme = extendTheme({
   colors: {
     light: {
       text: '#272f33',
-      textSelected: '#272f33',
+      textSelected: '#f6ad55',
       textLight: '#e6eef2',
       background: '#e6eef2',
       box: '#4e5d66',
-      border: '#C05621',
+      border: '#f6ad55',
+      borderAccent: '#f6ad55',
       accentBackground: '#cddce5',
     },
     dark: {
@@ -33,7 +34,8 @@ const theme = extendTheme({
       textSelected: '#f6ad55',
       background: '#2B2D31',
       box: '#1E1F22',
-      border: '#f6ad55',
+      border: '#cddce5',
+      borderAccent: '#dacaB6',
       accentBackground: '#272f33',
     },
     orange: {

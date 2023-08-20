@@ -214,12 +214,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </Stack>
       </Flex>
-      <Button
-        type="submit"
-        variant="customButton"
-        id="submit"
-        isLoading={isLoading}
-      >
+      <Button type="submit" variant="outline" id="submit" isLoading={isLoading}>
         Submit
       </Button>
     </form>

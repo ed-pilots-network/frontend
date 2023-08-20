@@ -1,18 +1,18 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 
-const customButton = defineStyle({
+const outline = defineStyle({
   border: '1px solid',
-  borderColor: '#f6ad55',
-  background: '#ed8936',
-  color: '#f2f2f2',
+  borderColor: 'brown.6',
+  background: 'brown.5',
+  color: 'blue.1',
   _hover: {
-    borderColor: '#fbaf5d',
-    background: '#f6ad55',
+    borderColor: 'brown.5',
+    background: 'brown.4',
   },
 });
 
 const buttonTheme = defineStyleConfig({
-  variants: { customButton },
+  variants: { outline },
 });
 
 export default buttonTheme;

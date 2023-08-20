@@ -9,14 +9,14 @@ const baseStyle = definePartsStyle({
     borderRadius: '2px',
     _dark: {
       _checked: {
-        borderColor: '#9bb9cb',
-        bg: '#9bb9cb',
+        borderColor: 'blue.4',
+        bg: 'blue.4',
       },
     },
     _checked: {
       boxSize: 4,
-      borderColor: '#ed8936',
-      bg: '#ed8936',
+      borderColor: 'orange.4',
+      bg: 'orange.4',
     },
   },
 });

@@ -6,6 +6,8 @@ const selectColor = (isDark: boolean, element: string) => {
     return isDark ? 'dark.textSelected' : 'light.textSelected';
   if (element === 'box') return isDark ? 'dark.box' : 'light.box';
   if (element === 'border') return isDark ? 'dark.border' : 'light.border';
+  if (element === 'border-accent')
+    return isDark ? 'dark.borderAccent' : 'light.borderAccent';
   if (element === 'switch') return isDark ? 'switchDark' : 'switchLight';
   if (element === 'accent-bg')
     return isDark ? 'dark.accentBackground' : 'light.accentBackground';

@@ -19,7 +19,7 @@ const outline = definePartsStyle({
   },
 
   icon: {
-    color: '#C05621',
+    color: 'orange.6',
   },
 });
 

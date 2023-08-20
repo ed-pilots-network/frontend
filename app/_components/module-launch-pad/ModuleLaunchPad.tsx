@@ -35,7 +35,7 @@ const ModuleLaunchPad = () => {
             key={module.title}
             borderWidth="1px"
             borderRadius="9px"
-            borderColor={selectColor(isDark, 'border')}
+            borderColor={selectColor(isDark, 'border-accent')}
             bgColor={cardBgColor}
             p="25px"
             position="relative"
