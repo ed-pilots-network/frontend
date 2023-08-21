@@ -52,7 +52,6 @@ const ModulesField = ({
           value={value}
           options={getOptions()}
           placeholder={placeholder}
-          isMulti
           chakraStyles={SelectStyles()}
           {...fieldOptions}
         />

@@ -24,6 +24,12 @@ server.post('/comments', function (req, res, next) {
   next();
 });
 
+server.use(
+  jsonServer.rewriter({
+    '/api/v1/exploration/system/by-name-containing': '/systems',
+  }),
+);
+
 server.use(rewriter);
 server.use(router);
 

@@ -26,6 +26,7 @@ import {
 } from '@/app/_components/inputs';
 import CheckboxGroup from '../../form/CheckboxGroup';
 import { useState } from 'react';
+import SystemsField from '../../inputs/Systems';
 
 export const SingleTradeRouteFormSchema = z.object({
   buySystem: z.string().optional(),
@@ -101,7 +102,16 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             isInvalid={!!(errors.buySystem && errors.buySystem.message)}
           >
             <FormLabel>Buy from System</FormLabel>
-            <Input
+            <SystemsField
+              control={control}
+              placeholder="Select a system..."
+              onChange={(newValue) => {
+                setBuySystemStations(
+                  newValue ? ['Station1', 'Station2', 'Station3'] : [],
+                );
+              }}
+            />
+            {/* <Input
               variant="outline"
               placeholder="Search by station name..."
               borderColor={selectColor(isDark, 'border')}
@@ -115,7 +125,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                   );
                 },
               })}
-            />
+            /> */}
             <FormErrorMessage>
               {errors.buySystem && errors.buySystem.message}
             </FormErrorMessage>
