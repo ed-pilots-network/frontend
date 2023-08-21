@@ -65,7 +65,9 @@ const SystemsField = ({
       control={control}
       render={({ field: { onBlur, name, ref } }) => (
         <AsyncSelect<SelectGroup, true, GroupBase<SelectGroup>>
+          defaultOptions
           cacheOptions
+          isClearable
           id="systems-field"
           instanceId="systems-field"
           name={name}

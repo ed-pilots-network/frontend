@@ -27,6 +27,7 @@ import {
 import CheckboxGroup from '../../form/CheckboxGroup';
 import { useState } from 'react';
 import SystemsField from '../../inputs/Systems';
+import Select from '../../inputs/form/Select';
 
 export const SingleTradeRouteFormSchema = z.object({
   buySystem: z.string().optional(),
@@ -137,7 +138,24 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             isInvalid={!!(errors.buyStation && errors.buyStation.message)}
           >
             <FormLabel>Buy from Station</FormLabel>
-            <Input
+            <Select
+              register={register('buyStation', {
+                disabled: buySystemStations.length === 0,
+              })}
+              placeholder={
+                buySystemStations.length === 0
+                  ? 'Enter a system first...'
+                  : 'Select a station (optional)'
+              }
+            >
+              {buySystemStations.length &&
+                buySystemStations.map((station) => (
+                  <option key={station} value={station}>
+                    {station}
+                  </option>
+                ))}
+            </Select>
+            {/* <Input
               variant="outline"
               placeholder={
                 buySystemStations.length === 0
@@ -150,7 +168,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               }}
               {...register('buyStation')}
               disabled={buySystemStations.length === 0}
-            />
+            /> */}
             <FormErrorMessage>
               {errors.buyStation && errors.buyStation.message}
             </FormErrorMessage>
@@ -162,20 +180,14 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             isInvalid={!!(errors.sellSystem && errors.sellSystem.message)}
           >
             <FormLabel>Sell to System</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by station name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
+            <SystemsField
+              control={control}
+              placeholder="Select a system..."
+              onChange={(newValue) => {
+                setSellSystemStations(
+                  newValue ? ['Station1', 'Station2', 'Station3'] : [],
+                );
               }}
-              {...register('sellSystem', {
-                onChange: (e) => {
-                  setSellSystemStations(
-                    e.target.value ? ['Station1', 'Station2', 'Station3'] : [],
-                  );
-                },
-              })}
             />
             <FormErrorMessage>
               {errors.sellSystem && errors.sellSystem.message}
@@ -188,7 +200,25 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             isInvalid={!!(errors.sellStation && errors.sellStation.message)}
           >
             <FormLabel>Sell to Station</FormLabel>
-            <Input
+            <Select
+              register={register('sellStation', {
+                disabled: sellSystemStations.length === 0,
+              })}
+              placeholder={
+                sellSystemStations.length === 0
+                  ? 'Enter a system first...'
+                  : 'Select a station (optional)'
+              }
+            >
+              {sellSystemStations.length &&
+                sellSystemStations.map((station) => (
+                  <option key={station} value={station}>
+                    {station}
+                  </option>
+                ))}
+            </Select>
+
+            {/* <Input
               variant="outline"
               placeholder={
                 sellSystemStations.length === 0
@@ -201,7 +231,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               }}
               {...register('sellStation')}
               disabled={sellSystemStations.length === 0}
-            />
+            /> */}
             <FormErrorMessage>
               {errors.sellStation && errors.sellStation.message}
             </FormErrorMessage>
