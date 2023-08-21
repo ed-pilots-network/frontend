@@ -50,7 +50,7 @@ export type ShipForm = {
 };
 
 export type SingleTradeRouteForm = TradeRouteFilters & {
-  buySystem: string;
+  buySystem?: string;
   buyStation?: string;
   sellSystem?: string;
   sellStation?: string;
