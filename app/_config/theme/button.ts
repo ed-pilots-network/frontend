@@ -23,8 +23,36 @@ const outline = defineStyle({
   },
 });
 
+const colorless = defineStyle({
+  border: '1px solid',
+  borderColor: 'blue.4',
+});
+
+const submit = defineStyle({
+  border: '1px solid',
+  borderColor: 'blue.5',
+  background: 'blue.4',
+  color: 'blue.6',
+
+  _hover: {
+    borderColor: 'blue.4',
+    background: 'blue.3',
+  },
+
+  _dark: {
+    borderColor: 'blue.5',
+    background: 'blue.4',
+    color: 'blue.6',
+
+    _hover: {
+      borderColor: 'blue.4',
+      background: 'blue.3',
+    },
+  },
+});
+
 const buttonTheme = defineStyleConfig({
-  variants: { outline },
+  variants: { outline, colorless, submit },
 });
 
 export default buttonTheme;

@@ -5,6 +5,7 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/commodities/Form';
 import useColorMode from '@/app/_hooks/useColorMode';
 import selectColor from '@/app/_hooks/fontColorSelector';
+import SampleGridResponse from '../_components/commodities/SampleGridResponse';
 
 interface ReqBody extends Omit<SubmitProps, 'commodityId' | 'system'> {
   commodityId: string;
@@ -72,6 +73,7 @@ const PageClient = () => {
       >
         <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
       </Box>
+      <SampleGridResponse />
     </Flex>
   );
 };

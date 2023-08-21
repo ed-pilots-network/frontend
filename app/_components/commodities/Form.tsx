@@ -187,13 +187,13 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               variant="outline"
             >
               <Button
-                variant={isBuying ? 'customButton' : 'outline'}
+                variant={isBuying ? 'outline' : 'colorless'}
                 onClick={() => setIsBuying(true)}
               >
                 Buy
               </Button>
               <Button
-                variant={isBuying ? 'outline' : 'customButton'}
+                variant={isBuying ? 'colorless' : 'outline'}
                 onClick={() => setIsBuying(false)}
               >
                 Sell
@@ -214,7 +214,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           </FormControl>
         </Stack>
       </Flex>
-      <Button type="submit" variant="outline" id="submit" isLoading={isLoading}>
+      <Button type="submit" variant="submit" id="submit" isLoading={isLoading}>
         Submit
       </Button>
     </form>

@@ -13,6 +13,11 @@ const theme = extendTheme({
     Radio: radioTheme,
     Select: selectTheme,
     Tabs: tabsTheme,
+    SimpleGrid: {
+      baseStyle: {
+        backgroundColor: 'blue.6',
+      },
+    },
   },
   config: {
     initialColorMode: 'dark',
@@ -28,6 +33,7 @@ const theme = extendTheme({
       border: '#9bb9cb',
       borderAccent: '#9bb9cb',
       accentBackground: '#cddce5',
+      gridAccent: '#cddce5',
     },
     dark: {
       text: '#F2F2F2',
@@ -37,6 +43,7 @@ const theme = extendTheme({
       border: '#cddce5',
       borderAccent: '#9bb9cb',
       accentBackground: '#272f33',
+      gridAccent: '#313b40',
     },
     orange: {
       1: '#FEEBC8',
@@ -53,6 +60,9 @@ const theme = extendTheme({
       4: '#9BB9CB',
       5: '#4e5d66',
       6: '#272f33',
+      7: '#313b40',
+      8: '#2c353a',
+      9: '#dae5ec',
     },
     brown: {
       1: '#f6f2ed',
