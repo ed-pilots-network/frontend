@@ -20,7 +20,6 @@ const LayoutClient = ({ children }: { children: React.ReactNode }) => {
         color={selectColor(isDark, 'text')}
         direction="column"
         minH="100vh"
-        // bgGradient={selectColor(isDark, 'gradient')}
       >
         <Navbar />
         <Box as="main" flex="1">
