@@ -13,7 +13,7 @@ export type SystemForm = {
   requiresPermit?: boolean;
 };
 
-export type System = {
+export interface ISystem {
   name: string;
   coordinate: {
     x: number;
@@ -22,4 +22,4 @@ export type System = {
   };
   eliteId: number;
   starClass: string;
-};
+}

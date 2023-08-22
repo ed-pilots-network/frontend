@@ -7,6 +7,7 @@ import {
   AsyncSelect,
 } from 'chakra-react-select';
 import SelectStyles from '@/app/_hooks/SelectStyles';
+import { ISystem } from '@/app/_types/system';
 
 interface Props {
   control: any;
@@ -34,7 +35,7 @@ const loadOptions = async (inputValue: string) => {
   )
     .then((response) => response.json())
     .then((response) =>
-      response.map((item: { name: string }) => ({
+      response.map((item: ISystem) => ({
         value: item.name,
         label: item.name,
       })),
