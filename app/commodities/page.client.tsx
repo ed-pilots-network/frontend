@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/commodities/Form';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 
 interface ReqBody extends Omit<SubmitProps, 'commodityId' | 'system'> {
   commodityId: string;
@@ -18,7 +17,6 @@ interface ReqBody extends Omit<SubmitProps, 'commodityId' | 'system'> {
 
 const PageClient = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { isDark } = useColorMode();
 
   const handleSubmit = (data: SubmitProps) => {
     setIsLoading(true);
@@ -52,7 +50,7 @@ const PageClient = () => {
           as="h1"
           size={{ base: 'md', md: 'lg', lg: 'lg' }}
           marginX={{ base: 'auto', md: '0', lg: '0' }}
-          color={selectColor(isDark, 'accent-text')}
+          color={GetColor('accent-text')}
         >
           Commodities
         </Heading>
@@ -67,7 +65,7 @@ const PageClient = () => {
       <Box
         borderWidth="2px"
         borderRadius="9px"
-        borderColor={selectColor(isDark, 'border-accent')}
+        borderColor={GetColor('border-accent')}
         padding="1rem"
       >
         <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />

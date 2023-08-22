@@ -18,8 +18,7 @@ import {
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 import {
   PowersField,
   AllegiancesField,
@@ -85,8 +84,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     resolver: zodResolver(StationFormSchema),
   });
 
-  const { isDark } = useColorMode();
-
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
     onSubmitHandler(data);
   };
@@ -110,9 +107,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <Input
               variant="outline"
               placeholder="Search by station name..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('stationId')}
             />
@@ -160,9 +157,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <Input
               variant="outline"
               placeholder="Enter system name..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('system')}
             />
@@ -222,9 +219,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               type="number"
               variant="outline"
               placeholder="In LS"
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('maxDistanceToArrival')}
             />
@@ -322,7 +319,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 <Checkbox
                   colorScheme="orange"
                   {...register('requiresPermit')}
-                  borderColor={selectColor(isDark, 'border')}
+                  borderColor={GetColor('border')}
                 >
                   Requires Permit
                 </Checkbox>

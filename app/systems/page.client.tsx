@@ -3,13 +3,11 @@
 import { useState } from 'react';
 import { Box, HStack, Heading, Flex } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/systems/Form';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 import { SystemForm } from '@/app/_types/forms';
 
 const PageClient = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { isDark } = useColorMode();
 
   const handleSubmit = (data: SubmitProps) => {
     setIsLoading(true);
@@ -33,7 +31,7 @@ const PageClient = () => {
             as="h1"
             size={{ base: 'md', md: 'lg', lg: 'lg' }}
             marginX={{ base: 'auto', md: '0', lg: '0' }}
-            color={selectColor(isDark, 'accent-text')}
+            color={GetColor('accent-text')}
           >
             Systems
           </Heading>
@@ -42,7 +40,7 @@ const PageClient = () => {
       <Box
         borderWidth="2px"
         borderRadius="9px"
-        borderColor={selectColor(isDark, 'border')}
+        borderColor={GetColor('border')}
         padding="1rem"
       >
         <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />

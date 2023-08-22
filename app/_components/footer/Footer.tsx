@@ -1,21 +1,16 @@
 import { Box } from '@chakra-ui/react';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 
-const Footer = () => {
-  const { isDark } = useColorMode();
-
-  return (
-    <Box
-      as="footer"
-      py={5}
-      textAlign="center"
-      bg={selectColor(isDark, 'box')}
-      color={selectColor(isDark, 'textLight')}
-    >
-      Engineered by the EDPN Team
-    </Box>
-  );
-};
+const Footer = () => (
+  <Box
+    as="footer"
+    py={5}
+    textAlign="center"
+    bg={GetColor('box')}
+    color={GetColor('textLight')}
+  >
+    Engineered by the EDPN Team
+  </Box>
+);
 
 export default Footer;

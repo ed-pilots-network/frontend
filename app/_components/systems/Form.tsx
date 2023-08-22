@@ -19,8 +19,7 @@ import {
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 import Select from '../inputs/form/Select';
 import {
   AllegiancesField,
@@ -77,8 +76,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     resolver: zodResolver(SystemFormSchema),
   });
 
-  const { isDark } = useColorMode();
-
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
     onSubmitHandler(data);
   };
@@ -101,9 +98,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <FormLabel>System</FormLabel>
             <Input
               placeholder="Search by system name..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('systemId')}
             />
@@ -171,7 +168,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           >
             <FormLabel>Minor Faction</FormLabel>
             <Input
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               variant="outline"
               placeholder="Enter a minor faction..."
               {...register('minorFaction')}
@@ -264,7 +261,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <Checkbox
               colorScheme="orange"
               {...register('onlyPopulated')}
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
             >
               Only Populated Systems
             </Checkbox>
@@ -282,7 +279,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <Checkbox
               colorScheme="orange"
               {...register('requiresPermit')}
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
             >
               Requires Permit
             </Checkbox>

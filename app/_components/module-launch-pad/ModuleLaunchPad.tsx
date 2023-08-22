@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 import ModuleProps, { Module, Tags } from '../../_lib/moduleProps';
 
 const ModuleLaunchPad = () => {
@@ -35,7 +35,7 @@ const ModuleLaunchPad = () => {
             key={module.title}
             borderWidth="1px"
             borderRadius="9px"
-            borderColor={selectColor(isDark, 'border-accent')}
+            borderColor={GetColor('border-accent')}
             bgColor={cardBgColor}
             p="25px"
             position="relative"
@@ -69,7 +69,7 @@ const ModuleLaunchPad = () => {
   const renderTab = (text: string) => (
     <Tab
       _selected={{
-        color: selectColor(isDark, 'textSelected'),
+        color: GetColor('textSelected'),
       }}
       aria-label={`Toggle ${text} Tab`}
       textTransform="capitalize"
@@ -104,7 +104,7 @@ const ModuleLaunchPad = () => {
       position="relative"
       align="center"
       minHeight="100%"
-      colorScheme={selectColor(isDark, 'text')}
+      colorScheme={GetColor('text')}
     >
       <TabList display="flex" gap="2rem" flexWrap="wrap">
         {Tags.map((tag) => renderTab(tag))}

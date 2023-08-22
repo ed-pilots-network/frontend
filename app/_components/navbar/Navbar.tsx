@@ -21,7 +21,7 @@ import { MdCode } from 'react-icons/md';
 import { rift } from '@/app/_config/theme/fonts';
 import useColorMode from '@/app/_hooks/useColorMode';
 import Link from 'next/link';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 
 import ModuleProps, { Tags, Module } from '@/app/_lib/moduleProps';
 import NavDrawer from '../nav-drawer/NavDrawer';
@@ -31,12 +31,7 @@ const Navbar = () => {
   const { isDark, toggleColorMode } = useColorMode();
 
   return (
-    <Flex
-      p={2}
-      bg={selectColor(isDark, 'box')}
-      color={selectColor(isDark, 'text')}
-      justify="center"
-    >
+    <Flex p={2} bg={GetColor('box')} color={GetColor('text')} justify="center">
       <Flex
         justifyContent="space-between"
         alignItems="center"
@@ -60,7 +55,7 @@ const Navbar = () => {
               ml="2"
               fontSize="4xl"
               fontWeight="700"
-              color={selectColor(isDark, 'textLight')}
+              color={GetColor('textLight')}
               className={rift.className}
             >
               EDPN
@@ -74,7 +69,7 @@ const Navbar = () => {
                   <Text
                     margin={4}
                     textTransform="capitalize"
-                    color={selectColor(isDark, 'textLight')}
+                    color={GetColor('textLight')}
                     cursor="pointer"
                   >
                     {tag}
@@ -83,11 +78,11 @@ const Navbar = () => {
                 </PopoverTrigger>
                 <PopoverContent backgroundColor={'#00000000'}>
                   <Stack
-                    backgroundColor={selectColor(isDark, 'box')}
+                    backgroundColor={GetColor('box')}
                     padding={4}
                     border="0px solid"
                     borderRadius="lg"
-                    color={selectColor(isDark, 'textLight')}
+                    color={GetColor('textLight')}
                   >
                     {ModuleProps.filter(
                       (module: Module) => module.tag === tag,
@@ -97,8 +92,8 @@ const Navbar = () => {
                         padding={4}
                         key={module.title}
                         _hover={{
-                          backgroundColor: selectColor(isDark, 'background'),
-                          color: selectColor(isDark, 'text'),
+                          backgroundColor: GetColor('background'),
+                          color: GetColor('text'),
                         }}
                       >
                         <Icon as={module.icon} />

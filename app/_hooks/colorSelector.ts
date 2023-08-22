@@ -1,4 +1,8 @@
-const selectColor = (isDark: boolean, element: string) => {
+import useColorMode from './useColorMode';
+
+const GetColor = (element: string) => {
+  const { isDark } = useColorMode();
+
   if (element === 'text') return isDark ? 'dark.text' : 'light.text';
   // the textLight color is used for text in the light theme on dark backgrounds (i.e. Navbar)
   if (element === 'textLight') return isDark ? 'dark.text' : 'light.textLight';
@@ -14,11 +18,7 @@ const selectColor = (isDark: boolean, element: string) => {
   if (element === 'accent-text') return isDark ? 'blue.4' : 'orange.5';
   if (element === 'grid-accent')
     return isDark ? 'dark.gridAccent' : 'light.gridAccent';
-  if (element === 'gradient')
-    return isDark
-      ? 'linear(to-br, blue.6, blue.7, blue.6)'
-      : 'linear(to-br, blue.2, blue.9, blue.2)';
   return isDark ? 'dark.background' : 'light.background';
 };
 
-export default selectColor;
+export default GetColor;
