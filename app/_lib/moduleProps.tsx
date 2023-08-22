@@ -1,21 +1,23 @@
-import { IconType } from 'react-icons';
-import { GiSolarSystem, GiEarthAmerica } from 'react-icons/gi';
-import { MdApartment, MdPhotoCamera } from 'react-icons/md';
-import { BsBox } from 'react-icons/bs';
 import {
-  FaArrowRight,
-  FaArrowRightArrowLeft,
-  FaShuttleSpace,
-  FaArrowTrendUp,
-  FaMapLocationDot,
-  FaLandmark,
-} from 'react-icons/fa6';
+  faArrowRight,
+  faArrowRightArrowLeft,
+  faShuttleSpace,
+  faArrowTrendUp,
+  faMapLocationDot,
+  faLandmark,
+  faSun,
+  faCity,
+  faEarthAmericas,
+  faCamera,
+  faCube,
+  IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
 
 export interface Module {
   title: string;
   tag: string;
   url: string;
-  icon: IconType;
+  icon: IconDefinition;
   description: string;
 }
 
@@ -25,7 +27,7 @@ const ModuleProps: Module[] = [
   {
     url: '/systems',
     tag: 'discover',
-    icon: GiSolarSystem,
+    icon: faSun,
     title: 'Systems',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -33,7 +35,7 @@ const ModuleProps: Module[] = [
   {
     url: '/bodies',
     tag: 'discover',
-    icon: GiEarthAmerica,
+    icon: faEarthAmericas,
     title: 'Bodies',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -41,7 +43,7 @@ const ModuleProps: Module[] = [
   {
     url: '/stations',
     tag: 'discover',
-    icon: MdApartment,
+    icon: faCity,
     title: 'Stations',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -49,7 +51,7 @@ const ModuleProps: Module[] = [
   {
     url: '/attractions',
     tag: 'discover',
-    icon: MdPhotoCamera,
+    icon: faCamera,
     title: 'Attractions',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -57,7 +59,7 @@ const ModuleProps: Module[] = [
   {
     url: '/pois',
     tag: 'discover',
-    icon: FaMapLocationDot,
+    icon: faMapLocationDot,
     title: 'POIs',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -65,7 +67,7 @@ const ModuleProps: Module[] = [
   {
     url: '/factions',
     tag: 'discover',
-    icon: FaLandmark,
+    icon: faLandmark,
     title: 'Factions',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -73,7 +75,7 @@ const ModuleProps: Module[] = [
   {
     url: '/shipyard',
     tag: 'outfit',
-    icon: FaShuttleSpace,
+    icon: faShuttleSpace,
     title: 'Shipyard',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -81,14 +83,14 @@ const ModuleProps: Module[] = [
   {
     url: '/commodities',
     tag: 'trade',
-    icon: BsBox,
+    icon: faCube,
     title: 'Trade Commodities',
     description: 'Find a place to buy or sell a specific commodity',
   },
   {
     url: '/trade/single',
     tag: 'trade',
-    icon: FaArrowRight,
+    icon: faArrowRight,
     title: 'Single Trade Route',
     description:
       'Trade from A to B and find the best profit route using multiple filter options',
@@ -96,7 +98,7 @@ const ModuleProps: Module[] = [
   {
     url: '/trade/multi',
     tag: 'trade',
-    icon: FaArrowTrendUp,
+    icon: faArrowTrendUp,
     title: 'Multi-Hop Trade Route',
     description:
       'Browse the universe! Jump to any system or search by many properties',
@@ -104,7 +106,7 @@ const ModuleProps: Module[] = [
   {
     url: '/trade/loop',
     tag: 'trade',
-    icon: FaArrowRightArrowLeft,
+    icon: faArrowRightArrowLeft,
     title: 'Loop Trade Route',
     description:
       'Browse the universe! Jump to any system or search by many properties',
