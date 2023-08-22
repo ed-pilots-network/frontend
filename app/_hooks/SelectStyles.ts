@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { SystemStyleObject } from '@chakra-ui/react';
 import GetColor from './colorSelector';
 
