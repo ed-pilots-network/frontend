@@ -62,7 +62,7 @@ const PageClient = () => {
           size={{ base: 'xs', md: 'sm', lg: 'sm' }}
           marginX={{ base: 'auto', md: '0', lg: '0' }}
         >
-          Find Closest Station to Buy/Sell Commodities
+          Find Closest Stations to Buy/Sell Commodities
         </Heading>
       </Box>
       <Box
