@@ -106,7 +106,12 @@ const ModuleLaunchPad = () => {
       minHeight="100%"
       colorScheme={GetColor('text')}
     >
-      <TabList display="flex" gap="2rem" flexWrap="wrap">
+      <TabList
+        display="flex"
+        gap="2rem"
+        flexWrap="wrap"
+        borderBottom="2px solid"
+      >
         {Tags.map((tag) => renderTab(tag))}
       </TabList>
       <TabPanels mt="20px" minHeight="400px">
