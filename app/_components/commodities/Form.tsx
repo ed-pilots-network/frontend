@@ -70,9 +70,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
     registerName: 'minSupply' | 'minDemand',
   ) => (
     <>
-      <FormLabel marginY="auto" width="140px">
-        {label}
-      </FormLabel>
+      <FormLabel marginY="auto">{label}</FormLabel>
       <NumberInput
         marginTop={2}
         defaultValue={1}
