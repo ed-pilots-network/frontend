@@ -30,13 +30,17 @@ type FieldOptions = {
 
 /* Swap out for live lookup when data is available? */
 const loadOptions = async (inputValue: string) => {
+  if (inputValue.length < 3) {
+    return [];
+  }
+
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_MOCK_API_URL}/api/v1/exploration/system/by-name-containing`,
   )
     .then((response) => response.json())
     .then((response) =>
       response.map((item: ISystem) => ({
-        value: item.name,
+        value: item.eliteId,
         label: item.name,
       })),
     )
@@ -69,6 +73,12 @@ const SystemsField = ({
           defaultOptions
           cacheOptions
           isClearable
+          loadingMessage={() => 'Searching...'}
+          noOptionsMessage={(inputValue) =>
+            inputValue.inputValue.length < 3
+              ? 'Enter 3 or more characters'
+              : 'No results found.'
+          }
           id="systems-field"
           instanceId="systems-field"
           name={name}
@@ -78,6 +88,7 @@ const SystemsField = ({
           onBlur={onBlur}
           placeholder={placeholder}
           chakraStyles={SelectStyles()}
+          {...fieldOptions}
         />
       )}
     />

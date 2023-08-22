@@ -112,21 +112,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 );
               }}
             />
-            {/* <Input
-              variant="outline"
-              placeholder="Search by station name..."
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('buySystem', {
-                onChange: (e) => {
-                  setBuySystemStations(
-                    e.target.value ? ['Station1', 'Station2', 'Station3'] : [],
-                  );
-                },
-              })}
-            /> */}
             <FormErrorMessage>
               {errors.buySystem && errors.buySystem.message}
             </FormErrorMessage>
@@ -155,20 +140,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                   </option>
                 ))}
             </Select>
-            {/* <Input
-              variant="outline"
-              placeholder={
-                buySystemStations.length === 0
-                  ? 'Enter a system first...'
-                  : 'Select a station (optional)'
-              }
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('buyStation')}
-              disabled={buySystemStations.length === 0}
-            /> */}
             <FormErrorMessage>
               {errors.buyStation && errors.buyStation.message}
             </FormErrorMessage>
@@ -217,21 +188,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                   </option>
                 ))}
             </Select>
-
-            {/* <Input
-              variant="outline"
-              placeholder={
-                sellSystemStations.length === 0
-                  ? 'Enter a system first...'
-                  : 'Select a station (optional)'
-              }
-              borderColor={selectColor(isDark, 'border')}
-              _hover={{
-                borderColor: selectColor(isDark, 'border'),
-              }}
-              {...register('sellStation')}
-              disabled={sellSystemStations.length === 0}
-            /> */}
             <FormErrorMessage>
               {errors.sellStation && errors.sellStation.message}
             </FormErrorMessage>
