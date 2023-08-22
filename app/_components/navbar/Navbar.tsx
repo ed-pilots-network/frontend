@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
   PopoverContent,
   Stack,
+  Icon,
 } from '@chakra-ui/react';
 import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
@@ -101,7 +102,7 @@ const Navbar = () => {
                           color: selectColor(isDark, 'text'),
                         }}
                       >
-                        <FontAwesomeIcon icon={faCode} />
+                        <Icon as={FontAwesomeIcon} icon={module.icon} />
                         <LinkOverlay href={module.url} marginLeft={2}>
                           {module.title}
                         </LinkOverlay>
@@ -130,7 +131,7 @@ const Navbar = () => {
               <Link href="/playground" prefetch={false}>
                 <MenuButton
                   as={IconButton}
-                  icon={<FontAwesomeIcon icon={faCode} />}
+                  icon={<Icon as={FontAwesomeIcon} icon={faCode} />}
                   m={2}
                 />
               </Link>

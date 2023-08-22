@@ -11,6 +11,7 @@ import {
   TabPanel,
   Box,
   Center,
+  Icon,
 } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NextLink from 'next/link';
@@ -51,7 +52,7 @@ const ModuleLaunchPad = () => {
               mb="10px"
               letterSpacing="2px"
             >
-              <FontAwesomeIcon icon={module.icon} />
+              <Icon as={FontAwesomeIcon} icon={module.icon} />
               <LinkOverlay as={NextLink} href={module.url} ml="10px">
                 <Heading as="h2" size="sm">
                   {module.title}
