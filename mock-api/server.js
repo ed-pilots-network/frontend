@@ -30,6 +30,12 @@ server.use(
   }),
 );
 
+server.use(
+  jsonServer.rewriter({
+    '/api/v1/exploration/station/filter': '/stations',
+  }),
+);
+
 server.use(rewriter);
 server.use(router);
 

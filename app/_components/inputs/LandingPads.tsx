@@ -7,9 +7,9 @@ interface Props {
 }
 
 export const radioValues = [
-  { name: 'Small', value: 'landingPadSmall' },
+  { name: 'Small', value: 'landingPadSmall', checked: true },
   { name: 'Medium', value: 'landingPadMedium' },
-  { name: 'Large', value: 'landingPadLarge', checked: true },
+  { name: 'Large', value: 'landingPadLarge' },
 ];
 
 const LandingPadsField = ({ register }: Props) => (

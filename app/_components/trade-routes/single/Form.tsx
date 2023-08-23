@@ -30,17 +30,17 @@ import SystemsField from '../../inputs/Systems';
 import Select from '../../inputs/form/Select';
 
 export const SingleTradeRouteFormSchema = z.object({
-  buySystem: z.string().optional(),
+  buySystem: z.object({ value: z.number() }).optional(),
   buyStation: z.string().optional(),
-  sellSystem: z.string().optional(),
+  sellSystem: z.object({ value: z.number() }).optional(),
   sellStation: z.string().optional(),
 
-  commodity: z.array(z.object({ value: z.string() })).optional(),
-  minSupply: z.number().optional(),
-  minDemand: z.number().optional(),
-  maxPriceAge: z.number().optional(),
-  cargoCapacity: z.number().optional(),
-  availableCredits: z.number().optional(),
+  commodityId: z.array(z.object({ value: z.string() })).optional(),
+  minSupply: z.string().optional(),
+  minDemand: z.string().optional(),
+  maxPriceAge: z.string().optional(),
+  cargoCapacity: z.string().optional(),
+  availableCredits: z.string().optional(),
 
   government: z
     .enum(['', ...(governments.map((item) => item) as [string, ...string[]])])
@@ -80,6 +80,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   const { isDark } = useColorMode();
 
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
+    console.log(data);
     onSubmitHandler(data);
   };
 
@@ -104,8 +105,10 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           >
             <FormLabel>Buy from System</FormLabel>
             <SystemsField
+              fieldName="buySystem"
               control={control}
               placeholder="Select a system..."
+              isMulti={false}
               onChange={(newValue) => {
                 setBuySystemStations(
                   newValue ? ['Station1', 'Station2', 'Station3'] : [],
@@ -152,8 +155,10 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           >
             <FormLabel>Sell to System</FormLabel>
             <SystemsField
+              fieldName="sellSystem"
               control={control}
               placeholder="Select a system..."
+              isMulti={false}
               onChange={(newValue) => {
                 setSellSystemStations(
                   newValue ? ['Station1', 'Station2', 'Station3'] : [],
@@ -202,7 +207,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
 
         <GridItem colSpan={{ base: 1, md: 3 }}>
           <FormControl
-            isInvalid={!!(errors.commodity && errors.commodity.message)}
+            isInvalid={!!(errors.commodityId && errors.commodityId.message)}
           >
             <FormLabel>Commodities</FormLabel>
             <CommoditiesField

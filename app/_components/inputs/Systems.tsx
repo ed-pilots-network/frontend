@@ -2,20 +2,21 @@ import { Controller } from 'react-hook-form';
 import {
   OptionBase,
   GroupBase,
-  ActionMeta,
-  MultiValue,
   AsyncSelect,
+  MultiValue,
 } from 'chakra-react-select';
 import SelectStyles from '@/app/_hooks/SelectStyles';
 import { ISystem } from '@/app/_types/system';
+import { ChangeEvent } from 'react';
 
 interface Props {
+  fieldName: string;
   control: any;
   isMulti?: boolean;
   placeholder?: string;
+  disabled?: boolean;
   onChange?: (
-    newValue: MultiValue<SelectGroup>,
-    actionMeta: ActionMeta<SelectGroup>,
+    e: ChangeEvent<HTMLSelectElement> | MultiValue<SelectGroup>,
   ) => void;
 }
 
@@ -54,9 +55,11 @@ const loadOptions = async (inputValue: string) => {
 };
 
 const SystemsField = ({
+  fieldName,
   control,
   isMulti = true,
   placeholder = 'Select systems...',
+  disabled = false,
   onChange,
 }: Props) => {
   const fieldOptions: FieldOptions = {};
@@ -66,11 +69,12 @@ const SystemsField = ({
 
   return (
     <Controller
-      name="systems"
+      name={fieldName}
       control={control}
-      render={({ field: { onBlur, name, ref } }) => (
+      render={({
+        field: { name, ref, value, onChange: internalOnChange, onBlur },
+      }) => (
         <AsyncSelect<SelectGroup, true, GroupBase<SelectGroup>>
-          defaultOptions
           cacheOptions
           isClearable
           loadingMessage={() => 'Searching...'}
@@ -79,15 +83,22 @@ const SystemsField = ({
               ? 'Enter 3 or more characters'
               : 'No results found.'
           }
-          id="systems-field"
-          instanceId="systems-field"
+          id={`${fieldName}-field`}
+          instanceId={`${fieldName}-field`}
           name={name}
           ref={ref}
+          isDisabled={disabled}
           loadOptions={loadOptions}
-          onChange={onChange}
+          onChange={(e) => {
+            internalOnChange(e);
+            if (onChange) {
+              onChange(e);
+            }
+          }}
           onBlur={onBlur}
           placeholder={placeholder}
           chakraStyles={SelectStyles()}
+          value={value}
           {...fieldOptions}
         />
       )}
