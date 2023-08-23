@@ -16,7 +16,7 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { MdCode } from 'react-icons/md';
+import { faCode } from '@fortawesome/free-solid-svg-icons';
 
 import { rift } from '@/app/_config/theme/fonts';
 import useColorMode from '@/app/_hooks/useColorMode';
@@ -26,6 +26,7 @@ import GetColor from '@/app/_hooks/colorSelector';
 import ModuleProps, { Tags, Module } from '@/app/_lib/moduleProps';
 import NavDrawer from '../nav-drawer/NavDrawer';
 import layoutConfig from '@/app/_config/layout';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Navbar = () => {
   const { isDark, toggleColorMode } = useColorMode();
@@ -96,7 +97,7 @@ const Navbar = () => {
                           color: GetColor('text'),
                         }}
                       >
-                        <Icon as={module.icon} />
+                        <Icon as={FontAwesomeIcon} icon={module.icon} />
                         <LinkOverlay href={module.url} marginLeft={2}>
                           {module.title}
                         </LinkOverlay>
@@ -123,7 +124,11 @@ const Navbar = () => {
           {process.env.NEXT_PUBLIC_STAGE === 'localhost' && (
             <Menu>
               <Link href="/playground" prefetch={false}>
-                <MenuButton as={IconButton} icon={<MdCode />} m={2} />
+                <MenuButton
+                  as={IconButton}
+                  icon={<Icon as={FontAwesomeIcon} icon={faCode} />}
+                  m={2}
+                />
               </Link>
             </Menu>
           )}

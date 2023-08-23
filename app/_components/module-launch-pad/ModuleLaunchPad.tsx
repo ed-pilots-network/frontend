@@ -10,10 +10,11 @@ import {
   TabPanels,
   TabPanel,
   Box,
-  Icon,
   Center,
   Text,
+  Icon,
 } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NextLink from 'next/link';
 import useColorMode from '@/app/_hooks/useColorMode';
 import GetColor from '@/app/_hooks/colorSelector';
@@ -52,7 +53,7 @@ const ModuleLaunchPad = () => {
               mb="10px"
               letterSpacing="2px"
             >
-              <Icon as={module.icon} boxSize={6} />
+              <Icon as={FontAwesomeIcon} icon={module.icon} />
               <LinkOverlay as={NextLink} href={module.url} ml="10px">
                 <Heading as="h2" size="sm">
                   {module.title}
