@@ -6,9 +6,9 @@ export type ShipForm = {
 };
 
 export type SingleTradeRouteForm = TradeRouteFilters & {
-  buySystem?: string;
+  buySystem?: { value: number };
   buyStation?: string;
-  sellSystem?: string;
+  sellSystem?: { value: number };
   sellStation?: string;
 };
 
@@ -22,11 +22,11 @@ export type TradeRouteFilters = {
   commodities?: {
     value: string;
   }[];
-  minSupply?: number;
-  minDemand?: number;
-  maxPriceAge?: number;
-  cargoCapacity?: number;
-  availableCredits?: number;
+  minSupply?: string;
+  minDemand?: string;
+  maxPriceAge?: string;
+  cargoCapacity?: string;
+  availableCredits?: string;
 
   government?: string;
   allegiance?: string;
