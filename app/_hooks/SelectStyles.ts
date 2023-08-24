@@ -1,19 +1,17 @@
 import { SystemStyleObject } from '@chakra-ui/react';
-import selectColor from './fontColorSelector';
-import useColorMode from '@/app/_hooks/useColorMode';
+import GetColor from './colorSelector';
 
+// eslint-disable-next-line arrow-body-style
 const SelectStyles = () => {
-  const { isDark } = useColorMode();
-
   return {
     control: (baseStyles: SystemStyleObject, state: any) => ({
       ...baseStyles,
-      borderColor: selectColor(isDark, 'border'),
+      borderColor: GetColor('border'),
       borderBottomLeftRadius: state.menuIsOpen ? 0 : 'md',
       borderBottomRightRadius: state.menuIsOpen ? 0 : 'md',
-      focusBorderColor: selectColor(isDark, 'border'),
+      focusBorderColor: GetColor('border'),
       _hover: {
-        borderColor: selectColor(isDark, 'border'),
+        borderColor: GetColor('border'),
       },
       _focus: {
         border: 'none',

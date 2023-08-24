@@ -1,32 +1,27 @@
 import { selectAnatomy } from '@chakra-ui/anatomy';
 import { createMultiStyleConfigHelpers } from '@chakra-ui/react';
-import selectColor from '@/app/_hooks/fontColorSelector';
 
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(selectAnatomy.keys);
 
-const customSelect = definePartsStyle({
+const outline = definePartsStyle({
   field: {
     border: '1px solid',
-    borderColor: selectColor(false, 'border'),
-    backgroundColor: selectColor(false, 'accent-bg'),
+    borderColor: 'blue.4',
 
-    _focus: {
-      borderColor: 'blue.300',
-    },
     _dark: {
-      borderColor: selectColor(true, 'border'),
-      backgroundColor: selectColor(true, 'accent-bg'),
+      borderColor: 'blue.4',
+      icon: {
+        color: 'blue.3',
+      },
     },
   },
 
   icon: {
-    paddingX: '3px',
+    color: 'blue.5',
   },
 });
 
-const selectTheme = defineMultiStyleConfig({
-  variants: { customSelect },
-});
+const selectTheme = defineMultiStyleConfig({ variants: { outline } });
 
 export default selectTheme;

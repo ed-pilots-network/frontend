@@ -1,28 +1,58 @@
 import { defineStyle, defineStyleConfig } from '@chakra-ui/react';
 
-const customButton = defineStyle({
+const outline = defineStyle({
   border: '1px solid',
-  borderColor: '#f6ad55',
-  background: '#ed8936',
-  color: '#f2f2f2',
+  borderColor: 'blue.4',
+  background: 'blue.3',
+  color: 'blue.6',
+
   _hover: {
-    borderColor: '#fbaf5d',
-    background: '#f6ad55',
+    borderColor: 'blue.5',
+    background: 'blue.4',
   },
+
   _dark: {
-    borderColor: '#cddce5',
-    background: '#9BB9CB',
-    color: '#272f33',
+    borderColor: 'blue.4',
+    background: 'blue.3',
+    color: 'blue.6',
 
     _hover: {
-      bordercolor: '#e6eef2',
-      background: '#cddce5',
+      borderColor: 'blue.5',
+      background: 'blue.4',
+    },
+  },
+});
+
+const colorless = defineStyle({
+  border: '1px solid',
+  borderColor: 'blue.4',
+});
+
+const submit = defineStyle({
+  border: '1px solid',
+  borderColor: 'orange.4',
+  background: 'orange.3',
+  color: 'blue.6',
+
+  _hover: {
+    borderColor: 'orange.5',
+    background: 'orange.4',
+  },
+
+  _dark: {
+    borderColor: 'orange.4',
+    background: 'orange.3',
+    color: 'blue.6',
+
+    _hover: {
+      borderColor: 'orange.5',
+      background: 'orange.4',
     },
   },
 });
 
 const buttonTheme = defineStyleConfig({
-  variants: { customButton },
+  variants: { outline, colorless, submit },
 });
 
 export default buttonTheme;

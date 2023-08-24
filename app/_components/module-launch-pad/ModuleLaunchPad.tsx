@@ -11,13 +11,14 @@ import {
   TabPanel,
   Box,
   Center,
+  Text,
   Icon,
 } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NextLink from 'next/link';
 import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
-import ModuleProps, { Module, Tags } from '@/lib/moduleProps';
+import GetColor from '@/app/_hooks/colorSelector';
+import ModuleProps, { Module, Tags } from '../../_lib/moduleProps';
 
 const ModuleLaunchPad = () => {
   const { isDark } = useColorMode();
@@ -35,7 +36,7 @@ const ModuleLaunchPad = () => {
             key={module.title}
             borderWidth="1px"
             borderRadius="9px"
-            borderColor={selectColor(isDark, 'text')}
+            borderColor={GetColor('border-accent')}
             bgColor={cardBgColor}
             p="25px"
             position="relative"
@@ -59,7 +60,7 @@ const ModuleLaunchPad = () => {
                 </Heading>
               </LinkOverlay>
             </Box>
-            <p>{module.description}</p>
+            <Text>{module.description}</Text>
           </LinkBox>
         ),
       )}
@@ -69,10 +70,7 @@ const ModuleLaunchPad = () => {
   const renderTab = (text: string) => (
     <Tab
       _selected={{
-        color: selectColor(isDark, 'text'),
-        borderBottom: '1px solid currentcolor',
-        fontWeight: 'bold',
-        letterSpacing: '1px',
+        color: GetColor('textSelected'),
       }}
       aria-label={`Toggle ${text} Tab`}
       textTransform="capitalize"
@@ -105,12 +103,16 @@ const ModuleLaunchPad = () => {
   return (
     <Tabs
       position="relative"
-      variant="enclosed"
       align="center"
       minHeight="100%"
-      colorScheme={selectColor(isDark, 'text')}
+      colorScheme={GetColor('text')}
     >
-      <TabList display="flex" gap="2rem" flexWrap="wrap">
+      <TabList
+        display="flex"
+        gap="2rem"
+        flexWrap="wrap"
+        borderBottom="2px solid"
+      >
         {Tags.map((tag) => renderTab(tag))}
       </TabList>
       <TabPanels mt="20px" minHeight="400px">
