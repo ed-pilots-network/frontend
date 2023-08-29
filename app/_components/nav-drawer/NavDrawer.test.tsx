@@ -1,10 +1,15 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import ModuleProps, { Tags } from '@/app/_lib/moduleProps';
 import NavDrawer from './NavDrawer';
+import { ChakraProvider } from '@chakra-ui/react';
 
 describe('Nav Drawer', () => {
   beforeEach(() => {
-    render(<NavDrawer />);
+    render(
+      <ChakraProvider>
+        <NavDrawer />
+      </ChakraProvider>,
+    );
   });
 
   it('renders closed', () => {

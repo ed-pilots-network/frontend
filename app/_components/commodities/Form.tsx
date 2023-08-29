@@ -17,9 +17,8 @@ import {
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
 import { ICommodity, ICommodityFormRequest } from '@/app/_types/commodity';
+import GetColor from '@/app/_hooks/colorSelector';
 import {
   CommoditiesField,
   LandingPadsField,
@@ -68,23 +67,19 @@ const Form: React.FC<FormProps> = ({
     resolver: zodResolver(CommodityFormSchema),
   });
 
-  const { isDark } = useColorMode();
-
   const numberInputs = (
     label: string,
     registerName: 'minSupply' | 'minDemand',
   ) => (
     <>
-      <FormLabel marginY="auto" width="140px">
-        {label}
-      </FormLabel>
+      <FormLabel marginY="auto">{label}</FormLabel>
       <NumberInput
         marginTop={2}
         defaultValue={1}
         min={1}
         max={50000000}
         precision={0}
-        borderColor={selectColor(isDark, 'border')}
+        borderColor={GetColor('border')}
       >
         <NumberInputField
           {...register(registerName, {
@@ -143,9 +138,9 @@ const Form: React.FC<FormProps> = ({
             <Input
               variant="outline"
               placeholder="Enter a system..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('system', {
                 maxLength: 40,
@@ -189,17 +184,17 @@ const Form: React.FC<FormProps> = ({
             <FormLabel>I am looking to:</FormLabel>
             <ButtonGroup
               isAttached
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               variant="outline"
             >
               <Button
-                variant={isBuying ? 'customButton' : 'outline'}
+                variant={isBuying ? 'outline' : 'colorless'}
                 onClick={() => setIsBuying(true)}
               >
                 Buy
               </Button>
               <Button
-                variant={isBuying ? 'outline' : 'customButton'}
+                variant={isBuying ? 'colorless' : 'outline'}
                 onClick={() => setIsBuying(false)}
               >
                 Sell
@@ -220,12 +215,7 @@ const Form: React.FC<FormProps> = ({
           </FormControl>
         </Stack>
       </Flex>
-      <Button
-        type="submit"
-        variant="customButton"
-        id="submit"
-        isLoading={isLoading}
-      >
+      <Button type="submit" variant="submit" id="submit" isLoading={isLoading}>
         Submit
       </Button>
     </form>

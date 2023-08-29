@@ -1,16 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, HStack, Heading, Center, VStack } from '@chakra-ui/react';
+import { Box, HStack, Heading, Flex } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/systems/Form';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 import { SystemForm } from '@/app/_types/forms';
-import layoutConfig from '../_config/layout';
 
 const PageClient = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { isDark } = useColorMode();
 
   const handleSubmit = (data: SubmitProps) => {
     setIsLoading(true);
@@ -27,33 +24,28 @@ const PageClient = () => {
   };
 
   return (
-    <Box paddingX={2} flex="1" as="main">
-      <Center maxWidth={layoutConfig.maxWidth} marginX="auto" paddingY={5}>
-        <VStack align="stretch" width="100%" gap={6}>
-          <HStack spacing={4}>
-            <Box alignSelf="baseline">
-              <Heading
-                as="h1"
-                size={{ base: 'md', md: 'lg', lg: 'lg' }}
-                marginX={{ base: 'auto', md: '0', lg: '0' }}
-                color={selectColor(isDark, 'accent-text')}
-              >
-                Systems
-              </Heading>
-            </Box>
-          </HStack>
-          <Box
-            borderWidth="2px"
-            borderRadius="9px"
-            borderColor={selectColor(isDark, 'border')}
-            bg={selectColor(isDark, 'accent-bg')}
-            padding="1rem"
+    <Flex flexDirection="column" gap="24px" width="100%">
+      <HStack spacing={4}>
+        <Box alignSelf="baseline">
+          <Heading
+            as="h1"
+            size={{ base: 'md', md: 'lg', lg: 'lg' }}
+            marginX={{ base: 'auto', md: '0', lg: '0' }}
+            color={GetColor('accent-text')}
           >
-            <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
-          </Box>
-        </VStack>
-      </Center>
-    </Box>
+            Systems
+          </Heading>
+        </Box>
+      </HStack>
+      <Box
+        borderWidth="2px"
+        borderRadius="9px"
+        borderColor={GetColor('border')}
+        padding="1rem"
+      >
+        <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
+      </Box>
+    </Flex>
   );
 };
 

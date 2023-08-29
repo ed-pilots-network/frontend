@@ -12,13 +12,12 @@ import {
   Button,
   useMediaQuery,
 } from '@chakra-ui/react';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
 import { ICommodity, ICommodityFormResponse } from '@/app/_types/commodity';
 import Form, { SubmitProps } from '@/components/commodities/Form';
 import CommodityFormResponse from '@/components/commodities/CommodityFormResponse';
 import CommodityFormResponseMobile from '@/components/commodities/CommodityFormResponseMobile';
 import layoutConfig from '../_config/layout';
+import GetColor from '@/app/_hooks/colorSelector';
 
 interface IPageClientProps {
   commodities: ICommodity[] | null;
@@ -33,7 +32,6 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
     ICommodityFormResponse[]
   >([]);
 
-  const { isDark } = useColorMode();
   const [isLarge] = useMediaQuery('(min-width: 1024px)');
 
   const handleSubmit = async (data: SubmitProps) => {
@@ -132,7 +130,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
                   as="h1"
                   size={{ base: 'md', md: 'lg', lg: 'lg' }}
                   marginX={{ base: 'auto', md: '0', lg: '0' }}
-                  color={selectColor(isDark, 'accent-text')}
+                  color={GetColor('accent-text')}
                 >
                   Commodities
                 </Heading>
@@ -151,8 +149,8 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
             <Box
               borderWidth="2px"
               borderRadius="9px"
-              borderColor={selectColor(isDark, 'border')}
-              bg={selectColor(isDark, 'accent-bg')}
+              borderColor={GetColor('border')}
+              bg={GetColor('accent-bg')}
               padding="1rem"
             >
               <Form

@@ -9,23 +9,21 @@ import {
   Image,
   Flex,
   Link,
-  Text,
   Heading,
   LinkBox,
   Box,
-  Icon,
   LinkOverlay,
   Divider,
+  useBreakpointValue,
+  Icon,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-import selectColor from '@/app/_hooks/fontColorSelector';
-import useColorMode from '@/app/_hooks/useColorMode';
+import { useState, useEffect } from 'react';
+import GetColor from '@/app/_hooks/colorSelector';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { rift } from '@/app/_config/theme/fonts';
-import ModuleProps, { Module, Tags } from '../../_lib/moduleProps';
+import ModuleProps, { Module, Tags } from '@/app/_lib/moduleProps';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavDrawer = () => {
-  const { isDark } = useColorMode();
   const [isOpen, setIsOpen] = useState(false);
 
   const onClose = () => {
@@ -35,6 +33,14 @@ const NavDrawer = () => {
   const onOpen = () => {
     setIsOpen(true);
   };
+
+  // Close the drawer if the screen resizes above the md breakpoint
+  const hideDrawer = !useBreakpointValue({ base: true, md: false });
+  useEffect(() => {
+    if (isOpen && hideDrawer) {
+      onClose();
+    }
+  }, [hideDrawer, isOpen]);
 
   return (
     <>
@@ -49,60 +55,46 @@ const NavDrawer = () => {
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton color={selectColor(isDark, 'textLight')} />
+          <DrawerCloseButton color={GetColor('textLight')} />
           <DrawerHeader
-            backgroundColor={selectColor(isDark, 'box')}
-            color={selectColor(isDark, 'textLight')}
+            backgroundColor={GetColor('box')}
+            color={GetColor('textLight')}
           >
             <Flex alignItems="center" justifyContent="center">
               <Link href="/">
                 <Image
-                  src={'/EDPN_logo_dark_background.png'}
+                  src={'/EDPN_logo_spelled_nav_drawer.png'}
+                  objectFit="cover"
                   alt="Logo"
-                  boxSize="75px"
                 />
-              </Link>
-              <Link href="/">
-                <Text
-                  marginLeft="2"
-                  fontSize="6xl"
-                  fontWeight="700"
-                  color={selectColor(isDark, 'textLight')}
-                  className={rift.className}
-                >
-                  EDPN
-                </Text>
               </Link>
             </Flex>
           </DrawerHeader>
 
           <DrawerBody
-            backgroundColor={selectColor(isDark, 'box')}
-            color={selectColor(isDark, 'textLight')}
+            backgroundColor={GetColor('box')}
+            color={GetColor('textLight')}
           >
-            <Heading as="h1" size="2xl">
-              Menu
-            </Heading>
             <Divider opacity="1.0" marginBottom={8}></Divider>
             {Tags.map((tag) => (
               <Box key={tag}>
                 <Heading textTransform="capitalize" size="md" as="h2">
                   {tag}
                 </Heading>
-                <Box>
+                <Box marginBottom={6}>
                   {ModuleProps.filter(
                     (module: Module) => module.tag === tag,
                   ).map((module) => (
                     <LinkBox
                       borderRadius="lg"
-                      padding={4}
+                      padding={2}
                       key={module.title}
                       _hover={{
-                        backgroundColor: selectColor(isDark, 'background'),
-                        color: selectColor(isDark, 'text'),
+                        backgroundColor: GetColor('background'),
+                        color: GetColor('text'),
                       }}
                     >
-                      <Icon as={module.icon} />
+                      <Icon as={FontAwesomeIcon} icon={module.icon} />
                       <LinkOverlay href={module.url} marginLeft={2}>
                         {module.title}
                       </LinkOverlay>
