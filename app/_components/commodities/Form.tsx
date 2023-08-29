@@ -167,7 +167,7 @@ const Form: React.FC<FormProps> = ({
               !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
             }
           >
-            <FormLabel>Min Landing Pad Size</FormLabel>
+            <FormLabel>Ship Size</FormLabel>
             <LandingPadsField register={register('maxLandingPadSize')} />
           </FormControl>
         </Stack>

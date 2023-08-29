@@ -149,7 +149,6 @@ const Form: React.FC<FormProps> = ({
           <FormControl
             isInvalid={!!(errors.commodity && errors.commodity.message)}
           >
-            <FormLabel>Commodities</FormLabel>
             <CommoditiesField control={control} commodities={commodities} />
           </FormControl>
         </GridItem>
