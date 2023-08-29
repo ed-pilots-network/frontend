@@ -41,19 +41,38 @@ const renderStationTypeIcon = (station: IStationType) => {
 
 const legendItems = [
   {
-    text: 'Surface Landing',
+    text: 'Surface',
     src: '/assets/Surface_settlement_sprite.png',
     alt: 'Surface Port',
     backgroundPosition: '0px 0px',
   },
   {
-    text: 'Fleet Carrier',
+    text: 'Carrier',
     src: '/assets/Carrier_sprite.png',
     alt: 'Fleet Carrier',
   },
   {
-    text: 'Orbital Station',
+    text: 'Orbital',
     src: '/assets/Coriolis_sprite.png',
+    alt: 'Orbital Station',
+  },
+];
+
+const legendItemsDark = [
+  {
+    text: 'Surface',
+    src: '/assets/Surface_settlement_dark_sprite.png',
+    alt: 'Surface Port',
+    backgroundPosition: '0px 0px',
+  },
+  {
+    text: 'Carrier',
+    src: '/assets/Carrier_dark_sprite.png',
+    alt: 'Fleet Carrier',
+  },
+  {
+    text: 'Orbital',
+    src: '/assets/Coriolis_dark_sprite.png',
     alt: 'Orbital Station',
   },
 ];
@@ -101,6 +120,7 @@ const calculateTimeDifference = (then: string): string => {
 export {
   renderStationTypeIcon,
   legendItems,
+  legendItemsDark,
   compareNumbers,
   calculateTimeDifference,
 };

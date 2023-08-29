@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { Table, TableContainer, VStack } from '@chakra-ui/react';
 import layoutConfig from '@/app/_config/layout';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
-import { compareNumbers, legendItems } from './helpers';
+import { compareNumbers, legendItems, legendItemsDark } from './helpers';
 import {
   FormResponseHeading,
   GridHeadingsMobile,
   GridBodyItemMobile,
 } from './components';
 import GetColor from '@/app/_hooks/colorSelector';
+import useColorMode from '@/app/_hooks/useColorMode';
 
 interface ICommodityFormResponseProps {
   commodityResponse: ICommodityFormResponse[];
@@ -24,6 +25,7 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
     'distance' as keyof ICommodityFormResponse,
   );
   const [ascending, setAscending] = useState(true);
+  const { isDark } = useColorMode();
 
   return (
     <VStack
@@ -38,7 +40,7 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
     >
       <FormResponseHeading
         commodityResponse={commodityResponse}
-        legendItems={legendItems}
+        legendItems={isDark ? legendItems : legendItemsDark}
       />
       <GridHeadingsMobile
         filter={filter}

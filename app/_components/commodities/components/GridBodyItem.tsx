@@ -21,7 +21,7 @@ const GridBodyItem: React.FC<IGridBodyItemProps> = ({
     gap={8}
     fontSize="sm"
     _odd={{
-      background: `${GetColor('')}`,
+      background: `${GetColor('grid-accent')}`,
     }}
     paddingY={2}
   >
