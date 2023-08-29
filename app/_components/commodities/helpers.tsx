@@ -5,11 +5,21 @@ interface IStationType {
   planetary: boolean | null;
 }
 
-const renderStationTypeIcon = (station: IStationType) => {
+const renderStationTypeIcon = (station: IStationType, isDark: boolean) => {
   if (station.fleetCarrier) {
+    if (isDark) {
+      return (
+        <Image
+          src="/assets/Carrier_sprite.png"
+          alt="Fleet Carrier"
+          boxSize="20px"
+          marginY="auto"
+        />
+      );
+    }
     return (
       <Image
-        src="/assets/Carrier_sprite.png"
+        src="/assets/Carrier_dark_sprite.png"
         alt="Fleet Carrier"
         boxSize="20px"
         marginY="auto"
@@ -17,9 +27,19 @@ const renderStationTypeIcon = (station: IStationType) => {
     );
   }
   if (station.planetary) {
+    if (isDark) {
+      return (
+        <Image
+          src="/assets/Surface_settlement_sprite.png"
+          alt="Planetary Station"
+          boxSize="20px"
+          marginY="auto"
+        />
+      );
+    }
     return (
       <Image
-        src="/assets/Surface_settlement_sprite.png"
+        src="/assets/Surface_settlement_dark_sprite.png"
         alt="Planetary Station"
         boxSize="20px"
         marginY="auto"
@@ -27,9 +47,19 @@ const renderStationTypeIcon = (station: IStationType) => {
     );
   }
   if (!station.planetary && !station.fleetCarrier) {
+    if (isDark) {
+      return (
+        <Image
+          src="/assets/Coriolis_sprite.png"
+          alt="Orbital Station"
+          boxSize="20px"
+          marginY="auto"
+        />
+      );
+    }
     return (
       <Image
-        src="/assets/Coriolis_sprite.png"
+        src="/assets/Coriolis_dark_sprite.png"
         alt="Orbital Station"
         boxSize="20px"
         marginY="auto"

@@ -58,6 +58,7 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
           )
           .map((commodity, index) => (
             <GridBodyItem
+              isDark={isDark}
               key={index}
               commodity={commodity}
               isBuying={isBuying}

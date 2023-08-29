@@ -9,11 +9,13 @@ import { calculateTimeDifference, renderStationTypeIcon } from '../helpers';
 import GetColor from '@/app/_hooks/colorSelector';
 
 interface IGridBodyItemProps {
+  isDark: boolean;
   commodity: ICommodityFormResponse;
   isBuying: boolean;
 }
 
 const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
+  isDark,
   commodity,
   isBuying,
 }) => {
@@ -25,7 +27,7 @@ const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
         <Text>Station Name: {commodity.station.name}</Text>
         <Flex gap={2}>
           Station Type:
-          {renderStationTypeIcon(commodity.station)}
+          {renderStationTypeIcon(commodity.station, isDark)}
         </Flex>
         <Text>
           Arrival Distance: {commodity.station.arrivalDistance ?? '?'} ls
@@ -42,7 +44,7 @@ const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
       cursor="pointer"
       onClick={() => setShowItemCard(!showItemCard)}
       _odd={{
-        background: `${GetColor('')}`,
+        background: `${GetColor('grid-accent')}`,
       }}
     >
       <Tr>

@@ -36,6 +36,7 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
       borderWidth="2px"
       borderRadius="9px"
       borderColor={GetColor('border')}
+      bg={GetColor('')}
       padding="1rem"
     >
       <FormResponseHeading
@@ -64,6 +65,7 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
                 )
                 .map((commodity, index) => (
                   <GridBodyItemMobile
+                    isDark={isDark}
                     key={index}
                     commodity={commodity}
                     isBuying={isBuying}

@@ -7,11 +7,13 @@ import GetColor from '@/app/_hooks/colorSelector';
 import { calculateTimeDifference, renderStationTypeIcon } from '../helpers';
 
 interface IGridBodyItemProps {
+  isDark: boolean;
   commodity: ICommodityFormResponse;
   isBuying: boolean;
 }
 
 const GridBodyItem: React.FC<IGridBodyItemProps> = ({
+  isDark,
   commodity,
   isBuying,
 }) => (
@@ -47,7 +49,7 @@ const GridBodyItem: React.FC<IGridBodyItemProps> = ({
       gap={1}
       hideBelow="md"
     >
-      {renderStationTypeIcon(commodity.station)}
+      {renderStationTypeIcon(commodity.station, isDark)}
       {commodity.station.name}
     </GridItem>
     <GridItem hideBelow="lg" textAlign="right" paddingRight={4}>
