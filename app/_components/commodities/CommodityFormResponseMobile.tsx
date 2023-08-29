@@ -34,7 +34,6 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
       borderWidth="2px"
       borderRadius="9px"
       borderColor={GetColor('border')}
-      bg={GetColor('accent-bg')}
       padding="1rem"
     >
       <FormResponseHeading

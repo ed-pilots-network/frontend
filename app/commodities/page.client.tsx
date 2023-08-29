@@ -150,6 +150,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
               borderWidth="2px"
               borderRadius="9px"
               borderColor={GetColor('border')}
+              bg={GetColor('')}
               padding="1rem"
             >
               <Form
