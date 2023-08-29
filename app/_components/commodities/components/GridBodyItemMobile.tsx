@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import { FaArrowDown, FaArrowUp } from 'react-icons/fa6';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { formatThousands } from '@/app/_hooks/textFormatting';
-import { Center, Flex, Tbody, Td, Text, Tr } from '@chakra-ui/react';
+import { Center, Flex, Icon, Tbody, Td, Text, Tr } from '@chakra-ui/react';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
-import selectColor from '@/app/_hooks/fontColorSelector';
-import useColorMode from '@/app/_hooks/useColorMode';
 import { calculateTimeDifference, renderStationTypeIcon } from '../helpers';
+import GetColor from '@/app/_hooks/colorSelector';
 
 interface IGridBodyItemProps {
   commodity: ICommodityFormResponse;
@@ -18,7 +18,6 @@ const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
   isBuying,
 }) => {
   const [showItemCard, setShowItemCard] = useState(false);
-  const { isDark } = useColorMode();
 
   const toggleItemCard = () => (
     <Tr fontSize="sm" borderBottomRadius="10px">
@@ -43,12 +42,18 @@ const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
       cursor="pointer"
       onClick={() => setShowItemCard(!showItemCard)}
       _odd={{
-        background: `${selectColor(isDark, '')}`,
+        background: `${GetColor('')}`,
       }}
     >
       <Tr>
         <Td display="flex" gap={2}>
-          <Center>{showItemCard ? <FaArrowUp /> : <FaArrowDown />}</Center>
+          <Center>
+            {showItemCard ? (
+              <Icon as={FontAwesomeIcon} icon={faArrowUp} />
+            ) : (
+              <Icon as={FontAwesomeIcon} icon={faArrowUp} />
+            )}
+          </Center>
           {isBuying
             ? formatThousands(commodity.sellPrice)
             : formatThousands(commodity.buyPrice)}

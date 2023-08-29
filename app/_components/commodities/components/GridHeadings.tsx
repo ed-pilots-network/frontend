@@ -1,9 +1,13 @@
 import React from 'react';
 
-import { FaArrowDown, FaArrowsUpDown, FaArrowUp } from 'react-icons/fa6';
-import { Button, GridItem, SimpleGrid } from '@chakra-ui/react';
-import selectColor from '@/app/_hooks/fontColorSelector';
-import useColorMode from '@/app/_hooks/useColorMode';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowUp,
+  faArrowDown,
+  faArrowsUpDown,
+} from '@fortawesome/free-solid-svg-icons';
+import { Button, GridItem, Icon, SimpleGrid } from '@chakra-ui/react';
+import GetColor from '@/app/_hooks/colorSelector';
 
 interface IGridHeadingsProps {
   filter: string;
@@ -20,8 +24,6 @@ const GridHeadings: React.FC<IGridHeadingsProps> = ({
   ascending,
   setAscending,
 }) => {
-  const { isDark } = useColorMode();
-
   const gridHeadings: {
     id: number;
     text: string;
@@ -48,9 +50,13 @@ const GridHeadings: React.FC<IGridHeadingsProps> = ({
 
   const renderArrowIcon = (newFilter: string) => {
     if (filter === newFilter) {
-      return ascending ? <FaArrowDown /> : <FaArrowUp />;
+      return ascending ? (
+        <Icon as={FontAwesomeIcon} icon={faArrowDown} />
+      ) : (
+        <Icon as={FontAwesomeIcon} icon={faArrowUp} />
+      );
     }
-    return <FaArrowsUpDown />;
+    return <Icon as={FontAwesomeIcon} icon={faArrowsUpDown} />;
   };
 
   return (
@@ -59,7 +65,7 @@ const GridHeadings: React.FC<IGridHeadingsProps> = ({
       width="100%"
       fontWeight="bold"
       borderBottom="1px"
-      borderColor={selectColor(isDark, 'border')}
+      borderColor={GetColor('border')}
       rowGap={1}
     >
       {gridHeadings.map((heading) => {

@@ -162,7 +162,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
             {/* TODO: remove this button after development - aslink87 */}
             <Button
               type="button"
-              variant="customButton"
+              variant="outline"
               id="example"
               onClick={handleExampleSubmit}
             >

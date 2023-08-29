@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import { Table, TableContainer, VStack } from '@chakra-ui/react';
 import layoutConfig from '@/app/_config/layout';
-import selectColor from '@/app/_hooks/fontColorSelector';
-import useColorMode from '@/app/_hooks/useColorMode';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
 import { compareNumbers, legendItems } from './helpers';
 import {
@@ -11,6 +9,7 @@ import {
   GridHeadingsMobile,
   GridBodyItemMobile,
 } from './components';
+import GetColor from '@/app/_hooks/colorSelector';
 
 interface ICommodityFormResponseProps {
   commodityResponse: ICommodityFormResponse[];
@@ -25,7 +24,6 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
     'distance' as keyof ICommodityFormResponse,
   );
   const [ascending, setAscending] = useState(true);
-  const { isDark } = useColorMode();
 
   return (
     <VStack
@@ -35,8 +33,8 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
       opacity={0.9}
       borderWidth="2px"
       borderRadius="9px"
-      borderColor={selectColor(isDark, 'border')}
-      bg={selectColor(isDark, 'accent-bg')}
+      borderColor={GetColor('border')}
+      bg={GetColor('accent-bg')}
       padding="1rem"
     >
       <FormResponseHeading
