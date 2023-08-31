@@ -17,11 +17,9 @@ export default async function getCommodities() {
       { next: { revalidate: 86400 } },
     );
 
-    if (!commoditiesReq.ok) {
-      throw new Error(`HTTP error! status: ${commoditiesReq.status}`);
+    if (commoditiesReq.ok) {
+      commodities = (await commoditiesReq.json()) as ICommodity[];
     }
-
-    commodities = (await commoditiesReq.json()) as ICommodity[];
   } catch (error) {
     if (process.env.NODE_ENV === 'development') console.error(error);
     throw error;
