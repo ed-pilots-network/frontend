@@ -57,3 +57,39 @@ export type CommodityForm = {
   minDemand: number;
   maxDemand: number;
 };
+
+// TODO: Recheck
+
+export type BodiesForm = {
+  bodiesId?: string;
+  materials?: {
+    value: string;
+  }[];
+  systemReserve?: string;
+  ringType?: string;
+  filterSystem?: string; // TODO: Not sure about this one. Confirm this.
+  SystemIsPopulated?: string;
+  powerInfluence?: string;
+  bodyGroup?: {
+    value: string;
+  }[];
+  hasRings?: string;
+  planetType?: {
+    value: string;
+  }[];
+  compactStarType?: {
+    value: string;
+  }[];
+  maxDistanceToArrival?: string;
+  arrivalStar?: boolean;
+  starSpectralClass?: {
+    value: string;
+  }[];
+  starLuminosityClass?: {
+    value: string;
+  }[];
+  planetaryLanding?: string;
+  extraColumn?: string;
+  referenceSystem?: string;
+  maximumReferenceDistance?: string;
+};
