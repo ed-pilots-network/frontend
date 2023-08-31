@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { formatThousands } from '@/app/_hooks/textFormatting';
 import { Center, Flex, Icon, Tbody, Td, Text, Tr } from '@chakra-ui/react';
 import { ICommodityFormResponse } from '@/app/_types/commodity';
@@ -51,7 +51,7 @@ const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
         <Td display="flex" gap={2}>
           <Center>
             {showItemCard ? (
-              <Icon as={FontAwesomeIcon} icon={faArrowUp} />
+              <Icon as={FontAwesomeIcon} icon={faArrowDown} />
             ) : (
               <Icon as={FontAwesomeIcon} icon={faArrowUp} />
             )}

@@ -28,16 +28,17 @@ const GridHeadings: React.FC<IGridHeadingsProps> = ({
     id: number;
     text: string;
     sortByString: string | null;
+    hideBelow: string;
   }[] = [
-    { id: 0, text: 'Sell Price', sortByString: 'sellPrice' },
-    { id: 1, text: 'Buy Price', sortByString: 'buyPrice' },
-    { id: 2, text: 'Supply', sortByString: 'supply' },
-    { id: 3, text: 'Demand', sortByString: 'demand' },
-    { id: 4, text: 'System', sortByString: null },
-    { id: 5, text: 'Station', sortByString: null },
-    { id: 6, text: 'Station Distance', sortByString: null },
-    { id: 7, text: 'Distance', sortByString: 'distance' },
-    { id: 8, text: 'Latest Update', sortByString: null },
+    { id: 0, text: 'Sell Price', sortByString: 'sellPrice', hideBelow: '' },
+    { id: 1, text: 'Buy Price', sortByString: 'buyPrice', hideBelow: '' },
+    { id: 2, text: 'Supply', sortByString: 'supply', hideBelow: '' },
+    { id: 3, text: 'Demand', sortByString: 'demand', hideBelow: '' },
+    { id: 4, text: 'System', sortByString: null, hideBelow: '' },
+    { id: 5, text: 'Station', sortByString: null, hideBelow: 'md' },
+    { id: 6, text: 'Station Distance', sortByString: null, hideBelow: 'lg' },
+    { id: 7, text: 'Distance', sortByString: 'distance', hideBelow: '' },
+    { id: 8, text: 'Latest Update', sortByString: null, hideBelow: '' },
   ];
 
   const unnecessaryHeadings = (newFilter: string | null) => {
@@ -51,37 +52,51 @@ const GridHeadings: React.FC<IGridHeadingsProps> = ({
   const renderArrowIcon = (newFilter: string) => {
     if (filter === newFilter) {
       return ascending ? (
-        <Icon as={FontAwesomeIcon} icon={faArrowDown} />
+        <Icon as={FontAwesomeIcon} icon={faArrowDown} boxSize={3} />
       ) : (
-        <Icon as={FontAwesomeIcon} icon={faArrowUp} />
+        <Icon as={FontAwesomeIcon} icon={faArrowUp} boxSize={3} />
       );
     }
-    return <Icon as={FontAwesomeIcon} icon={faArrowsUpDown} />;
+    return <Icon as={FontAwesomeIcon} icon={faArrowsUpDown} boxSize={3} />;
   };
 
   return (
     <SimpleGrid
       columns={[5, 7]}
       width="100%"
+      minChildWidth="130px"
       fontWeight="bold"
       borderBottom="1px"
       borderColor={GetColor('border')}
       rowGap={1}
+      paddingX={2}
     >
       {gridHeadings.map((heading) => {
         if (unnecessaryHeadings(heading.sortByString)) return null;
         if (!heading.sortByString) {
           return (
-            <GridItem display="flex" alignItems="center" key={heading.id}>
+            <GridItem
+              display="flex"
+              alignItems="center"
+              key={heading.id}
+              fontSize="sm"
+              hideBelow={heading.hideBelow}
+            >
               {heading.text}
             </GridItem>
           );
         }
         return (
-          <GridItem display="flex" alignItems="center" key={heading.id}>
+          <GridItem
+            display="flex"
+            alignItems="center"
+            key={heading.id}
+            hideBelow={heading.hideBelow}
+          >
             <Button
               variant="unstyled"
               display="flex"
+              fontSize="sm"
               gap={1}
               onClick={() => {
                 setFilter(heading.sortByString);

@@ -20,12 +20,13 @@ const GridBodyItem: React.FC<IGridBodyItemProps> = ({
   <SimpleGrid
     columns={[5, 7]}
     width="100%"
-    gap={8}
+    minChildWidth="130px"
     fontSize="sm"
     _odd={{
       background: `${GetColor('grid-accent')}`,
+      borderRadius: 'md',
     }}
-    paddingY={2}
+    padding={2}
   >
     <GridItem>
       CR{' '}
@@ -33,34 +34,23 @@ const GridBodyItem: React.FC<IGridBodyItemProps> = ({
         ? formatThousands(commodity.sellPrice)
         : formatThousands(commodity.buyPrice)}
     </GridItem>
-    <GridItem textAlign="right" paddingRight={8}>
+    <GridItem>
       {isBuying
         ? formatThousands(commodity.supply)
         : formatThousands(commodity.demand)}
     </GridItem>
-    <GridItem width="max-content" minWidth="180px">
-      {commodity.systemName}
-    </GridItem>
-    <GridItem
-      display="flex"
-      flexWrap="nowrap"
-      width="max-content"
-      minWidth="150px"
-      gap={1}
-      hideBelow="md"
-    >
+    <GridItem width="max-content">{commodity.systemName}</GridItem>
+    <GridItem display="flex" flexWrap="nowrap" columnGap={1} hideBelow="md">
       {renderStationTypeIcon(commodity.station, isDark)}
       {commodity.station.name}
     </GridItem>
-    <GridItem hideBelow="lg" textAlign="right" paddingRight={4}>
+    <GridItem hideBelow="lg" paddingLeft={5}>
       {formatThousands(commodity.station.arrivalDistance)} ls
     </GridItem>
-    <GridItem textAlign="right" paddingRight={4}>
+    <GridItem paddingLeft={5}>
       {formatThousands(commodity.distance)} ly
     </GridItem>
-    <GridItem textAlign="right" paddingRight={4}>
-      {calculateTimeDifference(commodity.pricesUpdatedAt)}
-    </GridItem>
+    <GridItem>{calculateTimeDifference(commodity.pricesUpdatedAt)}</GridItem>
   </SimpleGrid>
 );
 
