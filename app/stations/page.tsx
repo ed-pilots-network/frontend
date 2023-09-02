@@ -23,8 +23,7 @@ export default async function getCommodities() {
 
     commodities = (await commoditiesReq.json()) as ICommodity[];
   } catch (error) {
-    if (process.env.NODE_ENV === 'development') console.error(error);
-    throw error;
+    console.error(error);
   }
 
   return <PageClient commodities={commodities} />;
