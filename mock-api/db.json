@@ -16,58 +16,97 @@
   "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
   "commodity": [
     {
-      "commodityDisplayName": "Tritium",
-      "station": {
-        "name": "Thoreau Station",
-        "arrivalDistance": null,
-        "maxLandingPadSize": "UNKNOWN",
-        "fleetCarrier": true,
-        "requireOdyssey": null,
-        "planetary": null
+      "commodity": {
+        "commodityName": "tritium",
+        "displayName": "Tritium",
+        "type": "CHEMICALS",
+        "isRare": false
       },
-      "systemName": "HIP 113495",
-      "pricesUpdatedAt": "2023-08-02T00:47:01Z",
+      "station": {
+        "marketId": 42069,
+        "name": "Roger Station",
+        "arrivalDistance": 0,
+        "maxLandingPadSize": "MEDIUM",
+        "fleetCarrier": true,
+        "requireOdyssey": false,
+        "planetary": false,
+        "marketUpdatedAt": "2023-08-01T00:47:01Z",
+        "system": {
+          "eliteId": 42069,
+          "name": "Cool System",
+          "xcoordinate": 0,
+          "ycoordinate": 0,
+          "zcoordinate": 0
+        }
+      },
+      "priceUpdatedAt": "2023-08-02T00:47:01Z",
       "supply": 9199,
       "demand": 1,
       "buyPrice": 49906,
       "sellPrice": 49184,
-      "distance": 0
+      "distance": 10
     },
     {
-      "commodityDisplayName": "Tritium",
-      "station": {
-        "name": "Small Station",
-        "arrivalDistance": 400,
-        "maxLandingPadSize": "LARGE",
-        "fleetCarrier": false,
-        "requireOdyssey": null,
-        "planetary": true
+      "commodity": {
+        "commodityName": "tritium",
+        "displayName": "Tritium",
+        "type": "CHEMICALS",
+        "isRare": false
       },
-      "systemName": "HIP HIP HOORAY",
-      "pricesUpdatedAt": "2023-08-05T00:47:01Z",
+      "station": {
+        "marketId": 42069,
+        "name": "Syd Station",
+        "arrivalDistance": 0,
+        "maxLandingPadSize": "MEDIUM",
+        "fleetCarrier": false,
+        "requireOdyssey": false,
+        "planetary": true,
+        "marketUpdatedAt": "2023-08-01T00:47:01Z",
+        "system": {
+          "eliteId": 42069,
+          "name": "Cool System",
+          "xcoordinate": 0,
+          "ycoordinate": 0,
+          "zcoordinate": 0
+        }
+      },
+      "priceUpdatedAt": "2023-08-05T00:47:01Z",
       "supply": 69420,
       "demand": 1,
       "buyPrice": 43238,
       "sellPrice": 51234,
-      "distance": 0
+      "distance": 15
     },
     {
-      "commodityDisplayName": "Tritium",
+      "commodity": {
+        "commodityName": "tritium",
+        "displayName": "Tritium",
+        "type": "CHEMICALS",
+        "isRare": false
+      },
       "station": {
-        "name": "Another Station",
-        "arrivalDistance": 3600,
-        "maxLandingPadSize": "MEDIUM",
+        "marketId": 42069,
+        "name": "David Station",
+        "arrivalDistance": 0,
+        "maxLandingPadSize": "LARGE",
         "fleetCarrier": false,
         "requireOdyssey": false,
-        "planetary": false
+        "planetary": false,
+        "marketUpdatedAt": "2023-08-01T00:47:01Z",
+        "system": {
+          "eliteId": 42069,
+          "name": "Cool System",
+          "xcoordinate": 0,
+          "ycoordinate": 0,
+          "zcoordinate": 0
+        }
       },
-      "systemName": "Shiny System",
-      "pricesUpdatedAt": "2023-08-11T00:47:01Z",
+      "priceUpdatedAt": "2023-08-11T00:47:01Z",
       "supply": 112470,
       "demand": 1,
       "buyPrice": 42869,
       "sellPrice": 50192,
-      "distance": 0
+      "distance": 20
     }
   ]
 }

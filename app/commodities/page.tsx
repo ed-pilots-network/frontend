@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import PageClient from './page.client';
-import { ICommodity } from '../_types';
+import { ICommodity } from '@/types/index';
 
 export const metadata: Metadata = {
   title: 'EDPN - Commodities',

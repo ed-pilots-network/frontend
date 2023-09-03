@@ -121,6 +121,7 @@ const compareNumbers = (
     if (ascending) return b - a;
     return a - b;
   }
+  if (ascending) return b - a;
   return a - b;
 };
 

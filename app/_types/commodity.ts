@@ -1,3 +1,5 @@
+import { IStation } from './celestial_objects';
+
 export interface ICommodity {
   commodityName: string;
   displayName: string;
@@ -22,17 +24,9 @@ export interface ICommodityFormRequest {
 }
 
 export interface ICommodityFormResponse {
-  commodityDisplayName: string;
-  station: {
-    name: string;
-    arrivalDistance: number;
-    maxLandingPadSize: string;
-    fleetCarrier: boolean;
-    requireOdyssey: boolean;
-    planetary: boolean;
-  };
-  systemName: string;
-  pricesUpdatedAt: string;
+  commodity: ICommodity;
+  station: IStation;
+  priceUpdatedAt: string;
   supply: number;
   demand: number;
   buyPrice: number;

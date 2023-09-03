@@ -12,12 +12,12 @@ import {
   Button,
   useMediaQuery,
 } from '@chakra-ui/react';
-import { ICommodity, ICommodityFormResponse } from '@/app/_types/commodity';
 import Form, { SubmitProps } from '@/components/commodities/Form';
 import CommodityFormResponse from '@/components/commodities/CommodityFormResponse';
 import CommodityFormResponseMobile from '@/components/commodities/CommodityFormResponseMobile';
 import layoutConfig from '../_config/layout';
 import GetColor from '@/app/_hooks/colorSelector';
+import { ICommodity, ICommodityFormResponse } from '@/types/index';
 
 interface IPageClientProps {
   commodities: ICommodity[] | null;

@@ -33,7 +33,7 @@ const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
           Arrival Distance: {commodity.station.arrivalDistance ?? '?'} ls
         </Text>
         <Text>
-          Last Updated: {calculateTimeDifference(commodity.pricesUpdatedAt)}
+          Last Updated: {calculateTimeDifference(commodity.priceUpdatedAt)}
         </Text>
       </Td>
     </Tr>
@@ -65,7 +65,7 @@ const GridBodyItemMobile: React.FC<IGridBodyItemProps> = ({
             ? formatThousands(commodity.supply)
             : formatThousands(commodity.demand)}
         </Td>
-        <Td>{commodity.systemName}</Td>
+        <Td>{commodity.station.system.name}</Td>
         <Td>{formatThousands(commodity.distance)} ly</Td>
       </Tr>
       {showItemCard && toggleItemCard()}

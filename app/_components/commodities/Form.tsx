@@ -17,13 +17,13 @@ import {
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { ICommodity, ICommodityFormRequest } from '@/app/_types/commodity';
 import GetColor from '@/app/_hooks/colorSelector';
 import {
   CommoditiesField,
   LandingPadsField,
   StationTypesField,
 } from '../inputs';
+import { ICommodity, ICommodityFormRequest } from '@/types/index';
 
 export const CommodityFormSchema = z.object({
   commodityDisplayName: z.object({

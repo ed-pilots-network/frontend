@@ -2,9 +2,9 @@ import React from 'react';
 
 import { formatThousands } from '@/app/_hooks/textFormatting';
 import { GridItem, SimpleGrid } from '@chakra-ui/react';
-import { ICommodityFormResponse } from '@/app/_types/commodity';
 import GetColor from '@/app/_hooks/colorSelector';
 import { calculateTimeDifference, renderStationTypeIcon } from '../helpers';
+import { ICommodityFormResponse } from '@/types/index';
 
 interface IGridBodyItemProps {
   isDark: boolean;
@@ -39,7 +39,7 @@ const GridBodyItem: React.FC<IGridBodyItemProps> = ({
         ? formatThousands(commodity.supply)
         : formatThousands(commodity.demand)}
     </GridItem>
-    <GridItem width="max-content">{commodity.systemName}</GridItem>
+    <GridItem width="max-content">{commodity.station.system.name}</GridItem>
     <GridItem display="flex" flexWrap="nowrap" columnGap={1} hideBelow="md">
       {renderStationTypeIcon(commodity.station, isDark)}
       {commodity.station.name}
@@ -50,7 +50,7 @@ const GridBodyItem: React.FC<IGridBodyItemProps> = ({
     <GridItem paddingLeft={5}>
       {formatThousands(commodity.distance)} ly
     </GridItem>
-    <GridItem>{calculateTimeDifference(commodity.pricesUpdatedAt)}</GridItem>
+    <GridItem>{calculateTimeDifference(commodity.priceUpdatedAt)}</GridItem>
   </SimpleGrid>
 );
 

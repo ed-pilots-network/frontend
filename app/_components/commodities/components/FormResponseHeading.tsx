@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Flex, HStack, Heading, Image, Text, VStack } from '@chakra-ui/react';
-import { ICommodityFormResponse } from '@/app/_types/commodity';
+import { ICommodityFormResponse } from '@/types/index';
 
 interface IFormResponseHeadProps {
   commodityResponse: ICommodityFormResponse[];
@@ -18,7 +18,7 @@ const FormResponseHeading: React.FC<IFormResponseHeadProps> = ({
 }) => {
   // Get the commodity display name from the first response
   const commodityDisplayName =
-    commodityResponse[0]?.commodityDisplayName ?? 'Unknown';
+    commodityResponse[0]?.commodity.displayName ?? 'Unknown';
 
   return (
     <>
