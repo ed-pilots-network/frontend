@@ -14,8 +14,7 @@ import {
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import useColorMode from '@/app/_hooks/useColorMode';
-import selectColor from '@/app/_hooks/fontColorSelector';
+import GetColor from '@/app/_hooks/colorSelector';
 import {
   PowersField,
   AllegiancesField,
@@ -76,8 +75,6 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
   } = useForm<SubmitProps>({
     resolver: zodResolver(SingleTradeRouteFormSchema),
   });
-
-  const { isDark } = useColorMode();
 
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
     console.log(data);
@@ -226,9 +223,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               type="number"
               variant="outline"
               placeholder="Enter a number..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('cargoCapacity')}
             />
@@ -247,9 +244,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               type="number"
               variant="outline"
               placeholder="Enter a number..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('minSupply')}
               defaultValue={1}
@@ -269,9 +266,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               type="number"
               variant="outline"
               placeholder="Enter a number..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('minDemand')}
               defaultValue={1}
@@ -293,9 +290,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               type="number"
               variant="outline"
               placeholder="Enter a number..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('availableCredits')}
             />
@@ -314,9 +311,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               type="number"
               variant="outline"
               placeholder="Enter a number..."
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('maxPriceAge')}
             />
@@ -370,9 +367,9 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
               type="number"
               variant="outline"
               placeholder="In LS"
-              borderColor={selectColor(isDark, 'border')}
+              borderColor={GetColor('border')}
               _hover={{
-                borderColor: selectColor(isDark, 'border'),
+                borderColor: GetColor('border'),
               }}
               {...register('maxDistanceToArrival')}
             />
@@ -426,7 +423,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
                 <Checkbox
                   colorScheme="orange"
                   {...register('requiresPermit')}
-                  borderColor={selectColor(isDark, 'border')}
+                  borderColor={GetColor('border')}
                 >
                   Requires Permit
                 </Checkbox>
