@@ -18,14 +18,12 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import selectColor from '@/app/_hooks/fontColorSelector';
-import useColorMode from '@/app/_hooks/useColorMode';
+import GetColor from '@/app/_hooks/colorSelector';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import ModuleProps, { Module, Tags } from '@/app/_lib/moduleProps';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const NavDrawer = () => {
-  const { isDark } = useColorMode();
   const [isOpen, setIsOpen] = useState(false);
 
   const onClose = () => {
@@ -57,10 +55,10 @@ const NavDrawer = () => {
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton color={selectColor(isDark, 'textLight')} />
+          <DrawerCloseButton color={GetColor('textLight')} />
           <DrawerHeader
-            backgroundColor={selectColor(isDark, 'box')}
-            color={selectColor(isDark, 'textLight')}
+            backgroundColor={GetColor('box')}
+            color={GetColor('textLight')}
           >
             <Flex alignItems="center" justifyContent="center">
               <Link href="/">
@@ -74,8 +72,8 @@ const NavDrawer = () => {
           </DrawerHeader>
 
           <DrawerBody
-            backgroundColor={selectColor(isDark, 'box')}
-            color={selectColor(isDark, 'textLight')}
+            backgroundColor={GetColor('box')}
+            color={GetColor('textLight')}
           >
             <Divider opacity="1.0" marginBottom={8}></Divider>
             {Tags.map((tag) => (
@@ -92,8 +90,8 @@ const NavDrawer = () => {
                       padding={2}
                       key={module.title}
                       _hover={{
-                        backgroundColor: selectColor(isDark, 'background'),
-                        color: selectColor(isDark, 'text'),
+                        backgroundColor: GetColor('background'),
+                        color: GetColor('text'),
                       }}
                     >
                       <Icon as={FontAwesomeIcon} icon={module.icon} />

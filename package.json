@@ -20,6 +20,7 @@
     "test": "yarn test:e2e && yarn test:unit",
     "test:e2e": "playwright test",
     "test:unit": "jest",
+    "clean": "rm -rf .next && rm -rf node_modules && yarn install",
     "capture-screenshots": "RUN_SCREENSHOT_TEST=true yarn test"
   },
   "dependencies": {
