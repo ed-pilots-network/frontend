@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, GridItem, Icon, SimpleGrid } from '@chakra-ui/react';
+import { Button, Grid, GridItem, Icon } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowUp,
@@ -28,13 +28,14 @@ const GridHeadingsMobile: React.FC<IGridHeadingsProps> = ({
     id: number;
     text: string;
     sortByString: string | null;
+    margin: string;
   }[] = [
-    { id: 0, text: 'Sell Price', sortByString: 'sellPrice' },
-    { id: 1, text: 'Buy Price', sortByString: 'buyPrice' },
-    { id: 2, text: 'Supply', sortByString: 'supply' },
-    { id: 3, text: 'Demand', sortByString: 'demand' },
-    { id: 4, text: 'System', sortByString: null },
-    { id: 5, text: 'Distance', sortByString: 'distance' },
+    { id: 0, text: 'Price', sortByString: 'sellPrice', margin: 'inherit' },
+    { id: 1, text: 'Price', sortByString: 'buyPrice', margin: 'inherit' },
+    { id: 2, text: 'Supply', sortByString: 'supply', margin: 'inherit' },
+    { id: 3, text: 'Demand', sortByString: 'demand', margin: 'inherit' },
+    { id: 4, text: 'System', sortByString: null, margin: 'inherit' },
+    { id: 5, text: 'Distance', sortByString: 'distance', margin: 'auto' },
   ];
 
   const unnecessaryHeadings = (newFilter: string | null) => {
@@ -48,37 +49,44 @@ const GridHeadingsMobile: React.FC<IGridHeadingsProps> = ({
   const renderArrowIcon = (newFilter: string) => {
     if (filter === newFilter) {
       return ascending ? (
-        <Icon as={FontAwesomeIcon} icon={faArrowDown} />
+        <Icon as={FontAwesomeIcon} icon={faArrowDown} boxSize={3} />
       ) : (
-        <Icon as={FontAwesomeIcon} icon={faArrowUp} />
+        <Icon as={FontAwesomeIcon} icon={faArrowUp} boxSize={3} />
       );
     }
-    return <Icon as={FontAwesomeIcon} icon={faArrowsUpDown} />;
+    return <Icon as={FontAwesomeIcon} icon={faArrowsUpDown} boxSize={3} />;
   };
 
   return (
-    <SimpleGrid
-      columns={[4, 4]}
+    <Grid
+      templateColumns="repeat(4, 1fr)"
       width="100%"
       fontWeight="bold"
       borderBottom="1px"
       borderColor={GetColor('border')}
-      rowGap={1}
+      paddingX={2}
     >
       {gridHeadings.map((heading) => {
         if (unnecessaryHeadings(heading.sortByString)) return null;
         if (!heading.sortByString) {
           return (
-            <GridItem display="flex" alignItems="center" key={heading.id}>
+            <GridItem
+              display="flex"
+              alignItems="center"
+              key={heading.id}
+              fontSize="sm"
+              marginX={heading.margin}
+            >
               {heading.text}
             </GridItem>
           );
         }
         return (
-          <GridItem display="flex" alignItems="center" key={heading.id}>
+          <GridItem display="flex" key={heading.id} marginX={heading.margin}>
             <Button
               variant="unstyled"
               display="flex"
+              fontSize="sm"
               gap={1}
               onClick={() => {
                 setFilter(heading.sortByString);
@@ -91,7 +99,7 @@ const GridHeadingsMobile: React.FC<IGridHeadingsProps> = ({
           </GridItem>
         );
       })}
-    </SimpleGrid>
+    </Grid>
   );
 };
 

@@ -109,12 +109,12 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
   return (
     <Box
       flex="1"
-      as="main"
       backgroundImage={`url('/assets/Anaconda_Opacity.svg')`}
       backgroundRepeat="no-repeat"
-      backgroundSize={{ base: 'contain', sm: '0', lg: '50%' }}
+      backgroundSize={{ base: '0', md: '75%', lg: '50%' }}
       backgroundPosition="center center"
       paddingX={2}
+      width="100%"
     >
       <Center
         maxWidth={layoutConfig.maxWidth}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { Table, TableContainer, VStack } from '@chakra-ui/react';
-import layoutConfig from '@/app/_config/layout';
 import { compareNumbers, legendItems, legendItemsDark } from './helpers';
 import {
   FormResponseHeading,
@@ -29,7 +28,6 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
 
   return (
     <VStack
-      maxWidth={layoutConfig.maxWidth}
       width="100%"
       marginX="auto"
       opacity={0.9}
@@ -37,7 +35,7 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
       borderRadius="9px"
       borderColor={GetColor('border')}
       bg={GetColor('')}
-      padding="1rem"
+      paddingY="1rem"
     >
       <FormResponseHeading
         commodityResponse={commodityResponse}
@@ -51,7 +49,7 @@ const CommodityFormResponseMobile: React.FC<ICommodityFormResponseProps> = ({
         setAscending={setAscending}
       />
       <TableContainer width="100%">
-        <Table variant="unstyled" fontSize="sm">
+        <Table variant="unstyled" fontSize="sm" size="sm">
           {commodityResponse.length > 0 && (
             <>
               {commodityResponse

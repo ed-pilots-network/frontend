@@ -120,7 +120,7 @@ describe('Commodity Form Response', () => {
     const highPrice = '51,234';
     const firstRow = screen.getAllByRole('row')[0];
     let firstRowPrice = firstRow.firstChild?.textContent;
-    const sortButton = screen.getByRole('button', { name: 'Sell Price' });
+    const sortButton = screen.getByRole('button', { name: 'Price' });
 
     // ACT
     fireEvent.click(sortButton);

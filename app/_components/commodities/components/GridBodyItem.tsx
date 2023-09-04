@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { formatThousands } from '@/app/_hooks/textFormatting';
-import { GridItem, SimpleGrid } from '@chakra-ui/react';
+import { GridItem, SimpleGrid, Text } from '@chakra-ui/react';
 import GetColor from '@/app/_hooks/colorSelector';
 import { calculateTimeDifference, renderStationTypeIcon } from '../helpers';
 import { ICommodityFormResponse } from '@/types/index';
@@ -27,6 +27,7 @@ const GridBodyItem: React.FC<IGridBodyItemProps> = ({
       borderRadius: 'md',
     }}
     padding={2}
+    height={10}
   >
     <GridItem>
       CR{' '}
@@ -39,17 +40,28 @@ const GridBodyItem: React.FC<IGridBodyItemProps> = ({
         ? formatThousands(commodity.supply)
         : formatThousands(commodity.demand)}
     </GridItem>
-    <GridItem width="max-content">{commodity.station.system.name}</GridItem>
-    <GridItem display="flex" flexWrap="nowrap" columnGap={1} hideBelow="md">
-      {renderStationTypeIcon(commodity.station, isDark)}
-      {commodity.station.name}
+    <GridItem>
+      <Text maxWidth="130px" overflowX="scroll" whiteSpace="nowrap">
+        {commodity.station.system.name}
+      </Text>
     </GridItem>
-    <GridItem hideBelow="lg" paddingLeft={5}>
+    <GridItem
+      display="flex"
+      flexWrap="nowrap"
+      columnGap={1}
+      hideBelow="md"
+      marginY="auto"
+      maxWidth="90%"
+    >
+      {renderStationTypeIcon(commodity.station, isDark)}
+      <Text overflowX="scroll" whiteSpace="nowrap">
+        {commodity.station.name}
+      </Text>
+    </GridItem>
+    <GridItem hideBelow="lg">
       {formatThousands(commodity.station.arrivalDistance)} ls
     </GridItem>
-    <GridItem paddingLeft={5}>
-      {formatThousands(commodity.distance)} ly
-    </GridItem>
+    <GridItem>{formatThousands(commodity.distance)} ly</GridItem>
     <GridItem>{calculateTimeDifference(commodity.priceUpdatedAt)}</GridItem>
   </SimpleGrid>
 );

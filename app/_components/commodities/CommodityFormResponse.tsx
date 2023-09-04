@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { VStack } from '@chakra-ui/react';
-import layoutConfig from '@/app/_config/layout';
 import { compareNumbers, legendItems, legendItemsDark } from './helpers';
 import { FormResponseHeading, GridHeadings, GridBodyItem } from './components';
 import GetColor from '@/app/_hooks/colorSelector';
@@ -25,7 +24,6 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
 
   return (
     <VStack
-      maxWidth={layoutConfig.maxWidth}
       width="100%"
       marginX="auto"
       opacity={0.9}
