@@ -1,12 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Flex, HStack, Heading } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/stations/Form';
 import GetColor from '@/app/_hooks/colorSelector';
 import { StationForm } from '@/app/_types/forms';
+import { ICommodity } from '@/app/_types/commodity';
 
-const PageClient = () => {
+interface IPageClientProps {
+  commodities: ICommodity[] | null;
+}
+
+const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (data: SubmitProps) => {
@@ -43,7 +48,11 @@ const PageClient = () => {
         borderColor={GetColor('border')}
         padding="1rem"
       >
-        <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
+        <Form
+          onSubmitHandler={handleSubmit}
+          isLoading={isLoading}
+          commodities={commodities}
+        />
       </Box>
     </Flex>
   );

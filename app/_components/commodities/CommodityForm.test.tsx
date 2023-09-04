@@ -13,7 +13,15 @@ const mockData = {
   minSupply: 5000,
 };
 
-jest.mock('@/lib/commodity-list', () => ['mt_gold']);
+const mockCommodity = [
+  {
+    commodityName: 'algae',
+    displayName: 'Algae',
+    type: 'FOODS',
+    isRare: false,
+  },
+];
+
 jest.mock('../inputs/Commodities', () => ({
   __esModule: true,
   default: jest
@@ -25,7 +33,13 @@ const mockSubmit = jest.fn();
 
 describe('Form', () => {
   beforeEach(() => {
-    render(<Form onSubmitHandler={mockSubmit} isLoading={false} />);
+    render(
+      <Form
+        onSubmitHandler={mockSubmit}
+        isLoading={false}
+        commodities={mockCommodity}
+      />,
+    );
   });
 
   test('renders the form', () => {

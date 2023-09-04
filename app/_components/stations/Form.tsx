@@ -34,6 +34,7 @@ import {
   FacilitiesField,
 } from '@/app/_components/inputs';
 import CheckboxGroup from '../form/CheckboxGroup';
+import { ICommodity } from '@/app/_types';
 
 export const StationFormSchema = z.object({
   stationId: z.string(),
@@ -72,9 +73,14 @@ export type SubmitProps = z.infer<typeof StationFormSchema>;
 interface FormProps {
   onSubmitHandler: SubmitHandler<SubmitProps>;
   isLoading: boolean;
+  commodities: ICommodity[] | null;
 }
 
-const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
+const Form: React.FC<FormProps> = ({
+  onSubmitHandler,
+  isLoading,
+  commodities,
+}) => {
   const {
     control,
     register,
@@ -143,11 +149,7 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
           <FormControl
             isInvalid={!!(errors.commodity && errors.commodity.message)}
           >
-            <FormLabel>Commodities</FormLabel>
-            <CommoditiesField
-              control={control}
-              placeholder="Find stations selling these commodities..."
-            />
+            <CommoditiesField control={control} commodities={commodities} />
           </FormControl>
         </GridItem>
 

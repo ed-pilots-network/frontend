@@ -1,11 +1,11 @@
 'use client';
 
 import { ColorModeScript, Box, Flex } from '@chakra-ui/react';
-import GetColor from '@/app/_hooks/colorSelector';
 import Navbar from './_components/navbar/Navbar';
 import Footer from './_components/footer/Footer';
+import GetColor from '@/app/_hooks/colorSelector';
 import theme from './_config/theme';
-import layoutConfig from '@/app/_config/layout';
+import layoutConfig from './_config/layout';
 
 const LayoutClient = ({ children }: { children: React.ReactNode }) => (
   <>
