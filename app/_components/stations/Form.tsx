@@ -40,7 +40,7 @@ export const StationFormSchema = z.object({
   stationId: z.string(),
   ships: z.array(z.object({ value: z.string() })).optional(),
   modules: z.array(z.object({ value: z.string() })).optional(),
-  commodity: z.array(z.object({ value: z.string() })).optional(),
+  commodityDisplayName: z.array(z.object({ value: z.string() })).optional(),
   facilities: z.array(z.object({ value: z.string() })).optional(),
   allegiance: z
     .enum(['', ...(allegiances.map((item) => item) as [string, ...string[]])])
@@ -147,9 +147,23 @@ const Form: React.FC<FormProps> = ({
 
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl
-            isInvalid={!!(errors.commodity && errors.commodity.message)}
+            isInvalid={
+              !!(
+                errors.commodityDisplayName &&
+                errors.commodityDisplayName.message
+              )
+            }
           >
-            <CommoditiesField control={control} commodities={commodities} />
+            <FormLabel>Commodities</FormLabel>
+            <CommoditiesField
+              control={control}
+              commodities={commodities}
+              isMulti={true}
+            />
+            <FormErrorMessage>
+              {errors.commodityDisplayName &&
+                errors.commodityDisplayName.message}
+            </FormErrorMessage>
           </FormControl>
         </GridItem>
 
