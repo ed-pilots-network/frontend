@@ -159,6 +159,7 @@ const Form: React.FC<FormProps> = ({
               control={control}
               commodities={commodities}
               isMulti={true}
+              placeholder="Find stations selling these commodities..."
             />
             <FormErrorMessage>
               {errors.commodityDisplayName &&
