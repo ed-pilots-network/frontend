@@ -27,6 +27,7 @@ import CheckboxGroup from '../../form/CheckboxGroup';
 import { useState } from 'react';
 import SystemsField from '../../inputs/Systems';
 import Select from '../../inputs/form/Select';
+import { ICommodity } from '@/app/_types';
 
 export const SingleTradeRouteFormSchema = z.object({
   buySystem: z.object({ value: z.number() }).optional(),
@@ -64,9 +65,14 @@ export type SubmitProps = z.infer<typeof SingleTradeRouteFormSchema>;
 interface FormProps {
   onSubmitHandler: SubmitHandler<SubmitProps>;
   isLoading: boolean;
+  commodities: ICommodity[] | null;
 }
 
-const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
+const Form: React.FC<FormProps> = ({
+  onSubmitHandler,
+  isLoading,
+  commodities,
+}) => {
   const {
     control,
     register,
@@ -210,6 +216,8 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
             <CommoditiesField
               control={control}
               placeholder="Select commodities..."
+              commodities={commodities}
+              isMulti={true}
             />
           </FormControl>
         </GridItem>
@@ -436,13 +444,8 @@ const Form: React.FC<FormProps> = ({ onSubmitHandler, isLoading }) => {
         </GridItem>
       </Grid>
 
-      <Button
-        type="submit"
-        variant="customButton"
-        id="submit"
-        isLoading={isLoading}
-      >
-        Find Stations
+      <Button type="submit" variant="submit" id="submit" isLoading={isLoading}>
+        Find Routes
       </Button>
     </form>
   );
