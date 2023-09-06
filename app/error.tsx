@@ -1,9 +1,14 @@
 'use client';
 
-import NextLink from 'next/link';
-import { Button, Center, Flex, Heading } from '@chakra-ui/react';
+import { Button, Center, Flex, Heading, Text } from '@chakra-ui/react';
 
-export default function NotFound() {
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
   return (
     <Center width="100%">
       <Flex
@@ -17,13 +22,12 @@ export default function NotFound() {
           size={{ base: 'md', md: 'lg', lg: 'lg' }}
           marginX={{ base: 'auto', md: '0', lg: '0' }}
         >
-          404 - Page Not Found
+          Something went wrong!
         </Heading>
-        <NextLink href="/" passHref>
-          <Button type="button" variant="outline">
-            Go back Home
-          </Button>
-        </NextLink>
+        <Text as="samp">{error.message}</Text>
+        <Button type="button" variant="outline" onClick={() => reset()}>
+          Try again
+        </Button>
       </Flex>
     </Center>
   );

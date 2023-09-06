@@ -62,15 +62,26 @@ yarn lint
 yarn test
 ```
 
+### Clean
+
+Removes the `.next` and `node_modules` folders and runs `yarn install` to clean up the local workspace
+
+```bash
+yarn clean
+```
+
 ### Take Screenshots
+
 If you are making changes that impact the UI, ensure to test the change on different view ports. Run the following to auto capture screenshots when tests run. Note that this only runs when you run this command locally.
 
 #### Take screenshots of home page
+
 ```bash
 yarn capture-screenshots
 ```
 
 #### Take screenshots of a specific page
+
 ```bash
 PAGE_PATH=/commodities yarn capture-screenshots
 ```
@@ -116,4 +127,5 @@ yarn dev
 - Docker
 
 ### 🌐 Useful Tools
+
 - [ColorKit](https://colorkit.co/color-palette-generator/272f33-4e5d66-9BB9CB-cddce5-e6eef2/) - Color Palette Generator

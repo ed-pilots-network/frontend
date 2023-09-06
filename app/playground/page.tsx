@@ -6,9 +6,6 @@ import {
 } from './_api';
 import { ICommodity, IPost } from '../_types';
 
-// Force dynamic fetching during runtime for playground
-export const dynamic = 'force-dynamic';
-
 export const metadata: Metadata = {
   title: 'EDPN Playground',
   description: 'Elite Dangerous Pilots Network',
@@ -23,12 +20,14 @@ export default async function Page() {
     posts = await getPostsForCategoryFromMockApi();
   } catch (error) {
     console.error('Failed to fetch posts data:', error);
+    throw error;
   }
 
   try {
     commodity = await getCommodityByNameFromStagingApi('Wine');
   } catch (error) {
     console.error('Failed to fetch commodity data:', error);
+    throw error;
   }
 
   return <PageClient posts={posts} commodity={commodity} />;
