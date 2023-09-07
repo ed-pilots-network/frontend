@@ -35,6 +35,7 @@ import {
 } from '@/app/_components/inputs';
 import CheckboxGroup from '../form/CheckboxGroup';
 import { ICommodity } from '@/app/_types';
+import StationsField from '../inputs/Stations';
 
 export const StationFormSchema = z.object({
   stationId: z.string(),
@@ -110,15 +111,7 @@ const Form: React.FC<FormProps> = ({
             isInvalid={!!(errors.stationId && errors.stationId.message)}
           >
             <FormLabel>Station</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by station name..."
-              borderColor={GetColor('border')}
-              _hover={{
-                borderColor: GetColor('border'),
-              }}
-              {...register('stationId')}
-            />
+            <StationsField fieldName="stationId" control={control} />
             <FormErrorMessage>
               {errors.stationId && errors.stationId.message}
             </FormErrorMessage>

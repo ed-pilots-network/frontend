@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Form from './Form';
+import { ChakraProvider } from '@chakra-ui/react';
 
 jest.mock('../inputs/Powers', () => ({
   __esModule: true,
@@ -100,10 +101,14 @@ jest.mock('../inputs/Facilities', () => ({
 
 describe('Stations Form', () => {
   it('should render the basic fields', () => {
-    render(<Form onSubmitHandler={() => {}} isLoading={false} />);
+    render(
+      <ChakraProvider>
+        <Form onSubmitHandler={() => {}} isLoading={false} commodities={null} />
+      </ChakraProvider>,
+    );
 
     expect(
-      screen.getByRole('textbox', { name: 'Station' }),
+      screen.getByRole('combobox', { name: 'Station' }),
     ).toBeInTheDocument();
 
     expect(

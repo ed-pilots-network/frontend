@@ -1,4 +1,5 @@
 {
+  "/api/v1/exploration/station/by-name-containing": "/stations",
   "/api/*": "/$1",
   "/:resource/:id/show": "/:resource/:id",
   "/posts/:category": "/posts?category=:category"

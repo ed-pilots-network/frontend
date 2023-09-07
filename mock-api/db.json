@@ -14,6 +14,15 @@
     }
   ],
   "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+  "stations": [
+    { "name": "Daedalus" },
+    { "name": "Ehrlich City" },
+    { "name": "Abraham Lincoln" },
+    { "name": "Mars High" },
+    { "name": "Titan City" },
+    { "name": "Dekker's Yard" },
+    { "name": "Durrance Camp" }
+  ],
   "commodity": [
     {
       "commodity": {
