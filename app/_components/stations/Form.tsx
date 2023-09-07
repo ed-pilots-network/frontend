@@ -131,6 +131,7 @@ const Form: React.FC<FormProps> = ({
             <ShipsField
               control={control}
               placeholder="Find stations selling these ships..."
+              isMulti={true}
             />
           </FormControl>
         </GridItem>
@@ -141,6 +142,7 @@ const Form: React.FC<FormProps> = ({
             <ModulesField
               control={control}
               placeholder="Find stations selling these modules..."
+              isMulti={true}
             />
           </FormControl>
         </GridItem>
@@ -194,6 +196,7 @@ const Form: React.FC<FormProps> = ({
             <FacilitiesField
               control={control}
               placeholder="Select facilities..."
+              isMulti={true}
             />
           </FormControl>
         </GridItem>

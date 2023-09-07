@@ -22,10 +22,10 @@ import {
   LandingPadsField,
   StationTypesField,
   CommoditiesField,
+  SystemsField,
 } from '@/app/_components/inputs';
 import CheckboxGroup from '../../form/CheckboxGroup';
 import { useState } from 'react';
-import SystemsField from '../../inputs/Systems';
 import Select from '../../inputs/form/Select';
 import { ICommodity } from '@/app/_types';
 
@@ -111,7 +111,6 @@ const Form: React.FC<FormProps> = ({
               fieldName="buySystem"
               control={control}
               placeholder="Select a system..."
-              isMulti={false}
               onChange={(newValue) => {
                 setBuySystemStations(
                   newValue ? ['Station1', 'Station2', 'Station3'] : [],
@@ -161,7 +160,6 @@ const Form: React.FC<FormProps> = ({
               fieldName="sellSystem"
               control={control}
               placeholder="Select a system..."
-              isMulti={false}
               onChange={(newValue) => {
                 setSellSystemStations(
                   newValue ? ['Station1', 'Station2', 'Station3'] : [],

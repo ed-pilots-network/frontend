@@ -57,7 +57,7 @@ const loadOptions = async (inputValue: string) => {
 const SystemsField = ({
   fieldName,
   control,
-  isMulti = true,
+  isMulti = false,
   placeholder = 'Select systems...',
   disabled = false,
   onChange,
