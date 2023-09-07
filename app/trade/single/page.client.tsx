@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, HStack, Heading, Flex } from '@chakra-ui/react';
+import { Box, HStack, Heading, Flex, Button } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/trade-routes/single/Form';
 import GetColor from '@/app/_hooks/colorSelector';
 import { SingleTradeRouteForm } from '@/app/_types/forms';
@@ -13,6 +13,7 @@ interface IPageClientProps {
 
 const PageClient = ({ commodities }: IPageClientProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [mockStation, setMockStations] = useState<{ name: string }[]>([]);
 
   const handleSubmit = (data: SubmitProps) => {
     setIsLoading(true);
@@ -26,6 +27,25 @@ const PageClient = ({ commodities }: IPageClientProps) => {
       console.log('submitted ', submitData);
       setIsLoading(false);
     }, 2000);
+  };
+
+  const fetchMockStations = async () => {
+    setIsLoading(true);
+
+    try {
+      const mockStationsReq = await fetch(
+        `${process.env.NEXT_PUBLIC_MOCK_API_URL}/api/v1/exploration/station/filter`,
+        {
+          cache: 'no-store',
+        },
+      );
+      const mockStationsJson = await mockStationsReq.json();
+      setMockStations(mockStationsJson);
+    } catch (error) {
+      // handle error
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -54,6 +74,16 @@ const PageClient = ({ commodities }: IPageClientProps) => {
           commodities={commodities}
         />
       </Box>
+      <Button
+        type="button"
+        variant="outline"
+        id="example"
+        onClick={fetchMockStations}
+      >
+        Fetch Mock Stations
+      </Button>
+      {mockStation.length > 0 &&
+        mockStation.map((station) => <p key={station.name}>{station.name}</p>)}
     </Flex>
   );
 };
