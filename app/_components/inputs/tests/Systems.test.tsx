@@ -20,6 +20,6 @@ describe('Systems Field', () => {
   });
 
   it('renders', () => {
-    expect(screen.getByRole('combobox'));
+    expect(screen.getByRole('combobox')).toBeInTheDocument();
   });
 });
