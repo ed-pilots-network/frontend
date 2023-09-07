@@ -4,7 +4,7 @@ import { SystemForm } from '@/app/_types/system';
 import { ChakraProvider } from '@chakra-ui/react';
 import CommoditiesField from '../Commodities';
 
-describe('Systems Field', () => {
+describe('Commodities Field', () => {
   beforeEach(() => {
     const Component = () => {
       const { control } = useForm<SystemForm>();
