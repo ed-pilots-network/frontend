@@ -5,7 +5,7 @@ import { ICommodity } from '@/app/_types';
 export const metadata: Metadata = {
   title: 'EDPN - Single Trade Route Finder',
   description: 'Elite Dangerous Pilots Network',
-  icons: 'EDPN_logo_dark_background.png',
+  icons: '/EDPN_logo_dark_background.png',
 };
 
 export default async function Page() {
