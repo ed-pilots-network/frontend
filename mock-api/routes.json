@@ -1,5 +1,6 @@
 {
-  "/api/v1/exploration/station/filter": "/stations-filtered",
+  "/api/v1/exploration/system/by-name-containing": "/systems",
+  "/api/v1/exploration/station/filter": "/stations",
   "/api/v1/trade/commodity": "/commodity",
   "/api/*": "/$1",
   "/:resource/:id/show": "/:resource/:id",

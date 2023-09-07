@@ -40,7 +40,7 @@
       "starClass": "k"
     }
   ],
-  "stations-filtered": [
+  "stations": [
     { "name": "Daedalus" },
     { "name": "Ehrlich City" },
     { "name": "Abraham Lincoln" },
