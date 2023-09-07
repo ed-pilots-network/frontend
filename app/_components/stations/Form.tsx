@@ -121,20 +121,14 @@ const Form: React.FC<FormProps> = ({
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl isInvalid={!!(errors.ships && errors.ships.message)}>
             <FormLabel>Ships</FormLabel>
-            <ShipsField
-              control={control}
-              placeholder="Find stations selling these ships..."
-            />
+            <ShipsField control={control} placeholder="Select ships..." />
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl isInvalid={!!(errors.modules && errors.modules.message)}>
             <FormLabel>Modules</FormLabel>
-            <ModulesField
-              control={control}
-              placeholder="Find stations selling these modules..."
-            />
+            <ModulesField control={control} placeholder="Select modules..." />
           </FormControl>
         </GridItem>
 
@@ -152,7 +146,7 @@ const Form: React.FC<FormProps> = ({
               control={control}
               commodities={commodities}
               isMulti={true}
-              placeholder="Find stations selling these commodities..."
+              placeholder="Select commodities..."
             />
             <FormErrorMessage>
               {errors.commodityDisplayName &&
