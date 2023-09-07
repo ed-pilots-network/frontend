@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "dev-api": "concurrently \"next dev\" \"yarn api\"",
-    "api": "node mock-api/server.js",
+    "mock": "json-server --watch ./mock-api/_db.js --routes ./mock-api/routes.json --middlewares ./mock-api/middlewares/_postAsGet.js --port 3001",
+    "api": "nodemon --watch mock-api --exec 'json-server ./mock-api/_db.js --routes ./mock-api/routes.json' --middlewares ./mock-api/middlewares/_postAsGet.js --port 3001",
     "build": "next build",
     "copy-standalone-assets": "cp -R .next/static .next/standalone/.next && cp -R public .next/standalone",
     "start": "next start",
@@ -65,10 +66,12 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "glob": "^10.3.4",
     "husky": "^8.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "jest-fetch-mock": "^3.0.3",
+    "nodemon": "^3.0.1",
     "prettier": "^2.8.8"
   },
   "engines": {
