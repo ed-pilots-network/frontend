@@ -200,13 +200,13 @@ const Form: React.FC<FormProps> = ({
           </FormControl>
         </GridItem>
 
-        <GridItem marginTop={30} colSpan={{ base: 4 }}>
+        <GridItem marginTop={30} colSpan={{ base: 1, md: 2, lg: 4 }}>
           <h2>
             <b>Route options:</b>
           </h2>
         </GridItem>
 
-        <GridItem colSpan={{ base: 1, md: 3 }}>
+        <GridItem colSpan={{ base: 1, md: 2, lg: 3 }}>
           <FormControl
             isInvalid={!!(errors.commodityId && errors.commodityId.message)}
           >
@@ -329,7 +329,7 @@ const Form: React.FC<FormProps> = ({
           </FormControl>
         </GridItem>
 
-        <GridItem marginTop={30} colSpan={{ base: 4 }}>
+        <GridItem marginTop={30} colSpan={{ base: 1, md: 2, lg: 4 }}>
           <h2>
             <b>Station options:</b>
           </h2>
