@@ -4,16 +4,36 @@ import { StationForm } from '@/app/_types/station';
 import { ChakraProvider } from '@chakra-ui/react';
 import StationsField from '@/app/_components/inputs/Stations';
 import selectEvent from 'react-select-event';
+import { ChangeEvent } from 'react';
+import { MultiValue, OptionBase } from 'chakra-react-select';
 
-const Component = ({ isMulti = false }: { isMulti?: boolean }) => {
+const Component = ({
+  isMulti = false,
+  onChange,
+}: {
+  isMulti?: boolean;
+  onChange?: (
+    e: ChangeEvent<HTMLSelectElement> | MultiValue<SelectGroup>,
+  ) => void;
+}) => {
   const { control } = useForm<StationForm>();
 
   return (
     <ChakraProvider>
-      <StationsField fieldName="stations" control={control} isMulti={isMulti} />
+      <StationsField
+        fieldName="stations"
+        control={control}
+        isMulti={isMulti}
+        onChange={onChange || (() => {})}
+      />
     </ChakraProvider>
   );
 };
+
+interface SelectGroup extends OptionBase {
+  label: string;
+  value: string;
+}
 
 const MOCK_STATIONS = [
   { name: 'Daedalus' },
@@ -45,34 +65,42 @@ describe('Systems Field', () => {
       </form>,
     );
 
+    const selectElement = screen.getByRole('combobox');
+
     expect(getByTestId('form')).toHaveFormValues({ stations: '' });
 
+    // Search for abr
     await act(async () => {
-      await fireEvent.change(screen.getByRole('combobox'), {
+      await fireEvent.change(selectElement, {
         target: { value: 'abr' },
       });
     });
 
+    // Select Abraham Lincoln
     await act(async () => {
-      await selectEvent.select(screen.getByRole('combobox'), 'Abraham Lincoln');
+      await selectEvent.select(selectElement, 'Abraham Lincoln');
     });
 
+    // Check that Abraham Lincoln is selected
     await act(() => {
       expect(getByTestId('form')).toHaveFormValues({
         stations: 'Abraham Lincoln',
       });
     });
 
+    // Search for aed
     await act(async () => {
-      await fireEvent.change(screen.getByRole('combobox'), {
+      await fireEvent.change(selectElement, {
         target: { value: 'aed' },
       });
     });
 
+    // Select Daedalus
     await act(async () => {
-      await selectEvent.select(screen.getByRole('combobox'), 'Daedalus');
+      await selectEvent.select(selectElement, 'Daedalus');
     });
 
+    // Check that only Daedalus is selected
     await act(() => {
       expect(getByTestId('form')).toHaveFormValues({
         stations: 'Daedalus',
@@ -88,32 +116,71 @@ describe('Systems Field', () => {
       </form>,
     );
 
+    const selectElement = screen.getByRole('combobox');
+
     expect(getByTestId('form')).toHaveFormValues({ stations: '' });
 
+    // Search for abr
     await act(async () => {
-      await fireEvent.change(screen.getByRole('combobox'), {
+      await fireEvent.change(selectElement, {
         target: { value: 'abr' },
       });
     });
 
+    // Select Abraham Lincoln
     await act(async () => {
-      await selectEvent.select(screen.getByRole('combobox'), 'Abraham Lincoln');
+      await selectEvent.select(selectElement, 'Abraham Lincoln');
     });
 
+    // Check that Abraham Lincoln is selected
     await act(async () => {
-      await fireEvent.change(screen.getByRole('combobox'), {
+      await fireEvent.change(selectElement, {
         target: { value: 'aed' },
       });
     });
 
+    // Select for Daedalus
     await act(async () => {
-      await selectEvent.select(screen.getByRole('combobox'), 'Daedalus');
+      await selectEvent.select(selectElement, 'Daedalus');
     });
 
+    // Check that Daedalus is selected
     await act(async () => {
       expect(getByTestId('form')).toHaveFormValues({
         stations: ['Abraham Lincoln', 'Daedalus'],
       });
     });
+  });
+
+  it('fires a custom onChange event', async () => {
+    let onChangeHasRun = false;
+
+    render(
+      <form data-testid="form">
+        <label htmlFor="stations">Station</label>
+        <Component
+          onChange={() => {
+            onChangeHasRun = true;
+          }}
+        />
+      </form>,
+    );
+
+    const selectElement = screen.getByRole('combobox');
+
+    // Search for abr
+    await act(async () => {
+      await fireEvent.change(selectElement, {
+        target: { value: 'abr' },
+      });
+    });
+
+    // Select Abraham Lincoln
+    await act(async () => {
+      await selectEvent.select(selectElement, 'Abraham Lincoln');
+    });
+
+    // Check onChange has been run
+    expect(onChangeHasRun).toBe(true);
   });
 });
