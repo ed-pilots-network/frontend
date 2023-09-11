@@ -41,7 +41,7 @@ const loadOptions = async (inputValue: string) => {
     .then((response) => response.json())
     .then((response) =>
       response.map((item: IStation) => ({
-        value: item.eliteId,
+        value: item.name,
         label: item.name,
       })),
     )
