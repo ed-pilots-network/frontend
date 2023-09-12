@@ -100,7 +100,9 @@ jest.mock('../inputs/Facilities', () => ({
 
 describe('Stations Form', () => {
   it('should render the basic fields', () => {
-    render(<Form onSubmitHandler={() => {}} isLoading={false} />);
+    render(
+      <Form onSubmitHandler={() => {}} isLoading={false} commodities={null} />,
+    );
 
     expect(
       screen.getByRole('textbox', { name: 'Station' }),

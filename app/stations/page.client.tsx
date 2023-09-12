@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Box, Flex, HStack, Heading } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/stations/Form';
 import GetColor from '@/app/_hooks/colorSelector';
-import { StationForm } from '@/app/_types/forms';
+import { StationForm } from '@/app/_types/station';
 import { ICommodity } from '@/app/_types/commodity';
 
 interface IPageClientProps {

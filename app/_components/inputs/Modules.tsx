@@ -30,7 +30,7 @@ const getOptions = () => {
 
 const ModulesField = ({
   control,
-  isMulti = true,
+  isMulti = false,
   placeholder = 'Select modules...',
 }: Props) => {
   const fieldOptions: FieldOptions = {};
@@ -52,7 +52,6 @@ const ModulesField = ({
           value={value}
           options={getOptions()}
           placeholder={placeholder}
-          isMulti
           chakraStyles={SelectStyles()}
           {...fieldOptions}
         />

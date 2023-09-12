@@ -6,6 +6,7 @@ interface Props {
   children: ReactNode;
   register?: UseFormRegisterReturn;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 const Select = ({ children, register, placeholder = 'Select...' }: Props) => (
