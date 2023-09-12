@@ -146,14 +146,16 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
               />
             </Box>
             {/* TODO: remove this button after development - aslink87 */}
-            <Button
-              type="button"
-              variant="outline"
-              id="example"
-              onClick={handleExampleSubmit}
-            >
-              Submit Example
-            </Button>
+            {process.env.NODE_ENV === 'development' && (
+              <Button
+                type="button"
+                variant="outline"
+                id="example"
+                onClick={handleExampleSubmit}
+              >
+                Submit Example
+              </Button>
+            )}
           </VStack>
           {fetchError && (
             <Alert status="error">
