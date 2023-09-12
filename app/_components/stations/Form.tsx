@@ -194,6 +194,7 @@ const Form: React.FC<FormProps> = ({
             <FacilitiesField
               control={control}
               placeholder="Select facilities..."
+              isMulti={true}
             />
           </FormControl>
         </GridItem>
