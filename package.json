@@ -72,7 +72,8 @@
     "jest-environment-jsdom": "^29.5.0",
     "jest-fetch-mock": "^3.0.3",
     "nodemon": "^3.0.1",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "react-select-event": "^5.5.1"
   },
   "engines": {
     "node": ">= 18.12.0",

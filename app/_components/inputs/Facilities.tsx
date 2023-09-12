@@ -18,7 +18,6 @@ type FieldOptions = {
   isMulti?: true;
 };
 
-/* Swap out for live lookup when data is available? */
 const getOptions = () => {
   const options: SelectGroup[] = facilities.map((item) => ({
     value: item,
