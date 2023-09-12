@@ -24,7 +24,7 @@
       "@/app/*": ["./app/*"],
       "@/components/*": ["./app/_components/*"],
       "@/config/*": ["./app/_config/*"],
-      "@/types/*": ["./app/_types/*"],
+      "@/types/*": ["./app/_types"],
       "@/lib/*": ["./app/_lib/*"]
     }
   },

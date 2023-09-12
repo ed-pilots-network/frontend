@@ -140,6 +140,7 @@ const Form: React.FC<FormProps> = ({
               variant="outline"
               placeholder="Enter a system..."
               borderColor={GetColor('border')}
+              type="text"
               _hover={{
                 borderColor: GetColor('border'),
               }}
