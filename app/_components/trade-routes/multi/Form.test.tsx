@@ -2,14 +2,6 @@ import { render, screen } from '@testing-library/react';
 import Form from './Form';
 import { ChakraProvider } from '@chakra-ui/react';
 
-jest.mock('../../inputs/Systems', () => ({
-  __esModule: true,
-  default: jest
-    .fn()
-    .mockReturnValue(
-      <input value="some value" onChange={(e) => e.target.value} />,
-    ),
-}));
 jest.mock('../../inputs/Governments', () => ({
   __esModule: true,
   default: jest
@@ -80,15 +72,15 @@ describe('Stations Form', () => {
     );
 
     expect(
-      screen.getByRole('combobox', { name: 'Buy from Station' }),
+      screen.getByRole('combobox', { name: 'Start System' }),
     ).toBeInTheDocument();
 
     expect(
-      screen.getByRole('combobox', { name: 'Sell to Station' }),
+      screen.getByRole('combobox', { name: 'Start Station (optional)' }),
     ).toBeInTheDocument();
 
     expect(
-      screen.getByRole('spinbutton', { name: 'Max Hop Distance' }),
+      screen.getByRole('combobox', { name: 'Finish System (optional)' }),
     ).toBeInTheDocument();
 
     expect(
@@ -97,6 +89,14 @@ describe('Stations Form', () => {
 
     expect(
       screen.getByRole('spinbutton', { name: 'Cargo Capacity' }),
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('spinbutton', { name: 'Max Hop Distance' }),
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByRole('spinbutton', { name: 'Max Hop Count' }),
     ).toBeInTheDocument();
 
     expect(

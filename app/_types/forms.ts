@@ -13,15 +13,17 @@ export type SingleTradeRouteForm = TradeRouteFilters & {
 };
 
 export type MultiTradeRouteForm = TradeRouteFilters & {
-  startSystem: string;
+  startSystem?: { value: number };
   startStation?: string;
-  endSystem?: string;
+  finishSystem?: { value: number };
+  maxHopCount?: string;
 };
 
 export type TradeRouteFilters = {
   commodities?: {
     value: string;
   }[];
+  maxHopDistance?: string;
   minSupply?: string;
   minDemand?: string;
   maxPriceAge?: string;
