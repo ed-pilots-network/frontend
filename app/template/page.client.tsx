@@ -20,61 +20,87 @@ import {
 } from '@chakra-ui/react';
 import layoutConfig from '../_config/layout';
 import GetColor from '../_hooks/colorSelector';
-import getFilterCommodityFromApi from './api';
+import getFilterCommodityFromApiClientSide from './api';
 
-interface IResponse {
+export interface ICommoditySchema {
   commodityName: string;
   displayName: string;
   type: string;
   isRare: boolean;
 }
 
-const PageClient: React.FC = () => {
+interface Props {
+  data: ICommoditySchema[];
+  status: number;
+}
+
+const PageClient: React.FC<Props> = ({ data, status }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [submitReq, setSubmitReq] = useState(true);
-  const [submitted, setSubmitted] = useState(false);
-  const [fetchError, setFetchError] = useState<Response | null>(null);
-  const [response, setResponse] = useState<IResponse[]>([]);
+  const [submitErrorless, setSubmitReq] = useState(true);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [clientResponse, setClientResponse] = useState<Props>();
 
   const {
     handleSubmit,
     formState: { errors },
-  } = useForm<{ submitReq: boolean }>();
+  } = useForm<{ submitErrorless: boolean }>();
 
   const onSubmit = async (): Promise<void> => {
-    if (!submitReq) {
-      setResponse([]);
-      setSubmitted(true);
-      setFetchError(null);
-    }
-    if (submitReq) {
-      const res = await getFilterCommodityFromApi({
+    setClientResponse({ data: [], status: 0 });
+
+    if (submitErrorless) {
+      const res = await getFilterCommodityFromApiClientSide({
         setIsLoading,
-        setSubmitted,
+        setSubmitSuccess,
       });
-      if (!res.ok) {
-        setFetchError(res);
-        setResponse([]);
-        setIsLoading(false);
-        setSubmitted(true);
-        return;
-      }
       const json = await res.json();
-      setResponse(json);
-      setFetchError(null);
-      setSubmitted(true);
+      setClientResponse({ data: json, status: res.status });
+      setSubmitSuccess(true);
+      setIsLoading(false);
+    }
+
+    // DELETE THIS BLOCK IN PRODUCTION ROUTES
+    if (!submitErrorless) {
+      setClientResponse({ data: [], status: 400 });
+      setSubmitSuccess(true);
       setIsLoading(false);
     }
   };
 
-  const displayResults = () => (
-    <HStack marginX="auto" gap={10} fontSize="xl">
-      <Text>Waste Commodities:</Text>
-      {response.map((commodity) => (
-        <Text key={commodity.commodityName}>{commodity.displayName}</Text>
-      ))}
-    </HStack>
-  );
+  const displayResults = (
+    commodityArr: ICommoditySchema[],
+    resStatus: number,
+    label: string,
+    flag: string,
+  ) => {
+    if (resStatus !== 200) {
+      return (
+        <Alert status="error" borderRadius="md">
+          <AlertIcon />
+          Status: {status} - Failed to fetch {flag} data!
+        </Alert>
+      );
+    }
+    if (commodityArr.length === 0) {
+      return (
+        <Alert status="warning" borderRadius="md">
+          <AlertIcon />
+          No results found!
+        </Alert>
+      );
+    }
+    if (commodityArr.length >= 0) {
+      return (
+        <HStack marginX="auto" gap={10} fontSize="xl">
+          <Text>{label}</Text>
+          {commodityArr.map((commodity) => (
+            <Text key={commodity.commodityName}>{commodity.displayName}</Text>
+          ))}
+        </HStack>
+      );
+    }
+    return null;
+  };
 
   return (
     <Box flex="1" paddingX={2} width="100%">
@@ -116,6 +142,7 @@ const PageClient: React.FC = () => {
                 bg={GetColor('')}
                 padding="1rem"
               >
+                {/* DELETE THIS FORM IN PRODUCTION ROUTES - START */}
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Flex
                     justifyContent="space-between"
@@ -141,22 +168,24 @@ const PageClient: React.FC = () => {
                     >
                       <FormControl
                         width="100%"
-                        isInvalid={!!errors.submitReq || !!errors.submitReq}
+                        isInvalid={
+                          !!errors.submitErrorless || !!errors.submitErrorless
+                        }
                       >
-                        <FormLabel>Fetch Results?:</FormLabel>
+                        <FormLabel>Client Fetch Without Error?:</FormLabel>
                         <ButtonGroup
                           isAttached
                           borderColor={GetColor('border')}
                           variant="outline"
                         >
                           <Button
-                            variant={submitReq ? 'outline' : 'colorless'}
+                            variant={submitErrorless ? 'outline' : 'colorless'}
                             onClick={() => setSubmitReq(true)}
                           >
                             Yes
                           </Button>
                           <Button
-                            variant={submitReq ? 'colorless' : 'outline'}
+                            variant={submitErrorless ? 'colorless' : 'outline'}
                             onClick={() => setSubmitReq(false)}
                           >
                             No
@@ -174,22 +203,24 @@ const PageClient: React.FC = () => {
                     Submit
                   </Button>
                 </form>
+                {/* DELETE THIS FORM IN PRODUCTION ROUTES - END */}
               </Box>
             </VStack>
           </VStack>
-          {submitted && response.length > 0 && displayResults()}
-          {submitted && !fetchError && response.length === 0 && (
-            <Alert status="warning" borderRadius="md">
-              <AlertIcon />
-              No results found!
-            </Alert>
+          {displayResults(
+            data,
+            status,
+            'Fetch weapons server side: ',
+            'server',
           )}
-          {submitted && fetchError && (
-            <Alert status="error" borderRadius="md">
-              <AlertIcon />
-              Failed to fetch data!
-            </Alert>
-          )}
+          {submitSuccess &&
+            clientResponse &&
+            displayResults(
+              clientResponse.data,
+              clientResponse.status,
+              'Fetch waste products client side: ',
+              'client',
+            )}
         </Flex>
       </Center>
     </Box>

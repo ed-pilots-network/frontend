@@ -1,14 +1,14 @@
 interface Props {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  setSubmitSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const getFilterCommodityFromApi = async ({
+const getFilterCommodityFromApiClientSide = async ({
   setIsLoading,
-  setSubmitted,
+  setSubmitSuccess,
 }: Props): Promise<Response> => {
   setIsLoading(true);
-  setSubmitted(false);
+  setSubmitSuccess(false);
 
   let queryString = 'type=WASTE&isRare=false';
 
@@ -17,4 +17,4 @@ const getFilterCommodityFromApi = async ({
   return res;
 };
 
-export default getFilterCommodityFromApi;
+export default getFilterCommodityFromApiClientSide;
