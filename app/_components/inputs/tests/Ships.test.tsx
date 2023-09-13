@@ -1,38 +1,62 @@
 import { act, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import { ChakraProvider, FormControl, FormLabel } from '@chakra-ui/react';
-import FacilitiesField from '../Facilities';
 import selectEvent from 'react-select-event';
 import { StationForm } from '@/app/_types/forms';
+import ShipsField from '../Ships';
 
 const Component = ({ isMulti = false }: { isMulti?: boolean }) => {
   const { control } = useForm<StationForm>();
 
   return (
     <ChakraProvider>
-      <FacilitiesField control={control} isMulti={isMulti} />
+      <ShipsField control={control} isMulti={isMulti} />
     </ChakraProvider>
   );
 };
 
-const FACILITIES = [
-  'Black Market',
-  'Fleet Carrier Administration',
-  'Fleet Carrier Vendor',
-  'Interstellar Factors',
-  'Market',
-  'Refuel',
-  'Repair',
-  'Restock',
-  'Outfitting',
-  'Shipyard',
-  'Social Space',
-  'Material Trader',
-  'Technology Broker',
-  'Universal Cartographics',
+const SHIPS = [
+  'Adder',
+  'Alliance Challenger',
+  'Alliance Chieftain',
+  'Alliance Crusader',
+  'Anaconda',
+  'Asp Explorer',
+  'Asp Scout',
+  'Beluga Liner',
+  'Cobra MkIII',
+  'Cobra MkIV',
+  'Diamondback Explorer',
+  'Diamondback Scout',
+  'Dolphin',
+  'Eagle MkII',
+  'Federal Assault Ship',
+  'Federal Corvette',
+  'Federal Dropship',
+  'Federal Gunship',
+  'Fer-de-Lance',
+  'Hauler',
+  'Imperial Clipper',
+  'Imperial Courier',
+  'Imperial Cutter',
+  'Imperial Eagle',
+  'Keelback',
+  'Krait MkII',
+  'Krait Phantom',
+  'Mamba',
+  'Orca',
+  'Python',
+  'Sidewinder MkI',
+  'Type-6 Transporter',
+  'Type-7 Transporter',
+  'Type-9 Heavy',
+  'Type-10 Defender',
+  'Viper MkIII',
+  'Viper MkIV',
+  'Vulture',
 ];
 
-describe('Facilities Field', () => {
+describe('Ships Field', () => {
   it('renders', () => {
     render(<Component />);
     expect(screen.getByRole('combobox')).toBeInTheDocument();
@@ -41,20 +65,20 @@ describe('Facilities Field', () => {
   it('loads with the correct options', () => {
     render(
       <form data-testid="form">
-        <label htmlFor="facilities">Facility</label>
+        <label htmlFor="ships">Ships</label>
         <Component />
       </form>,
     );
 
     const selectElement = screen.getByRole('combobox');
 
-    expect(screen.queryByText('Black Market')).toBeNull();
+    expect(screen.queryByText('Anaconda')).toBeNull();
 
     act(() => {
       selectEvent.openMenu(selectElement);
     });
 
-    FACILITIES.forEach((item) => {
+    SHIPS.forEach((item) => {
       expect(screen.queryByText(item)).toBeInTheDocument();
     });
   });
@@ -63,13 +87,13 @@ describe('Facilities Field', () => {
     const { getByTestId, getByLabelText } = render(
       <form data-testid="form">
         <FormControl>
-          <FormLabel>Facilities</FormLabel>
+          <FormLabel>Ships</FormLabel>
           <Component />
         </FormControl>
       </form>,
     );
 
-    const selectElement = getByLabelText('Facilities');
+    const selectElement = getByLabelText('Ships');
 
     expect(getByTestId('form')).toHaveFormValues({});
 
@@ -79,12 +103,12 @@ describe('Facilities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Black Market');
+      await selectEvent.select(selectElement, 'Anaconda');
     });
 
     // Check item is selected
     expect(getByTestId('form')).toHaveFormValues({
-      facilities: 'Black Market',
+      ships: 'Anaconda',
     });
 
     act(() => {
@@ -93,12 +117,12 @@ describe('Facilities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Refuel');
+      await selectEvent.select(selectElement, 'Vulture');
     });
 
     // Check both items are selected
     expect(getByTestId('form')).toHaveFormValues({
-      facilities: 'Refuel',
+      ships: 'Vulture',
     });
   });
 
@@ -106,13 +130,13 @@ describe('Facilities Field', () => {
     const { getByTestId, getByLabelText } = render(
       <form data-testid="form">
         <FormControl>
-          <FormLabel>Facilities</FormLabel>
+          <FormLabel>Ships</FormLabel>
           <Component isMulti={true} />
         </FormControl>
       </form>,
     );
 
-    const selectElement = getByLabelText('Facilities');
+    const selectElement = getByLabelText('Ships');
 
     expect(getByTestId('form')).toHaveFormValues({});
 
@@ -122,12 +146,12 @@ describe('Facilities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Black Market');
+      await selectEvent.select(selectElement, 'Anaconda');
     });
 
     // Check item is selected
     expect(getByTestId('form')).toHaveFormValues({
-      facilities: 'Black Market',
+      ships: 'Anaconda',
     });
 
     act(() => {
@@ -136,12 +160,12 @@ describe('Facilities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Refuel');
+      await selectEvent.select(selectElement, 'Vulture');
     });
 
     // Check both items are selected
     expect(getByTestId('form')).toHaveFormValues({
-      facilities: ['Black Market', 'Refuel'],
+      ships: ['Anaconda', 'Vulture'],
     });
   });
 });

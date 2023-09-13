@@ -1,61 +1,69 @@
 import { act, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import { ChakraProvider, FormControl, FormLabel } from '@chakra-ui/react';
-import FacilitiesField from '../Facilities';
 import selectEvent from 'react-select-event';
 import { StationForm } from '@/app/_types/forms';
+import CommoditiesField from '../Commodities';
+
+const MOCK_COMMODITIES = [
+  {
+    commodityName: 'Agronomic Treatment',
+    displayName: 'Agronomic Treatment',
+    type: 'Consumables',
+    isRare: false,
+  },
+  {
+    commodityName: 'Trillium',
+    displayName: 'Trillium',
+    type: 'Consumables',
+    isRare: false,
+  },
+  {
+    commodityName: 'Gold',
+    displayName: 'Gold',
+    type: 'Consumables',
+    isRare: false,
+  },
+];
 
 const Component = ({ isMulti = false }: { isMulti?: boolean }) => {
   const { control } = useForm<StationForm>();
 
   return (
     <ChakraProvider>
-      <FacilitiesField control={control} isMulti={isMulti} />
+      <CommoditiesField
+        control={control}
+        isMulti={isMulti}
+        commodities={MOCK_COMMODITIES}
+      />
     </ChakraProvider>
   );
 };
 
-const FACILITIES = [
-  'Black Market',
-  'Fleet Carrier Administration',
-  'Fleet Carrier Vendor',
-  'Interstellar Factors',
-  'Market',
-  'Refuel',
-  'Repair',
-  'Restock',
-  'Outfitting',
-  'Shipyard',
-  'Social Space',
-  'Material Trader',
-  'Technology Broker',
-  'Universal Cartographics',
-];
-
-describe('Facilities Field', () => {
+describe('Commodities Field', () => {
   it('renders', () => {
     render(<Component />);
     expect(screen.getByRole('combobox')).toBeInTheDocument();
   });
 
-  it('loads with the correct options', () => {
+  it('loads with the provided options', () => {
     render(
       <form data-testid="form">
-        <label htmlFor="facilities">Facility</label>
+        <label htmlFor="commodities">Commodity</label>
         <Component />
       </form>,
     );
 
     const selectElement = screen.getByRole('combobox');
 
-    expect(screen.queryByText('Black Market')).toBeNull();
+    expect(screen.queryByText('Gold')).toBeNull();
 
     act(() => {
       selectEvent.openMenu(selectElement);
     });
 
-    FACILITIES.forEach((item) => {
-      expect(screen.queryByText(item)).toBeInTheDocument();
+    MOCK_COMMODITIES.forEach((item) => {
+      expect(screen.queryByText(item.displayName)).toBeInTheDocument();
     });
   });
 
@@ -63,13 +71,13 @@ describe('Facilities Field', () => {
     const { getByTestId, getByLabelText } = render(
       <form data-testid="form">
         <FormControl>
-          <FormLabel>Facilities</FormLabel>
+          <FormLabel>Commodities</FormLabel>
           <Component />
         </FormControl>
       </form>,
     );
 
-    const selectElement = getByLabelText('Facilities');
+    const selectElement = getByLabelText('Commodities');
 
     expect(getByTestId('form')).toHaveFormValues({});
 
@@ -79,12 +87,12 @@ describe('Facilities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Black Market');
+      await selectEvent.select(selectElement, 'Trillium');
     });
 
     // Check item is selected
     expect(getByTestId('form')).toHaveFormValues({
-      facilities: 'Black Market',
+      commodityDisplayName: 'Trillium',
     });
 
     act(() => {
@@ -93,12 +101,12 @@ describe('Facilities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Refuel');
+      await selectEvent.select(selectElement, 'Gold');
     });
 
     // Check both items are selected
     expect(getByTestId('form')).toHaveFormValues({
-      facilities: 'Refuel',
+      commodityDisplayName: 'Gold',
     });
   });
 
@@ -106,13 +114,13 @@ describe('Facilities Field', () => {
     const { getByTestId, getByLabelText } = render(
       <form data-testid="form">
         <FormControl>
-          <FormLabel>Facilities</FormLabel>
+          <FormLabel>Commodities</FormLabel>
           <Component isMulti={true} />
         </FormControl>
       </form>,
     );
 
-    const selectElement = getByLabelText('Facilities');
+    const selectElement = getByLabelText('Commodities');
 
     expect(getByTestId('form')).toHaveFormValues({});
 
@@ -122,12 +130,12 @@ describe('Facilities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Black Market');
+      await selectEvent.select(selectElement, 'Trillium');
     });
 
     // Check item is selected
     expect(getByTestId('form')).toHaveFormValues({
-      facilities: 'Black Market',
+      commodityDisplayName: 'Trillium',
     });
 
     act(() => {
@@ -136,12 +144,12 @@ describe('Facilities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Refuel');
+      await selectEvent.select(selectElement, 'Gold');
     });
 
     // Check both items are selected
     expect(getByTestId('form')).toHaveFormValues({
-      facilities: ['Black Market', 'Refuel'],
+      commodityDisplayName: ['Trillium', 'Gold'],
     });
   });
 });
