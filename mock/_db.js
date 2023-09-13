@@ -9,9 +9,7 @@ apiFiles.forEach((filePath) => {
   const api = require(filePath);
   let [, url] = filePath.split('mock/');
   url = url.slice(0, url.length - 3); // remove .js
-  // data[url] = api;
   data[url.replace(/\//g, '-')] = api;
-  console.log('api', api);
 });
 
 module.exports = () => data;
