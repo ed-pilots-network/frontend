@@ -128,7 +128,11 @@ const Form: React.FC<FormProps> = ({
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl isInvalid={!!(errors.modules && errors.modules.message)}>
             <FormLabel>Modules</FormLabel>
-            <ModulesField control={control} placeholder="Select modules..." />
+            <ModulesField
+              control={control}
+              placeholder="Select modules..."
+              isMulti={true}
+            />
           </FormControl>
         </GridItem>
 
@@ -181,6 +185,7 @@ const Form: React.FC<FormProps> = ({
             <FacilitiesField
               control={control}
               placeholder="Select facilities..."
+              isMulti={true}
             />
           </FormControl>
         </GridItem>

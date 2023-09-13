@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import allegiances from '@/app/_lib/allegiance-list';
 import AllegiancesField from '../Allegiances';
-import { SystemForm } from '@/app/_types/forms';
+import { SystemForm } from '@/app/_types/system';
 
 describe('Allegiances Field', () => {
   beforeEach(() => {

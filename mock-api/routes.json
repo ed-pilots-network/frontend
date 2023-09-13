@@ -1,5 +1,7 @@
 {
+  "/api/v1/exploration/system/by-name-containing": "/systems",
   "/api/v1/exploration/station/by-name-containing": "/stations",
+  "/api/v1/trade/commodity": "/commodity",
   "/api/*": "/$1",
   "/:resource/:id/show": "/:resource/:id",
   "/posts/:category": "/posts?category=:category"
