@@ -33,7 +33,9 @@ describe('Facilities Field', () => {
 
     expect(screen.queryByText('Black Market')).toBeNull();
 
-    selectEvent.openMenu(selectElement);
+    act(() => {
+      selectEvent.openMenu(selectElement);
+    });
 
     [
       'Black Market',
@@ -69,7 +71,9 @@ describe('Facilities Field', () => {
 
     expect(getByTestId('form')).toHaveFormValues({});
 
-    selectEvent.openMenu(selectElement);
+    act(() => {
+      selectEvent.openMenu(selectElement);
+    });
 
     // Select item
     await act(async () => {
@@ -81,7 +85,9 @@ describe('Facilities Field', () => {
       facilities: 'Black Market',
     });
 
-    selectEvent.openMenu(selectElement);
+    act(() => {
+      selectEvent.openMenu(selectElement);
+    });
 
     // Select item
     await act(async () => {
@@ -108,7 +114,9 @@ describe('Facilities Field', () => {
 
     expect(getByTestId('form')).toHaveFormValues({});
 
-    selectEvent.openMenu(selectElement);
+    act(() => {
+      selectEvent.openMenu(selectElement);
+    });
 
     // Select item
     await act(async () => {
@@ -120,7 +128,9 @@ describe('Facilities Field', () => {
       facilities: 'Black Market',
     });
 
-    selectEvent.openMenu(selectElement);
+    act(() => {
+      selectEvent.openMenu(selectElement);
+    });
 
     // Select item
     await act(async () => {
