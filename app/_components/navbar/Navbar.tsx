@@ -32,12 +32,18 @@ const Navbar = () => {
   const { isDark, toggleColorMode } = useColorMode();
 
   return (
-    <Flex p={2} bg={GetColor('box')} color={GetColor('text')} justify="center">
+    <Flex
+      padding={2}
+      bg={GetColor('box')}
+      color={GetColor('text')}
+      justify="center"
+    >
       <Flex
         justifyContent="space-between"
         alignItems="center"
         width="100%"
         maxWidth={layoutConfig.maxWidth}
+        paddingX={2}
       >
         <Flex alignItems="center">
           <Box display={{ base: 'flex', md: 'none' }}>
