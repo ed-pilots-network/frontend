@@ -30,7 +30,7 @@ const getOptions = () => {
 
 const FacilitiesField = ({
   control,
-  isMulti = true,
+  isMulti = false,
   placeholder = 'Select facilities...',
 }: Props) => {
   const fieldOptions: FieldOptions = {};

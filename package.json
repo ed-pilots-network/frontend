@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "dev-api": "concurrently \"next dev\" \"yarn api\"",
-    "mock": "json-server --watch ./mock-api/_db.js --routes ./mock-api/routes.json --middlewares ./mock-api/middlewares/_postAsGet.js --port 3001",
-    "api": "nodemon --watch mock-api --exec 'json-server ./mock-api/_db.js --routes ./mock-api/routes.json' --middlewares ./mock-api/middlewares/_postAsGet.js --port 3001",
+    "mock": "json-server --watch ./mock/_db.js --routes ./mock/routes.json --middlewares ./mock/middlewares/_postAsGet.js --port 3001",
+    "api": "nodemon --watch mock --exec 'json-server ./mock/_db.js --routes ./mock/routes.json' --middlewares ./mock/middlewares/_postAsGet.js --port 3001",
     "build": "next build",
     "copy-standalone-assets": "cp -R .next/static .next/standalone/.next && cp -R public .next/standalone",
     "start": "next start",

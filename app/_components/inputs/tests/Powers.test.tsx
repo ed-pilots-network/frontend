@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
-import { SystemForm } from '@/app/_types/forms';
+import { SystemForm } from '@/app/_types/system';
 import PowersField from '../Powers';
 import powers from '@/app/_lib/power-list';
 
