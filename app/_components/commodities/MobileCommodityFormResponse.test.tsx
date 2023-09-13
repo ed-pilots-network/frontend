@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import CommodityFormResponse from './CommodityFormResponseMobile';
+import CommodityFormResponse from './MobileCommodityFormResponse';
 
 const mockResponse = [
   {
