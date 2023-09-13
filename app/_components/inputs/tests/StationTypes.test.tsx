@@ -1,12 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
-import { CommodityForm } from '@/app/_types/forms';
 import StationTypes, { checkboxValues } from '../StationTypes';
+import { SystemForm } from '@/app/_types/system';
 
 describe('Station Type Field', () => {
   beforeEach(() => {
     const Component = () => {
-      const { register } = useForm<CommodityForm>();
+      const { register } = useForm<SystemForm>();
 
       return <StationTypes register={register} />;
     };

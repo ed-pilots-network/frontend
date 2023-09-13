@@ -2,8 +2,8 @@ import { act, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import { ChakraProvider, FormControl, FormLabel } from '@chakra-ui/react';
 import selectEvent from 'react-select-event';
-import { StationForm } from '@/app/_types/forms';
 import CommoditiesField from '../Commodities';
+import { StationForm } from '@/app/_types/station';
 
 const MOCK_COMMODITIES = [
   {

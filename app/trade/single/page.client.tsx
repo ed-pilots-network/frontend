@@ -2,17 +2,22 @@
 
 import { useState } from 'react';
 import { Box, HStack, Heading, Flex } from '@chakra-ui/react';
-import Form, { SubmitProps } from '@/components/systems/Form';
+import Form, { SubmitProps } from '@/components/trade-routes/single/Form';
 import GetColor from '@/app/_hooks/colorSelector';
-import { SystemForm } from '@/app/_types/system';
+import { SingleTradeRouteForm } from '@/app/_types/forms';
+import { ICommodity } from '@/app/_types';
 
-const PageClient = () => {
+interface IPageClientProps {
+  commodities: ICommodity[] | null;
+}
+
+const PageClient = ({ commodities }: IPageClientProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (data: SubmitProps) => {
     setIsLoading(true);
 
-    let submitData: SystemForm = {
+    let submitData: SingleTradeRouteForm = {
       ...data,
     };
 
@@ -33,7 +38,7 @@ const PageClient = () => {
             marginX={{ base: 'auto', md: '0', lg: '0' }}
             color={GetColor('accent-text')}
           >
-            Systems
+            Single Trade Route Finder
           </Heading>
         </Box>
       </HStack>
@@ -43,7 +48,11 @@ const PageClient = () => {
         borderColor={GetColor('border')}
         padding="1rem"
       >
-        <Form onSubmitHandler={handleSubmit} isLoading={isLoading} />
+        <Form
+          onSubmitHandler={handleSubmit}
+          isLoading={isLoading}
+          commodities={commodities}
+        />
       </Box>
     </Flex>
   );

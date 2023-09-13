@@ -1,43 +1,38 @@
-export type SystemForm = {
-  systemId?: string;
-  onlyPopulated?: boolean;
-  allegiance?: string;
-  government?: string;
-  economy?: string;
-  minorFaction?: string;
-  stationFilter?: string;
-  power?: string;
-  powerEffect?: string;
-  security?: string;
-  factionState?: string;
-  requiresPermit?: boolean;
+export type ShipForm = {
+  buySystem?: string;
+  buyStation?: string;
+  sellSystem?: string;
+  sellStation?: string;
 };
 
-export type StationForm = {
-  stationId?: string;
-  ships?: {
-    value: string;
-  }[];
-  modules?: {
-    value: string;
-  }[];
+export type SingleTradeRouteForm = TradeRouteFilters & {
+  buySystem?: { value: number };
+  buyStation?: string;
+  sellSystem?: { value: number };
+  sellStation?: string;
+};
+
+export type MultiTradeRouteForm = TradeRouteFilters & {
+  startSystem: string;
+  startStation?: string;
+  endSystem?: string;
+};
+
+export type TradeRouteFilters = {
   commodities?: {
     value: string;
   }[];
-  system?: string;
-  minorFaction?: string;
-  allegiance?: string;
+  minSupply?: string;
+  minDemand?: string;
+  maxPriceAge?: string;
+  cargoCapacity?: string;
+  availableCredits?: string;
+
   government?: string;
+  allegiance?: string;
+  requiresPermit?: boolean;
   landingPadSize?: string;
   maxDistanceToArrival?: string;
-  facilities?: {
-    value: string;
-  }[];
   stationType?: string;
-  requiresPermit?: boolean;
   power?: string;
-  powerEffect?: string;
-  factionState?: string;
-  economy?: string;
-  nearestSystem?: string;
 };
