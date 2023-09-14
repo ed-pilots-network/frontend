@@ -8,21 +8,21 @@ export const metadata: Metadata = {
 };
 
 async function getData() {
+  // adjust revalidation time to your needs, or remove it completely
+  // here it's set to 1 day as the data doesn't change often
   const req = await fetch(
-    `${process.env.NEXT_PUBLIC_STAGING_API_URL}/api/v1/trade/commodity/filter?type=WASTE&isRare=fals`,
+    `${process.env.NEXT_PUBLIC_STAGING_API_URL}/api/v1/trade/commodity/filter?type=WASTE&isRare=false`,
     { next: { revalidate: 86400 } },
   );
 
   if (!req.ok) {
-    // throw new Error('Failed to fetch data');
-    return { data: [], status: req.status };
+    throw new Error('Failed to fetch data. Try again, or wait until later.');
   }
-  return { data: await req.json(), status: req.status };
+  return req.json();
 }
 
 export default async function Page() {
-  const { data, status }: { data: ICommoditySchema[]; status: number } =
-    await getData();
+  const data: ICommoditySchema[] = await getData();
 
-  return <PageClient data={data} status={status} />;
+  return <PageClient serverData={data} />;
 }

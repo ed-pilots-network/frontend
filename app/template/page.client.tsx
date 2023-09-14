@@ -7,20 +7,16 @@ import {
   AlertIcon,
   Box,
   Button,
-  ButtonGroup,
   Center,
   Flex,
-  FormControl,
-  FormLabel,
-  HStack,
   Heading,
   Stack,
   Text,
   VStack,
 } from '@chakra-ui/react';
+import getFilterCommodityFromApiClientSide from './api';
 import layoutConfig from '../_config/layout';
 import GetColor from '../_hooks/colorSelector';
-import getFilterCommodityFromApiClientSide from './api';
 
 export interface ICommoditySchema {
   commodityName: string;
@@ -30,58 +26,30 @@ export interface ICommoditySchema {
 }
 
 interface Props {
-  data: ICommoditySchema[];
-  status: number;
+  serverData: ICommoditySchema[];
 }
 
-const PageClient: React.FC<Props> = ({ data, status }) => {
+const PageClient: React.FC<Props> = ({ serverData }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [submitErrorless, setSubmitReq] = useState(true);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [clientResponse, setClientResponse] = useState<Props>();
+  const [clientResponse, setClientResponse] = useState<
+    ICommoditySchema[] | null
+  >(null);
 
-  const {
-    handleSubmit,
-    formState: { errors },
-  } = useForm<{ submitErrorless: boolean }>();
+  const { handleSubmit } = useForm();
 
   const onSubmit = async (): Promise<void> => {
-    setClientResponse({ data: [], status: 0 });
+    setClientResponse(null);
 
-    if (submitErrorless) {
-      const res = await getFilterCommodityFromApiClientSide({
-        setIsLoading,
-        setSubmitSuccess,
-      });
-      const json = await res.json();
-      setClientResponse({ data: json, status: res.status });
-      setSubmitSuccess(true);
-      setIsLoading(false);
-    }
-
-    // DELETE THIS BLOCK IN PRODUCTION ROUTES
-    if (!submitErrorless) {
-      setClientResponse({ data: [], status: 400 });
-      setSubmitSuccess(true);
-      setIsLoading(false);
-    }
+    const res = await getFilterCommodityFromApiClientSide({
+      setIsLoading,
+    });
+    const json = await res.json();
+    setClientResponse(json);
+    setIsLoading(false);
   };
 
-  const displayResults = (
-    commodityArr: ICommoditySchema[],
-    resStatus: number,
-    label: string,
-    flag: string,
-  ) => {
-    if (resStatus !== 200) {
-      return (
-        <Alert status="error" borderRadius="md">
-          <AlertIcon />
-          Status: {status} - Failed to fetch {flag} data!
-        </Alert>
-      );
-    }
-    if (commodityArr.length === 0) {
+  const displayResults = (clientData: ICommoditySchema[], label: string) => {
+    if (clientData.length === 0) {
       return (
         <Alert status="warning" borderRadius="md">
           <AlertIcon />
@@ -89,17 +57,24 @@ const PageClient: React.FC<Props> = ({ data, status }) => {
         </Alert>
       );
     }
-    if (commodityArr.length >= 0) {
-      return (
-        <HStack marginX="auto" gap={10} fontSize="xl">
-          <Text>{label}</Text>
-          {commodityArr.map((commodity) => (
-            <Text key={commodity.commodityName}>{commodity.displayName}</Text>
-          ))}
-        </HStack>
-      );
-    }
-    return null;
+    return (
+      <Stack
+        direction={{
+          base: 'column',
+          sm: 'column',
+          md: 'column',
+          lg: 'row',
+        }}
+        width="100%"
+        spacing={8}
+        fontSize="xl"
+      >
+        <Text>{label}</Text>
+        {clientData.map((item) => (
+          <Text key={item.commodityName}>{item.displayName}</Text>
+        ))}
+      </Stack>
+    );
   };
 
   return (
@@ -142,7 +117,7 @@ const PageClient: React.FC<Props> = ({ data, status }) => {
                 bg={GetColor('')}
                 padding="1rem"
               >
-                {/* DELETE THIS FORM IN PRODUCTION ROUTES - START */}
+                {/* DELETE THIS FORM IN PRODUCTION ROUTES */}
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Flex
                     justifyContent="space-between"
@@ -156,43 +131,23 @@ const PageClient: React.FC<Props> = ({ data, status }) => {
                       lg: 'row',
                     }}
                   >
-                    <Stack
-                      direction={{
-                        base: 'column',
-                        sm: 'column',
-                        md: 'column',
-                        lg: 'row',
-                      }}
-                      width="100%"
-                      spacing={4}
-                    >
-                      <FormControl
-                        width="100%"
-                        isInvalid={
-                          !!errors.submitErrorless || !!errors.submitErrorless
-                        }
-                      >
-                        <FormLabel>Client Fetch Without Error?:</FormLabel>
-                        <ButtonGroup
-                          isAttached
-                          borderColor={GetColor('border')}
-                          variant="outline"
-                        >
-                          <Button
-                            variant={submitErrorless ? 'outline' : 'colorless'}
-                            onClick={() => setSubmitReq(true)}
-                          >
-                            Yes
-                          </Button>
-                          <Button
-                            variant={submitErrorless ? 'colorless' : 'outline'}
-                            onClick={() => setSubmitReq(false)}
-                          >
-                            No
-                          </Button>
-                        </ButtonGroup>
-                      </FormControl>
-                    </Stack>
+                    <Text fontSize="lg">
+                      This template route fetches data in a few ways. First, it
+                      fetches all weapon type commodities on the server side and
+                      passes the result as props. If that server side fetch
+                      fails it throws and error that is caught at the root level
+                      and the message defined in ./page.tsx is displayed.
+                    </Text>
+                    <Text fontSize="lg" marginY={6}>
+                      Second, it fetches all waste type commodities client side
+                      when the form is submitted so long as the switch is set to
+                      yes. When the switch is set to no, the client side fetch
+                      fails and displays an error message.
+                    </Text>
+                    <Text fontSize="lg" marginBottom={6}>
+                      Below the form is a display of the results from the
+                      server, as well as the client side fetch result.
+                    </Text>
                   </Flex>
                   <Button
                     type="submit"
@@ -203,23 +158,14 @@ const PageClient: React.FC<Props> = ({ data, status }) => {
                     Submit
                   </Button>
                 </form>
-                {/* DELETE THIS FORM IN PRODUCTION ROUTES - END */}
               </Box>
             </VStack>
           </VStack>
-          {displayResults(
-            data,
-            status,
-            'Fetch weapons server side: ',
-            'server',
-          )}
-          {submitSuccess &&
-            clientResponse &&
+          {displayResults(serverData, 'Fetch weapons server side: ')}
+          {clientResponse &&
             displayResults(
-              clientResponse.data,
-              clientResponse.status,
+              clientResponse,
               'Fetch waste products client side: ',
-              'client',
             )}
         </Flex>
       </Center>
