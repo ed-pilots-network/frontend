@@ -10,6 +10,8 @@ import {
   Center,
   Flex,
   Heading,
+  List,
+  ListItem,
   Stack,
   Text,
   VStack,
@@ -70,9 +72,11 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
         fontSize="xl"
       >
         <Text>{label}</Text>
-        {clientData.map((item) => (
-          <Text key={item.commodityName}>{item.displayName}</Text>
-        ))}
+        <List display="flex" gap={8}>
+          {clientData.map((item) => (
+            <ListItem key={item.commodityName}>{item.displayName}</ListItem>
+          ))}
+        </List>
       </Stack>
     );
   };
