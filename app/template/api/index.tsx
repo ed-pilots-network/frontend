@@ -9,9 +9,13 @@ const getFromApiClientSide = async ({
 
   let queryString = 'type=WASTE&isRare=false';
 
-  const res = await fetch(`/api/v1/trade/commodity/filter?${queryString}`);
+  try {
+    const res = await fetch(`/api/v1/trade/commodity/filter?${queryString}`);
 
-  return res;
+    return res;
+  } catch (error) {
+    return new Response(null);
+  }
 };
 
 export default getFromApiClientSide;

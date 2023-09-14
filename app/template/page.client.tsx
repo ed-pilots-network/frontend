@@ -35,18 +35,28 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clientResponse, setClientResponse] = useState<
     IServerDataSchema[] | null
-  >(null);
+  >([]);
+  const [submitted, setSubmitted] = useState(false);
 
   const { handleSubmit } = useForm();
 
   const onSubmit = async (): Promise<void> => {
-    setClientResponse(null);
+    setSubmitted(false);
+    setClientResponse([]);
 
     const res = await getFromApiClientSide({
       setIsLoading,
     });
+
+    if (!res.ok) {
+      setClientResponse(null);
+      setSubmitted(true);
+      setIsLoading(false);
+      return;
+    }
     const json = await res.json();
     setClientResponse(json);
+    setSubmitted(true);
     setIsLoading(false);
   };
 
@@ -167,10 +177,17 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
           </VStack>
           {displayResults(serverData, 'Fetch weapons server side: ')}
           {clientResponse &&
+            submitted &&
             displayResults(
               clientResponse,
               'Fetch waste products client side: ',
             )}
+          {!clientResponse && submitted && (
+            <Alert status="error" borderRadius="md">
+              <AlertIcon />
+              Failed to fetch data!
+            </Alert>
+          )}
         </Flex>
       </Center>
     </Box>
