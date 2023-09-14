@@ -16,11 +16,11 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import getFilterCommodityFromApiClientSide from './api';
+import getFromApiClientSide from './api';
 import layoutConfig from '../_config/layout';
 import GetColor from '../_hooks/colorSelector';
 
-export interface ICommoditySchema {
+export interface IServerDataSchema {
   commodityName: string;
   displayName: string;
   type: string;
@@ -28,13 +28,13 @@ export interface ICommoditySchema {
 }
 
 interface Props {
-  serverData: ICommoditySchema[];
+  serverData: IServerDataSchema[];
 }
 
 const PageClient: React.FC<Props> = ({ serverData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clientResponse, setClientResponse] = useState<
-    ICommoditySchema[] | null
+    IServerDataSchema[] | null
   >(null);
 
   const { handleSubmit } = useForm();
@@ -42,7 +42,7 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
   const onSubmit = async (): Promise<void> => {
     setClientResponse(null);
 
-    const res = await getFilterCommodityFromApiClientSide({
+    const res = await getFromApiClientSide({
       setIsLoading,
     });
     const json = await res.json();
@@ -50,7 +50,7 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
     setIsLoading(false);
   };
 
-  const displayResults = (clientData: ICommoditySchema[], label: string) => {
+  const displayResults = (clientData: IServerDataSchema[], label: string) => {
     if (clientData.length === 0) {
       return (
         <Alert status="warning" borderRadius="md">

@@ -2,7 +2,7 @@ interface Props {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const getFilterCommodityFromApiClientSide = async ({
+const getFromApiClientSide = async ({
   setIsLoading,
 }: Props): Promise<Response> => {
   setIsLoading(true);
@@ -14,4 +14,4 @@ const getFilterCommodityFromApiClientSide = async ({
   return res;
 };
 
-export default getFilterCommodityFromApiClientSide;
+export default getFromApiClientSide;
