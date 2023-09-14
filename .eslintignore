@@ -1,4 +1,4 @@
 node_modules
 .next
 out
-mock-api/server.js
+mock/*.js
