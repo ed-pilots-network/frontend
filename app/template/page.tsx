@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import PageClient, { ICommoditySchema } from './page.client';
+import PageClient, { IServerDataSchema } from './page.client';
 
 export const metadata: Metadata = {
   title: 'EDPN Template',
@@ -22,7 +22,7 @@ async function getData() {
 }
 
 export default async function Page() {
-  const data: ICommoditySchema[] = await getData();
+  const data: IServerDataSchema[] = await getData();
 
   return <PageClient serverData={data} />;
 }
