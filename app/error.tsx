@@ -1,6 +1,7 @@
 'use client';
 
 import { Button, Center, Flex, Heading, Text } from '@chakra-ui/react';
+import layoutConfig from './_config/layout';
 
 export default function Error({
   error,
@@ -15,7 +16,7 @@ export default function Error({
         flexDirection="column"
         alignItems="center"
         gap="24px"
-        maxWidth="1500px"
+        maxWidth={layoutConfig.maxWidth}
       >
         <Heading
           as="h1"

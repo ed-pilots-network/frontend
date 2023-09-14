@@ -2,6 +2,7 @@
 
 import NextLink from 'next/link';
 import { Button, Center, Flex, Heading } from '@chakra-ui/react';
+import layoutConfig from './_config/layout';
 
 export default function NotFound() {
   return (
@@ -10,7 +11,7 @@ export default function NotFound() {
         flexDirection="column"
         alignItems="center"
         gap="24px"
-        maxWidth="1500px"
+        maxWidth={layoutConfig.maxWidth}
       >
         <Heading
           as="h1"

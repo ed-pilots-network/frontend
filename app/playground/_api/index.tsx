@@ -8,7 +8,7 @@ export const getPostsForCategoryFromMockApi = async (): Promise<IPost[]> => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ category: 'json' }),
-      cache: 'no-store',
+      next: { revalidate: 86400 },
     });
 
     if (!res.ok) {
@@ -29,7 +29,7 @@ export const getCommodityByNameFromStagingApi = async (
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STAGING_API_URL}/api/v1/trade/commodity/${name}`,
-      { cache: 'no-store' },
+      { next: { revalidate: 86400 } },
     );
 
     if (!res.ok) {

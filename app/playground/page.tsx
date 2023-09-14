@@ -6,9 +6,6 @@ import {
 } from './_api';
 import { ICommodity, IPost } from '../_types';
 
-// Avoid statically building this page during build.
-export const dynamic = 'force-dynamic';
-
 export const metadata: Metadata = {
   title: 'EDPN Playground',
   description: 'Elite Dangerous Pilots Network',
