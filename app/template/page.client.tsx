@@ -42,11 +42,10 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
 
   const onSubmit = async (): Promise<void> => {
     setSubmitted(false);
+    setIsLoading(true);
     setClientResponse([]);
 
-    const res = await getFromApiClientSide({
-      setIsLoading,
-    });
+    const res = await getFromApiClientSide();
 
     if (!res.ok) {
       setClientResponse(null);

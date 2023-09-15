@@ -1,12 +1,4 @@
-interface Props {
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const getFromApiClientSide = async ({
-  setIsLoading,
-}: Props): Promise<Response> => {
-  setIsLoading(true);
-
+const getFromApiClientSide = async (): Promise<Response> => {
   let queryString = 'type=WASTE&isRare=false';
 
   try {
