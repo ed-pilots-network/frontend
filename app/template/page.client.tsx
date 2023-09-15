@@ -131,14 +131,23 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
                       This template route fetches data in a few ways. First, it
                       fetches all weapon type commodities on the server side and
                       passes the result as props. If that server side fetch
-                      fails it throws and error that is caught at the root level
+                      fails it throws an error that is caught at the root level
                       and the message defined in ./page.tsx is displayed.
                     </Text>
                     <Text fontSize="lg" marginY={6}>
                       Second, it fetches all waste type commodities client side
-                      when the form is submitted so long as the switch is set to
-                      yes. When the switch is set to no, the client side fetch
-                      fails and displays an error message.
+                      when the form is submitted.
+                    </Text>
+                    <Text fontSize="lg" marginY={6}>
+                      If you would like to see the server side fetch fail, you
+                      can edit the url in page.tsx (simply delete the last{' '}
+                      <strong>e </strong>
+                      from <strong>false</strong>.)
+                    </Text>
+                    <Text fontSize="lg" marginY={6}>
+                      If you would like to see the client fetch fail, you can
+                      edit the query string in ./api/index.tsx in the same
+                      manner.
                     </Text>
                     <Text fontSize="lg" marginBottom={6}>
                       Below the form is a display of the results from the
