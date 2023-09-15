@@ -2,6 +2,10 @@
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import PageHeading from '../_components/utility/pageHeading';
+import getFromApiClientSide from './api';
+import layoutConfig from '../_config/layout';
+import GetColor from '../_hooks/colorSelector';
 import {
   Alert,
   AlertIcon,
@@ -9,16 +13,12 @@ import {
   Button,
   Center,
   Flex,
-  Heading,
   List,
   ListItem,
   Stack,
   Text,
   VStack,
 } from '@chakra-ui/react';
-import getFromApiClientSide from './api';
-import layoutConfig from '../_config/layout';
-import GetColor from '../_hooks/colorSelector';
 
 export interface IServerDataSchema {
   commodityName: string;
@@ -33,10 +33,10 @@ interface Props {
 
 const PageClient: React.FC<Props> = ({ serverData }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [clientResponse, setClientResponse] = useState<
     IServerDataSchema[] | null
   >([]);
-  const [submitted, setSubmitted] = useState(false);
 
   const { handleSubmit } = useForm();
 
@@ -102,28 +102,10 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
         <Flex flexDirection="column" gap={6} width="100%">
           <VStack align="stretch" maxWidth={layoutConfig.maxWidth} paddingY={5}>
             <VStack align="stretch" gap={6}>
-              <Flex direction="column" gap={2}>
-                <Box alignSelf="baseline">
-                  <Heading
-                    as="h1"
-                    size={{ base: 'md', md: 'lg', lg: 'lg' }}
-                    marginX={{ base: 'auto', md: '0', lg: '0' }}
-                    color={GetColor('accent-text')}
-                  >
-                    Heading goes here
-                  </Heading>
-                </Box>
-                <Box alignSelf="baseline">
-                  <Heading
-                    as="h2"
-                    size={{ base: 'xs', md: 'sm', lg: 'sm' }}
-                    marginX={{ base: 'auto', md: '0', lg: '0' }}
-                    textAlign={{ base: 'center', sm: 'left', md: 'left' }}
-                  >
-                    Subheading sentence goes here
-                  </Heading>
-                </Box>
-              </Flex>
+              <PageHeading
+                heading="Heading goes here"
+                subheading="Subheading sentence goes here"
+              />
               <Box
                 borderWidth="2px"
                 borderRadius="9px"
@@ -131,7 +113,7 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
                 bg={GetColor('')}
                 padding="1rem"
               >
-                {/* DELETE THIS FORM IN PRODUCTION ROUTES */}
+                {/* DELETE THIS FORM IN PRODUCTION ROUTES, IT SHOULD BE IN A SAPARATE COMPONENT */}
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Flex
                     justifyContent="space-between"
@@ -185,7 +167,7 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
           {!clientResponse && submitted && (
             <Alert status="error" borderRadius="md">
               <AlertIcon />
-              Failed to fetch data!
+              Failed to fetch data, try again or wait until later!
             </Alert>
           )}
         </Flex>
