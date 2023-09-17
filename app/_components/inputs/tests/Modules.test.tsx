@@ -2,68 +2,50 @@ import { act, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import { ChakraProvider, FormControl, FormLabel } from '@chakra-ui/react';
 import selectEvent from 'react-select-event';
-import CommoditiesField from '../Commodities';
+import ModulesField from '../Modules';
 import { StationForm } from '@/app/_types/station';
-
-const MOCK_COMMODITIES = [
-  {
-    commodityName: 'Agronomic Treatment',
-    displayName: 'Agronomic Treatment',
-    type: 'Consumables',
-    isRare: false,
-  },
-  {
-    commodityName: 'Trillium',
-    displayName: 'Trillium',
-    type: 'Consumables',
-    isRare: false,
-  },
-  {
-    commodityName: 'Gold',
-    displayName: 'Gold',
-    type: 'Consumables',
-    isRare: false,
-  },
-];
 
 const Component = ({ isMulti = false }: { isMulti?: boolean }) => {
   const { control } = useForm<StationForm>();
 
   return (
     <ChakraProvider>
-      <CommoditiesField
-        control={control}
-        isMulti={isMulti}
-        commodities={MOCK_COMMODITIES}
-      />
+      <ModulesField control={control} isMulti={isMulti} />
     </ChakraProvider>
   );
 };
 
-describe('Commodities Field', () => {
+const MODULES = [
+  '1I Detailed Surface Scanner',
+  '2E Frame Shift Drive',
+  '0E Kill Warrant Scanner',
+  '1E Supercruise Assist',
+];
+
+describe('Modules Field', () => {
   it('renders', () => {
     render(<Component />);
     expect(screen.getByRole('combobox')).toBeInTheDocument();
   });
 
-  it('loads with the provided options', () => {
+  it('loads with the correct options', () => {
     render(
       <form data-testid="form">
-        <label htmlFor="commodities">Commodity</label>
+        <label htmlFor="modules">Modules</label>
         <Component />
       </form>,
     );
 
     const selectElement = screen.getByRole('combobox');
 
-    expect(screen.queryByText('Gold')).toBeNull();
+    expect(screen.queryByText('1I Detailed Surface Scanner')).toBeNull();
 
     act(() => {
       selectEvent.openMenu(selectElement);
     });
 
-    MOCK_COMMODITIES.forEach((item) => {
-      expect(screen.queryByText(item.displayName)).toBeInTheDocument();
+    MODULES.forEach((item) => {
+      expect(screen.queryByText(item)).toBeInTheDocument();
     });
   });
 
@@ -71,13 +53,13 @@ describe('Commodities Field', () => {
     const { getByTestId, getByLabelText } = render(
       <form data-testid="form">
         <FormControl>
-          <FormLabel>Commodities</FormLabel>
+          <FormLabel>Modules</FormLabel>
           <Component />
         </FormControl>
       </form>,
     );
 
-    const selectElement = getByLabelText('Commodities');
+    const selectElement = getByLabelText('Modules');
 
     expect(getByTestId('form')).toHaveFormValues({});
 
@@ -87,12 +69,12 @@ describe('Commodities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Trillium');
+      await selectEvent.select(selectElement, '2E Frame Shift Drive');
     });
 
     // Check item is selected
     expect(getByTestId('form')).toHaveFormValues({
-      commodityDisplayName: 'Trillium',
+      modules: '2E Frame Shift Drive',
     });
 
     act(() => {
@@ -101,12 +83,12 @@ describe('Commodities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Gold');
+      await selectEvent.select(selectElement, '1E Supercruise Assist');
     });
 
     // Check both items are selected
     expect(getByTestId('form')).toHaveFormValues({
-      commodityDisplayName: 'Gold',
+      modules: '1E Supercruise Assist',
     });
   });
 
@@ -114,13 +96,13 @@ describe('Commodities Field', () => {
     const { getByTestId, getByLabelText } = render(
       <form data-testid="form">
         <FormControl>
-          <FormLabel>Commodities</FormLabel>
+          <FormLabel>Modules</FormLabel>
           <Component isMulti={true} />
         </FormControl>
       </form>,
     );
 
-    const selectElement = getByLabelText('Commodities');
+    const selectElement = getByLabelText('Modules');
 
     expect(getByTestId('form')).toHaveFormValues({});
 
@@ -130,12 +112,12 @@ describe('Commodities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Trillium');
+      await selectEvent.select(selectElement, '2E Frame Shift Drive');
     });
 
     // Check item is selected
     expect(getByTestId('form')).toHaveFormValues({
-      commodityDisplayName: 'Trillium',
+      modules: '2E Frame Shift Drive',
     });
 
     act(() => {
@@ -144,12 +126,12 @@ describe('Commodities Field', () => {
 
     // Select item
     await act(async () => {
-      await selectEvent.select(selectElement, 'Gold');
+      await selectEvent.select(selectElement, '1E Supercruise Assist');
     });
 
     // Check both items are selected
     expect(getByTestId('form')).toHaveFormValues({
-      commodityDisplayName: ['Trillium', 'Gold'],
+      modules: ['2E Frame Shift Drive', '1E Supercruise Assist'],
     });
   });
 });

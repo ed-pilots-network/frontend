@@ -1,14 +1,14 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { useForm } from 'react-hook-form';
 import LandingPad, { radioValues } from '../LandingPads';
-import { CommodityForm } from '@/app/_types/forms';
+import { StationForm } from '@/app/_types/station';
 
 describe('Landing Pad Field', () => {
   beforeEach(() => {
     const Component = () => {
-      const { register } = useForm<CommodityForm>();
+      const { register } = useForm<StationForm>();
 
-      return <LandingPad register={register('maxLandingPadSize')} />;
+      return <LandingPad register={register('landingPadSize')} />;
     };
 
     render(<Component />);
