@@ -35,6 +35,7 @@ import {
 } from '@/app/_components/inputs';
 import CheckboxGroup from '../form/CheckboxGroup';
 import { ICommodity } from '@/app/_types';
+import StationsField from '../inputs/Stations';
 
 export const StationFormSchema = z.object({
   stationId: z.string(),
@@ -110,15 +111,7 @@ const Form: React.FC<FormProps> = ({
             isInvalid={!!(errors.stationId && errors.stationId.message)}
           >
             <FormLabel>Station</FormLabel>
-            <Input
-              variant="outline"
-              placeholder="Search by station name..."
-              borderColor={GetColor('border')}
-              _hover={{
-                borderColor: GetColor('border'),
-              }}
-              {...register('stationId')}
-            />
+            <StationsField fieldName="stationId" control={control} />
             <FormErrorMessage>
               {errors.stationId && errors.stationId.message}
             </FormErrorMessage>
@@ -128,11 +121,7 @@ const Form: React.FC<FormProps> = ({
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl isInvalid={!!(errors.ships && errors.ships.message)}>
             <FormLabel>Ships</FormLabel>
-            <ShipsField
-              control={control}
-              placeholder="Find stations selling these ships..."
-              isMulti={true}
-            />
+            <ShipsField control={control} placeholder="Select ships..." />
           </FormControl>
         </GridItem>
 
@@ -141,7 +130,7 @@ const Form: React.FC<FormProps> = ({
             <FormLabel>Modules</FormLabel>
             <ModulesField
               control={control}
-              placeholder="Find stations selling these modules..."
+              placeholder="Select modules..."
               isMulti={true}
             />
           </FormControl>
@@ -161,7 +150,7 @@ const Form: React.FC<FormProps> = ({
               control={control}
               commodities={commodities}
               isMulti={true}
-              placeholder="Find stations selling these commodities..."
+              placeholder="Select commodities..."
             />
             <FormErrorMessage>
               {errors.commodityDisplayName &&
