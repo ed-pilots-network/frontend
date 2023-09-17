@@ -29,14 +29,14 @@ import { useState } from 'react';
 import Select from '../../inputs/form/Select';
 import { ICommodity } from '@/app/_types';
 
-export const SingleTradeRouteFormSchema = z.object({
-  buySystem: z.object({ value: z.number() }).optional(),
-  buyStation: z.string().optional(),
-  sellSystem: z.object({ value: z.number() }).optional(),
-  sellStation: z.string().optional(),
+export const MultiTradeRouteFormSchema = z.object({
+  startSystem: z.object({ value: z.number() }),
+  startStation: z.string().optional(),
+  finishSystem: z.object({ value: z.number() }).optional(),
   commodityId: z.array(z.object({ value: z.string() })).optional(),
 
   maxHopDistance: z.string().optional(),
+  maxHopCount: z.string().optional(),
   minSupply: z.string().optional(),
   minDemand: z.string().optional(),
   maxPriceAge: z.string().optional(),
@@ -61,7 +61,7 @@ export const SingleTradeRouteFormSchema = z.object({
     .optional(),
 });
 
-export type SubmitProps = z.infer<typeof SingleTradeRouteFormSchema>;
+export type SubmitProps = z.infer<typeof MultiTradeRouteFormSchema>;
 
 interface FormProps {
   onSubmitHandler: SubmitHandler<SubmitProps>;
@@ -80,7 +80,7 @@ const Form: React.FC<FormProps> = ({
     handleSubmit,
     formState: { errors },
   } = useForm<SubmitProps>({
-    resolver: zodResolver(SingleTradeRouteFormSchema),
+    resolver: zodResolver(MultiTradeRouteFormSchema),
   });
 
   const onSubmit: SubmitHandler<SubmitProps> = (data) => {
@@ -89,8 +89,7 @@ const Form: React.FC<FormProps> = ({
   };
 
   // For demo purposes
-  const [buySystemStations, setBuySystemStations] = useState<string[]>([]);
-  const [sellSystemStations, setSellSystemStations] = useState<string[]>([]);
+  const [startSystemStations, setStartSystemStations] = useState<string[]>([]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -105,98 +104,65 @@ const Form: React.FC<FormProps> = ({
       >
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl
-            isInvalid={!!(errors.buySystem && errors.buySystem.message)}
+            isInvalid={!!(errors.startSystem && errors.startSystem.message)}
           >
-            <FormLabel>Buy from System</FormLabel>
+            <FormLabel>Start System</FormLabel>
             <SystemsField
-              fieldName="buySystem"
+              fieldName="startSystem"
               control={control}
               placeholder="Select a system..."
               onChange={(newValue) => {
-                setBuySystemStations(
+                setStartSystemStations(
                   newValue ? ['Station1', 'Station2', 'Station3'] : [],
                 );
               }}
             />
             <FormErrorMessage>
-              {errors.buySystem && errors.buySystem.message}
+              {errors.startSystem && errors.startSystem.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl
-            isInvalid={!!(errors.buyStation && errors.buyStation.message)}
+            isInvalid={!!(errors.startStation && errors.startStation.message)}
           >
-            <FormLabel>Buy from Station</FormLabel>
+            <FormLabel>Start Station (optional)</FormLabel>
             <Select
-              register={register('buyStation', {
-                disabled: buySystemStations.length === 0,
+              register={register('startStation', {
+                disabled: startSystemStations.length === 0,
               })}
               placeholder={
-                buySystemStations.length === 0
+                startSystemStations.length === 0
                   ? 'Enter a system first...'
                   : 'Select a station (optional)'
               }
             >
-              {buySystemStations.length &&
-                buySystemStations.map((station) => (
+              {startSystemStations.length &&
+                startSystemStations.map((station) => (
                   <option key={station} value={station}>
                     {station}
                   </option>
                 ))}
             </Select>
             <FormErrorMessage>
-              {errors.buyStation && errors.buyStation.message}
+              {errors.startStation && errors.startStation.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
 
         <GridItem colSpan={{ base: 1, md: 2 }}>
           <FormControl
-            isInvalid={!!(errors.sellSystem && errors.sellSystem.message)}
+            isInvalid={!!(errors.finishSystem && errors.finishSystem.message)}
           >
-            <FormLabel>Sell to System</FormLabel>
+            <FormLabel>Finish System (optional)</FormLabel>
             <SystemsField
-              fieldName="sellSystem"
+              fieldName="finishSystem"
               control={control}
               placeholder="Select a system..."
-              onChange={(newValue) => {
-                setSellSystemStations(
-                  newValue ? ['Station1', 'Station2', 'Station3'] : [],
-                );
-              }}
             />
             <FormErrorMessage>
-              {errors.sellSystem && errors.sellSystem.message}
-            </FormErrorMessage>
-          </FormControl>
-        </GridItem>
-
-        <GridItem colSpan={{ base: 1, md: 2 }}>
-          <FormControl
-            isInvalid={!!(errors.sellStation && errors.sellStation.message)}
-          >
-            <FormLabel>Sell to Station</FormLabel>
-            <Select
-              register={register('sellStation', {
-                disabled: sellSystemStations.length === 0,
-              })}
-              placeholder={
-                sellSystemStations.length === 0
-                  ? 'Enter a system first...'
-                  : 'Select a station (optional)'
-              }
-            >
-              {sellSystemStations.length &&
-                sellSystemStations.map((station) => (
-                  <option key={station} value={station}>
-                    {station}
-                  </option>
-                ))}
-            </Select>
-            <FormErrorMessage>
-              {errors.sellStation && errors.sellStation.message}
+              {errors.finishSystem && errors.finishSystem.message}
             </FormErrorMessage>
           </FormControl>
         </GridItem>
@@ -246,7 +212,28 @@ const Form: React.FC<FormProps> = ({
 
         <GridItem>
           <FormControl
-            isInvalid={!!(errors.cargoCapacity && errors.cargoCapacity.message)}
+            isInvalid={!!(errors.maxHopCount && errors.maxHopCount.message)}
+          >
+            <FormLabel>Max Hop Count</FormLabel>
+            <Input
+              type="number"
+              variant="outline"
+              placeholder="Enter a number..."
+              borderColor={GetColor('border')}
+              _hover={{
+                borderColor: GetColor('border'),
+              }}
+              {...register('maxHopCount')}
+            />
+            <FormErrorMessage>
+              {errors.maxHopCount && errors.maxHopCount.message}
+            </FormErrorMessage>
+          </FormControl>
+        </GridItem>
+
+        <GridItem>
+          <FormControl
+            isInvalid={!!(errors.maxHopCount && errors.maxHopCount.message)}
           >
             <FormLabel>Cargo Capacity</FormLabel>
             <Input
