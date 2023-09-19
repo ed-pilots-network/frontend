@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 // Purpose: API calls to the backend - name ending with Server are used in page.tsx, name ending with Client are used in page.client.tsx
-//
+
 async function getFormElementDataServer(queryString: string) {
   const req = await fetch(
     `${process.env.NEXT_PUBLIC_STAGING_API_URL}/api/v1/${queryString}`,
@@ -15,8 +15,6 @@ async function getFormElementDataServer(queryString: string) {
 }
 
 const getSubmitFormClient = async (queryString: string): Promise<Response> => {
-  // let queryString = 'trade/commodity/filter?type=WASTE&isRare=false';
-
   try {
     const res = await fetch(`/api/v1/${queryString}`);
 
