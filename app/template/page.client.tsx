@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import PageHeading from '../_components/utility/pageHeading';
 import layoutConfig from '../_config/layout';
 import GetColor from '../_hooks/colorSelector';
-import { getSubmitFormClient } from '../_lib/api-calls';
+import { useGetSubmitFormClient } from '../_lib/api-calls';
 import {
   Alert,
   AlertIcon,
@@ -20,50 +20,29 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
-// create an appropriate interface for your data fetched server side in page.tsx here
-export interface IServerDataSchema {
-  commodityName: string;
-  displayName: string;
-  type: string;
-  isRare: boolean;
-}
+// Import resourse type and create appropriate interface for your data fetched server side in page.tsx here
+import { ICommodity } from '@/app/_types/commodity';
 
 interface IProps {
-  serverData: IServerDataSchema[];
+  serverData: ICommodity[];
 }
 
 const PageClient: React.FC<IProps> = ({ serverData }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  // when a form sumbit fails, the clientResponse is set to null
-  const [clientResponse, setClientResponse] = useState<
-    IServerDataSchema[] | null
-  >([]);
+  let queryString = 'trade/commodity/filter?type=WASTE&isRare=false';
+  const {
+    data: clientResponse,
+    isLoading,
+    error,
+    mutate,
+  } = useGetSubmitFormClient(queryString);
 
   const { handleSubmit } = useForm();
 
   const onSubmit = async (): Promise<void> => {
-    setSubmitted(false);
-    setIsLoading(true);
-    setClientResponse([]);
-
-    // adjust the query string to your endpoint needs
-    let queryString = 'trade/commodity/filter?type=WASTE&isRare=false';
-    const res = await getSubmitFormClient(queryString);
-
-    if (!res.ok) {
-      setClientResponse(null);
-      setSubmitted(true);
-      setIsLoading(false);
-      return;
-    }
-    const json = await res.json();
-    setClientResponse(json);
-    setSubmitted(true);
-    setIsLoading(false);
+    await mutate();
   };
 
-  const displayResults = (clientData: IServerDataSchema[], label: string) => {
+  const displayResults = (clientData: ICommodity[], label: string) => {
     // if the clientData is empty, return a warning that no results were found
     if (clientData.length === 0) {
       return (
@@ -175,13 +154,12 @@ const PageClient: React.FC<IProps> = ({ serverData }) => {
           {displayResults(serverData, 'Fetch weapons server side: ')}
           {/* the following occurs when the client fetch is successful */}
           {clientResponse &&
-            submitted &&
             displayResults(
               clientResponse,
               'Fetch waste products client side: ',
             )}
-          {/* the following occurs when the client fetch fails and the clientResponse is null */}
-          {!clientResponse && submitted && (
+          {/* the following occurs when the client fetch fails */}
+          {error && (
             <Alert status="error" borderRadius="md">
               <AlertIcon />
               Failed to fetch data, try again or wait until later!

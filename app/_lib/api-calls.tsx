@@ -1,5 +1,18 @@
 /* eslint-disable no-console */
 // Purpose: API calls to the backend - name ending with Server are used in page.tsx, name ending with Client are used in page.client.tsx
+import useSWR from 'swr';
+
+// Default fetcher for SWR. Custom fetcher can be passed as needed
+const fetcher = async (url: string) => {
+  const res = await fetch(url, { next: { revalidate: 86400 } });
+
+  if (!res.ok) {
+    console.log('Failed to fetch data at: ', url);
+    throw new Error('Failed to fetch data. Try again, or wait until later.');
+  }
+
+  return res.json();
+};
 
 async function getFormElementDataServer(queryString: string) {
   const req = await fetch(
@@ -13,16 +26,24 @@ async function getFormElementDataServer(queryString: string) {
   }
   return req.json();
 }
+// Reusable client calls are written as hooks with swr
+const useGetSubmitFormClient = (queryString: string) => {
+  const { data, error, isLoading, mutate } = useSWR(
+    `/api/v1/${queryString}`,
+    fetcher,
+    {
+      shouldRetryOnError: false,
+      revalidateOnFocus: false,
+      revalidateOnMount: false,
+    },
+  );
 
-const getSubmitFormClient = async (queryString: string): Promise<Response> => {
-  try {
-    const res = await fetch(`/api/v1/${queryString}`);
-
-    return res;
-  } catch (error) {
-    console.log('Failed to fetch data at: ', queryString);
-    return new Response(null);
-  }
+  return {
+    data,
+    isLoading,
+    error,
+    mutate,
+  };
 };
 
-export { getFormElementDataServer, getSubmitFormClient };
+export { getFormElementDataServer, useGetSubmitFormClient };

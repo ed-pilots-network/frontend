@@ -1,6 +1,9 @@
 import { Metadata } from 'next';
-import PageClient, { IServerDataSchema } from './page.client';
+import PageClient from './page.client';
 import { getFormElementDataServer } from '../_lib/api-calls';
+
+// Import appropriare type for the resource you intend to fetch & pass to client
+import { ICommodity } from '@/app/_types/commodity';
 
 export const metadata: Metadata = {
   title: 'EDPN Template',
@@ -18,7 +21,7 @@ async function getData() {
 
 export default async function Page() {
   // create an appropriate interface for your data in page.client and import it here
-  const data: IServerDataSchema[] = await getData();
+  const data: ICommodity[] = await getData();
 
   return <PageClient serverData={data} />;
 }
