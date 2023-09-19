@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 import SelectStyles from '@/app/_hooks/SelectStyles';
 import { ICommodity } from '@/app/_types';
 import { useState } from 'react';
-import exactThenFuzzy from '@/app/_lib/utils/sort';
+import exactThenFuzzySort from '@/app/_lib/utils/sort';
 
 interface CommodityProps {
   control: any;
@@ -61,7 +61,7 @@ const CommoditiesField: React.FC<CommodityProps> = ({
           name={name}
           ref={ref}
           onInputChange={(input) => {
-            exactThenFuzzy(input, formattedCommodities, setOptions);
+            exactThenFuzzySort(input, formattedCommodities, setOptions);
           }}
           onChange={onChange}
           onBlur={onBlur}

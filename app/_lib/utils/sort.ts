@@ -5,7 +5,7 @@ interface SelectItem extends OptionBase {
   value: string;
 }
 
-const exactThenFuzzy = (
+const exactThenFuzzySort = (
   input: string,
   options: SelectItem[],
   after: (sortedOptions: SelectItem[]) => void,
@@ -27,4 +27,4 @@ const exactThenFuzzy = (
   after(exact.concat(fuzzy));
 };
 
-export default exactThenFuzzy;
+export default exactThenFuzzySort;
