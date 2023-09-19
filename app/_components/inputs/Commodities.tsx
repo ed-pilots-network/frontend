@@ -3,6 +3,8 @@ import { Controller } from 'react-hook-form';
 
 import SelectStyles from '@/app/_hooks/SelectStyles';
 import { ICommodity } from '@/app/_types';
+import { useState } from 'react';
+import exactThenFuzzy from '@/app/_lib/utils/sort';
 
 interface CommodityProps {
   control: any;
@@ -40,6 +42,8 @@ const CommoditiesField: React.FC<CommodityProps> = ({
     }));
   }
 
+  const [options, setOptions] = useState(formattedCommodities);
+
   const fieldOptions: FieldOptions = {};
   if (isMulti) {
     fieldOptions.isMulti = true;
@@ -56,10 +60,13 @@ const CommoditiesField: React.FC<CommodityProps> = ({
           instanceId="commodityDisplayName"
           name={name}
           ref={ref}
+          onInputChange={(input) => {
+            exactThenFuzzy(input, formattedCommodities, setOptions);
+          }}
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          options={formattedCommodities}
+          options={options}
           placeholder={placeholder}
           chakraStyles={SelectStyles()}
           {...fieldOptions}
