@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import PageHeading from '../_components/utility/pageHeading';
-import getFromApiClientSide from './api';
 import layoutConfig from '../_config/layout';
 import GetColor from '../_hooks/colorSelector';
+import { getSubmitFormClient } from '../_lib/api-calls';
 import {
   Alert,
   AlertIcon,
@@ -20,6 +20,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 
+// create an appropriate interface for your data fetched server side in page.tsx here
 export interface IServerDataSchema {
   commodityName: string;
   displayName: string;
@@ -27,13 +28,14 @@ export interface IServerDataSchema {
   isRare: boolean;
 }
 
-interface Props {
+interface IProps {
   serverData: IServerDataSchema[];
 }
 
-const PageClient: React.FC<Props> = ({ serverData }) => {
+const PageClient: React.FC<IProps> = ({ serverData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  // when a form sumbit fails, the clientResponse is set to null
   const [clientResponse, setClientResponse] = useState<
     IServerDataSchema[] | null
   >([]);
@@ -45,7 +47,9 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
     setIsLoading(true);
     setClientResponse([]);
 
-    const res = await getFromApiClientSide();
+    // adjust the query string to your endpoint needs
+    let queryString = 'trade/commodity/filter?type=WASTE&isRare=false';
+    const res = await getSubmitFormClient(queryString);
 
     if (!res.ok) {
       setClientResponse(null);
@@ -60,6 +64,7 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
   };
 
   const displayResults = (clientData: IServerDataSchema[], label: string) => {
+    // if the clientData is empty, return a warning that no results were found
     if (clientData.length === 0) {
       return (
         <Alert status="warning" borderRadius="md">
@@ -68,6 +73,7 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
         </Alert>
       );
     }
+    // else return the results: extract this to a component
     return (
       <Stack
         direction={{
@@ -165,13 +171,16 @@ const PageClient: React.FC<Props> = ({ serverData }) => {
               </Box>
             </VStack>
           </VStack>
+          {/* the following renders server fetched data */}
           {displayResults(serverData, 'Fetch weapons server side: ')}
+          {/* the following occurs when the client fetch is successful */}
           {clientResponse &&
             submitted &&
             displayResults(
               clientResponse,
               'Fetch waste products client side: ',
             )}
+          {/* the following occurs when the client fetch fails and the clientResponse is null */}
           {!clientResponse && submitted && (
             <Alert status="error" borderRadius="md">
               <AlertIcon />
