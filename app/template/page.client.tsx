@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 
 // Import resourse type and create appropriate interface for your data fetched server side in page.tsx here
-import { ICommodity } from '@/app/_types/commodity';
+import { ICommodity } from '@/types/';
 
 interface IProps {
   serverData: ICommodity[];
@@ -88,7 +88,7 @@ const PageClient: React.FC<IProps> = ({ serverData }) => {
             <VStack align="stretch" gap={6}>
               <PageHeading
                 heading="Heading goes here"
-                subheading="Subheading sentence goes here"
+                subheading="Subheading sentence goes here" // subheading is optional
               />
               <Box
                 borderWidth="2px"

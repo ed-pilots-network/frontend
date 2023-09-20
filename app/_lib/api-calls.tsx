@@ -2,12 +2,14 @@
 // Purpose: API calls to the backend - name ending with Server are used in page.tsx, name ending with Client are used in page.client.tsx
 import useSWR from 'swr';
 
+const now = new Date().toISOString();
+
 // Default fetcher for SWR. Custom fetcher can be passed as needed
 const fetcher = async (url: string) => {
   const res = await fetch(url, { next: { revalidate: 86400 } });
 
   if (!res.ok) {
-    console.log('Failed to fetch data at: ', url);
+    console.log(now, ' Failed to fetch data at: ', url);
     throw new Error('Failed to fetch data. Try again, or wait until later.');
   }
 
@@ -21,7 +23,7 @@ async function getFormElementDataServer(queryString: string) {
   );
 
   if (!req.ok) {
-    console.log('Failed to fetch data at: ', queryString);
+    console.log(now, ' Failed to fetch data at: ', queryString);
     throw new Error('Failed to fetch data. Try again, or wait until later.');
   }
   return req.json();

@@ -6,19 +6,9 @@ const PageHeading = ({
   subheading,
 }: {
   heading: string;
-  subheading: string;
-}) => (
-  <Flex direction="column" gap={2}>
-    <Box alignSelf="baseline">
-      <Heading
-        as="h1"
-        size={{ base: 'md', md: 'lg', lg: 'lg' }}
-        marginX={{ base: 'auto', md: '0', lg: '0' }}
-        color={GetColor('accent-text')}
-      >
-        {heading}
-      </Heading>
-    </Box>
+  subheading?: string;
+}) => {
+  const subHeading = () => (
     <Box alignSelf="baseline">
       <Heading
         as="h2"
@@ -29,7 +19,23 @@ const PageHeading = ({
         {subheading}
       </Heading>
     </Box>
-  </Flex>
-);
+  );
+
+  return (
+    <Flex direction="column" gap={2}>
+      <Box alignSelf="baseline">
+        <Heading
+          as="h1"
+          size={{ base: 'md', md: 'lg', lg: 'lg' }}
+          marginX={{ base: 'auto', md: '0', lg: '0' }}
+          color={GetColor('accent-text')}
+        >
+          {heading}
+        </Heading>
+      </Box>
+      {subheading && subHeading()}
+    </Flex>
+  );
+};
 
 export default PageHeading;
