@@ -2,6 +2,8 @@ import { Controller } from 'react-hook-form';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import SelectStyles from '@/app/_hooks/SelectStyles';
 import ships from '@/app/_lib/ship-list';
+import { useState } from 'react';
+import exactThenFuzzySort from '@/app/_lib/utils/sort';
 
 interface Props {
   control: any;
@@ -38,6 +40,8 @@ const ShipsField = ({
     fieldOptions.isMulti = true;
   }
 
+  const [options, setOptions] = useState(getOptions());
+
   return (
     <Controller
       name="ships"
@@ -48,10 +52,13 @@ const ShipsField = ({
           instanceId="ships-field"
           name={name}
           ref={ref}
+          onInputChange={(input) => {
+            exactThenFuzzySort(input, getOptions(), setOptions);
+          }}
           onChange={onChange}
           onBlur={onBlur}
           value={value}
-          options={getOptions()}
+          options={options}
           placeholder={placeholder}
           chakraStyles={SelectStyles()}
           {...fieldOptions}
