@@ -71,6 +71,7 @@ const ModuleLaunchPad = () => {
     <Tab
       _selected={{
         color: GetColor('textSelected'),
+        borderBottom: '2px solid',
       }}
       aria-label={`Toggle ${text} Tab`}
       textTransform="capitalize"
@@ -107,12 +108,7 @@ const ModuleLaunchPad = () => {
       minHeight="100%"
       colorScheme={GetColor('text')}
     >
-      <TabList
-        display="flex"
-        gap="2rem"
-        flexWrap="wrap"
-        borderBottom="2px solid"
-      >
+      <TabList display="flex" gap="2rem" flexWrap="wrap">
         {Tags.map((tag) => renderTab(tag))}
       </TabList>
       <TabPanels mt="20px" minHeight="400px">
