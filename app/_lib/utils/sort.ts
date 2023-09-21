@@ -5,7 +5,17 @@ interface SelectItem extends OptionBase {
   value: string;
 }
 
-const exactThenFuzzySort = (
+export const alphabeticalSort = (a: SelectItem, b: SelectItem) => {
+  if (a.label < b.label) {
+    return -1;
+  }
+  if (a.label > b.label) {
+    return 1;
+  }
+  return 0;
+};
+
+export const exactThenFuzzySort = (
   input: string,
   options: SelectItem[],
   after: (sortedOptions: SelectItem[]) => void,
@@ -22,9 +32,7 @@ const exactThenFuzzySort = (
     }
   }
 
-  exact.sort();
-  fuzzy.sort();
+  exact.sort(alphabeticalSort);
+  fuzzy.sort(alphabeticalSort);
   after(exact.concat(fuzzy));
 };
-
-export default exactThenFuzzySort;

@@ -3,7 +3,7 @@ import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import SelectStyles from '@/app/_hooks/SelectStyles';
 import ships from '@/app/_lib/ship-list';
 import { useState } from 'react';
-import exactThenFuzzySort from '@/app/_lib/utils/sort';
+import { exactThenFuzzySort } from '@/app/_lib/utils/sort';
 
 interface Props {
   control: any;

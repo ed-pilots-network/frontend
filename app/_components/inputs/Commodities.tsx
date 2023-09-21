@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 import SelectStyles from '@/app/_hooks/SelectStyles';
 import { ICommodity } from '@/app/_types';
 import { useState } from 'react';
-import exactThenFuzzySort from '@/app/_lib/utils/sort';
+import { exactThenFuzzySort } from '@/app/_lib/utils/sort';
 
 interface CommodityProps {
   control: any;

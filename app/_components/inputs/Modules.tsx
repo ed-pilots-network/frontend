@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form';
 import { Select, OptionBase, GroupBase } from 'chakra-react-select';
 import SelectStyles from '@/app/_hooks/SelectStyles';
 import modules from '@/app/_lib/module-list';
-import exactThenFuzzySort from '@/app/_lib/utils/sort';
+import { exactThenFuzzySort } from '@/app/_lib/utils/sort';
 import { useState } from 'react';
 
 interface Props {
