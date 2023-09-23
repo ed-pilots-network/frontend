@@ -7,7 +7,7 @@ test('server rendering errors should get caught and gracefully render error', as
   await expect(page.locator('h1')).toContainText('Something went wrong!');
   // Error messages for server rendering get replaced for security during builds
   await expect(page.locator('samp')).toContainText(
-    'An error occurred in the Server Components render.',
+    'This is a simulated server rendering error.',
   );
 });
 

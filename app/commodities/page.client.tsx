@@ -9,68 +9,49 @@ import {
   Alert,
   AlertIcon,
   Flex,
-  Button,
   useMediaQuery,
 } from '@chakra-ui/react';
 import Form, { SubmitProps } from '@/components/commodities/Form';
 import CommodityFormResponse from '@/components/commodities/CommodityFormResponse';
 import CommodityFormResponseMobile from '@/components/commodities/MobileCommodityFormResponse';
-import layoutConfig from '../_config/layout';
 import GetColor from '@/app/_hooks/colorSelector';
-import {
-  getLocateCommodityFromApi,
-  getLocateCommodityFromMockApi,
-} from './api';
-import { ICommodity, ICommodityFormResponse } from '@/types/';
+import layoutConfig from '../_config/layout';
+import { useGetMockSubmitFormClient } from '../_lib/api-calls';
+import { ICommodity } from '@/types/';
 
 interface IPageClientProps {
-  commodities: ICommodity[] | null;
+  commodities: ICommodity[];
 }
 
 const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [isBuying, setIsBuying] = useState(true);
-  const [submitted, setSubmitted] = useState(false);
-  const [fetchError, setFetchError] = useState<Error | null>(null);
-  const [commodityResponse, setCommodityResponse] = useState<
-    ICommodityFormResponse[]
-  >([]);
+  const [queryString, setQueryString] = useState('');
+  const {
+    data: clientResponse,
+    isLoading,
+    error,
+    mutate,
+  } = useGetMockSubmitFormClient(queryString);
 
   const [isLarge] = useMediaQuery('(min-width: 1024px)');
 
-  const handleSubmit = async (data: SubmitProps) => {
-    const response = await getLocateCommodityFromApi({
-      setIsLoading,
-      setSubmitted,
-      data,
-      setIsBuying,
-    }).finally(() => {
-      setIsLoading(false);
-      setSubmitted(true);
-    });
+  const handleSubmit = async (data: SubmitProps): Promise<void> => {
+    setQueryString('trade/commodity');
+    //   setQueryString(
+    //     `commodityDisplayName=${data.commodityDisplayName.value
+    //       .split(' ')
+    //       .join('%20')}&maxLandingPadSize=${data.maxLandingPadSize}&minSupply=${
+    //       data.minSupply
+    //     }&minDemand=${data.minDemand}&includeFleetCarriers=${
+    //       data.includeFleetCarriers
+    //     }&includeOdyssey=${data.includeOdyssey}&includePlanetary=${
+    //       data.includePlanetary
+    //     }&x=0&y=0&z=0`,
+    //   );
+    if (data.minDemand === 0) setIsBuying(true);
+    if (data.minSupply === 0) setIsBuying(false);
 
-    if (response instanceof Error) {
-      setFetchError(response as Error);
-      return;
-    }
-    setCommodityResponse(response);
-  };
-
-  // TODO: remove this function after development - aslink87
-  const handleExampleSubmit = async () => {
-    const response = await getLocateCommodityFromMockApi({
-      setIsLoading,
-      setSubmitted,
-    }).finally(() => {
-      setIsLoading(false);
-      setSubmitted(true);
-    });
-
-    if (response instanceof Error) {
-      setFetchError(response as Error);
-      return;
-    }
-    setCommodityResponse(response);
+    if (queryString !== '') await mutate();
   };
 
   const checkBreakpointBeforeShowingResponse = () => {
@@ -78,7 +59,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
       return (
         <CommodityFormResponse
           // TODO: remove this slice after pagination/truncate is implemented - aslink87
-          commodityResponse={commodityResponse.slice(0, 20)}
+          commodityResponse={clientResponse.slice(0, 20)}
           isBuying={isBuying}
         />
       );
@@ -86,7 +67,7 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
     return (
       <CommodityFormResponseMobile
         // TODO: remove this slice after pagination/truncate is implemented - aslink87
-        commodityResponse={commodityResponse.slice(0, 20)}
+        commodityResponse={clientResponse.slice(0, 20)}
         isBuying={isBuying}
       />
     );
@@ -145,33 +126,20 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
                 commodities={commodities}
               />
             </Box>
-            {/* TODO: remove this button after development - aslink87 */}
-            {process.env.NODE_ENV === 'development' && (
-              <Button
-                type="button"
-                variant="outline"
-                id="example"
-                onClick={handleExampleSubmit}
-              >
-                Submit Example
-              </Button>
-            )}
           </VStack>
-          {fetchError && (
+          {error && (
             <Alert status="error">
               <AlertIcon />
               Failed to fetch commodity data!
             </Alert>
           )}
-          {submitted && commodityResponse.length === 0 && (
+          {clientResponse?.length === 0 && (
             <Alert status="warning">
               <AlertIcon />
               Commodity Not Found!
             </Alert>
           )}
-          {submitted &&
-            commodityResponse.length > 0 &&
-            checkBreakpointBeforeShowingResponse()}
+          {clientResponse?.length > 0 && checkBreakpointBeforeShowingResponse()}
         </Flex>
       </Center>
     </Box>

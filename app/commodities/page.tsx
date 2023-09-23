@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import PageClient from './page.client';
+import { getFormElementDataServer } from '../_lib/api-calls';
 import { ICommodity } from '@/types/index';
 
 export const metadata: Metadata = {
@@ -8,22 +9,16 @@ export const metadata: Metadata = {
   icons: 'EDPN_logo_dark_background.png',
 };
 
-export default async function getCommodities() {
-  let commodities: ICommodity[] | null = null;
+async function getData() {
+  let queryString = 'trade/commodity';
 
-  try {
-    const commoditiesReq = await fetch(
-      `${process.env.NEXT_PUBLIC_STAGING_API_URL}/api/v1/trade/commodity`,
-      { next: { revalidate: 86400 } },
-    );
+  const result = await getFormElementDataServer(queryString);
 
-    if (commoditiesReq.ok) {
-      commodities = (await commoditiesReq.json()) as ICommodity[];
-    }
-  } catch (error) {
-    if (process.env.NODE_ENV === 'development') console.error(error);
-    throw error;
-  }
+  return result;
+}
 
-  return <PageClient commodities={commodities} />;
+export default async function Page() {
+  const data: ICommodity[] = await getData();
+
+  return <PageClient commodities={data} />;
 }
