@@ -25,9 +25,7 @@ export default function Error({
         >
           Something went wrong!
         </Heading>
-        <Text as="samp">
-          {process.env.NODE_ENV === 'development' && error.message}
-        </Text>
+        <Text as="samp">{error.message}</Text>
         <Button type="button" variant="outline" onClick={() => reset()}>
           Try again
         </Button>
