@@ -48,4 +48,27 @@ const useGetSubmitFormClient = (queryString: string) => {
   };
 };
 
-export { getFormElementDataServer, useGetSubmitFormClient };
+const useGetMockSubmitFormClient = (queryString: string) => {
+  const { data, error, isLoading, mutate } = useSWR(
+    `${process.env.NEXT_PUBLIC_MOCK_API_URL}/api/v1/${queryString}`,
+    fetcher,
+    {
+      shouldRetryOnError: false,
+      revalidateOnFocus: false,
+      revalidateOnMount: false,
+    },
+  );
+
+  return {
+    data,
+    isLoading,
+    error,
+    mutate,
+  };
+};
+
+export {
+  getFormElementDataServer,
+  useGetSubmitFormClient,
+  useGetMockSubmitFormClient,
+};

@@ -19,7 +19,7 @@ const CommodityFormResponse: React.FC<ICommodityFormResponseProps> = ({
   const [filter, setFilter] = useState(
     'distance' as keyof ICommodityFormResponse,
   );
-  const [ascending, setAscending] = useState(true);
+  const [ascending, setAscending] = useState(false);
   const { isDark } = useColorMode();
 
   return (

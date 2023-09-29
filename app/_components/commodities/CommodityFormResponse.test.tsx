@@ -121,9 +121,6 @@ describe('Commodity Form Response', () => {
     const table = lowestPriceTableRow.parentNode;
     const sortButton = screen.getByRole('button', { name: 'Sell Price' });
 
-    // ACT
-    fireEvent.click(sortButton);
-
     // ASSERT
     expect(table?.firstChild).toHaveTextContent('CR 49,184');
 

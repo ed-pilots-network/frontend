@@ -10,10 +10,11 @@ import {
   Heading,
   Spinner,
 } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { ICommodity, IPost } from '../_types';
 import layoutConfig from '../_config/layout';
+import { useGetSubmitFormClient } from '../_lib/api-calls';
 
 interface PageClientProps {
   posts: IPost[];
@@ -21,56 +22,19 @@ interface PageClientProps {
 }
 
 const PageClient = ({ posts, commodity }: PageClientProps) => {
-  const [clientCommodity, setClientCommodity] = useState<
-    ICommodity | undefined
-  >(undefined);
-  const [fetchError, setFetchError] = useState<Error | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const {
+    data: clientCommodity,
+    isLoading,
+    error,
+    mutate,
+  } = useGetSubmitFormClient('trade/commodity/Beer');
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const res = await fetch('/api/v1/trade/commodity/Beer', {
-          cache: 'no-store',
-        });
-
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data: ICommodity = await res.json();
-        setClientCommodity(data);
-      } catch (error) {
-        setFetchError(error as Error);
-      } finally {
-        setIsLoading(false);
-      }
+      await mutate();
     };
     fetchData();
-  }, []);
-
-  const renderCommodityData = () => {
-    if (isLoading) {
-      return <Spinner />;
-    }
-    if (fetchError) {
-      return (
-        <Alert status="error">
-          <AlertIcon />
-          Failed to fetch commodity data from staging server on client side
-        </Alert>
-      );
-    }
-    if (clientCommodity) {
-      return <div>Commodity Name: {clientCommodity.commodityName}</div>;
-    }
-    return (
-      <Alert status="warning">
-        <AlertIcon />
-        Commodity Not Found!
-      </Alert>
-    );
-  };
+  }, [mutate]);
 
   return (
     <Box paddingX={2} flex="1" as="main">
@@ -170,7 +134,16 @@ fetch('/api/v1/trade/commodity/Beer')
           <Heading as="h3" size="sm">
             Response
           </Heading>
-          {renderCommodityData()}
+          {error && (
+            <Alert status="error">
+              <AlertIcon />
+              Failed to fetch commodity data from staging server on client side
+            </Alert>
+          )}
+          {isLoading && <Spinner />}
+          {clientCommodity && (
+            <div>Commodity Name: {clientCommodity.commodityName}</div>
+          )}
         </Flex>
       </Center>
     </Box>
