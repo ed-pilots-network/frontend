@@ -15,19 +15,18 @@ import {
   FormErrorMessage,
   HStack,
   Collapse,
-  keyframes,
 } from '@chakra-ui/react';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import GetColor from '@/app/_hooks/colorSelector';
 import {
   CommoditiesField,
   LandingPadsField,
   StationTypesField,
 } from '../inputs';
+import ExpandIcon from '../utility/ExpandIcon';
 import { ICommodity, ICommodityFormRequest } from '@/types/index';
-import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 
 export const CommodityFormSchema = z.object({
   commodityDisplayName: z.object({
@@ -78,30 +77,6 @@ const Form: React.FC<FormProps> = ({
     if (!isBuying) submitData.minSupply = 0;
     onSubmitHandler(submitData);
     setIsExpanded(!isExpanded);
-  };
-
-  const expandIcon = () => {
-    const rotate = keyframes`
-      from {transform: rotate(180deg);}
-      to {transform: rotate(360deg);}
-    `;
-    return (
-      <Button onClick={() => setIsExpanded(!isExpanded)} variant="unstyled">
-        {isExpanded ? (
-          <ChevronUpIcon
-            boxSize={10}
-            color="orange.3"
-            animation={`${rotate} 0.3s linear`}
-          />
-        ) : (
-          <ChevronDownIcon
-            boxSize={10}
-            color="orange.3"
-            animation={`${rotate} 0.3s linear`}
-          />
-        )}
-      </Button>
-    );
   };
 
   const numberInputs = (
@@ -259,7 +234,7 @@ const Form: React.FC<FormProps> = ({
           </Stack>
         </Collapse>
       </Flex>
-      <HStack justifyContent="space-between" paddingRight="50%">
+      <HStack justifyContent="space-between" paddingRight={[0, '40%', '50%']}>
         <Button
           type="submit"
           variant="submit"
@@ -268,7 +243,7 @@ const Form: React.FC<FormProps> = ({
         >
           Submit
         </Button>
-        {expandIcon()}
+        <ExpandIcon isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
       </HStack>
     </form>
   );

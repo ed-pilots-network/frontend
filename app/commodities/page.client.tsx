@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   Box,
   Center,
@@ -58,17 +57,11 @@ const PageClient: React.FC<IPageClientProps> = ({ commodities }) => {
   const checkBreakpointBeforeShowingResponse = () => {
     if (isLarge) {
       return (
-        <motion.div
-          initial={{ x: '-100%' }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <CommodityFormResponse
-            // TODO: remove this slice after pagination/truncate is implemented - aslink87
-            commodityResponse={clientResponse.slice(0, 20)}
-            isBuying={isBuying}
-          />
-        </motion.div>
+        <CommodityFormResponse
+          // TODO: remove this slice after pagination/truncate is implemented - aslink87
+          commodityResponse={clientResponse.slice(0, 20)}
+          isBuying={isBuying}
+        />
       );
     }
     return (
