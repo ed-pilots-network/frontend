@@ -13,16 +13,19 @@ import {
   NumberInputStepper,
   Stack,
   FormErrorMessage,
+  HStack,
+  Collapse,
 } from '@chakra-ui/react';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import GetColor from '@/app/_hooks/colorSelector';
 import {
   CommoditiesField,
   LandingPadsField,
   StationTypesField,
 } from '../inputs';
+import ExpandIcon from '../utility/ExpandIcon';
 import { ICommodity, ICommodityFormRequest } from '@/types/index';
 
 export const CommodityFormSchema = z.object({
@@ -53,6 +56,7 @@ const Form: React.FC<FormProps> = ({
   commodities,
 }) => {
   const [isBuying, setIsBuying] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const {
     register,
@@ -66,6 +70,14 @@ const Form: React.FC<FormProps> = ({
     },
     resolver: zodResolver(CommodityFormSchema),
   });
+
+  const onSubmit: SubmitHandler<SubmitProps> = (data) => {
+    const submitData = data;
+    if (isBuying) submitData.minDemand = 0;
+    if (!isBuying) submitData.minSupply = 0;
+    onSubmitHandler(submitData);
+    setIsExpanded(!isExpanded);
+  };
 
   const numberInputs = (
     label: string,
@@ -94,13 +106,6 @@ const Form: React.FC<FormProps> = ({
       </NumberInput>
     </>
   );
-
-  const onSubmit: SubmitHandler<SubmitProps> = (data) => {
-    const submitData = data;
-    if (isBuying) submitData.minDemand = 0;
-    if (!isBuying) submitData.minSupply = 0;
-    onSubmitHandler(submitData);
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -153,73 +158,93 @@ const Form: React.FC<FormProps> = ({
             </FormErrorMessage>
           </FormControl>
         </Stack>
-        <Stack
-          direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
-          spacing={4}
-          width="100%"
-          marginTop={4}
-        >
-          <FormControl width="100%">
-            <FormLabel>Include</FormLabel>
-            <StationTypesField register={register} />
-          </FormControl>
-          <FormControl
+        <Collapse in={isExpanded} animateOpacity style={{ width: '100%' }}>
+          <Stack
+            direction={{
+              base: 'column',
+              sm: 'column',
+              md: 'column',
+              lg: 'row',
+            }}
+            spacing={4}
             width="100%"
-            isInvalid={
-              !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
-            }
+            marginTop={4}
           >
-            <FormLabel>Ship Size</FormLabel>
-            <LandingPadsField register={register('maxLandingPadSize')} />
-          </FormControl>
-        </Stack>
-        <Stack
-          direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
-          spacing={4}
-          width="100%"
-          marginTop={4}
-        >
-          <FormControl
-            width="100%"
-            isInvalid={!!errors.minSupply || !!errors.minDemand}
-          >
-            <FormLabel>I am looking to:</FormLabel>
-            <ButtonGroup
-              isAttached
-              borderColor={GetColor('border')}
-              variant="outline"
+            <FormControl width="100%">
+              <FormLabel>Include</FormLabel>
+              <StationTypesField register={register} />
+            </FormControl>
+            <FormControl
+              width="100%"
+              isInvalid={
+                !!(errors.maxLandingPadSize && errors.maxLandingPadSize.message)
+              }
             >
-              <Button
-                variant={isBuying ? 'outline' : 'colorless'}
-                onClick={() => setIsBuying(true)}
+              <FormLabel>Ship Size</FormLabel>
+              <LandingPadsField register={register('maxLandingPadSize')} />
+            </FormControl>
+          </Stack>
+          <Stack
+            direction={{
+              base: 'column',
+              sm: 'column',
+              md: 'column',
+              lg: 'row',
+            }}
+            spacing={4}
+            width="100%"
+            marginTop={4}
+          >
+            <FormControl
+              width="100%"
+              isInvalid={!!errors.minSupply || !!errors.minDemand}
+            >
+              <FormLabel>I am looking to:</FormLabel>
+              <ButtonGroup
+                isAttached
+                borderColor={GetColor('border')}
+                variant="outline"
               >
-                Buy
-              </Button>
-              <Button
-                variant={isBuying ? 'colorless' : 'outline'}
-                onClick={() => setIsBuying(false)}
-              >
-                Sell
-              </Button>
-            </ButtonGroup>
-          </FormControl>
-          <FormControl width="100%">
-            {isBuying && numberInputs('Minimum Supply', 'minSupply')}
-            {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
-            <FormErrorMessage>
-              {errors.minSupply &&
-                isBuying &&
-                (errors.minSupply.message as string)}
-              {errors.minDemand &&
-                !isBuying &&
-                (errors.minDemand.message as string)}
-            </FormErrorMessage>
-          </FormControl>
-        </Stack>
+                <Button
+                  variant={isBuying ? 'outline' : 'colorless'}
+                  onClick={() => setIsBuying(true)}
+                >
+                  Buy
+                </Button>
+                <Button
+                  variant={isBuying ? 'colorless' : 'outline'}
+                  onClick={() => setIsBuying(false)}
+                >
+                  Sell
+                </Button>
+              </ButtonGroup>
+            </FormControl>
+            <FormControl width="100%">
+              {isBuying && numberInputs('Minimum Supply', 'minSupply')}
+              {!isBuying && numberInputs('Minimum Demand', 'minDemand')}
+              <FormErrorMessage>
+                {errors.minSupply &&
+                  isBuying &&
+                  (errors.minSupply.message as string)}
+                {errors.minDemand &&
+                  !isBuying &&
+                  (errors.minDemand.message as string)}
+              </FormErrorMessage>
+            </FormControl>
+          </Stack>
+        </Collapse>
       </Flex>
-      <Button type="submit" variant="submit" id="submit" isLoading={isLoading}>
-        Submit
-      </Button>
+      <HStack justifyContent="space-between" paddingRight={[0, '40%', '50%']}>
+        <Button
+          type="submit"
+          variant="submit"
+          id="submit"
+          isLoading={isLoading}
+        >
+          Submit
+        </Button>
+        <ExpandIcon isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
+      </HStack>
     </form>
   );
 };
